@@ -735,7 +735,7 @@ if (!empty($result)) {
 // $locale['figure_461'] = "Video URL";
 // $locale['figurelib-error-113'] = "Attention: only 40 characters allowed!";
 // $locale['figure_1818'] = "Please enter only the embed video code (e.g. --> Q7RMpINVo)";
-	echo form_text("figure_videourl", $locale['figure_461'], $submitdata['figure_videourl'],
+	echo form_text("figure_videourl", $locale['figure_461'], $data['figure_videourl'],
 					array(
 						"inline" => TRUE,
 						"width" => "400px",
