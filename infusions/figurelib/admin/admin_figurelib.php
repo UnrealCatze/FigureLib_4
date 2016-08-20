@@ -75,7 +75,8 @@ if (!empty($result)) {
         "figure_retailprice" => "",
         "figure_usedprice" => "",
         "figure_limitation" => "",
-        "figure_cat" => 0,
+        "figure_videourl" => "",
+		"figure_cat" => 0,
         "figure_editionsize" => "",
         "figure_accessories" => "",
         "figure_description" => "",
@@ -176,7 +177,8 @@ if (!empty($result)) {
             "figure_retailprice" => form_sanitizer($_POST['figure_retailprice'], 0, "figure_retailprice"),
             "figure_usedprice" => form_sanitizer($_POST['figure_usedprice'], 0, "figure_usedprice"),
             "figure_limitation" => form_sanitizer($_POST['figure_limitation'], "", "figure_limitation"),
-            "figure_cat" => form_sanitizer($_POST['figure_cat'], "", "figure_cat"),
+            "figure_videourl" => form_sanitizer($_POST['figure_videourl'], "", "figure_videourl"),
+			"figure_cat" => form_sanitizer($_POST['figure_cat'], "", "figure_cat"),
             "figure_editionsize" => form_sanitizer($_POST['figure_editionsize'], "", "figure_editionsize"),
             "figure_pubdate" => form_sanitizer($_POST['figure_pubdate'], "", "figure_pubdate"),
             "figure_submitter" => form_sanitizer($_POST['figure_submitter'], "", "figure_submitter"),
@@ -650,7 +652,7 @@ if (!empty($result)) {
                           "figure_packaging_parent");
 
     closeside();
-    openside('<strong>PRICES AND LIMITATIONS</strong>');
+    openside('<strong>PRICES & LIMITATIONS & GOODIES</strong>');
 
 // Select Field "Pub Date" /////////////////////////////////////////////////////////////////////////////////////////////////////////
     // ['figurelib/admin/figurelib.php_047'] = "Release Date";
@@ -728,6 +730,21 @@ if (!empty($result)) {
                        "placeholder" => $locale['figurelib/admin/figurelib.php_058'],
                        "type" => "number"
                    ));
+				   
+// Text Field "figure_videourl"
+// $locale['figure_461'] = "Video URL";
+// $locale['figurelib-error-113'] = "Attention: only 40 characters allowed!";
+// $locale['figure_1818'] = "Please enter only the embed video code (e.g. --> Q7RMpINVo)";
+	echo form_text("figure_videourl", $locale['figure_461'], $submitdata['figure_videourl'],
+					array(
+						"inline" => TRUE,
+						"width" => "400px",
+						"max_length" => 20,
+						"error_text" => $locale['figurelib-error-113'],
+						"placeholder" => $locale['figure_1818']
+					)
+				);			   
+				   
 
     closeside();
 
