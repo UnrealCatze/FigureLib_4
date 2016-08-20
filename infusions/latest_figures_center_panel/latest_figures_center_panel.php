@@ -50,7 +50,7 @@ if (iMEMBER) {
 			DELETE FROM ".DB_FIGURE_USERFIGURES."
 			WHERE figure_userfigures_figure_id='".$_POST['remove_figure']."' AND figure_userfigures_user_id='".$userdata['user_id']."' AND figure_userfigures_language='".LANGUAGE."'
 		");
-		addNotice("success", "Figure is successfully removed from your Collection.");
+		addNotice("danger", "Figure is successfully removed from your Collection.");
 	}
 }
 
@@ -85,7 +85,7 @@ if (iMEMBER) {
 					echo "<div class='col-lg-1 hidden-md hidden-sm hidden-xs'>\n";	scale
 					echo "<div class='col-lg-1 col-md-2 hidden-sm hidden-xs'>\n";	year
 					echo "<div class='col-lg-1 hidden-md hidden-sm hidden-xs'>\n";	rating
-					echo "<div class='col-lg-1 col-md-1 col-sm-1 col-xs-1'>\n";		edit
+					echo "<div class='col-lg-1 col-md-1 col-sm-1 col-xs-1'>\n";		edit (only for admins)
 					echo "<div class='col-lg-1 col-md-1 col-sm-1 col-xs-1'>\n";		add/remove
 				//////////////////////////////////////////////////////////////////////////////*/
 							
@@ -276,9 +276,9 @@ if (iMEMBER) {
 								// Check if User has it in his Collection
 								echo openform("collectionform", "post", FUSION_SELF);
 								if (dbcount("(figure_userfigures_id)", DB_FIGURE_USERFIGURES, "figure_userfigures_figure_id='".$data['figure_id']."' AND figure_userfigures_user_id='".$userdata['user_id']."' AND figure_userfigures_language='".LANGUAGE."'")) {
-									echo form_button("remove_figure", "", $data['figure_id'], ["class" => "btn-xs btn-danger", "alt" => $locale['userfigure_002'], "icon" => "fa fa-fw fa-minus-circle"]);
+									echo form_button("remove_figure", "", $data['figure_id'], ["class" => "btn-xs btn-success", "alt" => $locale['userfigure_002'], "icon" => "fa fa-fw fa-check-square-o"]);
 								} else {
-									echo form_button("add_figure", "", $data['figure_id'], ["class" => "btn-xs btn-success", "alt" => $locale['userfigure_001'], "icon" => "fa fa-fw fa-plus-circle"]);
+									echo form_button("add_figure", "", $data['figure_id'], ["class" => "btn-xs btn-default", "alt" => $locale['userfigure_001'], "icon" => "fa fa-fw fa-plus-square-o"]);
 								}
 								echo closeform();
 												
