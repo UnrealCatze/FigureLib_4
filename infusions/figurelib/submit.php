@@ -65,6 +65,7 @@ if (iMEMBER && $fil_settings['figure_submit']) {
 			"figure_limitation" => "",
 			"figure_cat" => "",
 			"figure_editionsize" => "", 
+			"figure_videourl" => "", 
 			"figure_accessories" => "", 
 			"figure_description" => "", 
 			"figure_pubdate" => "", 
@@ -102,6 +103,7 @@ if (iMEMBER && $fil_settings['figure_submit']) {
 				"figure_pubdate"      => form_sanitizer($_POST['figure_pubdate'],      "", "figure_pubdate"),
 				"figure_agb"          => form_sanitizer($_POST['figure_agb'],          0,  "figure_agb"),
 				"figure_submitter"    => form_sanitizer($_POST['figure_submitter'],    "", "figure_submitter"), 
+				"figure_videourl"     => form_sanitizer($_POST['figure_videourl'],     "", "figure_videourl"),
 				"figure_description"  => addslash(nl2br(parseubb(stripinput($_POST['figure_description'])))),
 				"figure_accessories"  => addslash(nl2br(parseubb(stripinput($_POST['figure_accessories'])))),			
 			);
@@ -513,6 +515,18 @@ if (iMEMBER && $fil_settings['figure_submit']) {
 				"type" => "number"
 			)
 		);
+		
+		// Text Field "figure_videourl"
+		echo form_text("figure_videourl", $locale['figure_461'], $submitdata['figure_videourl'],
+			array(
+				"inline" => TRUE,
+				"width" => "400px",
+				"max_length" => 20,
+				"error_text" => $locale['figurelib-error-113'],
+				"placeholder" => $locale['figure_1818']
+			)
+		);
+		
 		// Form "Space"
 		echo "<div class='tbl1'>\n";
 			echo "<hr>\n";
