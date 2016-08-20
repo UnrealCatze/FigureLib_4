@@ -57,7 +57,7 @@ if (!function_exists('render_manufacturer')) {
 						echo "<div class='media'>\n";
 							echo "<div class='pull-left'><i class='entypo folder mid-opacity icon-sm'></i></div>\n";
 							echo "<div class='media-body overflow-hide'>\n";
-								echo "<div class='media-heading strong'><a href='".$item['manufacturer-link']."'>".$item['manufacturer-title']."</a> <span class='small'>[ ".$item['manufacturer-counter']." ]</span></div>\n";
+								echo "<div class='media-heading strong'><a href='".$item['manufacturer-link']."' alt='".$item['manufacturer-title']."' title='".$item['manufacturer-title']."'>".trimlink($item['manufacturer-title'],30)."</a> <span class='small'>[ ".$item['manufacturer-counter']." ]</span></div>\n";
 							echo "</div>\n";
 						echo "</div>\n";
 					echo "</div>\n";
