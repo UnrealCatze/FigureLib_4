@@ -704,22 +704,6 @@ $locale['figure_1815'] = "Attention: only numeric input from 1 to ..... possible
 $locale['figure_1816'] = "Attention: only numeric input from 1 to ..... possible";
 $locale['figure_1817'] = "Attention: maximum upload 10 images is allowed";
 
-
-// CENTER PANEL
-$locale['CLFP_000']= "Alien Figures Database";
-$locale['CLFP_001']= "No figures found";
-$locale['CLFP_002']= "Name";
-$locale['CLFP_003']= "Manufacturer";
-$locale['CLFP_004']= "Brand";
-$locale['CLFP_005']= "Scale";
-$locale['CLFP_006']= "Year";
-$locale['CLFP_007']= "Image";
-$locale['CLFP_008']= "No Data";
-$locale['CLFP_009']= "X";
-$locale['CLFP_010']= "Rating";
-$locale['CLFP_011']= "Submitter";
-$locale['CLFP_012']= "Count";
-
 // Error Messages
 $locale['figurelib-error-101'] = "You must specify a Name.";
 $locale['figurelib-error-102'] = "You must choose a Manufacturer.";
@@ -861,6 +845,7 @@ $locale['CLFP_016']= "Admin";
 $locale['CLFP_017']= "MY COLLECTION";
 $locale['CLFP_018']= "IMAGE";
 $locale['CLFP_019']= "ACTION";
+$locale['CLFP_020']= "Usercount";
 $locale['yours']= "Your Figures";	
 
 // mycollection
