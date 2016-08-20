@@ -481,7 +481,7 @@ $result = dbquery(
 				
 			
 			// MODUL 5 Begin (Video)  #############################################################################################		
-		if ($data['videourl']  != "") { 	
+		if ($data['figure_videourl']  != "") { 	
 	
 	echo "<hr>";
 		
