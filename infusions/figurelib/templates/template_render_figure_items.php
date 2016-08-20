@@ -483,14 +483,13 @@ $result = dbquery(
 	
 			// MODUL 5 Begin (Video)  #############################################################################################
 			
-		//if schleife bis einbau des codes im forular und DB auskommentiert
-		//if ($data['videourl']  != "") { 	
+		if ($data['videourl']  != "") { 	
 			
 			echo "<div class='container-fluid'>\n";
 			echo "<div class='table-responsive'>\n";
 			echo "<div class='row'>\n";	
 		
-			$embedcode = "49p2cglZn9Q";
+			$videourl = $data['figure_videourl'];
 			
 				// TEXT
 						echo "<div class='col-lg-4 col-md-4 col-sm-12 col-xs-12'>\n";
@@ -500,16 +499,14 @@ $result = dbquery(
 				// VIDEO
 						echo "<div class='col-lg-8 col-md-8 col-sm-12 col-xs-12'>\n";
 						// dieser code geht nicht 
-							//echo "<div align='center' class='embed-responsive embed-responsive-16by9' ><iframe class='embed-responsive-item' src='https://www.youtube.com/embed/".$embedcode. "'></iframe></div>";
-						
-							echo "<div class='embed-responsive embed-responsive-16by9'><iframe class='embed-responsive-item' src='https://www.youtube.com/embed/mnwDqvvE2iI'></iframe>";					
+							echo "<div class='embed-responsive embed-responsive-16by9' ><iframe class='embed-responsive-item' src='https://www.youtube.com/embed/".$embedcode. "'></iframe></div>";					
 						echo "</div>\n";
 				
 			echo "</div>\n";
 			echo "</div>\n";
 			echo "</div>\n";
-			//} else { 			
-			//}		
+			} else { 			
+			}		
 			// MODUL 5 End  (Video) ################################################################################################
 	
 	echo "<hr>";
