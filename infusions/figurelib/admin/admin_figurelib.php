@@ -670,44 +670,36 @@ if (!empty($result)) {
                           ), DB_FIGURE_YEARS, "figure_year", "figure_year_id", "figure_year_parent");
 // Text Field "Retail Price" ////////////////////////////////////////////////////////////////////////////////////////////////////////
     // ['figurelib/admin/figurelib.php_050'] = "Retail Price ($)";
-    // ['figurelib/admin/figurelib.php_051'] = "Retail price in US$ (only numeric input possible)";
-
-    echo form_text("figure_retailprice", $locale['figurelib/admin/figurelib.php_050'], $data['figure_retailprice'],
-                   array(
-                       "inline" => TRUE,
-                       "width" => "520px",
-                       //"min" => 1,
-                       //'min_range' => 0,
-                       //'max_range' => 1000000,
-                       "placeholder" => $locale['figurelib/admin/figurelib.php_051'],
-                       "type" => "number"
-                   ));
-
-    /*
-    echo form_text("figure_retailprice", $locale['figurelib/admin/figurelib.php_050'], $data['figure_retailprice'], array(
-                            "inline" => TRUE,
-                            "width" => "520px",
-                            "placeholder" => $locale['figurelib/admin/figurelib.php_051'],
-                            "type" => "number",
-                            "callback_check" => "retailprice_check"
-                            ));
-
-    */
-    //echo "<input type='range' name='ageInputName' id='ageInputId' value='1' min='1' max='1000000' style='width:520px' oninput='ageOutputId.value = ageInputId.value'><output name='ageOutputName' id='ageOutputId'>1</output>";
-
+    // ['figurelib/admin/figurelib.php_051'] = "Retail price in US$ (only numeric input possible)";	
+	echo form_text("figure_retailprice", $locale['figurelib/admin/figurelib.php_050'], $data['figure_retailprice'],
+					array(
+						"inline" => TRUE,
+						"width" => "488px",
+						"error_text" => $locale['figure_1814'],
+						"min" => "0",
+						"placeholder" => $locale['figure_1807'],
+						"prepend_value" => "&#036;",
+						"type" => "number"
+					)
+				);
 
 // Text Field "Used Price" ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     // ['figurelib/admin/figurelib.php_052'] = "Used Price ($)";
-    // ['figurelib/admin/figurelib.php_053'] = "Used price in US$ (only numeric input possible)";
-    echo form_text("figure_usedprice", $locale['figurelib/admin/figurelib.php_052'], $data['figure_usedprice'], array(
-        "inline" => TRUE,
-        "width" => "520px",
-        //"min" => 1,
-        //'min_range' => 0,
-        //'max_range' => 1000000,
-        "placeholder" => $locale['figurelib/admin/figurelib.php_053'],
-        "type" => "number"
-    ));
+    // ['figurelib/admin/figurelib.php_053'] = "Used price in US$ (only numeric input possible)";	
+	echo form_text("figure_usedprice", $locale['figurelib/admin/figurelib.php_052'], $data['figure_usedprice'], 
+					array(
+						"inline" => TRUE,
+						"width" => "488px",
+						"error_text" => $locale['figure_1815'],
+						"placeholder" => $locale['figure_1808'],
+						"min" => "0",
+						"prepend_value" => "&#036;",
+						"type" => "number"
+					)
+				);
+	
+	
+	
 // Select Field "Limited Edition" //////////////////////////////////////////////////////////////////////////////////////////////////////
     // ['figurelib/admin/figurelib.php_054'] = "Limited Edition";
     // ['figurelib/admin/figurelib.php_055'] = "Select Limited Editon";
