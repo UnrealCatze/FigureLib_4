@@ -78,6 +78,7 @@ $inf_newtable[] = DB_FIGURE_ITEMS." (
 		figure_pubdate VARCHAR(200) NOT NULL DEFAULT '',
 		figure_retailprice decimal(8,2) NOT NULL,
 		figure_usedprice decimal(8,2) NOT NULL,
+		figure_videourl VARCHAR(200) NOT NULL DEFAULT '',
 		figure_limitation VARCHAR(200) NOT NULL DEFAULT '',
 		figure_editionsize decimal(8) NOT NULL,
 		figure_forum_url VARCHAR(200) NOT NULL DEFAULT '',
@@ -113,14 +114,6 @@ $inf_newtable[] = DB_FIGURE_ITEMS." (
 		KEY figure_clickcount (figure_clickcount),
 		PRIMARY KEY (figure_id)
 	) ENGINE=MyISAM DEFAULT CHARSET=UTF8 COLLATE=utf8_unicode_ci";
-/////////////////////////////////////////////////////////////////////////////////	
-/*
-$inf_newtable[] = DB_FIGURE_SETTINGS." (
-		settings_name VARCHAR(200) NOT NULL DEFAULT '',
-		settings_value TEXT NOT NULL
-		settings_inf TEXT NOT NULL
-	) ENGINE=MyISAM DEFAULT CHARSET=UTF8 COLLATE=utf8_unicode_ci";
-*/	
 /////////////////////////////////////////////////////////////////////////////////
 $inf_newtable[] = DB_FIGURE_MANUFACTURERS." (
 		figure_manufacturer_id MEDIUMINT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -466,20 +459,22 @@ $inf_insertdbrow[] = DB_FIGURE_CATS." (figure_cat_id, figure_cat_name, figure_ca
 (4, '1/4 Scale', '', 'figure_id ASC'),
 (5, '1/6 Scale', '', 'figure_id ASC'),
 (6, 'Actionfigure', '', 'figure_id ASC'),
-(7, 'Bootleg', '', 'figure_id ASC'),
-(8, 'Bust', '', 'figure_id ASC'),
-(9, 'Diorama', '', 'figure_id ASC'),
-(10, 'Garage Kit', '', 'figure_id ASC'),
-(11, 'Jumbo Kenner', '', 'figure_id ASC'),
-(12, 'Maquette', '', 'figure_id ASC'),
-(13, 'Merchandise', '', 'figure_id ASC'),
-(14, 'Mini/Trade Figure', '', 'figure_id ASC'),
-(15, 'Model Kit', '', 'figure_id ASC'),
-(16, 'Plush', '', 'figure_id ASC'),
-(17, 'Promotion', '', 'figure_id ASC'),
-(18, 'Prop Replica', '', 'figure_id ASC'),
-(19, 'PVC Statue', '', 'figure_id ASC'),
-(20, 'Statue', '', 'figure_id ASC')
+(7, 'Accessories', '', 'figure_id ASC'),
+(8, 'Bootleg', '', 'figure_id ASC'),
+(9, 'Bust', '', 'figure_id ASC'),
+(10, 'Diorama', '', 'figure_id ASC'),
+(11, 'Garage Kit', '', 'figure_id ASC'),
+(12, 'Jumbo Kenner', '', 'figure_id ASC'),
+(13, 'Maquette', '', 'figure_id ASC'),
+(14, 'Media', '', 'figure_id ASC'),
+(15, 'Merchandise', '', 'figure_id ASC'),
+(16, 'Mini/Trade Figure', '', 'figure_id ASC'),
+(17, 'Model Kit', '', 'figure_id ASC'),
+(18, 'Plush', '', 'figure_id ASC'),
+(19, 'Promotion', '', 'figure_id ASC'),
+(20, 'Prop Replica', '', 'figure_id ASC'),
+(21, 'PVC Statue', '', 'figure_id ASC'),
+(22, 'Statue', '', 'figure_id ASC')
 ";
 /////////////////////////////////////////////////////////////////////////////////
 //befüllem von Materials
