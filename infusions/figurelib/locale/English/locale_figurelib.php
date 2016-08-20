@@ -1,5 +1,4 @@
 <?php
-
 $locale['comma'] = ",";
 
 // infusion.php
@@ -394,14 +393,14 @@ $locale['figure_445'] = "Width";
 $locale['figure_446'] = "Depth";
 $locale['figure_447'] = "Material";
 $locale['figure_448'] = "Packaging";
-$locale['figure_449'] = "Retail Price ($)";//"MSRP &sup1;"; MSRP = Manufacturer's Suggested Retail Price
+$locale['figure_449'] = "Retail Price";//"MSRP &sup1;"; MSRP = Manufacturer's Suggested Retail Price
 $locale['figure_450'] = "Limited Edition";
 $locale['figure_451'] = "Edition Size";
 $locale['figure_452'] = "Artists";
 $locale['figure_453'] = "[";
 $locale['figure_454'] = "] ";
 $locale['figure_455'] = "Articulation";
-$locale['figure_456'] = "Used Price ($)";
+$locale['figure_456'] = "Used Price";
 $locale['figure_457'] = "Accessories";
 $locale['figure_458'] = "Typ Artic. Points";
 $locale['figure_459'] = "Attention: Fields with * are required!";
@@ -692,8 +691,8 @@ $locale['figure_1803'] = "Artist and/or sculper of this figure";
 $locale['figure_1804'] = "Country (e.g. --> USA / Japan / Unknown)";
 $locale['figure_1805'] = "Serie of this figure (e.g. --> NECA Series 7)";
 $locale['figure_1806'] = "Weight in g/kg or lb/oz (e.g. --> 200 g)";
-$locale['figure_1807'] = "Retail price in US$ (only numeric input possible)";
-$locale['figure_1808'] = "Used price in US$ (only numeric input possible)";
+$locale['figure_1807'] = "Retail price (only numeric input possible)";
+$locale['figure_1808'] = "Used price (only numeric input possible)";
 $locale['figure_1809'] = "Number of pieces (only numeric input possible)";
 $locale['figure_1810'] = "I have read and agree to the terms and conditions.";
 $locale['figure_1811'] = "You must define at least one category before you can add any figure";
@@ -784,10 +783,10 @@ $locale['figurelib/admin/figurelib.php_046'] = "You must choose a Packaging.";
 $locale['figurelib/admin/figurelib.php_047'] = "Release Date";
 $locale['figurelib/admin/figurelib.php_048'] = "Select a Year";
 $locale['figurelib/admin/figurelib.php_049'] = "You must choose a Release Date.";
-$locale['figurelib/admin/figurelib.php_050'] = "Retail Price ($)"; //"MSRP &sup1;"; MSRP = Manufacturer's Suggested Retail Price
-$locale['figurelib/admin/figurelib.php_051'] = "Retail price in US$ (only numeric input possible)";
-$locale['figurelib/admin/figurelib.php_052'] = "Used Price ($)";
-$locale['figurelib/admin/figurelib.php_053'] = "Used price in US$ (only numeric input possible)";
+$locale['figurelib/admin/figurelib.php_050'] = "Retail Price"; //"MSRP &sup1;"; MSRP = Manufacturer's Suggested Retail Price
+$locale['figurelib/admin/figurelib.php_051'] = "Retail price (only numeric input possible)";
+$locale['figurelib/admin/figurelib.php_052'] = "Used Price";
+$locale['figurelib/admin/figurelib.php_053'] = "Used price (only numeric input possible)";
 $locale['figurelib/admin/figurelib.php_054'] = "Limited Edition";
 $locale['figurelib/admin/figurelib.php_055'] = "Select Limited Edition";
 $locale['figurelib/admin/figurelib.php_056'] = "You must choose a Limited Edition.";
