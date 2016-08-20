@@ -149,6 +149,8 @@ if (iMEMBER) {
 				");
 				
 				// Display Header for my Collection - START
+				echo "<div class='navbar-default'>";
+				echo "<div class='table-responsive'>\n";
 				echo "<div class='row'>\n";
 				
 					// Image
@@ -188,7 +190,9 @@ if (iMEMBER) {
 					
 				// Display Header for my Collection - END
 				echo "</div>\n";
-				
+				echo "</div>\n";
+				echo "</div>\n";
+				echo "<hr>";
 				// Display the Items
 				while ($data = dbarray($result)) {
 					
@@ -222,6 +226,7 @@ if (iMEMBER) {
 					}
 					
 					// Display Header for my Collection - START
+					
 					echo "<div class='row'>\n";
 				
 						// Image
@@ -281,6 +286,7 @@ if (iMEMBER) {
 					
 					// Display Header for my Collection - END
 					echo "</div>\n";
+
 				}
 				
 				// Display Page Nav if needed
