@@ -405,6 +405,8 @@ $locale['figure_457'] = "Accessories";
 $locale['figure_458'] = "Typ Artic. Points";
 $locale['figure_459'] = "Attention: Fields with * are required!";
 $locale['figure_460'] = "Link to Forum";
+$locale['figure_461'] = "Video URL";
+
 
 // Submit.php
 $locale['figure_501'] = "Figure deleted";
@@ -702,6 +704,7 @@ $locale['figure_1814'] = "Attention: only numeric input from 1 to ..... possible
 $locale['figure_1815'] = "Attention: only numeric input from 1 to ..... possible";
 $locale['figure_1816'] = "Attention: only numeric input from 1 to ..... possible";
 $locale['figure_1817'] = "Attention: maximum upload 10 images is allowed";
+$locale['figure_1818'] = "Please enter only the embed video code (e.g. --> Q7RMpINVo)";
 
 // Error Messages
 $locale['figurelib-error-101'] = "You must specify a Name.";
