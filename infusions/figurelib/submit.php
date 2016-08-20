@@ -461,25 +461,28 @@ if (iMEMBER && $fil_settings['figure_submit']) {
 		echo form_text("figure_retailprice", $locale['figure_449'], $submitdata['figure_retailprice'],
 			array(
 				"inline" => TRUE,
-				"width" => "400px",
+				"width" => "368px",
 				"error_text" => $locale['figure_1814'],
 				"min" => "0",
 				"placeholder" => $locale['figure_1807'],
+				"prepend_value" => "&#036;",
 				"type" => "number"
 			)
 		);
+		
 		// Text Field "Used Price"
 		echo form_text("figure_usedprice", $locale['figure_456'], $submitdata['figure_usedprice'],
-			array(
-				"inline" => TRUE,
-				"width" => "400px",
-				"error_text" => $locale['figure_1815'],
+            array(
+                "inline" => TRUE,
+                "width" => "368px",
+                "error_text" => $locale['figure_1815'],
+                "placeholder" => $locale['figure_1808'],
 				"min" => "0",
-				"placeholder" => $locale['figure_1808'],
+                "prepend_value" => "&#036;",
 				"type" => "number"
-			)
-		);
-	
+            )
+        );
+			
 		// Form "Space"
 		echo "<div class='tbl1'>\n";
 			echo "<hr>\n";
