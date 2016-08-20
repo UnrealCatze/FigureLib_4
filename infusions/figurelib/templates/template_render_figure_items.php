@@ -499,7 +499,7 @@ $result = dbquery(
 				// VIDEO
 						echo "<div class='col-lg-8 col-md-8 col-sm-12 col-xs-12'>\n";
 						// dieser code geht nicht 
-							echo "<div class='embed-responsive embed-responsive-16by9' ><iframe class='embed-responsive-item' src='https://www.youtube.com/embed/".$embedcode. "'></iframe></div>";					
+							echo "<div class='embed-responsive embed-responsive-16by9' ><iframe class='embed-responsive-item' src='https://www.youtube.com/embed/".$videourl."'></iframe></div>";					
 						echo "</div>\n";
 				
 			echo "</div>\n";
