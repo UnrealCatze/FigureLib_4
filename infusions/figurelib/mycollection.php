@@ -30,12 +30,43 @@ if (!db_exists(DB_FIGURE_ITEMS)) { redirect(BASEDIR."error.php?code=404"); }
 
 // Get Settings
 $fil_settings = get_settings("figurelib");
-	
+		
 // Start Site
 opentable("<strong>".$locale['mc_0001']."</strong>");
 
 // Display Content, if the User is a Member
 if (iMEMBER) {
+		
+	// Hande MyCollection Actions
+	
+	// Add a Figure to Collection
+	if (
+		isset($_POST['add_figure']) && isNum($_POST['add_figure']) && 
+		dbcount("(figure_id)", DB_FIGURE_ITEMS, "figure_id='".$_POST['add_figure']."' AND figure_freigabe='1'") &&
+		!dbcount("(figure_userfigures_id)", DB_FIGURE_USERFIGURES, "figure_userfigures_figure_id='".$_POST['add_figure']."' AND figure_userfigures_user_id='".$userdata['user_id']."' AND figure_userfigures_language='".LANGUAGE."'")
+	) {
+		dbquery("
+			INSERT INTO ".DB_FIGURE_USERFIGURES."
+				(figure_userfigures_figure_id, figure_userfigures_user_id, figure_userfigures_language)
+			VALUES
+				('".$_POST['add_figure']."', '".$userdata['user_id']."', '".LANGUAGE."')
+		");
+		addNotice("success", "Figure is successfully added to your Collection.");
+	
+	// Delete a Figure from Collection
+	} elseif (
+		isset($_POST['remove_figure']) && isNum($_POST['remove_figure']) && 
+		dbcount("(figure_id)", DB_FIGURE_ITEMS, "figure_id='".$_POST['remove_figure']."' AND figure_freigabe='1'") &&
+		dbcount("(figure_userfigures_id)", DB_FIGURE_USERFIGURES, "figure_userfigures_figure_id='".$_POST['remove_figure']."' AND figure_userfigures_user_id='".$userdata['user_id']."' AND figure_userfigures_language='".LANGUAGE."'")
+	) {
+		dbquery("
+			DELETE FROM ".DB_FIGURE_USERFIGURES."
+			WHERE figure_userfigures_figure_id='".$_POST['remove_figure']."' AND figure_userfigures_user_id='".$userdata['user_id']."' AND figure_userfigures_language='".LANGUAGE."'
+		");
+		addNotice("danger", "Figure is successfully removed from your Collection.");
+	}
+
+	
 
 	// Display Figures Counter and last Figure START
 	echo "<div class='row'>\n";
@@ -98,14 +129,13 @@ if (iMEMBER) {
 			closeside();
 		echo "</div>\n";
 			
-	// Display Figures Counter and last Figure START
+	// Display Figures Counter and last Figure END
 	echo "</div>\n";
 
-	
-	
-	
+
 	// Display my Collection START
 	echo "<hr />\n";
+	
 	echo "<div class='row'>\n";
 		echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";
 			openside($locale['yours']);
@@ -148,6 +178,17 @@ if (iMEMBER) {
 					LIMIT ".$_GET['rowstart'].",".$fil_settings['figure_per_page']."
 				");
 				
+			/*
+				echo "<div class='col-lg-1 col-md-2 col-sm-2 col-xs-2'>\n";  	// Image
+				echo "<div class='col-lg-2 col-md-2 col-sm-4 col-xs-4'>\n"; 	// Name of Figure
+				echo "<div class='col-lg-3 col-md-2 col-sm-4 col-xs-4'>\n"; 	// Manufacturer
+				echo "<div class='col-lg-2 hidden-md hidden-sm hidden-xs'>\n"; 	// Brand
+				echo "<div class='col-lg-1 col-md-2 hidden-sm hidden-xs'>\n"; 	// Scale
+				echo "<div class='col-lg-1 col-md-2 hidden-sm hidden-xs'>\n"; 	// Release Date
+				echo "<div class='col-lg-1 hidden-md hidden-sm hidden-xs'>\n"; 	// Rating
+				echo "<div class='col-lg-1 col-md-2 col-sm-2 col-xs-2'>\n"; 	// Add/Remove
+			*/
+								
 				// Display Header for my Collection - START
 				echo "<div class='navbar-default'>";
 				echo "<div class='table-responsive'>\n";
@@ -159,12 +200,12 @@ if (iMEMBER) {
 					echo "</div>\n";
 					
 					// Name of Figure
-					echo "<div class='col-lg-3 col-md-3 col-sm-4 col-xs-4'>\n";
+					echo "<div class='col-lg-2 col-md-2 col-sm-4 col-xs-4'>\n";
 						echo "<span class='text-smaller text-uppercase'>".$locale['CLFP_002']."</span>\n";
 					echo "</div>\n";
 					
 					// Manufacturer
-					echo "<div class='col-lg-2 col-md-3 col-sm-4 col-xs-4'>\n";
+					echo "<div class='col-lg-3 col-md-2 col-sm-4 col-xs-4'>\n";
 						echo "<span class='text-smaller text-uppercase'>".$locale['CLFP_003']."</span>\n";
 					echo "</div>\n";
 					
@@ -179,13 +220,18 @@ if (iMEMBER) {
 					echo "</div>\n";
 					
 					// Release Date
-					echo "<div class='col-lg-1 col-md-2 col-sm-2 col-xs-2'>\n";
+					echo "<div class='col-lg-1 hidden-md hidden-sm hidden-xs'>\n";
 						echo "<span class='text-smaller text-uppercase'>".$locale['CLFP_006']."</span>\n";
 					echo "</div>\n";
 					
 					// Rating
-					echo "<div class='col-lg-2 hidden-md hidden-sm hidden-xs'>\n";
+					echo "<div class='col-lg-1 hidden-md hidden-sm hidden-xs'>\n";
 						echo "<span class='text-smaller text-uppercase'>".$locale['CLFP_010']."</span>\n";
+					echo "</div>\n";
+					
+					// Add/Remove
+					echo "<div class='col-lg-1 col-md-2 col-sm-2 col-xs-2'>\n";
+						echo "<span class='text-smaller text-uppercase'>Opt.</span>\n";
 					echo "</div>\n";
 					
 				// Display Header for my Collection - END
@@ -196,15 +242,17 @@ if (iMEMBER) {
 				// Display the Items
 				while ($data = dbarray($result)) {
 					
-					// Rating
 					$drating = dbarray(dbquery("
-						SELECT 
-							SUM(rating_vote) AS sum_rating, COUNT(rating_item_id) AS count_votes 
-						FROM ".DB_RATINGS." 
-						WHERE rating_type='FI' AND rating_item_id='".$data['figure_id']."'
-					")); 
-					$rating = ($drating['count_votes'] > 0 ? str_repeat("<img src='".INFUSIONS."figurelib/images/starsmall.png'>".ceil($drating['sum_rating'] / $drating['count_votes'])) : "-");
-					
+								   SELECT 
+										SUM(rating_vote) sum_rating, 
+										COUNT(rating_item_id) count_votes 
+										FROM ".DB_RATINGS." 
+										WHERE rating_type='FI' 
+										AND  rating_item_id='".$data['figure_id']."'
+									")); 
+   
+								$rating = ($drating['count_votes'] > 0 ? str_repeat("<img src='".INFUSIONS.$inf_folder."/images/starsmall.png'>", ceil($drating['sum_rating']/$drating['count_votes'])) : "-");
+												
 					// Get correct Image
 					if (dbcount("(figure_images_image_id)", DB_FIGURE_IMAGES, "figure_images_figure_id='".$data['figure_id']."'")) {
 						$imageData = dbarray(dbquery("
@@ -225,9 +273,9 @@ if (iMEMBER) {
 						$imageURL = INFUSIONS."figurelib/images/default.png";
 					}
 					
-					// Display Header for my Collection - START
-					
-					echo "<div class='row'>\n";
+				// Display Header for my Collection - START					
+				echo "<div class='row'>\n";
+				
 				
 						// Image
 						echo "<div class='col-lg-1 col-md-2 col-sm-2 col-xs-2'>\n";
@@ -237,14 +285,14 @@ if (iMEMBER) {
 						echo "</div>\n";
 						
 						// Name of Figure
-						echo "<div class='col-lg-3 col-md-3 col-sm-4 col-xs-4'>\n";
+						echo "<div class='col-lg-2 col-md-2 col-sm-4 col-xs-4'>\n";
 							echo "<a href='".INFUSIONS."figurelib/figures.php?figure_id=".$data['figure_id']."' title='".$locale['CLFP_002'].": ".$data['figure_title']."' class='side-small'>\n";
 								echo trimlink($data['figure_title'], 10);
 							echo "</a>\n";
 						echo "</div>\n";
 						
 						// Manufacturer
-						echo "<div class='col-lg-2 col-md-3 col-sm-4 col-xs-4'>\n";
+						echo "<div class='col-lg-3 col-md-2 col-sm-4 col-xs-4'>\n";
 							echo "<span title='".$locale['CLFP_003'].": ".$data['figure_manufacturer_name']."' class='side-small'>\n";
 								echo trimlink($data['figure_manufacturer_name'], 10);
 							echo "</span>\n";
@@ -265,7 +313,7 @@ if (iMEMBER) {
 						echo "</div>\n";
 						
 						// Release Date
-						echo "<div class='col-lg-1 col-md-2 col-sm-2 col-xs-2'>\n";
+						echo "<div class='col-lg-1 hidden-md hidden-sm hidden-xs'>\n";
 							if (!$data['figure_pubdate']) {
 								echo "<span title='".$locale['CLFP_006'].": ".$locale['CLFP_008']."' class='side-small'>\n";
 									echo trimlink($locale['CLFP_008'], 6);
@@ -278,13 +326,25 @@ if (iMEMBER) {
 						echo "</div>\n";
 						
 						// Rating
-						echo "<div class='col-lg-2 hidden-md hidden-sm hidden-xs'>\n";
+						echo "<div class='col-lg-1 hidden-md hidden-sm hidden-xs'>\n";
 							echo "<span title='".$locale['CLFP_010']."' class='side-small'>\n";
 								echo $rating;
 							echo "</span>\n";
 						echo "</div>\n";
-					
-					// Display Header for my Collection - END
+						
+						// add/remove
+						echo "<div class='col-lg-1 col-md-2 col-sm-2 col-xs-2'>\n"; 
+					// Check if User has it in his Collection
+								echo openform("collectionform", "post", FUSION_SELF);
+								if (dbcount("(figure_userfigures_id)", DB_FIGURE_USERFIGURES, "figure_userfigures_figure_id='".$data['figure_id']."' AND figure_userfigures_user_id='".$userdata['user_id']."' AND figure_userfigures_language='".LANGUAGE."'")) {
+									echo form_button("remove_figure", "", $data['figure_id'], ["class" => "btn-xs btn-success", "alt" => $locale['userfigure_002'], "icon" => "fa fa-fw fa-check-square-o"]);
+								} else {
+									echo form_button("add_figure", "", $data['figure_id'], ["class" => "btn-xs btn-default", "alt" => $locale['userfigure_001'], "icon" => "fa fa-fw fa-plus-square-o"]);
+								}
+								echo closeform();
+						echo "</div>\n";								
+								
+					// Display Table for my Collection - END
 					echo "</div>\n";
 
 				}
