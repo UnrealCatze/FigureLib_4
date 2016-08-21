@@ -796,15 +796,16 @@ global $userdata;
 		if (dbrows($resultufc) != 0) {
 				echo "<div align='center'>\n";
 				echo $locale['userfigure_003'];		
-				echo "<p>";	
-				
+				//echo "<p>";	
+				echo "</div>";	
 				
 			while ($data = dbarray($resultufc)) {
 				
-				echo "<tr>\n<td class='side-small' align='left'>".THEME_BULLET."\n";
-				echo "<a href='".BASEDIR."profile.php?lookup=".$data['user_id']."' title='".$data['user_name']."' class='side'>\n";
-				echo trimlink($data['user_name'], 15)."</a></td>\n</tr>\n";
-				echo "</div>";	
+				echo "<tr><td class='side-small'>\n";
+				echo "<a href='".BASEDIR."profile.php?lookup=".$data['user_id']."' title='".$data['user_name']."'>\n";
+				echo "<span>".THEME_BULLET." ".trimlink($data['user_name'], 15)."</a></span>\n";
+				echo "</td></tr>\n";
+				
 			}
 
 		} else {
