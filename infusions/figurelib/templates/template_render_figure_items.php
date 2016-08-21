@@ -492,12 +492,12 @@ $result = dbquery(
 			$videourl = $data['figure_videourl'];
 			
 				// TEXT
-						echo "<div class='col-lg-4 col-md-4 col-sm-12 col-xs-12'>\n";
+						echo "<div class='col-lg-4 col-md-12 col-sm-12 col-xs-12'>\n";
 							echo "<div class='navbar-default'><div class='text-smaller text-uppercase'><strong>Unboxing Video</strong>\n";
 						echo "</div></div></div>\n";									
 						
 				// VIDEO
-						echo "<div class='col-lg-8 col-md-8 col-sm-12 col-xs-12'>\n";
+						echo "<div class='col-lg-8 col-md-12 col-sm-12 col-xs-12'>\n";
 						// dieser code geht nicht 
 							echo "<div class='embed-responsive embed-responsive-16by9' ><iframe class='embed-responsive-item' src='https://www.youtube.com/embed/".$videourl."'></iframe></div>";					
 						echo "</div>\n";
@@ -758,26 +758,6 @@ closeside();
 	
 // ########### 	LIST OF ALL USER WHERE HAVE THIS FIGURE  ##################################				
 global $userdata;
-
-
-
-
-
-/*        $resultufc = dbquery(
-				"SELECT             
-					fu.user_id, 
-					fu.user_name, 
-					fu.user_status, 
-					fu.user_avatar, 
-					fuf.figure_userfigures_figure_id,
-					fuf.figure_userfigures_user_id          
-            FROM ".DB_FIGURE_USERFIGURES." fuf
-            INNER JOIN ".DB_USERS." fu ON fuf.figure_userfigures_user_id=fu.user_id  
-            WHERE fuf.figure_userfigures_figure_id='".$data['figure_id']."'
-            AND fu.user_id='".$userdata['user_id']."' 
-			GROUP BY fu.user_id 			
-            ");	
-*/
 
 			$resultufc = dbquery(
 				"SELECT             
