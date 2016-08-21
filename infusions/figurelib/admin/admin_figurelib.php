@@ -738,12 +738,35 @@ if (!empty($result)) {
 	echo form_text("figure_videourl", $locale['figure_461'], $data['figure_videourl'],
 					array(
 						"inline" => TRUE,
-						"width" => "400px",
+						"width" => "520px",
 						"max_length" => 20,
 						"error_text" => $locale['figurelib-error-113'],
 						"placeholder" => $locale['figure_1818']
 					)
-				);			   
+				);	
+
+		if ($data['figure_videourl']  != "") { 	
+	
+	echo "<hr>";
+		
+			echo "<div class='row'>\n";	
+		
+			$videourl = $data['figure_videourl'];
+			
+				// TEXT
+						echo "<div class='col-lg-3 col-md-3 col-sm-12 col-xs-12'>\n";
+							echo "<strong>Video Preview</strong>\n";
+						echo "</div>\n";									
+						
+				// VIDEO
+						echo "<div class='col-lg-9 col-md-9 col-sm-12 col-xs-12'>\n";
+						// dieser code geht nicht 
+							echo "<div class='embed-responsive embed-responsive-16by9' ><iframe class='embed-responsive-item' src='https://www.youtube.com/embed/".$videourl."'></iframe></div>";					
+						echo "</div>\n";
+
+			echo "</div>\n";
+			} else { 			
+			}				
 				   
 
     closeside();
