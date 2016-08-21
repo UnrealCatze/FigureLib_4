@@ -848,6 +848,10 @@ $locale['CLFP_017']= "MY COLLECTION";
 $locale['CLFP_018']= "IMAGE";
 $locale['CLFP_019']= "ACTION";
 $locale['CLFP_020']= "Usercount";
+$locale['CLFP_021']= "Last entries";
+$locale['CLFP_022']= "Most viewed Figures";
+
+
 $locale['yours']= "Your Figures";	
 
 // mycollection
