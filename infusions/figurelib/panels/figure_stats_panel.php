@@ -1,4 +1,3 @@
-
 <?php
 
 /***************************************************************************
@@ -36,7 +35,19 @@ $fil_settings = get_settings("figurelib");
 // Start Site
 opentable("<strong>Figure Stats</strong>");
 
+
+//////////////////////////////////
+// gesamtzahl aller Figuren
+$allFiguresCounter = dbcount("(figure_id)",             DB_FIGURE_ITEMS,       "figure_freigabe='1'");	
 		
+		echo "<span>Gesamtzahl aller Figuren: </span><span class='badge'>".$allFiguresCounter."</span>\n";
+		echo "<br>";
+//////////////////////////////////	
+
+
+
+	
+	
 //////////////////////////////////
 // Teuerste Figur
 
@@ -67,7 +78,7 @@ opentable("<strong>Figure Stats</strong>");
 						while ($data = dbarray($resultteuerste)) {
 						
 						
-						echo "<span>Teuerste Figur:</span> ".$data['figure_retailprice']." (".$data['figure_title']." / ".$data['figure_manufacturer_name'].")";
+						echo "<span>H&ouml;chster Neupreis:</span> ".$data['figure_retailprice']." (".$data['figure_title']." / ".$data['figure_manufacturer_name'].")";
 					}
 						}
 						
@@ -104,6 +115,17 @@ opentable("<strong>Figure Stats</strong>");
 							echo "<span>H&ouml;chster Gebrauchtpreis:</span> ".$data['figure_usedprice']." (".$data['figure_title']." / ".$data['figure_manufacturer_name'].")";		
 					}
 						}
+//////////////////////////////////
+
+
+//////////////////////////////////
+// Gesamtzahl Figuren in Userbesitz
+	
+$allFiguresCounterUser = dbcount("(figure_userfigures_id)",             DB_FIGURE_USERFIGURES,       "");	
+									
+						echo "<br>";
+						echo "<span>Gesamtzahl Figuren in Userbesitz:</span> <span class='badge'>".$allFiguresCounterUser."</span>\n";
+					
 //////////////////////////////////
 
 
