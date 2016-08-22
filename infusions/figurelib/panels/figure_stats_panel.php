@@ -73,23 +73,27 @@ opentable("<strong>Figure Stats</strong>");
 				echo "<div class='row'>\n";
 				
 			// GESAMTZAHL ALLER FIGUREN /////////////////////////////////////////		
-						echo "<div class='col-lg-6 col-md-6 col-sm-12 col-xs-12'>\n";														
+						echo "<div class='col-lg-4 col-md-4 col-sm-12 col-xs-12'>\n";														
 								echo "<div class='navbar-default text-bold'>";	
-								echo "<span>Total number of figures: </span>\n";
+						echo "<span>Total number of figures: </span>\n";
 								echo "</div>\n";
+						echo "</div>\n";
+						echo "<div class='col-lg-2 col-md-2 col-sm-12 col-xs-12'>\n";
 								$allFiguresCounter = dbcount("(figure_id)", DB_FIGURE_ITEMS, "figure_freigabe='1'");
-								echo "<span class='badge'>".$allFiguresCounter."</span>\n";								
+								//echo "<span class='badge'>".$allFiguresCounter."</span>\n";	
+								echo "<button class='btn btn-primary btn-xs' type='button'><span class='badge'>".$allFiguresCounter."</button>\n";
 						echo "</div>\n";
 
-
 			// Gesamtzahl Figuren in Userbesitz //////////////////////////////////	
-						echo "<div class='col-lg-6 col-md-6 col-sm-12 col-xs-12'>\n";
-																									
+						echo "<div class='col-lg-4 col-md-4 col-sm-12 col-xs-12'>\n";																		
 								echo "<div class='navbar-default text-bold'>";	
-								echo "<span>Total figures owned by the user:</span>\n";
+								echo "<span>Total figures owned by user:</span>\n";
 								echo "</div>\n";
+						echo "</div>\n";
+						echo "<div class='col-lg-2 col-md-2 col-sm-12 col-xs-12'>\n";								
 								$allFiguresCounterUser = dbcount("(figure_userfigures_id)",  DB_FIGURE_USERFIGURES, "");
-								echo "<span class='badge'>".$allFiguresCounterUser."</span>\n";											
+								//echo "<span class='badge'>".$allFiguresCounterUser."</span>\n";	
+								echo "<button class='btn btn-primary btn-xs' type='button'><span class='badge'>".$allFiguresCounterUser."</button>\n";							
 						echo "</div>\n";
 			//////////////////////////////////////////////////////////////////////				
 				
