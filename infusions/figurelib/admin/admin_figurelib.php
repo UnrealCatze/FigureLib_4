@@ -38,13 +38,6 @@ if (file_exists(LOCALE.LOCALESET."admin/settings.php")) {
     include LOCALE."English/admin/settings.php";
 }
 
-/* war fÃ¼r retailpice und usedprice gedacht
-function retailprice_check($input) {
-            $max_range = 100000;
-            return (isnum($input) && $input <= $max_range) ? true : false;
-        }
-*/
-
 // Check if there exists Categories
 $result = dbcount("(figure_cat_id)", DB_FIGURE_CATS);
 if (!empty($result)) {
@@ -154,9 +147,12 @@ if (!empty($result)) {
         $data = array(
             "figure_id" => form_sanitizer($_POST['figure_id'], 0, "figure_id"),
             "figure_datestamp" => form_sanitizer($_POST['figure_datestamp'], "", "figure_datestamp"),
-            "figure_freigabe" => form_sanitizer($_POST['figure_freigabe'], 0, "figure_freigabe"),
-			"figure_allow_comments" => isset($_POST['figure_allow_comments']) ? 1 : 0, #form_sanitizer($_POST['figure_allow_comments'], 0, "figure_allow_comments"),
-			"figure_allow_ratings" => isset($_POST['figure_allow_ratings']) ? 1 : 0, #form_sanitizer($_POST['figure_allow_ratings'], 0, "figure_allow_ratings"),
+            //"figure_freigabe" => form_sanitizer($_POST['figure_freigabe'], 0, "figure_freigabe"),
+			//"figure_allow_comments" => isset($_POST['figure_allow_comments']) ? 1 : 0, #form_sanitizer($_POST['figure_allow_comments'], 0, "figure_allow_comments"),
+			//"figure_allow_ratings" => isset($_POST['figure_allow_ratings']) ? 1 : 0, #form_sanitizer($_POST['figure_allow_ratings'], 0, "figure_allow_ratings"),
+			"figure_freigabe" => isset($_POST['figure_freigabe']) ? "1" : "0",
+			"figure_allow_comments" => isset($_POST['figure_allow_comments']) ? "1" : "0",
+			"figure_allow_ratings" => isset($_POST['figure_allow_ratings']) ? "1" : "0",
 			"figure_language" => form_sanitizer($_POST['figure_language'], "", "figure_language"),
 			"figure_sorting" => form_sanitizer($_POST['figure_sorting'], "", "figure_sorting"),
             "figure_title" => form_sanitizer($_POST['figure_title'], "", "figure_title"),
@@ -366,16 +362,15 @@ if (!empty($result)) {
 // Checkbox "figure_allow_comments" ////////////////////////////////////////////////////////////////////////////
     // $locale['figurelib/admin/figurelib.php_075'] = "Show Comments?";
 	echo form_checkbox("figure_allow_comments", $locale['figurelib/admin/figurelib.php_075'], $data['figure_allow_comments'], 			array(
-						"inline" => TRUE,
-						"required" => TRUE
+						"inline" => TRUE
 					));	
 	
 // Checkbox "figure_allow_ratings" ///////////////////////////////////////////////////////////////////////////
     // $locale['figurelib/admin/figurelib.php_076'] = "Show Ratings?";
 	echo form_checkbox("figure_allow_ratings", $locale['figurelib/admin/figurelib.php_076'], $data['figure_allow_ratings'], 
 					array(
-						"inline" => TRUE,
-						"required" => TRUE
+						"inline" => TRUE
+
 					));			
     closeside();
 
@@ -402,7 +397,7 @@ if (!empty($result)) {
         'delete_original' => 0,
         'type' => 'image',
         'ext_tip' => sprintf($locale['figure_035'], parsebytesize($asettings['figure_photo_max_b']) . $locale['figure_036'] . $max_image_allowed),
-        'deactivate' => $image_count > 10 ? true : false,
+		'deactivate' => $image_count > $max_image_allowed ? true : false
     );
 
     echo "<div class='well'>\n";
