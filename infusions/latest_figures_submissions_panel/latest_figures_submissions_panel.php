@@ -18,33 +18,39 @@ global $aidlink;
 // LOCALE
 $locale['LFS_0001']= "Figures Submissions";
 $locale['LFS_0002']= "No Submissions";
-$locale['LFS_0003']= "Submit";
-$locale['LFS_0004']= "Submits";
+$locale['LFS_0003']= "Submission";
+$locale['LFS_0004']= "Submissions";
 
 $submits = dbcount("(figure_id)", DB_FIGURE_ITEMS, "figure_freigabe='0'");	
 
 openside($locale['LFS_0001']);
 
-echo "<table>\n";
-  echo "<tr>\n";
-  echo "<colgroup><col width='50%'><col width='50%'></colgroup>";	
-   echo "<td class='small' valign='' align='center' rowspan=''><a href='".INFUSIONS."figurelib/admin.php".$aidlink."&amp;section=figurelib_submissions'><img alt='FigureLib' src='".BASEDIR."administration/images/figurelib.png' border='0'></a></td>\n";
-
-	if ($submits > "0") {
-		
-				if ($submits == "1") {
-					echo " <td class='' valign='' align='center'><font color='red'>".$submits."</font> ".$locale['LFS_0003']."</td>\n";
-					} else {
-					echo "<td class='' valign='' align='center'><font color='red'>".$submits."</font> ".$locale['LFS_0004']."</td>\n";	
-					}
-	} else {
-
-			echo "<td>".$locale['LFS_0002']."</td>";		
-	} 
+	echo "<center><div class='row'>\n";	
+			
+			echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";	
+				echo "<a href='".INFUSIONS."figurelib/admin.php".$aidlink."&amp;section=figurelib_submissions'><img alt='FigureLib' src='".BASEDIR."administration/images/figurelib.png' border='0'></a>";
+			echo "</div>\n";
+			
+			echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";	
+	
+				if ($submits > "0") {
 					
+							if ($submits == "1") {
+								echo " <span valign='' align='center'><font color='red'>".$submits."</font> ".$locale['LFS_0003']."</span>\n";
+								} else {
+								echo "<span class='' valign='' align='center'><font color='red'>".$submits."</font> ".$locale['LFS_0004']."</span>\n";	
+								}
+				} else {
 
-  echo "</tr>\n";
-echo "</table>\n";
+						echo "<span>".$locale['LFS_0002']."</span>";		
+				} 
+	
+			echo "</div>\n";
+	
+	echo "</div>\n";
+				
+				
+
 
 closeside();
  
