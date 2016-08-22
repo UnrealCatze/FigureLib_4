@@ -33,6 +33,22 @@ if (file_exists(INFUSIONS."figurelib/locale/".LOCALESET."locale_figurelib.php"))
 } else {
     include INFUSIONS."figurelib/locale/English/locale_figurelib.php";
 }
+
+// Add jQuery
+        add_to_footer("
+        <script type='text/javascript'>
+        $(function(){
+            $('#figure_limitation').change(function(){
+                if ($(this).val() == 3 ) {
+                    $('#figure_editionsize').prop('disabled', true);
+                } else {
+                    $('#figure_editionsize').prop('disabled', false);
+                }
+            });
+        });
+        </script>");
+
+
 // ['figure_521'] = "Submit Figure";
 add_to_title($locale['global_200'].$locale['figure_521']);
 openside("<i class='fa fa-globe fa-lg m-r-10'></i>".$locale['figure_521']);
