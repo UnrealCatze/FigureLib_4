@@ -34,6 +34,8 @@ if (file_exists(INFUSIONS."figurelib/locale/".LOCALESET."locale_figurelib.php"))
     include INFUSIONS."figurelib/locale/English/locale_figurelib.php";
 }
 
+/*
+// Feld Limation - wenn NO gewählt dann mache Feld Anzahl nicht beschreibbar
 // Add jQuery
 add_to_footer("
 <script type='text/javascript'>
@@ -47,6 +49,24 @@ $(function(){
 	});
 });
 </script>");
+*/
+
+//Feld Limitation - man kann man das Feld davor ausfüllen, wird allerdings dann "no" gewählt, wird der Inhalt entfernt.
+// Add jQuery
+add_to_footer("
+<script type='text/javascript'>
+$(function(){
+    $('#figure_limitation').change(function(){
+        if ($(this).val() == 3 ) {
+            $('#figure_editionsize').val('');
+            $('#figure_editionsize').prop('disabled', true);
+        } else {
+            $('#figure_editionsize').prop('disabled', false);
+        }
+    });
+});
+</script>");
+
 		
 // ['figure_521'] = "Submit Figure";
 add_to_title($locale['global_200'].$locale['figure_521']);
@@ -644,7 +664,5 @@ if (iMEMBER && $fil_settings['figure_submit']) {
 	echo "<div class='well text-center'>".$locale['figure_1813']."</div>\n";
 }
 closeside();
-
 require_once THEMES."templates/footer.php";
-
 ?>
