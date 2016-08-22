@@ -128,7 +128,8 @@ echo openform('settingsform', 'post', FUSION_REQUEST, array('class' => "m-t-20")
 // Display Form
 echo "<div class='row'><div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";
 openside("General Settings");
-
+	echo "<div class='col-lg-6 col-md-6 col-sm-12 col-xs-12'>\n";
+	
 	// Set Options for Selectlists
 	$thumb_opts = [
 		'0' => $locale['admin_figurelib_settings.php_001'], 
@@ -173,7 +174,6 @@ openside("General Settings");
 		'width' => '250px'
 	));	
 
-
 	// ['figure_335'] = "Allow users to submit figures:";
 	// ALS CHECKBOX
 	echo form_checkbox("figure_submit", $locale['figure_335'], $fil_settings['figure_submit']);
@@ -195,7 +195,10 @@ openside("General Settings");
 			"options" => array($locale['disable'], $locale['enable'])
 		));
 	*/
-	
+
+echo "</div>\n";		
+echo "<div class='col-lg-6 col-md-6 col-sm-12 col-xs-12'>\n";	
+		
 	// ['figure_348'] = "Show related figures:";
 	// ALS CHECKBOX
 	echo form_checkbox('figure_related', $locale['figure_348'], $fil_settings['figure_related']);
@@ -217,11 +220,9 @@ openside("General Settings");
 
 	// ['figure_339'] = "Gallery Mode on";
 	echo form_checkbox('figure_display', $locale['figure_339'], $fil_settings['figure_display']);
-
-
-	
-closeside();
 echo "</div>\n";
+closeside();
+echo "</div>\n";	
 // General settings END ##################################################################################
 
 
