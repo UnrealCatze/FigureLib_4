@@ -22,22 +22,24 @@ if (!defined("IN_FUSION")) { die("Access Denied"); }
 pageAccess("FI");
 require_once THEMES. "templates/admin_header.php";
 
+// LANGUAGE
+if (file_exists(INFUSIONS."figurelib/locale/".LOCALESET."locale_figurelib.php")) {
+    include INFUSIONS."figurelib/locale/".LOCALESET."locale_figurelib.php";
+} else {
+    include INFUSIONS."figurelib/locale/English/locale_figurelib.php";
+}
+
+if (file_exists(LOCALE.LOCALESET."admin/settings.php")) {
+    include LOCALE.LOCALESET."admin/settings.php";
+} else {
+    include LOCALE."English/admin/settings.php";
+}
+
 $locale = fusion_get_locale();
 
 // SETTINGS HOLEN
 $fil_settings = get_settings("figurelib");
 
-// Locale (should be added in the correct Localefile)
-$locale['notification-101'] = "You must specify a Subject if you activate Notifications.";
-$locale['notification-102'] = "You must specify a Message if you activate Notifications.";
-$locale['notification-103'] = "Deactivated";
-$locale['notification-104'] = "Private Message";
-$locale['notification-105'] = "E-Mail";
-$locale['notification-106'] = "Please choose";
-$locale['notification-107'] = "Notification";
-$locale['notification-108'] = "Subject";
-$locale['notification-109'] = "Message";
-$locale['notification-110'] = "Insert the Keyword {FIGURELINK} for a direct Link for editing a Figure in Adminarea.";
 global $defender;
 
 // Handle posted Form
@@ -122,14 +124,10 @@ if (isset($_POST['savesettings'])) {
 opentable($locale['figure_settings']);
 echo openform('settingsform', 'post', FUSION_REQUEST, array('class' => "m-t-20"));
 
-// Description
-echo "<div class='well'>".$locale['filt_0006']."</div>";
 
-
-
-// Display Left Form
-echo "<div class='row'>\n<div class='col-xs-12 col-sm-8'>\n";
-openside("");
+// Display Form
+echo "<div class='row'><div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";
+openside("General Settings");
 
 	// Set Options for Selectlists
 	$thumb_opts = [
@@ -144,12 +142,10 @@ openside("");
 
 	// Calculate
 	$calc_c = calculate_byte($asettings['figure_photo_max_b']);
-	$calc_b = $asettings['figure_photo_max_b'] / $calc_c;
-	
-	$calc_c_cat = calculate_byte($asettings['figure_photo_cat_b']);
-	$calc_b_cat = $asettings['figure_photo_cat_max_b'] / $calc_c_cat;
-	
-	$calc_c_man = calculate_byte($asettings['figure_photo_man_b']);
+	$calc_b = $asettings['figure_photo_max_b'] / $calc_c;	
+	$calc_c_cat = calculate_byte($asettings['figure_photo_cat_max_b']);   
+	$calc_b_cat = $asettings['figure_photo_cat_max_b'] / $calc_c_cat;	
+	$calc_c_man = calculate_byte($asettings['figure_photo_man_max_b']);
 	$calc_b_man = $asettings['figure_photo_man_max_b'] / $calc_c_man;
 
 	// ['figure_334'] = "Figures per page:";
@@ -176,7 +172,64 @@ openside("");
 		'type' => 'number',
 		'width' => '250px'
 	));	
+
+
+	// ['figure_335'] = "Allow users to submit figures:";
+	// ALS CHECKBOX
+	echo form_checkbox("figure_submit", $locale['figure_335'], $fil_settings['figure_submit']);
+	/*	
+	// ALS DROPDOWN 	
+		echo form_select("figure_submit", $locale['figure_335'], $fil_settings['figure_submit'], array(
+			"inline" => TRUE, 
+			"options" => array($locale['disable'], $locale['enable'])
+		));
+	*/
 	
+	// ['figure_344'] = "Allow Social Sharing:";	
+	// ALS CHECKBOX
+	echo form_checkbox('figure_social_sharing', $locale['figure_344'], $fil_settings['figure_social_sharing']);
+	/*
+	// ALS DROPDOWN
+		echo form_select("figure_social_sharing", $locale['figure_344'], $fil_settings['figure_social_sharing'], array(
+			"inline" => TRUE, 
+			"options" => array($locale['disable'], $locale['enable'])
+		));
+	*/
+	
+	// ['figure_348'] = "Show related figures:";
+	// ALS CHECKBOX
+	echo form_checkbox('figure_related', $locale['figure_348'], $fil_settings['figure_related']);
+	/*	
+	// ALS DROPDOWN
+	echo form_select("figure_related", $locale['figure_348'], $fil_settings['figure_related'], array(
+			"inline" => TRUE, 
+			"options" => array($locale['disable'], $locale['enable'])
+		));
+	*/	
+
+	// ['figure_363'] = "Allow Comments:";
+	// ALS CHECKBOX
+	echo form_checkbox('figure_allow_comments', $locale['figure_363'], $fil_settings['figure_allow_comments']);
+		
+	// ['figure_364'] = "Allow Ratings:";
+	// ALS CHECKBOX
+	echo form_checkbox('figure_allow_ratings', $locale['figure_364'], $fil_settings['figure_allow_ratings']);
+
+	// ['figure_339'] = "Gallery Mode on";
+	echo form_checkbox('figure_display', $locale['figure_339'], $fil_settings['figure_display']);
+
+
+	
+closeside();
+echo "</div>\n";
+// General settings END ##################################################################################
+
+
+// #######################################################################################################
+// Display Figure Image Settings START
+echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";	
+	openside("Figure Image Settings");
+
 	//$locale['figure_365'] = "Image upload count per figure:";
 	echo form_text('figure_image_upload_count', $locale['figure_365'], $fil_settings['figure_image_upload_count'], array(
 		'inline' => 1,
@@ -188,23 +241,25 @@ openside("");
 		'width' => '250px'
 	));	
 	
-
-
-
-// $locale['admin_figurelib_settings.php_010'] = "Thumb2 ratio:";
-	
-/*
-
-figure_thumb2_ratio
-
-figure_thumb_cat_w
-figure_thumb_cat_h
-figure_thumb_cat_ratio
-
-figure_thumb_man_w
-figure_thumb_man_h
-figure_thumb_man_ratio
-*/	
+	// $locale['admin_figurelib_settings.php_009'] = "Thumb2 size:";
+// $locale['admin_figurelib_settings.php_006'] = "Width x Height";
+echo "
+<div class='row'>
+	<div class='col-xs-12 col-sm-3'>
+		<label for='figure_thumb2_w'>".$locale['admin_figurelib_settings.php_009']."</label>
+	</div>
+	<div class='col-xs-12 col-sm-9'>
+	".form_text(
+	'figure_thumb2_w', '', $fil_settings['figure_thumb2_w'], array(
+		'class' => 'pull-left', 'max_length' => 4, 'number' => 1, 'width' => '150px'
+	))."
+	<i class='entypo icancel pull-left m-r-10 m-l-0 m-t-10'></i>
+	".form_text('figure_thumb2_h', '', $fil_settings['figure_thumb2_h'], array(
+		'class' => 'pull-left', 'max_length' => 4, 'number' => 1, 'width' => '150px'
+	))."
+	<small class='m-l-10 mid-opacity text-uppercase pull-left m-t-10'>( ".$locale['admin_figurelib_settings.php_006']." )</small>
+	</div>
+</div>";
 
 // $locale['admin_figurelib_settings.php_003'] = "Thumb size:";
 // $locale['admin_figurelib_settings.php_006'] = "Width x Height";
@@ -220,26 +275,6 @@ echo "
 	))."
 	<i class='entypo icancel pull-left m-r-10 m-l-0 m-t-10'></i>
 	".form_text('figure_thumb_h', '', $fil_settings['figure_thumb_h'], array(
-		'class' => 'pull-left', 'max_length' => 4, 'number' => 1, 'width' => '150px'
-	))."
-	<small class='m-l-10 mid-opacity text-uppercase pull-left m-t-10'>( ".$locale['admin_figurelib_settings.php_006']." )</small>
-	</div>
-</div>";
-
-// $locale['admin_figurelib_settings.php_009'] = "Thumb2 size:";
-// $locale['admin_figurelib_settings.php_006'] = "Width x Height";
-echo "
-<div class='row'>
-	<div class='col-xs-12 col-sm-3'>
-		<label for='figure_thumb2_w'>".$locale['admin_figurelib_settings.php_009']."</label>
-	</div>
-	<div class='col-xs-12 col-sm-9'>
-	".form_text(
-	'figure_thumb2_w', '', $fil_settings['figure_thumb2_w'], array(
-		'class' => 'pull-left', 'max_length' => 4, 'number' => 1, 'width' => '150px'
-	))."
-	<i class='entypo icancel pull-left m-r-10 m-l-0 m-t-10'></i>
-	".form_text('figure_thumb2_h', '', $fil_settings['figure_thumb2_h'], array(
 		'class' => 'pull-left', 'max_length' => 4, 'number' => 1, 'width' => '150px'
 	))."
 	<small class='m-l-10 mid-opacity text-uppercase pull-left m-t-10'>( ".$locale['admin_figurelib_settings.php_006']." )</small>
@@ -299,70 +334,21 @@ echo "
 		'options' => $calc_opts, 'placeholder' => $locale['choose'], 'class' => 'pull-left', 'width' => '180px'
 	))."
 	</div>
-</div>
-";
+</div>";	
 	
-closeside();
+// ['admin_figurelib_settings.php_008'] = "Thumb ratio:";	
+echo form_select('figure_thumb_ratio', $locale['admin_figurelib_settings.php_008'], $fil_settings['figure_thumb_ratio'], array("options" => $thumb_opts));	
 
+	echo "</div>\n";	
 
-// Display Right Form 
-echo "</div>\n";
-echo "<div class='col-xs-12 col-sm-4'>\n";
-openside("");
+// Display Figure Image Settings END
+	closeside();
+// #######################################################################################################
 
-	// ['figure_335'] = "Allow users to submit figures:";
-	// ALS CHECKBOX
-	echo form_checkbox("figure_submit", $locale['figure_335'], $fil_settings['figure_submit']);
-	/*	
-	// ALS DROPDOWN 	
-		echo form_select("figure_submit", $locale['figure_335'], $fil_settings['figure_submit'], array(
-			"inline" => TRUE, 
-			"options" => array($locale['disable'], $locale['enable'])
-		));
-	*/
-	
-	// ['figure_344'] = "Allow Social Sharing:";	
-	// ALS CHECKBOX
-	echo form_checkbox('figure_social_sharing', $locale['figure_344'], $fil_settings['figure_social_sharing']);
-	/*
-	// ALS DROPDOWN
-		echo form_select("figure_social_sharing", $locale['figure_344'], $fil_settings['figure_social_sharing'], array(
-			"inline" => TRUE, 
-			"options" => array($locale['disable'], $locale['enable'])
-		));
-	*/
-	
-	// ['figure_348'] = "Show related figures:";
-	// ALS CHECKBOX
-	echo form_checkbox('figure_related', $locale['figure_348'], $fil_settings['figure_related']);
-	/*	
-	// ALS DROPDOWN
-	echo form_select("figure_related", $locale['figure_348'], $fil_settings['figure_related'], array(
-			"inline" => TRUE, 
-			"options" => array($locale['disable'], $locale['enable'])
-		));
-	*/	
-
-	// ['figure_363'] = "Allow Comments:";
-	// ALS CHECKBOX
-	echo form_checkbox('figure_allow_comments', $locale['figure_363'], $fil_settings['figure_allow_comments']);
-		
-	// ['figure_364'] = "Allow Ratings:";
-	// ALS CHECKBOX
-	echo form_checkbox('figure_allow_ratings', $locale['figure_364'], $fil_settings['figure_allow_ratings']);
-
-	// ['figure_339'] = "Gallery Mode on";
-	echo form_checkbox('figure_display', $locale['figure_339'], $fil_settings['figure_display']);
-
-	// ['admin_figurelib_settings.php_008'] = "Thumb ratio:";	
-	echo form_select('figure_thumb_ratio', $locale['admin_figurelib_settings.php_008'], $fil_settings['figure_thumb_ratio'], array("options" => $thumb_opts));
-
-closeside();
-echo "</div>\n</div>\n";
 
 // #######################################################################################################
 // Display Category Image Settings START
-echo "<div class='row'>\n<div class='col-xs-12 col-sm-8'>\n";	
+echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";
 	openside("Category Image Settings");
 
 // $locale['admin_figurelib_settings.php_011'] = "Thumb Category size:";	
@@ -422,21 +408,90 @@ echo "
 </div>
 ";
 
-	// ['admin_figurelib_settings.php_008'] = "Thumb ratio:";	hier für Category
+	// ['admin_figurelib_settings.php_008'] = "Thumb ratio:";	--> hier für Category
 	echo form_select('figure_thumb_cat_ratio', $locale['admin_figurelib_settings.php_008'], $fil_settings['figure_thumb_cat_ratio'], array("options" => $thumb_opts));
 	
-echo "</div></div>\n";	
+echo "</div>\n";	
 
 // Display Category Image Settings END
 	closeside();
 // #######################################################################################################
 
 
+// #######################################################################################################
+// Display Manufacturer Image Settings START
+echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";	
+	openside("Manufacturer Image Settings");
+
+// $locale['admin_figurelib_settings.php_015'] = "Thumb Manufacturer size:";	
+// $locale['admin_figurelib_settings.php_006'] = "Width x Height";
+echo "
+<div class='row'>
+	<div class='col-xs-12 col-sm-3'>
+		<label for='figure_thumb_man_w'>".$locale['admin_figurelib_settings.php_015']."</label>
+	</div>
+	<div class='col-xs-12 col-sm-9'>
+	".form_text(
+	'figure_thumb_man_w', '', $fil_settings['figure_thumb_man_w'], array(
+		'class' => 'pull-left', 'max_length' => 4, 'number' => 1, 'width' => '150px'
+	))."
+	<i class='entypo icancel pull-left m-r-10 m-l-0 m-t-10'></i>
+	".form_text('figure_thumb_man_h', '', $fil_settings['figure_thumb_man_h'], array(
+		'class' => 'pull-left', 'max_length' => 4, 'number' => 1, 'width' => '150px'
+	))."
+	<small class='m-l-10 mid-opacity text-uppercase pull-left m-t-10'>( ".$locale['admin_figurelib_settings.php_006']." )</small>
+	</div>
+</div>";
+
+// $locale['admin_figurelib_settings.php_014'] = "Maximum photo Manufacturer size:";
+// $locale['admin_figurelib_settings.php_006'] = "Width x Height";
+echo "
+<div class='row'>
+	<div class='col-xs-12 col-sm-3'>
+		<label for='figure_photo_man_max_w'>".$locale['admin_figurelib_settings.php_014']."</label>
+	</div>
+	<div class='col-xs-12 col-sm-9'>
+	".form_text('figure_photo_man_max_w', '', $fil_settings['figure_photo_man_max_w'], array(
+		'class' => 'pull-left', 'max_length' => 4, 'number' => 1, 'width' => '150px'
+	))."
+	<i class='entypo icancel pull-left m-r-10 m-l-0 m-t-10'></i>
+	".form_text('figure_photo_man_max_h', '', $fil_settings['figure_photo_man_max_h'], array(
+		'class' => 'pull-left', 'max_length' => 4, 'number' => 1, 'width' => '150px'
+	))."
+	<small class='m-l-10 mid-opacity text-uppercase pull-left m-t-10'>( ".$locale['admin_figurelib_settings.php_006']." )</small>
+	</div>
+</div>";
+
+//$locale['admin_figurelib_settings.php_007'] = "Maximum file size (bytes):";	
+echo "
+<div class='row'>
+	<div class='col-xs-12 col-sm-3'>
+		<label for='calc_b_man'>".$locale['admin_figurelib_settings.php_007']."</label>
+	</div>
+	<div class='col-xs-12 col-sm-9'>
+	".form_text('calc_b_man', '', $calc_b_man, array(
+		'required' => 1, 'number' => 1, 'error_text' => $locale['error_rate'], 'width' => '100px', 'max_length' => 4,
+		'class' => 'pull-left m-r-10'
+	))."
+	".form_select('calc_c_man', '', $calc_c_man, array(
+		'options' => $calc_opts, 'placeholder' => $locale['choose'], 'class' => 'pull-left', 'width' => '180px'
+	))."
+	</div>
+</div>
+";
+
+	// ['admin_figurelib_settings.php_008'] = "Thumb ratio:";	-->  hier für Manufacturer
+	echo form_select('figure_thumb_man_ratio', $locale['admin_figurelib_settings.php_008'], $fil_settings['figure_thumb_man_ratio'], array("options" => $thumb_opts));
+	
+echo "</div>\n";	
+
+// Display Manufacturer Image Settings END
+	closeside();
+// #######################################################################################################
 
 
-
-// Display Notification Settings START
-echo "<div class='row'><div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";
+// Display Notification Settings START ###################################################################
+echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";
 	openside("Notification Settings");
 	$notificationOptions = [
 		"1" => $locale['notification-103'],
@@ -471,7 +526,8 @@ echo "<div class='row'><div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";
 	
 // Display Notification Settings END
 	closeside();
-echo "</div></div>\n";
+// #######################################################################################################
+echo "</div>\n";
 
 // Save Settings Button
 echo form_button("savesettings", $locale['figure_345'], $locale['figure_345'], ["class" => "btn-success"]);
@@ -491,4 +547,3 @@ function calculate_byte($total_bit) {
 	return 1000000;
 }
 
-?>
