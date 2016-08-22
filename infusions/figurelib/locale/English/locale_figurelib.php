@@ -826,6 +826,28 @@ $locale['admin_figurelib_settings.php_006'] = "Width x Height";
 $locale['admin_figurelib_settings.php_007'] = "Maximum file size (bytes):";	
 $locale['admin_figurelib_settings.php_008'] = "Thumb ratio:";
 
+$locale['admin_figurelib_settings.php_009'] = "Thumb2 size:";
+$locale['admin_figurelib_settings.php_010'] = "Thumb2 ratio:";
+
+$locale['admin_figurelib_settings.php_011'] = "Thumb Category size:";
+$locale['admin_figurelib_settings.php_012'] = "Thumb Category ratio:";
+
+$locale['admin_figurelib_settings.php_013'] = "Maximum photo Category size:";
+$locale['admin_figurelib_settings.php_014'] = "Maximum photo Manufacturer size:";
+$locale['admin_figurelib_settings.php_015'] = "Thumb Manufacturer size:";
+
+$locale['notification-101'] = "You must specify a Subject if you activate Notifications.";
+$locale['notification-102'] = "You must specify a Message if you activate Notifications.";
+$locale['notification-103'] = "Deactivated";
+$locale['notification-104'] = "Private Message";
+$locale['notification-105'] = "E-Mail";
+$locale['notification-106'] = "Please choose";
+$locale['notification-107'] = "Notification";
+$locale['notification-108'] = "Subject";
+$locale['notification-109'] = "Message";
+$locale['notification-110'] = "Insert the Keyword {FIGURELINK} for a direct Link for editing a Figure in Adminarea.";
+
+
 // LOCALE FÜR MITTELPANELE UND MYCOLLECTION
 $locale['CLFP_000']= "Alien Figures Database";
 $locale['CLFP_001']= "No figures found";
