@@ -30,6 +30,7 @@ $inf_weburl = "http://www.AlienCollectors.com";
 $inf_folder = "figurelib";
 $inf_image = "icon.png";
 //$inf_image = "figure_ico.png";
+
 // Position these links under Content Administration
 $inf_adminpanel[] = array(
 	"image" => $inf_image,
@@ -38,12 +39,14 @@ $inf_adminpanel[] = array(
 	"title" => $locale['INF_TITLE'],
 	"panel" => "admin.php"
 );
+
 // Multilanguage table for Administration
 $inf_mlt[] = array(
 "title" => $locale['INF_ADMIN'],
 "rights" => "FI",
 );
-// Create tables
+
+// Create tables ////////////////////////////////////////////////////////////////
 $inf_newtable[] = DB_FIGURE_CATS." (
 	figure_cat_id MEDIUMINT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
 	figure_cat_parent MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
@@ -234,19 +237,44 @@ $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_submit', '1', 'figurelib')";
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_related', '1', 'figurelib')";
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_social_sharing', '1', 'figurelib')";
-$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_thumb_ratio', '0', 'figurelib')";
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_image_upload_count', '10', 'figurelib')";
-$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_photo_w', '800', 'figurelib')";
-$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_photo_h', '600', 'figurelib')";
+
+//thumb seetings
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_thumb_w', '400', 'figurelib')";
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_thumb_h', '300', 'figurelib')";
+$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_thumb2_w', '40', 'figurelib')";
+$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_thumb2_h', '40', 'figurelib')";
+$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_thumb_cat_w', '40', 'figurelib')";
+$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_thumb_cat_h', '40', 'figurelib')";
+$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_thumb_man_w', '40', 'figurelib')";
+$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_thumb_man_h', '40', 'figurelib')";
+$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_thumb_ratio', '0', 'figurelib')";
+$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_thumb2_ratio', '0', 'figurelib')";
+$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_thumb_cat_ratio', '0', 'figurelib')";
+$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_thumb_man_ratio', '0', 'figurelib')";
+
+//all other photo seetings
+$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_photo_w', '800', 'figurelib')";
+$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_photo_h', '600', 'figurelib')";
+
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_photo_max_w', '1800', 'figurelib')";
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_photo_max_h', '1600', 'figurelib')";
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_photo_max_b', '500000', 'figurelib')";
+
+$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_photo_cat_max_w', '1800', 'figurelib')";
+$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_photo_cat_max_h', '1600', 'figurelib')";
+$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_photo_cat_max_b', '50000', 'figurelib')";
+
+$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_photo_man_max_w', '1800', 'figurelib')";
+$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_photo_man_max_h', '1600', 'figurelib')";
+$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_photo_man_max_b', '50000', 'figurelib')";
+
+// notifications seetings
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_notification', '1', 'figurelib')";
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_notification_subject', '', 'figurelib')";
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_notification_message', '', 'figurelib')";
 /////////////////////////////////////////////////////////////////////////////////
+
 //befüllen von Brand
 $inf_insertdbrow[] = DB_FIGURE_BRANDS." (figure_brand_id, figure_brand_name, figure_brand_description, figure_brand_sorting) VALUES
 (1, 'Unknown', '', 'figure_id ASC'),
@@ -278,37 +306,37 @@ $inf_insertdbrow[] = DB_FIGURE_SCALES." (figure_scale_id, figure_scale_name, fig
 //befüllen von measurements
 $inf_insertdbrow[] = DB_FIGURE_MEASUREMENTS." (figure_measurements_id, figure_measurements_inch, figure_measurements_cm, figure_measurements_description, figure_measurements_sorting) VALUES 
 (1, 'Unknown','', '', 'figure_id ASC'),
-(2, '01 Inch','2,54 cm', '', 'figure_id ASC'),
-(3, '02 Inch','5,08 cm', '', 'figure_id ASC'),
-(4, '03 Inch','7,62 cm', '', 'figure_id ASC'),
-(5, '04 Inch','9,00 cm', '', 'figure_id ASC'),
-(6, '05 Inch','12,70 cm', '', 'figure_id ASC'),
-(7, '06 Inch','15,24 cm', '', 'figure_id ASC'),
-(8, '07 Inch','17,78 cm', '', 'figure_id ASC'),
-(9, '08 Inch','20,32 cm', '', 'figure_id ASC'),
-(10, '09 Inch','22,86 cm', '', 'figure_id ASC'),
-(11, '10 Inch','25,40 cm', '', 'figure_id ASC'),
-(12, '11 Inch','27,94 cm', '', 'figure_id ASC'),
-(13, '12 Inch','30,48 cm', '', 'figure_id ASC'),
-(14, '13 Inch','33,02 cm', '', 'figure_id ASC'),
-(15, '14 Inch','35,56 cm', '', 'figure_id ASC'),
-(16, '15 Inch','38,10 cm', '', 'figure_id ASC'),
-(17, '16 Inch','40,64 cm', '', 'figure_id ASC'),
-(18, '17 Inch','43,18 cm', '', 'figure_id ASC'),
-(19, '18 Inch','45,72 cm', '', 'figure_id ASC'),
-(20, '19 Inch','48,26 cm', '', 'figure_id ASC'),
-(21, '20 Inch','50,80 cm', '', 'figure_id ASC'),
-(22, '21 Inch','53,34 cm', '', 'figure_id ASC'),
-(23, '22 Inch','55,88 cm', '', 'figure_id ASC'),
-(24, '23 Inch','58,42 cm', '', 'figure_id ASC'),
-(25, '24 Inch','60,96 cm', '', 'figure_id ASC'),
-(26, '25 Inch','63,50 cm', '', 'figure_id ASC'),
-(27, '26 Inch','66,04 cm', '', 'figure_id ASC'),
-(28, '27 Inch','68,58 cm', '', 'figure_id ASC'),
-(29, '28 Inch','71,12 cm', '', 'figure_id ASC'),
-(30, '29 Inch','73,66 cm', '', 'figure_id ASC'),
-(31, '30 Inch','76,20 cm', '', 'figure_id ASC'),
-(32, 'bigger than 30 Inch','76,20 cm', '', 'figure_id ASC')
+(2, '01 Inch (2,54 cm)','2,54 cm (01 Inch', '', 'figure_id ASC'),
+(3, '02 Inch (5,08 cm)','5,08 cm (02 Inch', '', 'figure_id ASC'),
+(4, '03 Inch (7,62 cm)','7,62 cm (03 Inch)', '', 'figure_id ASC'),
+(5, '04 Inch (9,00 cm)','9,00 cm (04 Inch)', '', 'figure_id ASC'),
+(6, '05 Inch (12,70 cm)','12,70 cm (05 Inch)', '', 'figure_id ASC'),
+(7, '06 Inch (15,24 cm)','15,24 cm (06 Inch)', '', 'figure_id ASC'),
+(8, '07 Inch (17,78 cm)','17,78 cm (07 Inch)', '', 'figure_id ASC'),
+(9, '08 Inch (20,32 cm)','20,32 cm (08 Inch)', '', 'figure_id ASC'),
+(10, '09 Inch (22,86 cm)','22,86 cm (09 Inch)', '', 'figure_id ASC'),
+(11, '10 Inch (25,40 cm)','25,40 cm (10 Inch)', '', 'figure_id ASC'),
+(12, '11 Inch (27,94 cm)','27,94 cm (11 Inch)', '', 'figure_id ASC'),
+(13, '12 Inch (30,48 cm)','30,48 cm (12 Inch)', '', 'figure_id ASC'),
+(14, '13 Inch (33,02 cm)','33,02 cm (13 Inch)', '', 'figure_id ASC'),
+(15, '14 Inch (35,56 cm)','35,56 cm (14 Inch)', '', 'figure_id ASC'),
+(16, '15 Inch (38,10 cm)','38,10 cm (15 Inch)', '', 'figure_id ASC'),
+(17, '16 Inch (40,64 cm)','40,64 cm (16 Inch)', '', 'figure_id ASC'),
+(18, '17 Inch (43,18 cm)','43,18 cm (17 Inch)', '', 'figure_id ASC'),
+(19, '18 Inch (45,72 cm)','45,72 cm (18 Inch)', '', 'figure_id ASC'),
+(20, '19 Inch (48,26 cm)','48,26 cm (19 Inch)', '', 'figure_id ASC'),
+(21, '20 Inch (50,80 cm)','50,80 cm (20 Inch)', '', 'figure_id ASC'),
+(22, '21 Inch (53,34 cm)','53,34 cm (21 Inch)', '', 'figure_id ASC'),
+(23, '22 Inch (55,88 cm)','55,88 cm (22 Inch)', '', 'figure_id ASC'),
+(24, '23 Inch (58,42 cm)','58,42 cm (23 Inch)', '', 'figure_id ASC'),
+(25, '24 Inch (60,96 cm)','60,96 cm (24 Inch)', '', 'figure_id ASC'),
+(26, '25 Inch (63,50 cm)','63,50 cm (25 Inch)', '', 'figure_id ASC'),
+(27, '26 Inch (66,04 cm)','66,04 cm (26 Inch)', '', 'figure_id ASC'),
+(28, '27 Inch (68,58 cm)','68,58 cm (27 Inch)', '', 'figure_id ASC'),
+(29, '28 Inch (71,12 cm)','71,12 cm (28 Inch)', '', 'figure_id ASC'),
+(30, '29 Inch (73,66 cm)','73,66 cm (29 Inch)', '', 'figure_id ASC'),
+(31, '30 Inch (76,20 cm)','76,20 cm (30 Inch)', '', 'figure_id ASC'),
+(32, 'bigger than 30 Inch (76,20 cm)','76,20 cm (30 Inch)', '', 'figure_id ASC')
 ";
 /////////////////////////////////////////////////////////////////////////////////
 //befüllem von years
@@ -398,57 +426,58 @@ $inf_insertdbrow[] = DB_FIGURE_PACKAGINGS." (figure_packaging_id, figure_packagi
 //befüllem von Point of Articulation
 $inf_insertdbrow[] = DB_FIGURE_POAS." (figure_poa_id, figure_poa_name, figure_poa_description, figure_poa_sorting) VALUES 
 (1, 'Unknown', '', 'figure_id ASC'),
-(2, '01 Point of articulation', '', 'figure_id ASC'),
-(3, '02 Points of articulation', '', 'figure_id ASC'),
-(4, '03 Points of articulation', '', 'figure_id ASC'),
-(5, '04 Points of articulation', '', 'figure_id ASC'),
-(6, '05 Points of articulation', '', 'figure_id ASC'),
-(7, '06 Points of articulation', '', 'figure_id ASC'),
-(8, '07 Points of articulation', '', 'figure_id ASC'),
-(9, '08 Points of articulation', '', 'figure_id ASC'),
-(10, '09 Points of articulation', '', 'figure_id ASC'),
-(11, '10 Points of articulation', '', 'figure_id ASC'),
-(12, '11 Points of articulation', '', 'figure_id ASC'),
-(13, '12 Points of articulation', '', 'figure_id ASC'),
-(14, '13 Points of articulation', '', 'figure_id ASC'),
-(15, '14 Points of articulation', '', 'figure_id ASC'),
-(16, '15 Points of articulation', '', 'figure_id ASC'),
-(17, '16 Points of articulation', '', 'figure_id ASC'),
-(18, '17 Points of articulation', '', 'figure_id ASC'),
-(19, '18 Points of articulation', '', 'figure_id ASC'),
-(20, '19 Points of articulation', '', 'figure_id ASC'),
-(21, '20 Points of articulation', '', 'figure_id ASC'),
-(22, '21 Points of articulation', '', 'figure_id ASC'),
-(23, '22 Points of articulation', '', 'figure_id ASC'),
-(24, '23 Points of articulation', '', 'figure_id ASC'),
-(25, '24 Points of articulation', '', 'figure_id ASC'),
-(26, '25 Points of articulation', '', 'figure_id ASC'),
-(27, '26 Points of articulation', '', 'figure_id ASC'),
-(28, '27 Points of articulation', '', 'figure_id ASC'),
-(29, '28 Points of articulation', '', 'figure_id ASC'),
-(30, '29 Points of articulation', '', 'figure_id ASC'),
-(31, '30 Points of articulation', '', 'figure_id ASC'),
-(32, '31 Points of articulation', '', 'figure_id ASC'),
-(33, '32 Points of articulation', '', 'figure_id ASC'),
-(34, '33 Points of articulation', '', 'figure_id ASC'),
-(35, '34 Points of articulation', '', 'figure_id ASC'),
-(36, '35 Points of articulation', '', 'figure_id ASC'),
-(37, '36 Points of articulation', '', 'figure_id ASC'),
-(38, '37 Points of articulation', '', 'figure_id ASC'),
-(39, '38 Points of articulation', '', 'figure_id ASC'),
-(40, '39 Points of articulation', '', 'figure_id ASC'),
-(41, '40 Points of articulation', '', 'figure_id ASC'),
-(42, '41 Points of articulation', '', 'figure_id ASC'),
-(43, '42 Points of articulation', '', 'figure_id ASC'),
-(44, '43 Points of articulation', '', 'figure_id ASC'),
-(45, '44 Points of articulation', '', 'figure_id ASC'),
-(46, '45 Points of articulation', '', 'figure_id ASC'),
-(47, '46 Points of articulation', '', 'figure_id ASC'),
-(48, '47 Points of articulation', '', 'figure_id ASC'),
-(49, '48 Points of articulation', '', 'figure_id ASC'),
-(50, '49 Points of articulation', '', 'figure_id ASC'),
-(51, '50 Points of articulation', '', 'figure_id ASC'),
-(52, 'more than 50 Points of articulation', '', 'figure_id ASC')
+(2, '00 No articulation', '', 'figure_id ASC'),
+(3, '01 Point of articulation', '', 'figure_id ASC'),
+(4, '02 Points of articulation', '', 'figure_id ASC'),
+(5, '03 Points of articulation', '', 'figure_id ASC'),
+(6, '04 Points of articulation', '', 'figure_id ASC'),
+(7, '05 Points of articulation', '', 'figure_id ASC'),
+(8, '06 Points of articulation', '', 'figure_id ASC'),
+(9, '07 Points of articulation', '', 'figure_id ASC'),
+(10, '08 Points of articulation', '', 'figure_id ASC'),
+(11, '09 Points of articulation', '', 'figure_id ASC'),
+(12, '10 Points of articulation', '', 'figure_id ASC'),
+(13, '11 Points of articulation', '', 'figure_id ASC'),
+(14, '12 Points of articulation', '', 'figure_id ASC'),
+(15, '13 Points of articulation', '', 'figure_id ASC'),
+(16, '14 Points of articulation', '', 'figure_id ASC'),
+(17, '15 Points of articulation', '', 'figure_id ASC'),
+(18, '16 Points of articulation', '', 'figure_id ASC'),
+(19, '17 Points of articulation', '', 'figure_id ASC'),
+(20, '18 Points of articulation', '', 'figure_id ASC'),
+(21, '19 Points of articulation', '', 'figure_id ASC'),
+(22, '20 Points of articulation', '', 'figure_id ASC'),
+(23, '21 Points of articulation', '', 'figure_id ASC'),
+(24, '22 Points of articulation', '', 'figure_id ASC'),
+(25, '23 Points of articulation', '', 'figure_id ASC'),
+(26, '24 Points of articulation', '', 'figure_id ASC'),
+(27, '25 Points of articulation', '', 'figure_id ASC'),
+(28, '26 Points of articulation', '', 'figure_id ASC'),
+(29, '27 Points of articulation', '', 'figure_id ASC'),
+(30, '28 Points of articulation', '', 'figure_id ASC'),
+(31, '29 Points of articulation', '', 'figure_id ASC'),
+(32, '30 Points of articulation', '', 'figure_id ASC'),
+(33, '31 Points of articulation', '', 'figure_id ASC'),
+(34, '32 Points of articulation', '', 'figure_id ASC'),
+(35, '33 Points of articulation', '', 'figure_id ASC'),
+(36, '34 Points of articulation', '', 'figure_id ASC'),
+(37, '35 Points of articulation', '', 'figure_id ASC'),
+(38, '36 Points of articulation', '', 'figure_id ASC'),
+(39, '37 Points of articulation', '', 'figure_id ASC'),
+(40, '38 Points of articulation', '', 'figure_id ASC'),
+(41, '39 Points of articulation', '', 'figure_id ASC'),
+(42, '40 Points of articulation', '', 'figure_id ASC'),
+(43, '41 Points of articulation', '', 'figure_id ASC'),
+(44, '42 Points of articulation', '', 'figure_id ASC'),
+(45, '43 Points of articulation', '', 'figure_id ASC'),
+(46, '44 Points of articulation', '', 'figure_id ASC'),
+(47, '45 Points of articulation', '', 'figure_id ASC'),
+(48, '46 Points of articulation', '', 'figure_id ASC'),
+(49, '47 Points of articulation', '', 'figure_id ASC'),
+(50, '48 Points of articulation', '', 'figure_id ASC'),
+(51, '49 Points of articulation', '', 'figure_id ASC'),
+(52, '50 Points of articulation', '', 'figure_id ASC'),
+(53, 'more than 50 Points of articulation', '', 'figure_id ASC')
 ";
 /////////////////////////////////////////////////////////////////////////////////
 //befüllem von Cats
