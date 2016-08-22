@@ -35,20 +35,19 @@ if (file_exists(INFUSIONS."figurelib/locale/".LOCALESET."locale_figurelib.php"))
 }
 
 // Add jQuery
-        add_to_footer("
-        <script type='text/javascript'>
-        $(function(){
-            $('#figure_limitation').change(function(){
-                if ($(this).val() == 3 ) {
-                    $('#figure_editionsize').prop('disabled', true);
-                } else {
-                    $('#figure_editionsize').prop('disabled', false);
-                }
-            });
-        });
-        </script>");
-
-
+add_to_footer("
+<script type='text/javascript'>
+$(function(){
+	$('#figure_limitation').change(function(){
+		if ($(this).val() == 3 ) {
+			$('#figure_editionsize').prop('disabled', true);
+		} else {
+			$('#figure_editionsize').prop('disabled', false);
+		}
+	});
+});
+</script>");
+		
 // ['figure_521'] = "Submit Figure";
 add_to_title($locale['global_200'].$locale['figure_521']);
 openside("<i class='fa fa-globe fa-lg m-r-10'></i>".$locale['figure_521']);
@@ -199,7 +198,6 @@ if (iMEMBER && $fil_settings['figure_submit']) {
 						if ($fil_settings['figure_notification'] == "2") {
 							require_once INCLUDES."infusions_include.php";
 							send_pm("-103", $userdata['user_id'], $fil_settings['figure_notification_subject'], $fil_settings['figure_notification_message'], "y", true);
-
 						// Send Mail Notification
 						} elseif ($fil_settings['figure_notification'] == "3") {
 							$resultAdmins = dbquery("SELECT user_name, user_email FROM ".DB_USERS." WHERE user_id != '".$userdata['user_id']."' AND user_level='-103' AND user_status='0'");
@@ -308,15 +306,18 @@ if (iMEMBER && $fil_settings['figure_submit']) {
 				"placeholder" => $locale['figure_1803']
 			)
 		);
-		// Text Field "Country"
-		echo form_text("figure_country", $locale['figure_436'], $submitdata['figure_country'],
-			array(
-				"inline" => TRUE,
-				"max_length" => 100,
-				"width" => "400px",
-				"placeholder" => $locale['figure_1804']
-			)
-		);
+		
+		// Selectlist: Country Field
+        $countries = array();
+        require_once INCLUDES."geomap/geomap.inc.php";
+        echo form_select("figure_country", $locale['figure_436'], $submitdata['figure_country'], [
+            "options" => $countries,
+            "inline" => true,
+            "width" => "400px",
+            "placeholder" => $locale['figure_1804'],
+            "allowclear" => true
+        ]);
+		
 		// Select Field "Brand"
 		echo form_select_tree("figure_brand", $locale['figure_438'], $submitdata['figure_brand'], 
 			array(
@@ -380,7 +381,8 @@ if (iMEMBER && $fil_settings['figure_submit']) {
 				"maxselect" => 1,
 				"allowclear" => TRUE,
 			),
-		DB_FIGURE_MEASUREMENTS, "figure_measurements_inch", "figure_measurements_id", "figure_measurements_parent");
+		DB_FIGURE_MEASUREMENTS, "".(LANGUAGE == "English" ? "figure_measurements_inch" : "figure_measurements_cm")."", "figure_measurements_id", "figure_measurements_parent");
+		
 		// Select Field "Width"
 		echo form_select_tree("figure_width", $locale['figure_445'], $submitdata['figure_width'], 
 			array(
@@ -394,7 +396,8 @@ if (iMEMBER && $fil_settings['figure_submit']) {
 				"maxselect" => 1,
 				"allowclear" => TRUE,
 			),
-		DB_FIGURE_MEASUREMENTS, "figure_measurements_inch", "figure_measurements_id", "figure_measurements_parent");
+		DB_FIGURE_MEASUREMENTS, "".(LANGUAGE == "English" ? "figure_measurements_inch" : "figure_measurements_cm")."", "figure_measurements_id", "figure_measurements_parent");
+		
 		// Select Field "Depth"
 		echo form_select_tree("figure_depth", $locale['figure_446'], $submitdata['figure_depth'], 
 			array(
@@ -408,7 +411,7 @@ if (iMEMBER && $fil_settings['figure_submit']) {
 				"maxselect" => 1,
 				"allowclear" => TRUE,
 			),
-		DB_FIGURE_MEASUREMENTS, "figure_measurements_inch", "figure_measurements_id", "figure_measurements_parent");
+		DB_FIGURE_MEASUREMENTS, "".(LANGUAGE == "English" ? "figure_measurements_inch" : "figure_measurements_cm")."", "figure_measurements_id", "figure_measurements_parent");
 		
 		// Form "Space"
 		echo "<div class='tbl1'>\n";
@@ -641,6 +644,7 @@ if (iMEMBER && $fil_settings['figure_submit']) {
 	echo "<div class='well text-center'>".$locale['figure_1813']."</div>\n";
 }
 closeside();
+
 require_once THEMES."templates/footer.php";
-//send_pm( -102, 1, 'Figure submittet', 'A new figure was submittet!', 'y', TRUE);
-//send_pm( -103, 1, 'Figure submittet', 'A new figure was submittet!', 'y', TRUE);
+
+?>
