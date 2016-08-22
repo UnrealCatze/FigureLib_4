@@ -665,7 +665,7 @@ if (!empty($enabled_languages)) {
 		$mlt_insertdbrow[$language][] = DB_SITE_LINKS." (link_name, link_url, link_visibility, link_position, link_window, link_order, link_language) VALUES ('".$locale['figure_521']."', 'infusions/figurelib/submit.php?stype=f', ".USER_LEVEL_MEMBER.", '2', '0', '4', '".$language."')";
 		
 		//$locale['figure_533'] = "Figure Stats";
-		$mlt_insertdbrow[$language][] = DB_SITE_LINKS." (link_name, link_url, link_visibility, link_position, link_window, link_order, link_language) VALUES ('".$locale['figure_533']."', 'infusions/figurelib/panels/figure_stats_panel.php', '0', '2', '0', '4', '".$language."')";
+		$mlt_insertdbrow[$language][] = DB_SITE_LINKS." (link_name, link_url, link_visibility, link_position, link_window, link_order, link_language) VALUES ('".$locale['figure_533']."', 'infusions/figurelib/panels/figure_stats_panel.php', '0', '2', '0', '5', '".$language."')";
 		
 		
 		// drop deprecated language records
