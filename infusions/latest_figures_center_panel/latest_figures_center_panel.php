@@ -317,9 +317,9 @@ if (iMEMBER) {
 							echo "<div align='center' class='text-smaller text-uppercase'><a href='".INFUSIONS."figurelib/submit.php'>".$locale['CLFP_014']."</a></div>\n";
 						echo "</div>\n";
 						
-						// ['CLFP_011']= "Most viewed";
+						// ['CLFP_023']= "Figure Stats";
 						echo "<div class='col-lg-3 col-md-6 col-sm-6 col-xs-6'>\n";
-							echo "<div align='center' class='text-smaller text-uppercase'><a href='".INFUSIONS."figurelib/panels/most_clicked_figures_center_panel.php'>".$locale['CLFP_015']."</a></div>\n";
+							echo "<div align='center' class='text-smaller text-uppercase'><a href='".INFUSIONS."figurelib/panels/figure_stats_panel.php'>".$locale['CLFP_023']."</a></div>\n";
 						echo "</div>\n";
 						
 						// ['CLFP_017']." = "My Collection"
