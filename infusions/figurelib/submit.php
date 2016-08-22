@@ -326,10 +326,11 @@ if (iMEMBER && $fil_settings['figure_submit']) {
 				"placeholder" => $locale['figure_1803']
 			)
 		);
-		
-		// Selectlist: Country Field
+				
+		 // Selectlist: Country Field
         $countries = array();
         require_once INCLUDES."geomap/geomap.inc.php";
+        $countries = array_merge(["Unknown"], $countries);
         echo form_select("figure_country", $locale['figure_436'], $submitdata['figure_country'], [
             "options" => $countries,
             "inline" => true,
@@ -337,6 +338,8 @@ if (iMEMBER && $fil_settings['figure_submit']) {
             "placeholder" => $locale['figure_1804'],
             "allowclear" => true
         ]);
+		
+		
 		
 		// Select Field "Brand"
 		echo form_select_tree("figure_brand", $locale['figure_438'], $submitdata['figure_brand'], 
