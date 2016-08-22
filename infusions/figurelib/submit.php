@@ -339,8 +339,7 @@ if (iMEMBER && $fil_settings['figure_submit']) {
             "allowclear" => true
         ]);
 		
-		
-		
+			
 		// Select Field "Brand"
 		echo form_select_tree("figure_brand", $locale['figure_438'], $submitdata['figure_brand'], 
 			array(
