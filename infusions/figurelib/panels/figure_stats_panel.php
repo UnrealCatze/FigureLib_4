@@ -366,7 +366,7 @@ opentable("<strong>Figure Stats</strong>");
 								// $locale['mc_0011']= "This feature is only available for registered members. Please Sign up ";
 								echo "<span alt='".$locale['userfigure_001']." | ".$locale['mc_0011']."' title='".$locale['userfigure_001']." | ".$locale['mc_0011']."' class='glyphicon glyphicon-eye-close'></span>";
 							}						
-				echo "</div>\n";
+						echo "</div>\n";
 				
 				echo "</div>\n";
 				echo "</div>\n";
@@ -645,9 +645,9 @@ opentable("<strong>Figure Stats</strong>");
 							}						
 						echo "</div>\n";
 						
-						echo "</div>\n";
-						echo "</div>\n";
-						echo "</div>\n";
+				echo "</div>\n";
+				echo "</div>\n";
+				echo "</div>\n";
 						
 		}
 		closeside();
@@ -708,8 +708,8 @@ opentable("<strong>Figure Stats</strong>");
 				echo "<div class='row'>\n";	
 				echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";
 				echo "<div class='navbar-default'>";	
-				//$locale['CLFP_026']= "Highest usedprice";					
-				echo "<span><strong>".$locale['CLFP_026']."</strong></span>\n";
+				// $locale['CLFP_025']= "The figure, which most be in the user's possession.				
+				echo "<span><strong>".$locale['CLFP_025']."</strong></span>\n";
 				echo "</div></div></div>\n";			 
 
 				echo "<hr>";	
@@ -923,9 +923,9 @@ opentable("<strong>Figure Stats</strong>");
 							}						
 						echo "</div>\n";
 						
-						echo "</div>\n";
-						echo "</div>\n";
-						echo "</div>\n";
+				echo "</div>\n";
+				echo "</div>\n";
+				echo "</div>\n";
 						
 		}
 		closeside();
