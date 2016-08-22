@@ -874,6 +874,11 @@ $locale['CLFP_020']= "Usercount";
 $locale['CLFP_021']= "Last entries";
 $locale['CLFP_022']= "Most viewed Figures";
 $locale['CLFP_023']= "Figure Stats";
+$locale['CLFP_024']= "Not enough data available to create a statistic.";
+$locale['CLFP_025']= "The figure, which most be in the user's possession";
+$locale['CLFP_026']= "Highest usedprice";
+$locale['CLFP_027']= "Highest retailprice";
+
 
 
 $locale['yours']= "Your Figures";	
