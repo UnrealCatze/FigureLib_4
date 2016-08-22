@@ -1,6 +1,6 @@
 <?php
 /***************************************************************************
- *   figures_stats_panel.php for FIGURELIB                                 *
+ *   figure_stats_panel.php for FIGURELIB                                  *
  *                                                                         *
  *   Copyright (C) 2016 Catzenjaeger                                       *
  *   www.AlienCollectors.com                                               *
