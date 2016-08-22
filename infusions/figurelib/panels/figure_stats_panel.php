@@ -1,7 +1,6 @@
 <?php
-
 /***************************************************************************
- *   figure_stats_panel.php for FIGURELIB                                        *
+ *   figure_stats_panel.php for FIGURELIB                                  *
  *                                                                         *
  *   Copyright (C) 2016 Catzenjaeger                                       *
  *   www.AlienCollectors.com                                               *
@@ -67,34 +66,32 @@ $fil_settings = get_settings("figurelib");
 opentable("<strong>Figure Stats</strong>");
 
 
-// GESAMTZAHL ALLER FIGUREN //////////////////////////////////
-			$allFiguresCounter = dbcount("(figure_id)", DB_FIGURE_ITEMS, "figure_freigabe='1'");
-
-openside();			
-	echo "<div class='row'>\n";		
-		
-			echo "<div class='col-lg-6 col-md-6 col-sm-12 col-xs-12'>\n";														
-					echo "<div class='navbar-default text-bold'>";	
-					echo "<span>Total number of figures: </span>\n";
-					echo "</div>\n";
-					echo "<span class='badge'>".$allFiguresCounter."</span>\n";								
-		echo "</div>\n";
-
-
-// Gesamtzahl Figuren in Userbesitz //////////////////////////////////
-	
-		$allFiguresCounterUser = dbcount("(figure_userfigures_id)",  DB_FIGURE_USERFIGURES, "");	
-	
-		echo "<div class='col-lg-6 col-md-6 col-sm-12 col-xs-12'>\n";
-																						
-						echo "<div class='navbar-default text-bold'>";	
-						echo "<span>Total figures owned by the user:</span>\n";
-						echo "</div>\n";
-						echo "<span class='badge'>".$allFiguresCounterUser."</span>\n";											
-		echo "</div>\n";
+			openside("");			
+				echo "<div class='row'>\n";
 				
-	echo "</div>\n";
-closeside();	
+			// GESAMTZAHL ALLER FIGUREN /////////////////////////////////////////		
+						echo "<div class='col-lg-6 col-md-6 col-sm-12 col-xs-12'>\n";														
+								echo "<div class='navbar-default text-bold'>";	
+								echo "<span>Total number of figures: </span>\n";
+								echo "</div>\n";
+								$allFiguresCounter = dbcount("(figure_id)", DB_FIGURE_ITEMS, "figure_freigabe='1'");
+								echo "<span class='badge'>".$allFiguresCounter."</span>\n";								
+						echo "</div>\n";
+
+
+			// Gesamtzahl Figuren in Userbesitz //////////////////////////////////	
+						echo "<div class='col-lg-6 col-md-6 col-sm-12 col-xs-12'>\n";
+																									
+								echo "<div class='navbar-default text-bold'>";	
+								echo "<span>Total figures owned by the user:</span>\n";
+								echo "</div>\n";
+								$allFiguresCounterUser = dbcount("(figure_userfigures_id)",  DB_FIGURE_USERFIGURES, "");
+								echo "<span class='badge'>".$allFiguresCounterUser."</span>\n";											
+						echo "</div>\n";
+			//////////////////////////////////////////////////////////////////////				
+				
+				echo "</div>\n";
+			closeside();	
 
 // TEUERSTE FIGUR //////////////////////////////////
 
@@ -125,7 +122,7 @@ closeside();
 		// WENN DATEN UNGLEICH = 0 DANN DARSTELLUNG DER DATEN
 		if (dbrows($resultteuerste) != 0) {
 
-	openside();				
+	openside("");				
 		 
 						echo "<div class='row'>\n";	
 						echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";
@@ -389,7 +386,7 @@ closeside();
 					if (dbrows($resultteuerstegebraucht) != 0) {
 						
 
-	openside();				
+	openside("");				
 		 
 						echo "<div class='row'>\n";	
 						echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";
