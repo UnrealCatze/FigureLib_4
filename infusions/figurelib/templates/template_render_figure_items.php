@@ -759,6 +759,26 @@ closeside();
 // ########### 	LIST OF ALL USER WHERE HAVE THIS FIGURE  ##################################				
 global $userdata;
 
+
+
+
+
+/*        $resultufc = dbquery(
+				"SELECT             
+					fu.user_id, 
+					fu.user_name, 
+					fu.user_status, 
+					fu.user_avatar, 
+					fuf.figure_userfigures_figure_id,
+					fuf.figure_userfigures_user_id          
+            FROM ".DB_FIGURE_USERFIGURES." fuf
+            INNER JOIN ".DB_USERS." fu ON fuf.figure_userfigures_user_id=fu.user_id  
+            WHERE fuf.figure_userfigures_figure_id='".$data['figure_id']."'
+            AND fu.user_id='".$userdata['user_id']."' 
+			GROUP BY fu.user_id 			
+            ");	
+*/
+
 			$resultufc = dbquery(
 				"SELECT             
 					fu.user_id, 
@@ -778,16 +798,23 @@ global $userdata;
 				echo $locale['userfigure_003'];		
 				//echo "<p>";	
 				echo "</div>";	
-				
+			echo "<div class='side-small text-center'>";	
 			while ($data = dbarray($resultufc)) {
 				
-				echo "<tr><td class='side-small'>\n";
-				echo "<a href='".BASEDIR."profile.php?lookup=".$data['user_id']."' title='".$data['user_name']."'>\n";
-				echo "<span>".THEME_BULLET." ".trimlink($data['user_name'], 15)."</a></span>\n";
-				echo "</td></tr>\n";
+				// Text von rechts
+				//echo "<tr><td class='side-small'>\n";
+				//echo "<a href='".BASEDIR."profile.php?lookup=".$data['user_id']."' title='".$data['user_name']."'>\n";
+				//echo "<span>".THEME_BULLET." ".trimlink($data['user_name'], 15)."</a></span>\n";
+				//echo "</td></tr>\n";
 				
+				//text center
+				echo "<a href='".BASEDIR."profile.php?lookup=".$data['user_id']."' title='".$data['user_name']."'>
+				<span>".THEME_BULLET." ".trimlink($data['user_name'], 15)."</span>
+				</a>";
+	
 			}
-
+				echo "</div>\n";
+		
 		} else {
 				echo "<div align='center'>\n";
 				echo $locale['userfigure_004'];	
