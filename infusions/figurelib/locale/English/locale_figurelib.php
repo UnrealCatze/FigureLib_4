@@ -432,6 +432,7 @@ $locale['figure_532'] = "Use the following form to submit a Alien figure. Your s
 Administrator. [SITENAME] reserves the right to amend or edit any submission. Figures
 should be applicable to the content of this site. Unsuitable submissions will be deleted.<p><p>
 <strong>Attention:</strong> The selection fields marked with an asterisk (*) is required. Please enter the appropriate information or select from the list provided. If you are unsure, please select 'Unknown'.";
+$locale['figure_533'] = "Figure Stats";
 
 $locale['figure_581'] = "This figure was submitted by ";
 $locale['figure_583'] = "Publish";
@@ -872,6 +873,7 @@ $locale['CLFP_019']= "ACTION";
 $locale['CLFP_020']= "Usercount";
 $locale['CLFP_021']= "Last entries";
 $locale['CLFP_022']= "Most viewed Figures";
+$locale['CLFP_023']= "Figure Stats";
 
 
 $locale['yours']= "Your Figures";	
