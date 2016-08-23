@@ -173,8 +173,35 @@ $result = dbquery(
 				unset($indicators, $images, $i);	
 
    }
+
 //closeside();
 // ############################################################################################	
+
+
+// ####### SOCIAL_SHARING   ###################################################################	
+															
+						// SETTINGS HOLEN
+						//$settings = fusion_get_settings();
+						$settings = fusion_get_settings();
+						$fil_settings = get_settings("figurelib"); 
+
+						if ($fil_settings['figure_social_sharing']) {
+						//openside("<div class='well clearfix'><strong>SOCIAL SHARING</strong></div>");	
+							echo "<div style='text-align:center'>\n";
+							$link = $settings['siteurl'].str_replace("../","",INFUSIONS)."figurelib/figure.php?figure_id=".$_GET['figure_id'];
+							echo "<a href='http://www.facebook.com/share.php?u=".$link."' target='_blank'><img alt='Facebook' src='".INFUSIONS."figurelib/images/facebook.png' border='0'></a>&nbsp;\n";
+							echo "<a href='http://twitter.com/share?url=".$link."' target='_blank'><img alt='Twitter' src='".INFUSIONS."figurelib/images/twitter.png' border='0'></a>&nbsp;\n";
+							echo "<a href='http://digg.com/submit?url=".$link."' target='_blank'><img alt='Digg' src='".INFUSIONS."figurelib/images/digg.png' border='0'></a>&nbsp;\n";
+							echo "<a href='http://reddit.com/submit?url=".$link."' target='_blank'><img alt='Reddit' src='".INFUSIONS."figurelib/images/reddit.png' border='0'></a>&nbsp;\n";
+							echo "<a href='http://del.icio.us/post?url=".$link."' target='_blank'><img alt='Del.icio.us' src='".INFUSIONS."figurelib/images/delicious.png' border='0'></a>&nbsp;\n";
+							echo "</div>\n";
+						//closeside();
+						}	
+
+// ############################################################################################	
+
+
+
 
 // ###########  FIGURE DETAILS   ##############################################################
 //openside('');
@@ -848,8 +875,6 @@ closeside();
                         AND figure_id != '".$data['figure_id']."' ".(iSUPERADMIN ? "" : "AND ".groupaccess('figure_visibility'))." 
                         ORDER BY RAND() LIMIT 0,5");
 						
-
-				
 					
 					if (dbrows($result3)) {
 						$i = 0;
@@ -870,8 +895,8 @@ closeside();
 							$cell_color = ($i % 2 == 0 ? "tbl1" : "tbl2"); $i++;
 							echo "<tr>\n";
 							echo "<td class='$cell_color' width='50%'><a href='figure.php?figure_id=".$data3['figure_id']."' title='".$data3['figure_title']."'>".$data3['figure_title']."</a></td>\n";
-							echo "<td class='$cell_color' width='25%' align=''>".trimlink($data3['figure_manufacturer_name'],30)."</td>\n";
-							echo "<td class='$cell_color' width='25%' align=''>".$data3['figure_cat_name']."</td>\n";
+							echo "<td class='$cell_color' width='25%' align=''>".trimlink($data3['figure_manufacturer_name'],20)."</td>\n";
+							echo "<td class='$cell_color' width='25%' align=''>".trimlink($data3['figure_cat_name'],10)."</td>\n";
 							echo "<td class='$cell_color' width='25%' align=''>".$rating."</td>\n";
 							echo "</tr>\n";
 						} 
@@ -942,7 +967,7 @@ echo "</aside>\n";
 	
 } 					// TO LINE 32
 	
-// ##### FUNCTINS FOR IMAGES  #################################################################
+// ##### FUNCTIONS FOR IMAGES  #################################################################
 
 function get_figure_image_path($figure_images_image, $figure_images_thumb, $hiRes = FALSE) {
     if (!$hiRes) {
