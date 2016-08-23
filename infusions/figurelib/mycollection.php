@@ -71,7 +71,8 @@ if (iMEMBER) {
 	// Display Figures Counter and last Figure START
 	echo "<div class='row'>\n";
 
-		// Display my Figures Counter START
+		
+// Display my Figures Counter START
 		echo "<div class='col-lg-4 col-md-12 col-sm-12 col-xs-12'>\n";
 			openside($locale['mc_0006']);
 			
@@ -82,7 +83,10 @@ if (iMEMBER) {
 			// Display Counter
 			if ($myFiguresCounter) {
 				echo $locale['mc_0007'];
-				echo "<span class='badge'>".$myFiguresCounter." / ".$allFiguresCounter."</span>\n";
+				
+				echo "<button class='btn btn-primary btn-xs' type='button'><span class='badge'>".$myFiguresCounter." / ".$allFiguresCounter."</button>\n";
+				
+				
 				
 			// Display Message
 			} else {
@@ -365,9 +369,21 @@ if (iMEMBER) {
 			// Display Admin Options
 			if (iADMIN || iSUPERADMIN) {
 				echo "<hr />\n";
-				echo "<div class='text-center'>\n";
-					echo "<a href='".INFUSIONS."figurelib/admin.php".$aidlink."' title='".$locale['CLFP_016']."'>".$locale['CLFP_016']."</a>\n";
+				
+				echo "<div class='navbar-default'>";
+				echo "<div class='table-responsive'>\n";
+				echo "<div class='row'>\n";
+				echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";
+				
+					echo "<div class='text-center'>\n";
+						echo "<a href='".INFUSIONS."figurelib/admin.php".$aidlink."' title='".$locale['CLFP_016']."'>".$locale['CLFP_016']."</a>\n";
+					echo "</div>\n";
+				
 				echo "</div>\n";
+				echo "</div>\n";
+				echo "</div>\n";
+				echo "</div>\n";
+				
 				echo "<hr />\n";
 			}
 
@@ -381,9 +397,14 @@ if (iMEMBER) {
 	$locale['mc_0001'] = "My Figure Collection";
 	$locale['mc_0011'] = "This feature is only available for registered members. Please Sign up ";
 	$locale['mc_0012'] = "HERE";
-	openside($locale['mc_0001']);
-		echo $locale['mc_0011'];
-		echo "<a href='".BASEDIR."register.php' title='".$locale['mc_0012']."'>".$locale['mc_0012']."</a>\n";
+	openside("");
+		
+		echo "<div class='alert alert-danger' role='alert'>";	
+
+		echo "<div style='text-align:center'><br />".$locale['mc_0011']."<a href='".BASEDIR."register.php' title='".$locale['mc_0012']."'>".$locale['mc_0012']."</a><br /><br />\n</div>\n";
+		
+		echo "</div>";
+	
 	closeside();
 }
 
