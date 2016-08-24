@@ -52,6 +52,8 @@ $inf_newtable[] = DB_FIGURE_CATS." (
 		figure_cat_parent MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
 		figure_cat_name VARCHAR(100) NOT NULL DEFAULT '',
 		figure_cat_description TEXT NOT NULL,
+		figure_cat_image VARCHAR(255) NOT NULL DEFAULT '',
+		figure_cat_thumb VARCHAR(255) NOT NULL DEFAULT '',
 		figure_cat_sorting VARCHAR(50) NOT NULL DEFAULT 'figure_title ASC',
 		figure_cat_language VARCHAR(50) NOT NULL DEFAULT '".LANGUAGE."',
 		PRIMARY KEY(figure_cat_id)
@@ -106,6 +108,7 @@ $inf_newtable[] = DB_FIGURE_ITEMS." (
 		figure_amazon_ca VARCHAR(400) NOT NULL DEFAULT '',
 		figure_accessories TEXT NOT NULL,
 		figure_description TEXT NOT NULL,
+		figure_wanted_by_member VARCHAR(500) NOT NULL DEFAULT '',
 		figure_visibility TINYINT(4) NOT NULL DEFAULT '0',		
 		figure_datestamp int(10) UNSIGNED NOT NULL DEFAULT '0',
 		figure_clickcount int(10) UNSIGNED NOT NULL DEFAULT '0',
@@ -123,6 +126,8 @@ $inf_newtable[] = DB_FIGURE_MANUFACTURERS." (
 		figure_manufacturer_name VARCHAR(100) NOT NULL DEFAULT '',
 		figure_manufacturer_description TEXT NOT NULL,
 		figure_manufacturer_parent MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
+		figure_manufacturer_image VARCHAR(255) NOT NULL DEFAULT '',
+		figure_manufacturer_thumb VARCHAR(255) NOT NULL DEFAULT '',
 		figure_manufacturer_sorting VARCHAR(50) NOT NULL DEFAULT '',
 		figure_manufacturer_language VARCHAR(50) NOT NULL DEFAULT '".LANGUAGE."',
 		PRIMARY KEY (figure_manufacturer_id)
@@ -199,11 +204,28 @@ $inf_newtable[] = DB_FIGURE_MEASUREMENTS." (
 PRIMARY KEY (figure_measurements_id)
 	) ENGINE=MyISAM DEFAULT CHARSET=UTF8 COLLATE=utf8_unicode_ci";
 /////////////////////////////////////////////////////////////////////////////////
+/* USERFIGURES DICREPTION ///////////////////////////////////////////////////////
+--> gekauft am --> figure_userfigures_bought_at
+--> gekauft wo --> figure_userfigures_buy_where
+--> Member möchte diese Figur verkaufen --> figure_userfigures_for_sale
+--> Member möchte diese Figur tauchen --> figure_userfigures_for_trade
+--> Einkaufspreis der Figur --> figure_userfigures_purchase_price
+--> Verkaufspreis der Figur --> figure_userfigures_sale_price
+--> Versandkosten --> figure_userfigures_shipping_costs
+--> Figur verkauft --> figure_userfigures_sold
+//////////////////////////////////////////////////////////////////////////////*/
 $inf_newtable[] = DB_FIGURE_USERFIGURES." (
 		figure_userfigures_id MEDIUMINT(8) UNSIGNED NOT NULL AUTO_INCREMENT, 
 		figure_userfigures_figure_id VARCHAR(100) NOT NULL DEFAULT '',
-		figure_userfigures_user_id VARCHAR(100) NOT NULL DEFAULT '',
-		figure_userfigures_sorting VARCHAR(50) NOT NULL DEFAULT '',
+		figure_userfigures_user_id VARCHAR(100) NOT NULL DEFAULT '',		
+		figure_userfigures_purchase_price VARCHAR(100) NOT NULL DEFAULT '',
+		figure_userfigures_bought_at VARCHAR(100) NOT NULL DEFAULT '',
+		figure_userfigures_buy_where VARCHAR(100) NOT NULL DEFAULT '',	
+		figure_userfigures_sale_price VARCHAR(100) NOT NULL DEFAULT '',		
+		figure_userfigures_shipping_costs VARCHAR(100) NOT NULL DEFAULT '',		
+		figure_userfigures_for_sale TINYINT(1) UNSIGNED NOT NULL DEFAULT '0', 
+		figure_userfigures_for_trade TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
+		figure_userfigures_sold TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',	
 		figure_userfigures_language VARCHAR(50) NOT NULL DEFAULT '".LANGUAGE."',
 PRIMARY KEY (figure_userfigures_id)
 	) ENGINE=MyISAM DEFAULT CHARSET=UTF8 COLLATE=utf8_unicode_ci";
@@ -211,21 +233,12 @@ PRIMARY KEY (figure_userfigures_id)
 $inf_newtable[] = DB_FIGURE_IMAGES." (
 		figure_images_image_id MEDIUMINT(8) UNSIGNED NOT NULL AUTO_INCREMENT, 
 		figure_images_figure_id VARCHAR(100) NOT NULL DEFAULT '',
-		figure_images_image VARCHAR(100) NOT NULL DEFAULT '',
-		figure_images_thumb VARCHAR(100) NOT NULL DEFAULT '',
+		figure_images_image VARCHAR(255) NOT NULL DEFAULT '',
+		figure_images_thumb VARCHAR(255) NOT NULL DEFAULT '',
+		figure_images_thumb2 VARCHAR(255) NOT NULL DEFAULT '',
 		figure_images_sorting VARCHAR(50) NOT NULL DEFAULT '',
 		figure_images_language VARCHAR(50) NOT NULL DEFAULT '".LANGUAGE."',
 PRIMARY KEY (figure_images_image_id)
-	) ENGINE=MyISAM DEFAULT CHARSET=UTF8 COLLATE=utf8_unicode_ci";
-/////////////////////////////////////////////////////////////////////////////////
-$inf_newtable[] = DB_FIGURE_YEARS." (
-		figure_year_id MEDIUMINT(8) UNSIGNED NOT NULL AUTO_INCREMENT, 
-		figure_year VARCHAR(100) NOT NULL DEFAULT '',
-		figure_year_description TEXT NOT NULL,
-		figure_year_parent MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
-		figure_year_sorting VARCHAR(50) NOT NULL DEFAULT '',
-		figure_year_language VARCHAR(50) NOT NULL DEFAULT '".LANGUAGE."',
-PRIMARY KEY (figure_year_id)
 	) ENGINE=MyISAM DEFAULT CHARSET=UTF8 COLLATE=utf8_unicode_ci";
 /////////////////////////////////////////////////////////////////////////////////
 // Settings
@@ -233,25 +246,26 @@ $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_per_line', '4', 'figurelib')";
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_allow_comments', '1', 'figurelib')";
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_allow_ratings', '1', 'figurelib')";
+$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_allow_submit_videos', '1', 'figurelib')";
+$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_show_videos', '1', 'figurelib')";
+$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_affiliate', '1', 'figurelib')";
+$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_amazon', '1', 'figurelib')";
+$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_ebay', '1', 'figurelib')";
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_display', '1', 'figurelib')";
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_submit', '1', 'figurelib')";
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_related', '1', 'figurelib')";
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_social_sharing', '1', 'figurelib')";
-$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_image_upload_count', '10', 'figurelib')";
 
 //thumb seetings
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_thumb_w', '400', 'figurelib')";
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_thumb_h', '300', 'figurelib')";
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_thumb_ratio', '0', 'figurelib')";
-
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_thumb2_w', '50', 'figurelib')";
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_thumb2_h', '50', 'figurelib')";
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_thumb2_ratio', '0', 'figurelib')";
-
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_thumb_cat_w', '100', 'figurelib')";
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_thumb_cat_h', '100', 'figurelib')";
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_thumb_cat_ratio', '0', 'figurelib')";
-
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_thumb_man_w', '100', 'figurelib')";
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_thumb_man_h', '100', 'figurelib')";
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_thumb_man_ratio', '0', 'figurelib')";
@@ -259,18 +273,16 @@ $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_
 //all other photo seetings
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_photo_w', '800', 'figurelib')";
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_photo_h', '600', 'figurelib')";
-
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_photo_max_w', '1800', 'figurelib')";
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_photo_max_h', '1600', 'figurelib')";
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_photo_max_b', '500000', 'figurelib')";
-
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_photo_cat_max_w', '1800', 'figurelib')";
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_photo_cat_max_h', '1600', 'figurelib')";
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_photo_cat_max_b', '500000', 'figurelib')";
-
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_photo_man_max_w', '1800', 'figurelib')";
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_photo_man_max_h', '1600', 'figurelib')";
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_photo_man_max_b', '500000', 'figurelib')";
+$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_image_upload_count', '10', 'figurelib')";
 
 // notifications seetings
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_notification', '1', 'figurelib')";
@@ -340,72 +352,6 @@ $inf_insertdbrow[] = DB_FIGURE_MEASUREMENTS." (figure_measurements_id, figure_me
 (30, '29 Inch (73,66 cm)','73,66 cm (29 Inch)', '', 'figure_id ASC'),
 (31, '30 Inch (76,20 cm)','76,20 cm (30 Inch)', '', 'figure_id ASC'),
 (32, 'bigger than 30 Inch (76,20 cm)','76,20 cm (30 Inch)', '', 'figure_id ASC')
-";
-/////////////////////////////////////////////////////////////////////////////////
-//befüllem von years
-$inf_insertdbrow[] = DB_FIGURE_YEARS." (figure_year_id, figure_year, figure_year_description, figure_year_sorting) VALUES
-(1, 'Unknown', '', 'figure_id ASC'),
-(2, '1970', '', 'figure_id ASC'),
-(3, '1971', '', 'figure_id ASC'),
-(4, '1972', '', 'figure_id ASC'),
-(5, '1973', '', 'figure_id ASC'),
-(6, '1974', '', 'figure_id ASC'),
-(7, '1975', '', 'figure_id ASC'),
-(8, '1976', '', 'figure_id ASC'),
-(9, '1977', '', 'figure_id ASC'),
-(10, '1978', '', 'figure_id ASC'),
-(11, '1979', '', 'figure_id ASC'),
-(12, '1980', '', 'figure_id ASC'),
-(13, '1981', '', 'figure_id ASC'),
-(14, '1982', '', 'figure_id ASC'),
-(15, '1983', '', 'figure_id ASC'),
-(16, '1984', '', 'figure_id ASC'),
-(17, '1985', '', 'figure_id ASC'),
-(18, '1986', '', 'figure_id ASC'),
-(19, '1987', '', 'figure_id ASC'),
-(20, '1988', '', 'figure_id ASC'),
-(21, '1989', '', 'figure_id ASC'),
-(22, '1990', '', 'figure_id ASC'),
-(23, '1991', '', 'figure_id ASC'),
-(24, '1992', '', 'figure_id ASC'),
-(25, '1993', '', 'figure_id ASC'),
-(26, '1994', '', 'figure_id ASC'),
-(27, '1995', '', 'figure_id ASC'),
-(28, '1996', '', 'figure_id ASC'),
-(29, '1997', '', 'figure_id ASC'),
-(30, '1998', '', 'figure_id ASC'),
-(31, '1999', '', 'figure_id ASC'),
-(32, '2000', '', 'figure_id ASC'),
-(33, '2001', '', 'figure_id ASC'),
-(34, '2002', '', 'figure_id ASC'),
-(35, '2003', '', 'figure_id ASC'),
-(36, '2004', '', 'figure_id ASC'),
-(37, '2005', '', 'figure_id ASC'),
-(38, '2006', '', 'figure_id ASC'),
-(39, '2007', '', 'figure_id ASC'),
-(40, '2008', '', 'figure_id ASC'),
-(41, '2009', '', 'figure_id ASC'),
-(42, '2010', '', 'figure_id ASC'),
-(43, '2011', '', 'figure_id ASC'),
-(44, '2012', '', 'figure_id ASC'),
-(45, '2013', '', 'figure_id ASC'),
-(46, '2014', '', 'figure_id ASC'),
-(47, '2015', '', 'figure_id ASC'),
-(48, '2016', '', 'figure_id ASC'),
-(49, '2017', '', 'figure_id ASC'),
-(50, '2018', '', 'figure_id ASC'),
-(51, '2019', '', 'figure_id ASC'),
-(52, '2020', '', 'figure_id ASC'),
-(53, '2021', '', 'figure_id ASC'),
-(54, '2022', '', 'figure_id ASC'),
-(55, '2023', '', 'figure_id ASC'),
-(56, '2024', '', 'figure_id ASC'),
-(57, '2025', '', 'figure_id ASC'),
-(58, '2026', '', 'figure_id ASC'),
-(59, '2027', '', 'figure_id ASC'),
-(60, '2028', '', 'figure_id ASC'),
-(61, '2029', '', 'figure_id ASC'),
-(62, '2030', '', 'figure_id ASC')
 ";
 /////////////////////////////////////////////////////////////////////////////////
 //befüllem von Limitation
@@ -797,8 +743,6 @@ $enabled_languages = makefilelist(LOCALE, ".|..", TRUE, "folders");
 // Defuse cleaning	
 $inf_droptable[] = DB_FIGURE_CATS;
 $inf_droptable[] = DB_FIGURE_ITEMS;
-	// wird nicht benötigt aber erstmal lassen
-	//$inf_droptable[] = DB_FIGURE_SETTINGS;
 $inf_droptable[] = DB_FIGURE_MANUFACTURERS;
 $inf_droptable[] = DB_FIGURE_BRANDS;
 $inf_droptable[] = DB_FIGURE_MATERIALS;
@@ -809,7 +753,6 @@ $inf_droptable[] = DB_FIGURE_LIMITATIONS;
 $inf_droptable[] = DB_FIGURE_MEASUREMENTS;
 $inf_droptable[] = DB_FIGURE_USERFIGURES;
 $inf_droptable[] = DB_FIGURE_IMAGES;
-$inf_droptable[] = DB_FIGURE_YEARS;
 $inf_deldbrow[] = DB_COMMENTS." WHERE comment_type='FI'";
 $inf_deldbrow[] = DB_RATINGS." WHERE rating_type='FI'";
 $inf_deldbrow[] = DB_ADMIN." WHERE admin_rights='FI'";
@@ -820,5 +763,3 @@ $inf_deldbrow[] = DB_SITE_LINKS." WHERE link_url='infusions/figurelib/panels/fig
 $inf_deldbrow[] = DB_LANGUAGE_TABLES." WHERE mlt_rights='FI'";
 $inf_deldbrow[] = DB_PANELS." WHERE panel_filename='latest_figures_center_panel'";
 $inf_deldbrow[] = DB_SETTINGS_INF." WHERE settings_inf='figurelib'";
-// so lange betaphase erstmal auskommentieren weil sond die ganzen submittings weg sind und alle mühesam per hand neu eingereicht werden müssen
-//$inf_deldbrow[] = DB_SUBMISSIONS." WHERE submit_type='f'";
