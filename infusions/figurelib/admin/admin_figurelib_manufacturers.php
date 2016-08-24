@@ -4,7 +4,7 @@
 | Copyright (C) PHP-Fusion Inc
 | https://www.php-fusion.co.uk/
 +--------------------------------------------------------+
-| Filename: figurelib_manufacturer based on weblink_cats.php
+| Filename: figurelib_manufacturers based on weblink_cats.php
 | Author: PHP-Fusion Development Team
 |
 | Modification: Catzenjaeger
@@ -19,219 +19,351 @@
 | copyright header is strictly prohibited without
 | written permission from the original author(s).
 +--------------------------------------------------------*/
+
 if (!defined("IN_FUSION")) { die("Access Denied"); }
 $locale = fusion_get_locale();
+global $figurelibSettings;
 pageAccess("FI");
 
-if ((isset($_GET['action']) && $_GET['action'] == "delete") && (isset($_GET['man_id']) && isnum($_GET['man_id']))) {
-	
-	$result = dbcount("(figure_manufacturer)", DB_FIGURE_ITEMS, "figure_manufacturer='".$_GET['man_id']."'") || dbcount("(figure_manufacturer_id)", DB_FIGURE_MANUFACTURERS, "figure_manufacturer_parent='".$_GET['man_id']."'");
-		
-	// ['figmm_0004'] = "Figure Manufacturer cannot be deleted"; |
-	// ['figmm_0005'] = "There are Figure or Sub-Manufacturer linked to this Manufacturer";
-	if (!empty($result)) {
+// Delete a Manufacturer
+if ((isset($_GET['action']) && $_GET['action'] == "delete") && (isset($_GET['manufacturer_id']) && isnum($_GET['manufacturer_id']))) {
+
+	if (
+		dbcount("(figure_manufacturer)", DB_FIGURE_ITEMS, "figure_manufacturer='".$_GET['manufacturer_id']."'") ||
+		dbcount("(figure_manufacturer_id)", DB_FIGURE_MANUFACTURERS, "figure_manufacturer_parent='".$_GET['manufacturer_id']."'")
+	) {
 		addNotice("danger", $locale['figmm_0004'].$locale['figmm_0005']); 
-		redirect(clean_request("", array("section", "aid"), TRUE));
 	} else {
-		$result = dbquery("DELETE FROM ".DB_FIGURE_MANUFACTURERS." WHERE figure_manufacturer_id='".$_GET['man_id']."'");
-		addNotice("success", $locale['figmm_0003']); // ['figmm_0003'] = "Figure Manufacturer deleted";
-		redirect(clean_request("", array("section", "aid"), TRUE));
+		figures_deleteImages("manufacturers", $_GET['manufacturer_id']);
+		dbquery("DELETE FROM ".DB_FIGURE_MANUFACTURERS." WHERE figure_manufacturer_id='".$_GET['manufacturer_id']."'");
+		addNotice("success", $locale['figmm_0003']);
 	}
+	redirect(clean_request("", ["section", "aid"], TRUE));
+
+// Add / Edit a Manufacturer
 } else {
-	$man_hidden = array();
-	$data = array(
-		"figure_manufacturer_id" => 0,
-		"figure_manufacturer_name" => "",
+	
+	// Empty Arrays
+	$data = [
+		"figure_manufacturer_id"          => 0,
+		"figure_manufacturer_name"        => "",
+		"figure_manufacturer_image"       => "",
+		"figure_manufacturer_thumb"       => "",
 		"figure_manufacturer_description" => "",
-		"figure_manufacturer_language" => LANGUAGE,
-		"figure_manufacturer_parent" => "",
-		"man_sort_by" => 2,
-		"man_sort_order" => "ASC",
-	);
-	if (isset($_POST['save_man'])) {
-		$data = array(
-			"figure_manufacturer_id" => form_sanitizer($_POST['figure_manufacturer_id'], 0, 'figure_manufacturer_id'),
-			"figure_manufacturer_name" => form_sanitizer($_POST['figure_manufacturer_name'], '', 'figure_manufacturer_name'),
-			"figure_manufacturer_description" => form_sanitizer($_POST['figure_manufacturer_description'], '', 'figure_manufacturer_description'),
-			"figure_manufacturer_language" => form_sanitizer($_POST['figure_manufacturer_language'], LANGUAGE, 'figure_manufacturer_language'),
-			"figure_manufacturer_parent" => form_sanitizer($_POST['figure_manufacturer_parent'], 0, 'figure_manufacturer_parent'),
-		);
-		$data['man_sort_by'] = form_sanitizer($_POST['man_sort_by'], 2, "man_sort_by");
-		$data['man_sort_order'] = form_sanitizer($_POST['man_sort_order'], "ASC", "man_sort_order");
-		if (isnum($data['man_sort_by']) && $data['man_sort_by'] == "1") {
-			$data['figure_manufacturer_sorting'] = "figure_id ".($data['man_sort_order'] == "ASC" ? "ASC" : "DESC");
-		} else if (isnum($_POST['man_sort_by']) && $data['man_sort_by'] == "2") {
-			$data['figure_manufacturer_sorting'] = "figure_title ".($data['man_sort_order'] == "ASC" ? "ASC" : "DESC");
-		} else if (isnum($_POST['man_sort_by']) && $data['man_sort_by'] == "3") {
-			$data['figure_manufacturer_sorting'] = "figure_datestamp ".($data['man_sort_order'] == "ASC" ? "ASC" : "DESC");
+		"figure_manufacturer_language"    => LANGUAGE,
+		"figure_manufacturer_parent"      => "",
+		"figure_manufacturer_sorting"     => "figure_title ASC"
+	];
+	
+	// Edit a Manufacturer?
+	if (
+		(isset($_GET['action']) && $_GET['action'] == "edit") && 
+		(isset($_GET['manufacturer_id']) && isnum($_GET['manufacturer_id'])) && 
+		dbcount("(figure_manufacturer_id)", DB_FIGURE_MANUFACTURERS, "figure_manufacturer_id='".$_GET['manufacturer_id']."'")
+	) {
+		$data = dbarray(dbquery("
+			SELECT 
+				figure_manufacturer_id, figure_manufacturer_name, figure_manufacturer_image, figure_manufacturer_thumb, figure_manufacturer_description,
+				figure_manufacturer_language, figure_manufacturer_parent, figure_manufacturer_sorting
+			FROM ".DB_FIGURE_MANUFACTURERS."
+			WHERE figure_manufacturer_id='".$_GET['manufacturer_id']."'
+			LIMIT 0,1
+		"));
+	}
+	
+	// Handle posted Informations
+	if (isset($_POST['save_manufacturer'])) {
+		$data = [
+			"figure_manufacturer_id"          => form_sanitizer($_POST['figure_manufacturer_id'],          0,        "figure_manufacturer_id"),
+			"figure_manufacturer_name"        => form_sanitizer($_POST['figure_manufacturer_name'],        "",       "figure_manufacturer_name"),
+			"figure_manufacturer_description" => form_sanitizer($_POST['figure_manufacturer_description'], "",       "figure_manufacturer_description"),
+			"figure_manufacturer_language"    => form_sanitizer($_POST['figure_manufacturer_language'],    LANGUAGE, "figure_manufacturer_language"),
+			"figure_manufacturer_parent"      => form_sanitizer($_POST['figure_manufacturer_parent'],      0,        "figure_manufacturer_parent")
+		];
+		
+		// Check Sorting Fields
+		$manufacturerSortBy    = form_sanitizer($_POST['manufacturer_sort_by'],    2,     "manufacturer_sort_by");
+		$manufacturerSortOrder = form_sanitizer($_POST['manufacturer_sort_order'], "ASC", "manufacturer_sort_order");
+		
+		// Handle Sorting Informations
+		if (isnum($manufacturerSortBy) && $manufacturerSortBy == "1") {
+			$data['figure_manufacturer_sorting'] = "figure_id ".($manufacturerSortOrder == "ASC" ? "ASC" : "DESC");
+		} elseif (isnum($manufacturerSortBy) && $manufacturerSortBy == "2") {
+			$data['figure_manufacturer_sorting'] = "figure_title ".($manufacturerSortOrder == "ASC" ? "ASC" : "DESC");
+		} elseif (isnum($manufacturerSortBy) && $manufacturerSortBy == "3") {
+			$data['figure_manufacturer_sorting'] = "figure_datestamp ".($manufacturerSortOrder == "ASC" ? "ASC" : "DESC");
 		} else {
-			$data['figure_manufacturer_sorting'] = "figure_manufacturer_name ASC";
+			$data['figure_manufacturer_sorting'] = "figure_title ASC";
 		}
-		$manufacturerNameCheck = array(
-			"when_updating" => "figure_manufacturer_name='".$data['figure_manufacturer_name']."' and figure_manufacturer_id !='".$data['figure_manufacturer_id']."'",
-			"when_saving" => "figure_manufacturer_name='".$data['figure_manufacturer_name']."'",
-		);
+		
+		// Handle Images
+		if ($data['figure_manufacturer_id'] && isset($_POST['delete_image'])) {
+			figures_deleteImages("manufacturers", $data['figure_manufacturer_id']);
+			$data['figure_manufacturer_image'] = "";
+			$data['figure_manufacturer_thumb'] = "";
+		}
+		if (isset($_FILES['figure_manufacturer_file']) && $_FILES['figure_manufacturer_file']['name']) {
+			if (!empty($_FILES['figure_manufacturer_file']) && is_uploaded_file($_FILES['figure_manufacturer_file']['tmp_name'])) {
+				$upload = form_sanitizer($_FILES['figure_manufacturer_file'], "", "figure_manufacturer_file");
+				if ($upload['error'] == 0) {
+					figures_deleteImages("manufacturers", $data['figure_manufacturer_id']);
+					$data['figure_manufacturer_image'] = $upload['image_name'];
+					$data['figure_manufacturer_thumb'] = $upload['thumb1_name'];
+				}
+			}
+		}
+		if (!isset($data['figure_manufacturer_image']) || !isset($data['figure_manufacturer_thumb'])) {
+			if ($data['figure_manufacturer_id']) {
+				$data['figure_manufacturer_image'] = dbarraynum(dbquery("SELECT figure_manufacturer_image FROM ".DB_FIGURE_MANUFACTURERS." WHERE figure_manufacturer_id='".$data['figure_manufacturer_id']."' LIMIT 0,1"));
+				$data['figure_manufacturer_thumb'] = dbarraynum(dbquery("SELECT figure_manufacturer_thumb FROM ".DB_FIGURE_MANUFACTURERS." WHERE figure_manufacturer_id='".$data['figure_manufacturer_id']."' LIMIT 0,1"));
+			} else {
+				$data['figure_manufacturer_image'] = "";
+				$data['figure_manufacturer_thumb'] = "";
+			}
+		}
+		
+		// Handle Manufacturer Check
+		$manufacturerNameCheck = [
+			"when_updating" => "figure_manufacturer_name='".$data['figure_manufacturer_name']."' AND figure_manufacturer_id != '".$data['figure_manufacturer_id']."'",
+			"when_saving"   => "figure_manufacturer_name='".$data['figure_manufacturer_name']."'"
+		];
+		
+		// Handle Action
 		if (defender::safe()) {
-			if ($figureMan_edit && dbcount("(figure_manufacturer_id)", DB_FIGURE_MANUFACTURERS, "figure_manufacturer_id='".intval($data['figure_manufacturer_id'])."'")) {
+			
+			// Update a Figure
+			if ($data['figure_manufacturer_id']) {
 				if (!dbcount("(figure_manufacturer_id)", DB_FIGURE_MANUFACTURERS, $manufacturerNameCheck['when_updating'])) {
 					dbquery_insert(DB_FIGURE_MANUFACTURERS, $data, "update");
-					addNotice("success", $locale['figmm_0002']); // ['figmm_0002'] = "Figure Manufacturer updated";
-					redirect(clean_request("", array("section", "aid"), TRUE));
+					addNotice("success", $locale['figmm_0002']);
+					redirect(clean_request("", ["section", "aid"], true));
 				} else {
 					$defender->stop();
-					addNotice("danger", $locale['figmm_0006']); // ['figmm_0006'] = "This Manufacturer already exists.";
+					addNotice("danger", $locale['figmm_0006']);
 				}
+				
+			// Save a Figure 
 			} else {
 				if (!dbcount("(figure_manufacturer_id)", DB_FIGURE_MANUFACTURERS, $manufacturerNameCheck['when_saving'])) {
 					dbquery_insert(DB_FIGURE_MANUFACTURERS, $data, "save");
-					addNotice("success", $locale['figmm_0001']); // ['figmm_0001'] = "Figure Manufacturer added";
-					redirect(clean_request("", array("section", "aid"), TRUE));
+					addNotice("success", $locale['figmm_0001']);
+					redirect(clean_request("", ["section", "aid"], true));
 				} else {
 					$defender->stop();
-					addNotice("danger", $locale['figmm_0006']); // ['figmm_0006'] = "This Manufacturer already exists.";
+					addNotice("danger", $locale['figmm_0006']);
 				}
 			}
 		}
 	}
-	if ($figureMan_edit) {
-		$result = dbquery("SELECT * FROM ".DB_FIGURE_MANUFACTURERS." ".(multilang_table("FI") ? "WHERE figure_manufacturer_language='".LANGUAGE."' AND" : "WHERE")." figure_manufacturer_id='".intval($_GET['man_id'])."'");
-		if (dbrows($result)) {
-			$data = dbarray($result);
-			$man_hidden = array($data['figure_manufacturer_id']);
-			$man_sorting = explode(" ", $data['figure_manufacturer_sorting']);
-			if ($man_sorting[0] == "figure_id") {
-				$data['man_sort_by'] = "1";
-			} elseif ($man_sorting[0] == "figure_title") {
-				$data['man_sort_by'] = "2";
-			} else {
-				$data['man_sort_by'] = "3";
-			}
-			$data['man_sort_order'] = $man_sorting[1];
-		} else {
-			redirect(FUSION_SELF.$aidlink);
-		}
-	}
-	// ['figm_0010'] = "Figure Manufacturer Editor";
-	// ['filt_0014'] = "Figures Manufacturer";
-	$fiManTab['title'] = array($locale['figm_0010'], $locale['filt_0014']); 
-	$fiManTab['id'] = array("a", "b");
-	$tab_active = tab_active($fiManTab, isset($_GET['man_view']) ? 1 : 0);
-	echo opentab($fiManTab, $tab_active, "fiMan_Tab", FALSE, "m-t-20");
-	echo opentabbody($fiManTab['title'][0], $fiManTab['id'][0], $tab_active);
-	echo openform('addman', 'post', FUSION_REQUEST, array("class" => "m-t-20"));
-	echo form_hidden("figure_manufacturer_id", "", $data['figure_manufacturer_id']);
 	
-	// ['figm_0000'] = "Manufacturer Name:";
-	// ['figm_0001'] = "Please enter a Manufacturer name";
-	echo form_text('figure_manufacturer_name', $locale['figm_0000'], $data['figure_manufacturer_name'], array(
-										 'required' => TRUE,
-										 "error_text" => $locale['figm_0001'],
-										 "inline" => TRUE,
-									 ));
-	
-	// ['figm_0002'] = "Manufacturer Description:";								 
-	echo form_textarea('figure_manufacturer_description', $locale['figm_0002'], $data['figure_manufacturer_description'], array(
-										"html" => TRUE,
-										"preview" => FALSE,
-										"autosize" => TRUE,
-										"inline" => TRUE,
-										"form_name" => "addman"
-									));
-	// ['figm_0003'] = "Parent Manufacturer";
-	echo form_select_tree("figure_manufacturer_parent", $locale['figm_0003'], $data['figure_manufacturer_parent'], array(
-										"disable_opts" => $man_hidden,
-										"hide_disabled" => TRUE,
-										"inline" => TRUE,
-										), DB_FIGURE_MANUFACTURERS, "figure_manufacturer_name", "figure_manufacturer_id", "figure_manufacturer_parent");
-	
-	if (multilang_table("FI")) {
-		echo form_select('figure_manufacturer_language', $locale['global_ML100'], $data['figure_manufacturer_language'], array(
-												   'options' => fusion_get_enabled_languages(),
-												   "inline" => TRUE,
-											   ));
+	// Split Sorting Field
+	$sorting = explode(" ", $data['figure_manufacturer_sorting']);
+		
+	// Handle Sorting Informations
+	if ($sorting[0] == "1") {
+		$manufacturerSortBy = "figure_id";
+	} elseif ($sorting[0] == "2") {
+		$manufacturerSortBy = "figure_title";
+	} elseif ($sorting[0] == "3") {
+		$manufacturerSortBy = "figure_datestamp";
 	} else {
-		echo form_hidden('figure_manufacturer_language', '', $data['figure_manufacturer_language']);
+		$manufacturerSortBy = "figure_title";
+	}
+	$manufacturerSortOrder = $sorting[1];
+
+	// Handle Tab Informations
+	$fiManufacturerTab['title'] = [$locale['figm_0010'], $locale['filt_0014']]; 
+	$fiManufacturerTab['id']    = ["a", "b"];
+	$tab_active                 = tab_active($fiManufacturerTab, isset($_GET['manufacturer_view']) ? 1 : 0);
+	
+	// Display Tabs
+	echo opentab($fiManufacturerTab, $tab_active, "fiManufacturer_Tab", false, "m-t-20");
+	echo opentabbody($fiManufacturerTab['title'][0], $fiManufacturerTab['id'][0], $tab_active);
+	
+	// Open Form
+	echo openform("addmanufacturer", "post", FUSION_REQUEST, ["class" => "m-t-20", "enctype" => true]);
+	echo form_hidden("figure_manufacturer_id", "", $data['figure_manufacturer_id']);
+
+	// Manufacturer Name
+	echo form_text("figure_manufacturer_name", $locale['figm_0000'], $data['figure_manufacturer_name'], [
+		"inline"     => true,
+		"required"   => true,
+		"error_text" => $locale['figm_0001']
+	]);
+	
+	// Manufacturer Image
+	echo form_fileinput("figure_manufacturer_file", "Manufacturer Image", "", [
+		"upload_path"       => MANUFACTURERS,
+		"type"              => "image",
+		"thumbnail"         => true,
+		"thumbnail_w"       => $figurelibSettings['figure_thumb_man_w'],
+		"thumbnail_h"       => $figurelibSettings['figure_thumb_man_h'],
+		"thumbnail_folder"  => "thumbs/",
+		"thumbnail_suffix"  => "_t1",
+		"delete_original"   => false,
+		"max_width"         => $figurelibSettings['figure_photo_man_max_w'],
+		"max_height"        => $figurelibSettings['figure_photo_man_max_h'],
+		"max_byte"          => $figurelibSettings['figure_photo_man_max_b'],
+		"max_count"         => 1
+	]);
+	
+	// Display Manufacturer Image
+	if ($data['figure_manufacturer_image'] || $data['figure_manufacturer_thumb']) {
+		echo "<div class='row'>\n";
+			echo "<div class='col-sm-3 col-xs-12'></div>\n";
+			echo "<div class='col-sm-9 col-xs-12'>\n";
+				echo form_checkbox("delete_image", "Delete this Image <br /> <img src='".figures_getImagePath("manufacturers", "thumb", $data['figure_manufacturer_id'])."' style='max-width: 200px;' />", "0", [
+					"reverse_label" => true
+				]);
+			echo "</div>\n";
+		echo "</div>\n";
 	}
 	
+	// Manufacturer Description							 
+	echo form_textarea("figure_manufacturer_description", $locale['figm_0002'], $data['figure_manufacturer_description'], [
+		"inline"    => true,
+		"html"      => true,
+		"preview"   => false,
+		"autosize"  => true,
+		"form_name" => "addmanufacturer"
+	]);
 	
+	// Manufacturer Parent
+	echo form_select_tree("figure_manufacturer_parent", $locale['figm_0003'], $data['figure_manufacturer_parent'], [
+		"disable_opts"  => [$data['figure_manufacturer_id']],
+		"hide_disabled" => true,
+		"inline"        => true,
+	], DB_FIGURE_MANUFACTURERS, "figure_manufacturer_name", "figure_manufacturer_id", "figure_manufacturer_parent");
+	
+	// Manufacturer Language
+	if (multilang_table("FI")) {
+		echo form_select("figure_manufacturer_language", $locale['global_ML100'], $data['figure_manufacturer_language'], [
+			"options" => fusion_get_enabled_languages(),
+			"inline" => true,
+		]);
+	} else {
+		echo form_hidden("figure_manufacturer_language", "", $data['figure_manufacturer_language']);
+	}
+	
+	// Manufacturer Sorting
 	echo "<div class='row m-0'>\n";	
-	echo "<label class='label-control col-xs-12 col-sm-3 p-l-0'>".$locale['figm_0004']."</label>\n"; // ['figm_0004'] = "Manufacturer Sorting:";
+	echo "<label class='label-control col-xs-12 col-sm-3 p-l-0'>".$locale['figm_0004']."</label>\n";
+	echo "<div class='col-xs-12 col-sm-3 p-l-0'>\n";
+
+		// Manufacturer Sorting By
+		echo form_select("manufacturer_sort_by", "", $manufacturerSortBy, [
+			"inline"  => true,
+			"width"   => "100%",
+			"options" => ["1" => $locale['figm_0005'], "2" => $locale['figm_0006'], "3" => $locale['figm_0007']],
+			"class"   => "pull-left m-r-10"
+		]);
 		
-	echo "<div class='col-xs-12 col-sm-3  p-l-0'>\n";
-	
-	// ['figm_0005'] = "Manufacturer ID"; 
-	// ['figm_0006'] = "Manufacturer Name"; 
-	// ['figm_0007'] = "Manufacturer Date";
-	echo form_select('man_sort_by', "", $data['man_sort_by'], array(
-		"inline" => TRUE,
-		"width" => "100%",
-		'options' => array('1' => $locale['figm_0005'], '2' => $locale['figm_0006'], '3' => $locale['figm_0007']),
-		'class' => 'pull-left m-r-10'
-	));
 	echo "</div>\n";
-	echo "<div class='col-xs-12 col-sm-2'>\n";
+	echo "<div class='col-xs-12 col-sm-3'>\n";
 	
-	// ['figm_0008'] = "Ascending"; 
-	// ['figm_0009'] = "Descending";
-	echo form_select('man_sort_order', '', $data['man_sort_order'], array(
-		"inline" => TRUE,
-		"width" => "100%",
-		'options' => array('ASC' => $locale['figm_0008'], 'DESC' => $locale['figm_0009']),
-	));
-	echo "</div>\n";
-	echo "</div>\n";
-	
+		// Manufacturer Sorting Direction
+		echo form_select("manufacturer_sort_order", "", $manufacturerSortOrder, [
+			"inline"  => true,
+			"width"   => "100%",
+			"options" => ["ASC" => $locale['figm_0008'], "DESC" => $locale['figm_0009']]
+		]);
 		
-	// ['figm_0011'] = "Save Manufacturer";
-	echo form_button('save_man', $locale['figm_0011'], $locale['figm_0011'], array('class' => 'btn-primary m-t-10'));
+	echo "</div>\n";
+	echo "</div>\n";
+		
+	// Button
+	echo form_button("save_manufacturer", $locale['figm_0011'], $locale['figm_0011'], ["class" => "btn-primary m-t-10"]);
+	
+	// Close Form
 	echo closeform();
+	
+	// Display Tabs
 	echo closetabbody();
-	echo opentabbody($fiManTab['title'][1], $fiManTab['id'][1], $tab_active);
-	$row_num = 0;
-	echo "<table class='table table-responsive table-hover table-striped'>\n";
-	showmanlist();
-	if ($row_num == 0) {
-		echo "<tr><td align='center' class='tbl1'>".$locale['figm_0012']."</td></tr>\n"; // ['figm_0012'] = "No figure categories defined";
-	}
-	echo "</table>\n";
+	
+	// Display Tabs
+	echo opentabbody($fiManufacturerTab['title'][1], $fiManufacturerTab['id'][1], $tab_active);
+	figures_showmanufacturerlist();
 	echo closetabbody();
 	echo closetab();
+
 }
 
 /////////////////////////////////////////////////////////
 // FUNCTIONS ////////////////////////////////////////////
 /////////////////////////////////////////////////////////
-
-function showmanlist($parent = 0, $level = 0) {
-	global $locale, $aidlink, $row_num;
+	function figures_showmanufacturerlist($parent = 0, $level = 0) {
+		global $locale, $aidlink;
+		
+		// Check Page (only on Level 0)
+		if ($parent == "0" && $level == "0") {
+			$allRows = dbcount("(figure_manufacturer_id)", DB_FIGURE_MANUFACTURERS, "figure_manufacturer_parent='0'".(multilang_table("FI") ? " AND figure_manufacturer_language='".LANGUAGE."'" : "")."");
+			if (isset($_GET['rowstart']) && isNum($_GET['rowstart']) && $_GET['rowstart'] <= $allRows) {
+				$rowstart = $_GET['rowstart'];
+			} else {
+				$rowstart = 0;
+			}
+		}
+		
+		// Get all Manufacturer
 		$result = dbquery("
 			SELECT 
 				figure_manufacturer_id, 
 				figure_manufacturer_name, 
-				figure_manufacturer_description 
+				figure_manufacturer_description,
+				figure_manufacturer_image,
+				figure_manufacturer_thumb
 			FROM ".DB_FIGURE_MANUFACTURERS." 
-			WHERE figure_manufacturer_parent='".$parent."'".(multilang_table("FI") ? " 
-			AND figure_manufacturer_language='".LANGUAGE."'" : "")." 
-			ORDER BY figure_manufacturer_name
+			WHERE figure_manufacturer_parent='".$parent."'".(multilang_table("FI") ? " AND figure_manufacturer_language='".LANGUAGE."'" : "")." 
+			ORDER BY figure_manufacturer_name ASC
+			".($parent == "0" && $level == "0" ? "LIMIT ".$rowstart.",10" : "")."
 		");
-	if (dbrows($result) != 0) {
-		while ($data = dbarray($result)) {
-			$description = strip_tags(parse_textarea($data['figure_manufacturer_description']));
-			echo "<tr>\n";
-			echo "<td><strong>".str_repeat("&mdash;", $level).$data['figure_manufacturer_name']."</strong>\n";
-			if ($data['figure_manufacturer_description']) {
-				echo "<br />".str_repeat("&mdash;", $level)."<span class='small'>".$description."</span></td>\n";
+		
+		// If there are Results, display it.
+		if (dbrows($result) != 0) {
+			if ($parent == "0" && $level == "0") {  echo "<table class='table table-responsive table-hover table-striped'>\n"; }			
+			// Display Items
+			while ($data = dbarray($result)) {
+				$description = strip_tags(parse_textarea($data['figure_manufacturer_description']));
+				
+				// Display each Item
+				echo "<tr>\n";
+					if ($data['figure_manufacturer_thumb'] || $data['figure_manufacturer_image']) {
+						echo "<td class='figurelib-inforow-height' style='width: 1%;'><img src='".figures_getImagePath("manufacturers", "thumb", $data['figure_manufacturer_id'])."' alt='Manufacturer Image' /></td>\n";
+					} else {
+						echo "<td style='width: 1%;'></td>\n";
+					}
+					echo "<td><strong>".str_repeat("&mdash;", $level).$data['figure_manufacturer_name']."</strong>\n";
+					if ($data['figure_manufacturer_description']) {
+						echo "<br />".str_repeat("&mdash;", $level)."<span class='small'>".$description."</span>\n";
+					}
+					echo "</td>\n";
+					echo "<td align='center' width='1%' style='white-space:nowrap'>\n";
+						echo "<a href='".FUSION_SELF.$aidlink."&amp;section=figurelib_manufacturers&amp;action=edit&amp;manufacturer_id=".$data['figure_manufacturer_id']."' title='".$locale['cifg_0005']."' class='btn btn-warning btn-xs'><i class='fa fa-fw fa-cogs'></i> ".$locale['cifg_0005']."</a>\n"; 
+						echo "<a href='".FUSION_SELF.$aidlink."&amp;section=figurelib_manufacturers&amp;action=delete&amp;manufacturer_id=".$data['figure_manufacturer_id']."' onclick=\"return confirm('".$locale['figmm_0007']."');\" class='btn btn-danger btn-xs'><i class='fa fa-fw fa-trash'></i> ".$locale['cifg_0006']."</a>\n";
+					echo "</td>\n";
+				echo "</tr>\n";
+				
+				// Display Sublevel
+				figures_showmanufacturerlist($data['figure_manufacturer_id'], $level+1);
 			}
-			// ['cifg_0005'] = "Edit";
-			echo "<td align='center' width='1%' style='white-space:nowrap'>\n
-			<a href='".FUSION_SELF.$aidlink."&amp;section=figurelib_manufacturers&amp;action=edit&amp;man_id=".$data['figure_manufacturer_id']."'>".$locale['cifg_0005']."</a> -\n"; 
+			if ($parent == "0" && $level == "0") { echo "</table>\n"; }
 			
-			// ['figmm_0007'] = "Delete this Manufacturer?";
-			// ['cifg_0006'] = "Delete";
-			echo "<a href='".FUSION_SELF.$aidlink."&amp;section=figurelib_manufacturers&amp;action=delete&amp;man_id=".$data['figure_manufacturer_id']."' onclick=\"return confirm('".$locale['figmm_0007']."');\">".$locale['cifg_0006']."</a></td>\n";
-			echo "</tr>\n";
-			$row_num++;
-			showmanlist($data['figure_manufacturer_id'], $level+1);
+			// Display Navigation (only on Level 0)
+			if ($parent == "0" && $level == "0") {
+				if ($allRows > 10) {
+					echo "<hr />\n";
+					echo "<div class='text-center'>\n";
+						echo makepagenav($rowstart, 10, $allRows, 6, FUSION_SELF.$aidlink."&amp;section=figurelib_manufacturers&amp;manufacturer_view&amp;");
+					echo "\n</div>\n";
+				}
+			}
+			
+		// Otherwise display Message
+		} else {
+			if ($parent == "0" && $level == "0") {
+				echo "<div class='text-center tbl1'>".$locale['figm_0012']."</div>\n";
+			}
 		}
 	}
-}
+
+?>
