@@ -51,30 +51,34 @@ if (isset($_POST['savesettings'])) {
 		"figure_notification"         => form_sanitizer($_POST['figure_notification'],         1,    "figure_notification"),
 		"figure_notification_subject" => form_sanitizer($_POST['figure_notification_subject'], "",   "figure_notification_subject"),
 		"figure_notification_message" => form_sanitizer($_POST['figure_notification_message'], "",   "figure_notification_message"),
+		"figure_notification"         => form_sanitizer($_POST['figure_notification'],         1,    "figure_notification"),
+		"figure_show_videos"          => form_sanitizer($_POST['figure_show_videos'],          1,    "figure_show_videos"),
+		"figure_affiliate"            => form_sanitizer($_POST['figure_affiliate'],            1,    "figure_affiliate"),
+		"figure_amazon"               => form_sanitizer($_POST['figure_amazon'],               1,    "figure_amazon"),
+		"figure_ebay"                 => form_sanitizer($_POST['figure_ebay'],                 1,    "figure_ebay"),
 		"figure_per_page"             => form_sanitizer($_POST['figure_per_page'],             0,    "figure_per_page"),
 		"figure_per_line"             => form_sanitizer($_POST['figure_per_line'],             0,    "figure_per_line"),
 		"figure_image_upload_count"   => form_sanitizer($_POST['figure_image_upload_count'],   10,   "figure_image_upload_count"),	
 		"figure_thumb_w"              => form_sanitizer($_POST['figure_thumb_w'],              300,  "figure_thumb_w"),
 		"figure_thumb_h"              => form_sanitizer($_POST['figure_thumb_h'],              150,  "figure_thumb_h"),
-		"figure_thumb_ratio"          => form_sanitizer($_POST['figure_thumb_ratio'],          0,    "figure_thumb_ratio"),
-		"figure_thumb2_w"             => form_sanitizer($_POST['figure_thumb2_w'],             40,  "figure_thumb2_w"),
-		"figure_thumb2_h"             => form_sanitizer($_POST['figure_thumb2_h'],             40,  "figure_thumb2_h"),
-		"figure_thumb2_ratio"         => form_sanitizer($_POST['figure_thumb2_ratio'],         0,    "figure_thumb2_ratio"),				
+		"figure_thumb2_w"             => form_sanitizer($_POST['figure_thumb2_w'],             40,   "figure_thumb2_w"),
+		"figure_thumb2_h"             => form_sanitizer($_POST['figure_thumb2_h'],             40,   "figure_thumb2_h"),
 		"figure_thumb_cat_w"          => form_sanitizer($_POST['figure_thumb_cat_w'],          100,  "figure_thumb_cat_w"),
 		"figure_thumb_cat_h"          => form_sanitizer($_POST['figure_thumb_cat_h'],          100,  "figure_thumb_cat_h"),
-		"figure_thumb_cat_ratio"      => form_sanitizer($_POST['figure_thumb_cat_ratio'],      0,    "figure_thumb_cat_ratio"),
 		"figure_thumb_man_w"          => form_sanitizer($_POST['figure_thumb_man_w'],          100,  "figure_thumb_man_w"),
 		"figure_thumb_man_h"          => form_sanitizer($_POST['figure_thumb_man_h'],          100,  "figure_thumb_man_h"),
-		"figure_thumb_man_ratio"      => form_sanitizer($_POST['figure_thumb_man_ratio'],      0,    "figure_thumb_man_ratio"),		
-		"figure_photo_w"              => form_sanitizer($_POST['figure_photo_w'],              400,  "figure_photo_w"),
-		"figure_photo_h"              => form_sanitizer($_POST['figure_photo_h'],              300,  "figure_photo_h"),
 		"figure_photo_max_w"          => form_sanitizer($_POST['figure_photo_max_w'],          1800, "figure_photo_max_w"),
 		"figure_photo_max_h"          => form_sanitizer($_POST['figure_photo_max_h'],          1600, "figure_photo_max_h"),
+		"figure_photo_cat_max_w"      => form_sanitizer($_POST['figure_photo_cat_max_w'],      1800, "figure_photo_cat_max_w"),
+		"figure_photo_cat_max_h"      => form_sanitizer($_POST['figure_photo_cat_max_h'],      1600, "figure_photo_cat_max_h"),
+		"figure_photo_man_max_w"      => form_sanitizer($_POST['figure_photo_man_max_w'],      1800, "figure_photo_man_max_w"),
+		"figure_photo_man_max_h"      => form_sanitizer($_POST['figure_photo_man_max_h'],      1600, "figure_photo_man_max_h"),
 		"figure_photo_max_b"          => form_sanitizer($_POST['calc_b'], 150, "calc_b") * form_sanitizer($_POST['calc_c'], 100000, "calc_c"),				
 		"figure_photo_cat_max_b"      => form_sanitizer($_POST['calc_b_cat'], 150, "calc_b_cat") * form_sanitizer($_POST['calc_c_cat'], 100000, "calc_c_cat"),
 		"figure_photo_man_max_b"      => form_sanitizer($_POST['calc_b_man'], 150, "calc_b_man") * form_sanitizer($_POST['calc_c_man'], 100000, "calc_c_man"),		
 		"figure_allow_comments"       => isset($_POST['figure_allow_comments']) ? 1 : 0,
-		"figure_allow_ratings"        => isset($_POST['figure_allow_ratings'])  ? 1 : 0,
+		"figure_allow_ratings"        => isset($_POST['figure_allow_ratings'])  ? 1 : 0,	
+		"figure_allow_submit_videos"  => isset($_POST['figure_allow_submit_videos'])  ? 1 : 0, 	
 		"figure_display"              => isset($_POST['figure_display'])        ? 1 : 0,
 		"figure_submit"               => isset($_POST['figure_submit'])         ? 1 : 0,
 		"figure_related"              => isset($_POST['figure_related'])        ? 1 : 0,
@@ -124,12 +128,15 @@ if (isset($_POST['savesettings'])) {
 opentable($locale['figure_settings']);
 echo openform('settingsform', 'post', FUSION_REQUEST, array('class' => "m-t-20"));
 
-
 // Display Form
 echo "<div class='row'><div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";
-openside("General Settings");
-	echo "<div class='col-lg-6 col-md-6 col-sm-12 col-xs-12'>\n";
-	
+
+
+
+#################### General Settings Part 1 ########################################################
+
+openside("General Settings Part 1");
+echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";		
 	// Set Options for Selectlists
 	$thumb_opts = [
 		'0' => $locale['admin_figurelib_settings.php_001'], 
@@ -173,55 +180,130 @@ openside("General Settings");
 		'type' => 'number',
 		'width' => '250px'
 	));	
-
-	// ['figure_335'] = "Allow users to submit figures:";
-	// ALS CHECKBOX
-	echo form_checkbox("figure_submit", $locale['figure_335'], $fil_settings['figure_submit']);
-	/*	
-	// ALS DROPDOWN 	
-		echo form_select("figure_submit", $locale['figure_335'], $fil_settings['figure_submit'], array(
-			"inline" => TRUE, 
-			"options" => array($locale['disable'], $locale['enable'])
-		));
-	*/
 	
-	// ['figure_344'] = "Allow Social Sharing:";	
+	// ['figure_339'] = "Gallery Mode on";
 	// ALS CHECKBOX
-	echo form_checkbox('figure_social_sharing', $locale['figure_344'], $fil_settings['figure_social_sharing']);
-	/*
+	//echo form_checkbox('figure_display', $locale['figure_339'], $fil_settings['figure_display']);
+		
 	// ALS DROPDOWN
-		echo form_select("figure_social_sharing", $locale['figure_344'], $fil_settings['figure_social_sharing'], array(
+	echo form_select("figure_display", $locale['figure_339'], $fil_settings['figure_display'], array(
 			"inline" => TRUE, 
 			"options" => array($locale['disable'], $locale['enable'])
 		));
-	*/
+echo "</div>\n";
+closeside();
+echo "</div>\n";
 
-echo "</div>\n";		
-echo "<div class='col-lg-6 col-md-6 col-sm-12 col-xs-12'>\n";	
-		
+#################### General Settings Part 2 ########################################################
+	
+echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";				
+openside("General Settings Part 2");
+echo "<div class='col-lg-6 col-md-6 col-sm-12 col-xs-12'>\n";
+
+
 	// ['figure_348'] = "Show related figures:";
 	// ALS CHECKBOX
-	echo form_checkbox('figure_related', $locale['figure_348'], $fil_settings['figure_related']);
-	/*	
+	//echo form_checkbox('figure_related', $locale['figure_348'], $fil_settings['figure_related']);
+		
 	// ALS DROPDOWN
 	echo form_select("figure_related", $locale['figure_348'], $fil_settings['figure_related'], array(
 			"inline" => TRUE, 
 			"options" => array($locale['disable'], $locale['enable'])
 		));
-	*/	
 
-	// ['figure_363'] = "Allow Comments:";
+	// ['figure_367'] = "Show Videos:";
 	// ALS CHECKBOX
-	echo form_checkbox('figure_allow_comments', $locale['figure_363'], $fil_settings['figure_allow_comments']);
+	//echo form_checkbox('figure_show_videos', $locale['figure_367'], $fil_settings['figure_show_videos']);
+		
+	// ALS DROPDOWN
+	echo form_select("figure_show_videos", $locale['figure_367'], $fil_settings['figure_show_videos'], array(
+			"inline" => TRUE, 
+			"options" => array($locale['disable'], $locale['enable'])
+		));
+						
+	// ['figure_368'] = "Show Affiliate:";
+	// ALS CHECKBOX
+	//echo form_checkbox('figure_affiliate', $locale['figure_368'], $fil_settings['figure_affiliate']);
+		
+	// ALS DROPDOWN
+	echo form_select("figure_affiliate", $locale['figure_368'], $fil_settings['figure_affiliate'], array(
+			"inline" => TRUE, 
+			"options" => array($locale['disable'], $locale['enable'])
+		));
+		
+	// ['figure_369'] = "Show Amazon Affiliate:";
+	// ALS CHECKBOX
+	//echo form_checkbox('figure_amazon', $locale['figure_369'], $fil_settings['figure_amazon']);
+		
+	// ALS DROPDOWN
+	echo form_select("figure_amazon", $locale['figure_369'], $fil_settings['figure_amazon'], array(
+			"inline" => TRUE, 
+			"options" => array($locale['disable'], $locale['enable'])
+		));
+	
+	// ['figure_370'] = "Show Ebay Affiliate:";
+	// ALS CHECKBOX
+	//echo form_checkbox('figure_ebay', $locale['figure_370'], $fil_settings['figure_ebay']);
+		
+	// ALS DROPDOWN
+	echo form_select("figure_ebay", $locale['figure_370'], $fil_settings['figure_ebay'], array(
+			"inline" => TRUE, 
+			"options" => array($locale['disable'], $locale['enable'])
+		));	
+
+echo "</div>\n";
+echo "<div class='col-lg-6 col-md-6 col-sm-12 col-xs-12'>\n";
+		
+	// ['figure_335'] = "Allow users to submit figures:";
+	// ALS CHECKBOX
+	//echo form_checkbox("figure_submit", $locale['figure_335'], $fil_settings['figure_submit']);
+		
+	// ALS DROPDOWN 	
+		echo form_select("figure_submit", $locale['figure_335'], $fil_settings['figure_submit'], array(
+			"inline" => TRUE, 
+			"options" => array($locale['disable'], $locale['enable'])
+		));
+		
+	// ['figure_344'] = "Allow Social Sharing:";	
+	// ALS CHECKBOX
+	//echo form_checkbox('figure_social_sharing', $locale['figure_344'], $fil_settings['figure_social_sharing']);
+	
+	// ALS DROPDOWN
+		echo form_select("figure_social_sharing", $locale['figure_344'], $fil_settings['figure_social_sharing'], array(
+			"inline" => TRUE, 
+			"options" => array($locale['disable'], $locale['enable'])
+		));	
+
+	// $locale['figure_366'] = "Allow submit videos:";
+	// ALS CHECKBOX
+	//echo form_checkbox("figure_allow_submit_videos", $locale['figure_366'], $fil_settings['figure_allow_submit_videos']);
+		
+	// ALS DROPDOWN 	
+		echo form_select("figure_allow_submit_videos", $locale['figure_366'], $fil_settings['figure_allow_submit_videos'], array(
+			"inline" => TRUE, 
+			"options" => array($locale['disable'], $locale['enable'])
+		));
+		
+		// ['figure_363'] = "Allow Comments:";
+	// ALS CHECKBOX
+	//echo form_checkbox('figure_allow_comments', $locale['figure_363'], $fil_settings['figure_allow_comments']);
+	// ALS DROPDOWN
+	echo form_select("figure_allow_comments", $locale['figure_363'], $fil_settings['figure_allow_comments'], array(
+			"inline" => TRUE, 
+			"options" => array($locale['disable'], $locale['enable'])
+		));
 		
 	// ['figure_364'] = "Allow Ratings:";
 	// ALS CHECKBOX
-	echo form_checkbox('figure_allow_ratings', $locale['figure_364'], $fil_settings['figure_allow_ratings']);
-
-	// ['figure_339'] = "Gallery Mode on";
-	echo form_checkbox('figure_display', $locale['figure_339'], $fil_settings['figure_display']);
-echo "</div>\n";
+	//echo form_checkbox('figure_allow_ratings', $locale['figure_364'], $fil_settings['figure_allow_ratings']);
+	// ALS DROPDOWN
+	echo form_select("figure_allow_ratings", $locale['figure_363'], $fil_settings['figure_allow_ratings'], array(
+			"inline" => TRUE, 
+			"options" => array($locale['disable'], $locale['enable'])
+		));
+echo "</div>\n";		
 closeside();
+
 echo "</div>\n";	
 // General settings END ##################################################################################
 
@@ -230,7 +312,7 @@ echo "</div>\n";
 // Display Figure Image Settings START
 echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";	
 	openside("Figure Image Settings");
-
+	
 	//$locale['figure_365'] = "Image upload count per figure:";
 	echo form_text('figure_image_upload_count', $locale['figure_365'], $fil_settings['figure_image_upload_count'], array(
 		'inline' => 1,
@@ -284,7 +366,7 @@ echo "
 
 // $locale['admin_figurelib_settings.php_004'] = "Photo size:";
 // $locale['admin_figurelib_settings.php_006'] = "Width x Height";
-echo "
+/*echo "
 <div class='row'>
 	<div class='col-xs-12 col-sm-3'>
 		<label for='figure_photo_w'>".$locale['admin_figurelib_settings.php_004']."</label>
@@ -299,7 +381,7 @@ echo "
 	))."
 	<small class='m-l-10 mid-opacity text-uppercase pull-left m-t-10'>( ".$locale['admin_figurelib_settings.php_006']." )</small>
 	</div>
-</div>";
+</div>";*/
 
 // $locale['admin_figurelib_settings.php_005'] = "Maximum photo size:";
 // $locale['admin_figurelib_settings.php_006'] = "Width x Height";
@@ -337,9 +419,7 @@ echo "
 	</div>
 </div>";	
 	
-// ['admin_figurelib_settings.php_008'] = "Thumb ratio:";	
-echo form_select('figure_thumb_ratio', $locale['admin_figurelib_settings.php_008'], $fil_settings['figure_thumb_ratio'], array("options" => $thumb_opts));	
-
+	
 	echo "</div>\n";	
 
 // Display Figure Image Settings END
@@ -408,10 +488,6 @@ echo "
 	</div>
 </div>
 ";
-
-	// ['admin_figurelib_settings.php_008'] = "Thumb ratio:";	--> hier für Category
-	echo form_select('figure_thumb_cat_ratio', $locale['admin_figurelib_settings.php_008'], $fil_settings['figure_thumb_cat_ratio'], array("options" => $thumb_opts));
-	
 echo "</div>\n";	
 
 // Display Category Image Settings END
@@ -481,9 +557,6 @@ echo "
 </div>
 ";
 
-	// ['admin_figurelib_settings.php_008'] = "Thumb ratio:";	-->  hier für Manufacturer
-	echo form_select('figure_thumb_man_ratio', $locale['admin_figurelib_settings.php_008'], $fil_settings['figure_thumb_man_ratio'], array("options" => $thumb_opts));
-	
 echo "</div>\n";	
 
 // Display Manufacturer Image Settings END
