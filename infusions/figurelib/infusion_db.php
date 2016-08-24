@@ -57,9 +57,6 @@ if (!defined("DB_FIGURE_PACKAGINGS")) {
 if (!defined("DB_FIGURE_LIMITATIONS")) {
 	define("DB_FIGURE_LIMITATIONS", DB_PREFIX."figure_limitations");
 }
-//if (!defined("DB_FIGURE_SETTINGS")) {
-//	define("DB_FIGURE_SETTINGS", DB_PREFIX."figure_settings");
-//}
 if (!defined("DB_FIGURE_MEASUREMENTS")) {
 	define("DB_FIGURE_MEASUREMENTS", DB_PREFIX."figure_measurements");
 }
