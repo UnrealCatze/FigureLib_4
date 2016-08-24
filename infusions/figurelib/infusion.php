@@ -112,15 +112,16 @@ $inf_newtable[] = DB_FIGURE_ITEMS." (
 		figure_visibility TINYINT(4) NOT NULL DEFAULT '0',		
 		figure_datestamp int(10) UNSIGNED NOT NULL DEFAULT '0',
 		figure_clickcount int(10) UNSIGNED NOT NULL DEFAULT '0',		
-		figure_allow_images TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
-		figure_allow_data TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
-		figure_allow_videos TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
-		figure_allow_affiliates TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
-		figure_allow_amazon TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
-		figure_allow_ebay TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',	
-		figure_allow_comments TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
-		figure_allow_ratings TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',	
-		figure_allow_social_sharing	TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',				
+		figure_show_images TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
+		figure_show_data TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
+		figure_show_videos TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
+		figure_show_affiliates TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
+		figure_show_amazon TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
+		figure_show_ebay TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
+		figure_show_related TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',		
+		figure_show_comments TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
+		figure_show_ratings TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',	
+		figure_show_social_sharing TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',				
 		figure_sorting VARCHAR(50) NOT NULL DEFAULT '',
 		figure_language VARCHAR(50) NOT NULL DEFAULT '".LANGUAGE."',
 		KEY figure_datestamp (figure_datestamp),
@@ -251,17 +252,22 @@ PRIMARY KEY (figure_images_image_id)
 // Settings
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_per_page', '10', 'figurelib')";
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_per_line', '4', 'figurelib')";
-$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_allow_comments', '1', 'figurelib')";
-$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_allow_ratings', '1', 'figurelib')";
-$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_allow_submit_videos', '1', 'figurelib')";
-$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_show_videos', '1', 'figurelib')";
-$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_affiliate', '1', 'figurelib')";
-$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_amazon', '1', 'figurelib')";
-$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_ebay', '1', 'figurelib')";
+
+// MODULE SHOW/HIDE GLOBAL
+$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_show_images_global', '1', 'figurelib')";
+$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_show_data_global', '1', 'figurelib')";
+$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_show_videos_global', '1', 'figurelib')";
+$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_show_affiliate_global', '1', 'figurelib')";
+$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_show_amazon_global', '1', 'figurelib')";
+$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_show_ebay_global', '1', 'figurelib')";
+$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_show_related', '1', 'figurelib')";
+$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_show_comments_global', '1', 'figurelib')";
+$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_show_ratings_global', '1', 'figurelib')";
+$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_show_social_sharing_global', '1', 'figurelib')";
+
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_display', '1', 'figurelib')";
+$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_allow_submit_videos', '1', 'figurelib')";
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_submit', '1', 'figurelib')";
-$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_related', '1', 'figurelib')";
-$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_social_sharing', '1', 'figurelib')";
 
 //thumb seetings
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_thumb_w', '400', 'figurelib')";
