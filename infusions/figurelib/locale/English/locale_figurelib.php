@@ -321,7 +321,7 @@ $locale['figure_330'] = "Maximum size uploads:";
 $locale['figure_331'] = "(Maximum file size in bytes)";
 $locale['figure_332'] = "Allowed file types:";
 $locale['figure_334'] = "Figures per page:";
-$locale['figure_335'] = "Allow users to submit figures:";
+$locale['figure_335'] = "Allow Submit Figures:";
 $locale['figure_336'] = "Yes";
 $locale['figure_337'] = "No";
 $locale['figure_338'] = "Allow guests to download figures:";
@@ -349,9 +349,14 @@ $locale['figure_359'] = "Figure photo max width:";
 $locale['figure_360'] = "Figure photo max heigh:";
 $locale['figure_361'] = "Only values 1-500 allowed!";
 $locale['figure_362'] = "Only values 1-10 allowed!";
-$locale['figure_363'] = "Allow comments:";
-$locale['figure_364'] = "Allow ratings:";
+$locale['figure_363'] = "Allow Comments:";
+$locale['figure_364'] = "Allow Ratings:";
 $locale['figure_365'] = "Image upload count per figure:";
+$locale['figure_366'] = "Allow Submit Videos:";
+$locale['figure_367'] = "Show Videos:";
+$locale['figure_368'] = "Show Affiliate:";
+$locale['figure_369'] = "Show Amazon Affiliate:";
+$locale['figure_370'] = "Show Ebay Affiliate:";
 
 // figure.php
 $locale['figure_410'] = "[NEW]";
