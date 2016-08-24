@@ -146,8 +146,24 @@ if (!empty($result)) {
 			$data = [
 				"figure_freigabe"       => isset($_POST['figure_freigabe'])       ? "1" : "0",
 				"figure_agb"            => isset($_POST['figure_agb'])            ? "1" : "0",
+				
+				
 				"figure_allow_comments" => isset($_POST['figure_allow_comments']) ? "1" : "0",
 				"figure_allow_ratings"  => isset($_POST['figure_allow_ratings'])  ? "1" : "0",
+				
+				
+				"figure_show_images"      	  => form_sanitizer($_POST['figure_show_images'],          1,    "figure_show_images"),
+				"figure_show_data"        	  => form_sanitizer($_POST['figure_show_data'],            1,    "figure_show_data"),
+				"figure_show_videos"      	  => form_sanitizer($_POST['figure_show_videos'],          1,    "figure_show_videos"),
+				"figure_show_affiliate"   	  => form_sanitizer($_POST['figure_show_affiliate'],       1,    "figure_show_affiliate"),
+				"figure_show_amazon"      	  => form_sanitizer($_POST['figure_show_amazon'],          1,    "figure_show_amazon"),
+				"figure_show_ebay"        	  => form_sanitizer($_POST['figure_show_ebay'],            1,    "figure_show_ebay"),
+				"figure_show_related"          => form_sanitizer($_POST['figure_show_related'],         1,    "figure_show_related"),
+				"figure_show_comments"   	  => form_sanitizer($_POST['figure_show_comments'],        1,    "figure_show_comments"),
+				"figure_show_ratings"    	  => form_sanitizer($_POST['figure_show_ratings'],         1,    "figure_show_ratings"),
+				"figure_show_social_sharing"   => form_sanitizer($_POST['figure_show_social_sharing'],  1,    "figure_show_social_sharing"),
+				
+		
 				"figure_id"             => form_sanitizer($_POST['figure_id'],           0,  "figure_id"),
 				"figure_language"       => form_sanitizer($_POST['figure_language'],     "", "figure_language"),
 				"figure_title"          => form_sanitizer($_POST['figure_title'],        "", "figure_title"),
