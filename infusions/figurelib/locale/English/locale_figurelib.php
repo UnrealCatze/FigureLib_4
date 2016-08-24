@@ -330,11 +330,11 @@ $locale['figure_340'] = "Table";
 $locale['figure_341'] = "Gallery";
 $locale['figure_342'] = "Activate sub-categories:";
 $locale['figure_343'] = "Figures per row:";
-$locale['figure_344'] = "Allow Social Sharing:";
+$locale['figure_344'] = "Social Sharing:";
 $locale['figure_345'] = "Save Settings";
 $locale['figure_346'] = "Recount figures";
 $locale['figure_347'] = "Figures recounted";
-$locale['figure_348'] = "Show related figures:";
+$locale['figure_348'] = "Related:";
 $locale['figure_349'] = "Activate sub-manufacturers:";
 $locale['figure_350'] = "Activate sub-brands:";
 $locale['figure_351'] = "Activate sub-materials:";
@@ -349,14 +349,21 @@ $locale['figure_359'] = "Figure photo max width:";
 $locale['figure_360'] = "Figure photo max heigh:";
 $locale['figure_361'] = "Only values 1-500 allowed!";
 $locale['figure_362'] = "Only values 1-10 allowed!";
-$locale['figure_363'] = "Allow Comments:";
-$locale['figure_364'] = "Allow Ratings:";
+$locale['figure_363'] = "Comments:";
+$locale['figure_364'] = "Ratings:";
 $locale['figure_365'] = "Image upload count per figure:";
 $locale['figure_366'] = "Allow Submit Videos:";
-$locale['figure_367'] = "Show Videos:";
-$locale['figure_368'] = "Show Affiliate:";
-$locale['figure_369'] = "Show Amazon Affiliate:";
-$locale['figure_370'] = "Show Ebay Affiliate:";
+$locale['figure_367'] = "Videos:";
+$locale['figure_368'] = "Affiliate:";
+$locale['figure_369'] = "Amazon Affiliate:";
+$locale['figure_370'] = "Ebay Affiliate:";
+
+$locale['figure_371'] = "Images:";
+$locale['figure_372'] = "Data:";
+
+
+
+
 
 // figure.php
 $locale['figure_410'] = "[NEW]";
