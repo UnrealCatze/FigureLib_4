@@ -69,47 +69,31 @@ if (!defined("DB_FIGURE_USERFIGURES")) {
 if (!defined("DB_FIGURE_IMAGES")) {
 	define("DB_FIGURE_IMAGES", DB_PREFIX."figure_images");
 }
-if (!defined("DB_FIGURE_YEARS")) {
-	define("DB_FIGURE_YEARS", DB_PREFIX."figure_years");
-}
 $inf_folder = "figurelib";
 	
-	// FOLDERS for Figures
+// FOLDERS for Figures
 if (!defined("FIGURES")) {
-	define("FIGURES", INFUSIONS.$inf_folder."/images/figures/");
-}
-if (!defined("IMAGES_FIGURES")) {
-	define("IMAGES_FIGURES", INFUSIONS.$inf_folder."/images/figures/images/");
+    define("FIGURES", INFUSIONS.$inf_folder."/images/figures/"); 
 }
 if (!defined("THUMBS_FIGURES")) {
-	define("THUMBS_FIGURES", INFUSIONS.$inf_folder."/images/figures/thumbs/");
-}
-if (!defined("THUMBS2_FIGURES")) {
-	define("THUMBS2_FIGURES", INFUSIONS.$inf_folder."/images/figures/thumbs2/");
+    define("THUMBS_FIGURES", INFUSIONS.$inf_folder."/images/figures/thumbs/");
 }
 
-	// FOLDERS for Categories
+// FOLDERS for Categories
 if (!defined("CATEGORIES")) {
-	define("CATEGORIES", INFUSIONS.$inf_folder."/images/categories/");
-}
-if (!defined("IMAGES_CATEGORIES")) {
-	define("IMAGES_CATEGORIES", INFUSIONS.$inf_folder."/images/categories/images/");
+    define("CATEGORIES", INFUSIONS.$inf_folder."/images/categories/");
 }
 if (!defined("THUMBS_CATEGORIES")) {
-	define("THUMBS_CATEGORIES", INFUSIONS.$inf_folder."/images/categories/thumbs/");
+    define("THUMBS_CATEGORIES", INFUSIONS.$inf_folder."/images/categories/thumbs/");
 }
 
-	// FOLDERS for Manufacturers
+// FOLDERS for Manufacturers
 if (!defined("MANUFACTURERS")) {
-	define("MANUFACTURERS", INFUSIONS.$inf_folder."/images/manufacturers/");
-}
-if (!defined("IMAGES_MANUFACTURERS")) {
-	define("IMAGES_MANUFACTURERS", INFUSIONS.$inf_folder."/images/manufacturers/images/");
+    define("MANUFACTURERS", INFUSIONS.$inf_folder."/images/manufacturers/");
 }
 if (!defined("THUMBS_MANUFACTURERS")) {
-	define("THUMBS_MANUFACTURERS", INFUSIONS.$inf_folder."/images/manufacturers/thumbs/");
+    define("THUMBS_MANUFACTURERS", INFUSIONS.$inf_folder."/images/manufacturers/thumbs/");
 }
-
 
 
 // Settings
