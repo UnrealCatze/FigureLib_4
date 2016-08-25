@@ -548,10 +548,11 @@ if (iADMIN || iSUPERADMIN) {
 // ########  AFFILIATE PANEL  #################################################################
 
 		
+if ($fil_settings['figure_show_affiliates_complete_global']) { // Affiliates Complete global on/off ???	
 	
-	if ($fil_settings['figure_show_affiliates_global']) { // Affiliates global on/off ???
-		if ($data['figure_show_affiliates']) { //Affiliates for this figure on/off ???
-	
+		if ($fil_settings['figure_show_affiliates_other_global']) { // Affiliates Other global on/off ???
+				if ($data['figure_show_affiliates_other']) { //Affiliates Other for this figure on/off ???
+
 		openside("<div class='well clearfix'><strong>AFFILIATES</strong></div>");						
 				
 		// CSS 
@@ -665,9 +666,10 @@ if ($fil_settings['figure_show_amazon_global']) { // Amazon Affiliates global on
 						} else { echo "<a href='".$data['figure_amazon_it']."'><img src='".INFUSIONS."figurelib/images/flags/flag_italy.png"."' alt='".trimlink($data['figure_amazon_it'],50)."' title='".trimlink($data['figure_amazon_it'],100)."'></td>\n"; }	
 				echo "</tr></table>\n";
 
+			}
 		}
-  }
-		closeside();
+			closeside();
+			}
 		}
 	}
 // ############################################################################################
