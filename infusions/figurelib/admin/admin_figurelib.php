@@ -70,59 +70,67 @@ if (!empty($result)) {
 		
 		// Get Empty Figure Datas
 		$data = [
-			"figure_id"             => 0,
-			"figure_freigabe"       => 0,
-			"figure_agb"            => "0",
-			"figure_allow_comments" => $figurelibSettings['figure_allow_comments'],
-			"figure_allow_ratings"  => $figurelibSettings['figure_allow_ratings'],
-			"figure_language"       => LANGUAGE,
-			"figure_title"          => "",
-			"figure_variant"        => "",
-			"figure_manufacturer"   => "",
-			"figure_artists"        => "",
-			"figure_country"        => "",
-			"figure_brand"          => "",
-			"figure_series"         => "",
-			"figure_scale"          => "",
-			"figure_weight"         => "",
-			"figure_height"         => "",
-			"figure_width"          => "",
-			"figure_depth"          => "",
-			"figure_material"       => "",
-			"figure_poa"            => "",
-			"figure_packaging"      => "",
-			"figure_retailprice"    => "",
-			"figure_usedprice"      => "",
-			"figure_limitation"     => "",
-			"figure_videourl"       => "",
-			"figure_cat"            => 0,
-			"figure_editionsize"    => "",
-			"figure_pubdate"        => "",
-			"figure_submitter"      => $userdata['user_id'],
-			"figure_visibility"     => iGUEST,
-			"figure_forum_url"      => "",
-			"figure_affiliate_1"    => "",
-			"figure_affiliate_2"    => "",
-			"figure_affiliate_3"    => "",
-			"figure_affiliate_4"    => "",
-			"figure_affiliate_5"    => "",
-			"figure_affiliate_6"    => "",
-			"figure_affiliate_7"    => "",
-			"figure_affiliate_8"    => "",
-			"figure_affiliate_9"    => "",
-			"figure_affiliate_10"   => "",
-			"figure_eshop"          => "",
-			"figure_amazon_de"      => "",
-			"figure_amazon_uk"      => "",
-			"figure_amazon_fr"      => "",
-			"figure_amazon_es"      => "",
-			"figure_amazon_it"      => "",
-			"figure_amazon_jp"      => "",
-			"figure_amazon_com"     => "",
-			"figure_amazon_ca"      => "",
-			"figure_accessories"    => "",
-			"figure_description"    => "",
-			"figure_datestamp"      => time()
+			"figure_id"						=> 0,
+			"figure_freigabe"       		=> 0,
+			"figure_agb"           			=> 0,					
+			"figure_show_images"      		=> 1,
+			"figure_show_data"          	=> 1,
+			"figure_show_videos"       		=> 1,
+			"figure_show_affiliates"   		=> 1,
+			"figure_show_amazon"        	=> 1,
+			"figure_show_ebay"         		=> 1,
+			"figure_show_related"      		=> 1,
+			"figure_show_comments"     		=> 1,
+			"figure_show_ratings"       	=> 1,
+			"figure_show_social_sharing" 	=> 1,					
+			"figure_language"       		=> LANGUAGE,
+			"figure_title"          		=> "",
+			"figure_variant"        		=> "",
+			"figure_manufacturer"   		=> "",
+			"figure_artists"        		=> "",
+			"figure_country"        		=> "",
+			"figure_brand"          		=> "",
+			"figure_series"         		=> "",
+			"figure_scale"          		=> "",
+			"figure_weight"         		=> "",
+			"figure_height"         		=> "",
+			"figure_width"          		=> "",
+			"figure_depth"          		=> "",
+			"figure_material"       		=> "",
+			"figure_poa"            		=> "",
+			"figure_packaging"      		=> "",
+			"figure_retailprice"    		=> "",
+			"figure_usedprice"      		=> "",
+			"figure_limitation"     		=> "",
+			"figure_videourl"       		=> "",
+			"figure_cat"            		=> 0,
+			"figure_editionsize"    		=> "",
+			"figure_pubdate"        		=> "",
+			"figure_submitter"      		=> $userdata['user_id'],
+			"figure_visibility"     		=> iGUEST,
+			"figure_forum_url"      		=> "",
+			"figure_affiliate_1"    		=> "",
+			"figure_affiliate_2"    		=> "",
+			"figure_affiliate_3"    		=> "",
+			"figure_affiliate_4"    		=> "",
+			"figure_affiliate_5"    		=> "",
+			"figure_affiliate_6"    		=> "",
+			"figure_affiliate_7"    		=> "",
+			"figure_affiliate_8"    		=> "",
+			"figure_affiliate_9"    		=> "",
+			"figure_affiliate_10"   		=> "",
+			"figure_eshop"          		=> "",
+			"figure_amazon_de"      		=> "",
+			"figure_amazon_uk"      		=> "",
+			"figure_amazon_fr"      		=> "",
+			"figure_amazon_es"      		=> "",
+			"figure_amazon_it"      		=> "",
+			"figure_amazon_jp"      		=> "",
+			"figure_amazon_com"     		=> "",
+			"figure_amazon_ca"      		=> "",
+			"figure_accessories"    		=> "",
+			"figure_description"    		=> "",
+			"figure_datestamp"      		=> time()
 		];
 		
 		// Edit a Figure?
@@ -144,76 +152,72 @@ if (!empty($result)) {
 		// Handle posted Informations
 		if (isset($_POST['save_figure'])) {
 			$data = [
-				"figure_freigabe"       => isset($_POST['figure_freigabe'])       ? "1" : "0",
-				"figure_agb"            => isset($_POST['figure_agb'])            ? "1" : "0",
-				
-				
-				"figure_allow_comments" => isset($_POST['figure_allow_comments']) ? "1" : "0",
-				"figure_allow_ratings"  => isset($_POST['figure_allow_ratings'])  ? "1" : "0",
-				
-				
-				"figure_show_images"      	  => form_sanitizer($_POST['figure_show_images'],          1,    "figure_show_images"),
-				"figure_show_data"        	  => form_sanitizer($_POST['figure_show_data'],            1,    "figure_show_data"),
-				"figure_show_videos"      	  => form_sanitizer($_POST['figure_show_videos'],          1,    "figure_show_videos"),
-				"figure_show_affiliate"   	  => form_sanitizer($_POST['figure_show_affiliate'],       1,    "figure_show_affiliate"),
-				"figure_show_amazon"      	  => form_sanitizer($_POST['figure_show_amazon'],          1,    "figure_show_amazon"),
-				"figure_show_ebay"        	  => form_sanitizer($_POST['figure_show_ebay'],            1,    "figure_show_ebay"),
-				"figure_show_related"          => form_sanitizer($_POST['figure_show_related'],         1,    "figure_show_related"),
-				"figure_show_comments"   	  => form_sanitizer($_POST['figure_show_comments'],        1,    "figure_show_comments"),
-				"figure_show_ratings"    	  => form_sanitizer($_POST['figure_show_ratings'],         1,    "figure_show_ratings"),
-				"figure_show_social_sharing"   => form_sanitizer($_POST['figure_show_social_sharing'],  1,    "figure_show_social_sharing"),
-				
-		
-				"figure_id"             => form_sanitizer($_POST['figure_id'],           0,  "figure_id"),
-				"figure_language"       => form_sanitizer($_POST['figure_language'],     "", "figure_language"),
-				"figure_title"          => form_sanitizer($_POST['figure_title'],        "", "figure_title"),
-				"figure_variant"        => form_sanitizer($_POST['figure_variant'],      "", "figure_variant"),
-				"figure_manufacturer"   => form_sanitizer($_POST['figure_manufacturer'], "", "figure_manufacturer"),
-				"figure_artists"        => form_sanitizer($_POST['figure_artists'],      "", "figure_artists"),
-				"figure_country"        => form_sanitizer($_POST['figure_country'],      "", "figure_country"),
-				"figure_brand"          => form_sanitizer($_POST['figure_brand'],        "", "figure_brand"),
-				"figure_series"         => form_sanitizer($_POST['figure_series'],       "", "figure_series"),
-				"figure_scale"          => form_sanitizer($_POST['figure_scale'],        "", "figure_scale"),
-				"figure_weight"         => form_sanitizer($_POST['figure_weight'],       "", "figure_weight"),
-				"figure_height"         => form_sanitizer($_POST['figure_height'],       "", "figure_height"),
-				"figure_width"          => form_sanitizer($_POST['figure_width'],        "", "figure_width"),
-				"figure_depth"          => form_sanitizer($_POST['figure_depth'],        "", "figure_depth"),
-				"figure_material"       => form_sanitizer($_POST['figure_material'],     "", "figure_material"),
-				"figure_poa"            => form_sanitizer($_POST['figure_poa'],          "", "figure_poa"),
-				"figure_packaging"      => form_sanitizer($_POST['figure_packaging'],    "", "figure_packaging"),
-				"figure_retailprice"    => form_sanitizer($_POST['figure_retailprice'],  0,  "figure_retailprice"),
-				"figure_usedprice"      => form_sanitizer($_POST['figure_usedprice'],    0,  "figure_usedprice"),
-				"figure_limitation"     => form_sanitizer($_POST['figure_limitation'],   "", "figure_limitation"),
-				"figure_videourl"       => form_sanitizer($_POST['figure_videourl'],     "", "figure_videourl"),
-				"figure_cat"            => form_sanitizer($_POST['figure_cat'],          "", "figure_cat"),
-				"figure_editionsize"    => (isset($_POST['figure_editionsize']) ? form_sanitizer($_POST['figure_editionsize'],  "", "figure_editionsize") : ""),
-				"figure_pubdate"        => form_sanitizer($_POST['figure_pubdate'],      "", "figure_pubdate"),
-				"figure_submitter"      => form_sanitizer($_POST['figure_submitter'],    "", "figure_submitter"),
-				"figure_visibility"     => form_sanitizer($_POST['figure_visibility'],   0,  "figure_visibility"),
-				"figure_forum_url"      => form_sanitizer($_POST['figure_forum_url'],    "", "figure_forum_url"),
-				"figure_affiliate_1"    => form_sanitizer($_POST['figure_affiliate_1'],  "", "figure_affiliate_1"),
-				"figure_affiliate_2"    => form_sanitizer($_POST['figure_affiliate_2'],  "", "figure_affiliate_2"),
-				"figure_affiliate_3"    => form_sanitizer($_POST['figure_affiliate_3'],  "", "figure_affiliate_3"),
-				"figure_affiliate_4"    => form_sanitizer($_POST['figure_affiliate_4'],  "", "figure_affiliate_4"),
-				"figure_affiliate_5"    => form_sanitizer($_POST['figure_affiliate_5'],  "", "figure_affiliate_5"),
-				"figure_affiliate_6"    => form_sanitizer($_POST['figure_affiliate_6'],  "", "figure_affiliate_6"),
-				"figure_affiliate_7"    => form_sanitizer($_POST['figure_affiliate_7'],  "", "figure_affiliate_7"),
-				"figure_affiliate_8"    => form_sanitizer($_POST['figure_affiliate_8'],  "", "figure_affiliate_8"),
-				"figure_affiliate_9"    => form_sanitizer($_POST['figure_affiliate_9'],  "", "figure_affiliate_9"),
-				"figure_affiliate_10"   => form_sanitizer($_POST['figure_affiliate_10'], "", "figure_affiliate_10"),
-				"figure_eshop"          => form_sanitizer($_POST['figure_eshop'],        "", "figure_eshop"),
-				"figure_amazon_de"      => form_sanitizer($_POST['figure_amazon_de'],    "", "figure_amazon_de"),
-				"figure_amazon_uk"      => form_sanitizer($_POST['figure_amazon_uk'],    "", "figure_amazon_uk"),
-				"figure_amazon_fr"      => form_sanitizer($_POST['figure_amazon_fr'],    "", "figure_amazon_fr"),
-				"figure_amazon_es"      => form_sanitizer($_POST['figure_amazon_es'],    "", "figure_amazon_es"),
-				"figure_amazon_it"      => form_sanitizer($_POST['figure_amazon_it'],    "", "figure_amazon_it"),
-				"figure_amazon_jp"      => form_sanitizer($_POST['figure_amazon_jp'],    "", "figure_amazon_jp"),
-				"figure_amazon_com"     => form_sanitizer($_POST['figure_amazon_com'],   "", "figure_amazon_com"),
-				"figure_amazon_ca"      => form_sanitizer($_POST['figure_amazon_ca'],    "", "figure_amazon_ca"),
-				"figure_datestamp"      => form_sanitizer($_POST['figure_datestamp'],    "", "figure_datestamp"),
-				"figure_description"    => addslash(nl2br(parseubb(stripinput($_POST['figure_description'])))),
-				"figure_accessories"    => addslash(nl2br(parseubb(stripinput($_POST['figure_accessories']))))
+				"figure_freigabe"       		=> isset($_POST['figure_freigabe'])       ? "1" : "0",
+				"figure_agb"            		=> isset($_POST['figure_agb'])            ? "1" : "0",
+								
+				"figure_show_images"      		=> form_sanitizer($_POST['figure_show_images'],     	"", "figure_show_images"),
+				"figure_show_data"        		=> form_sanitizer($_POST['figure_show_data'],     		"", "figure_show_data"),
+				"figure_show_videos"      		=> form_sanitizer($_POST['figure_show_videos'],     	"", "figure_show_videos"),
+				"figure_show_affiliates"   		=> form_sanitizer($_POST['figure_show_affiliates'],     "", "figure_show_affiliates"),
+				"figure_show_amazon"      		=> form_sanitizer($_POST['figure_show_amazon'],     	"", "figure_show_amazon"),
+				"figure_show_ebay"        		=> form_sanitizer($_POST['figure_show_ebay'],     		"", "figure_show_ebay"),
+				"figure_show_related"       	=> form_sanitizer($_POST['figure_show_related'],     	"", "figure_show_related"),
+				"figure_show_comments"   		=> form_sanitizer($_POST['figure_show_comments'],     	"", "figure_show_comments"),
+				"figure_show_ratings"    		=> form_sanitizer($_POST['figure_show_ratings'],     	"", "figure_show_ratings"),
+				"figure_show_social_sharing"	=> form_sanitizer($_POST['figure_show_social_sharing'], "", "figure_show_social_sharing"),
+						
+				"figure_id"             		=> form_sanitizer($_POST['figure_id'],           0,  "figure_id"),
+				"figure_language"       		=> form_sanitizer($_POST['figure_language'],     "", "figure_language"),
+				"figure_title"         			=> form_sanitizer($_POST['figure_title'],        "", "figure_title"),
+				"figure_variant"        		=> form_sanitizer($_POST['figure_variant'],      "", "figure_variant"),
+				"figure_manufacturer"   		=> form_sanitizer($_POST['figure_manufacturer'], "", "figure_manufacturer"),
+				"figure_artists"        		=> form_sanitizer($_POST['figure_artists'],      "", "figure_artists"),
+				"figure_country"        		=> form_sanitizer($_POST['figure_country'],      "", "figure_country"),
+				"figure_brand"          		=> form_sanitizer($_POST['figure_brand'],        "", "figure_brand"),
+				"figure_series"         		=> form_sanitizer($_POST['figure_series'],       "", "figure_series"),
+				"figure_scale"          		=> form_sanitizer($_POST['figure_scale'],        "", "figure_scale"),
+				"figure_weight"         		=> form_sanitizer($_POST['figure_weight'],       "", "figure_weight"),
+				"figure_height"         		=> form_sanitizer($_POST['figure_height'],       "", "figure_height"),
+				"figure_width"          		=> form_sanitizer($_POST['figure_width'],        "", "figure_width"),
+				"figure_depth"          		=> form_sanitizer($_POST['figure_depth'],        "", "figure_depth"),
+				"figure_material"       		=> form_sanitizer($_POST['figure_material'],     "", "figure_material"),
+				"figure_poa"            		=> form_sanitizer($_POST['figure_poa'],          "", "figure_poa"),
+				"figure_packaging"      		=> form_sanitizer($_POST['figure_packaging'],    "", "figure_packaging"),
+				"figure_retailprice"    		=> form_sanitizer($_POST['figure_retailprice'],  0,  "figure_retailprice"),
+				"figure_usedprice"      		=> form_sanitizer($_POST['figure_usedprice'],    0,  "figure_usedprice"),
+				"figure_limitation"     		=> form_sanitizer($_POST['figure_limitation'],   "", "figure_limitation"),
+				"figure_videourl"       		=> form_sanitizer($_POST['figure_videourl'],     "", "figure_videourl"),
+				"figure_cat"            		=> form_sanitizer($_POST['figure_cat'],          "", "figure_cat"),
+				"figure_editionsize"    		=> (isset($_POST['figure_editionsize']) ? form_sanitizer($_POST['figure_editionsize'],  "", "figure_editionsize") : ""),
+				"figure_pubdate"        		=> stripinput(trim($_POST['figure_pubdate'])),
+				"figure_submitter"      		=> form_sanitizer($_POST['figure_submitter'],    "", "figure_submitter"),
+				"figure_visibility"     		=> form_sanitizer($_POST['figure_visibility'],   0,  "figure_visibility"),
+				"figure_forum_url"      		=> form_sanitizer($_POST['figure_forum_url'],    "", "figure_forum_url"),
+				"figure_affiliate_1"    		=> form_sanitizer($_POST['figure_affiliate_1'],  "", "figure_affiliate_1"),
+				"figure_affiliate_2"    		=> form_sanitizer($_POST['figure_affiliate_2'],  "", "figure_affiliate_2"),
+				"figure_affiliate_3"    		=> form_sanitizer($_POST['figure_affiliate_3'],  "", "figure_affiliate_3"),
+				"figure_affiliate_4"    		=> form_sanitizer($_POST['figure_affiliate_4'],  "", "figure_affiliate_4"),
+				"figure_affiliate_5"    		=> form_sanitizer($_POST['figure_affiliate_5'],  "", "figure_affiliate_5"),
+				"figure_affiliate_6"    		=> form_sanitizer($_POST['figure_affiliate_6'],  "", "figure_affiliate_6"),
+				"figure_affiliate_7"    		=> form_sanitizer($_POST['figure_affiliate_7'],  "", "figure_affiliate_7"),
+				"figure_affiliate_8"    		=> form_sanitizer($_POST['figure_affiliate_8'],  "", "figure_affiliate_8"),
+				"figure_affiliate_9"    		=> form_sanitizer($_POST['figure_affiliate_9'],  "", "figure_affiliate_9"),
+				"figure_affiliate_10"   		=> form_sanitizer($_POST['figure_affiliate_10'], "", "figure_affiliate_10"),
+				"figure_eshop"          		=> form_sanitizer($_POST['figure_eshop'],        "", "figure_eshop"),
+				"figure_amazon_de"      		=> form_sanitizer($_POST['figure_amazon_de'],    "", "figure_amazon_de"),
+				"figure_amazon_uk"      		=> form_sanitizer($_POST['figure_amazon_uk'],    "", "figure_amazon_uk"),
+				"figure_amazon_fr"      		=> form_sanitizer($_POST['figure_amazon_fr'],    "", "figure_amazon_fr"),
+				"figure_amazon_es"      		=> form_sanitizer($_POST['figure_amazon_es'],    "", "figure_amazon_es"),
+				"figure_amazon_it"      		=> form_sanitizer($_POST['figure_amazon_it'],    "", "figure_amazon_it"),
+				"figure_amazon_jp"      		=> form_sanitizer($_POST['figure_amazon_jp'],    "", "figure_amazon_jp"),
+				"figure_amazon_com"     		=> form_sanitizer($_POST['figure_amazon_com'],   "", "figure_amazon_com"),
+				"figure_amazon_ca"      		=> form_sanitizer($_POST['figure_amazon_ca'],    "", "figure_amazon_ca"),
+				"figure_datestamp"      		=> form_sanitizer($_POST['figure_datestamp'],    "", "figure_datestamp"),
+				"figure_description"    		=> addslash(nl2br(parseubb(stripinput($_POST['figure_description'])))),
+				"figure_accessories"    		=> addslash(nl2br(parseubb(stripinput($_POST['figure_accessories']))))
 			];
+			
+			print_r($_POST);
 
 			// Check AGBs
 			if (!$data['figure_agb']) {
@@ -316,18 +320,16 @@ if (!empty($result)) {
 	}
 	echo "</div>\n";
 
-   
-	// Visibility / Publishing
-    openside("<strong>VISIBILITY / PUBLISHING</strong>");
-
 	// Hidden Formfields
 	echo form_hidden("figure_id",        "", $data['figure_id']);
     echo form_hidden("figure_datestamp", "", $data['figure_datestamp']);
     echo form_hidden("figure_submitter", "", $data['figure_submitter']);
 	
-	// Display Left Column
+/*#################################################################################################*/
+	// Visibility / Publishing
+    openside("<strong>VISIBILITY / PUBLISHING</strong>");
 	echo "<div class='row'>\n";
-	echo "<div class='col-md-6 col-xs-12'>\n";
+	echo "<div class='col-md-12 col-xs-12'>\n";
 
 		// Formfield "Visibility"
 		echo form_select("figure_visibility", $locale['figurelib/admin/figurelib.php_009'], $data['figure_visibility'], ["inline" => true, "options" => fusion_get_groups()]);
@@ -339,27 +341,84 @@ if (!empty($result)) {
 			echo form_hidden("figure_language", "", $data['figure_language']);
 		}
 		
-	// Display Right Column
-	echo "</div>\n";
-	echo "<div class='col-md-6 col-xs-12'>\n";
-	
 		// Formfield "Figure Freigabe"
-		echo form_checkbox("figure_freigabe", $locale['figurelib/admin/figurelib.php_069'], $data['figure_freigabe'], ["reverse_label" => true]);
+			//echo form_checkbox("figure_freigabe", $locale['figurelib/admin/figurelib.php_069'], $data['figure_freigabe'], ["reverse_label" => true]);
+			  echo form_select("figure_freigabe", $locale['figurelib/admin/figurelib.php_069'], $data['figure_freigabe'], array(
+								"inline" => TRUE, 
+								"options" => array($locale['disable'], $locale['enable'])
+						));
+	echo "</div>\n";
+	echo "</div>\n";	
 		
-		// Formfield "Allow Comments"
-		echo form_checkbox("figure_allow_comments", $locale['figurelib/admin/figurelib.php_075'], $data['figure_allow_comments'], ["reverse_label" => true]);
-		
-		// Formfield "Allow Ratings"
-		echo form_checkbox("figure_allow_ratings", $locale['figurelib/admin/figurelib.php_076'], $data['figure_allow_ratings'], ["reverse_label" => true]);
+    closeside();	
 
-	// Display Right Column
-	echo "</div>\n";
-	echo "</div>\n";
+/*#################################################################################################*/	
 	
-	// Visibility / Publishing
+	openside("<strong>MODULE ON/OFF - FIGURE ONLY</strong>");
+
+	// Display LEFT Column BEGIN
+		echo "<div class='row'>\n";
+		echo "<div class='col-md-6 col-xs-12'>\n";
+		/*---------------------------------------------------
+		| figure_show_images		|						|
+		| figure_show_data			|						|
+		| figure_show_videos		|						|
+		| figure_show_affiliates	|						|
+		| figure_show_amazon		|						|
+		---------------------------------------------------*/
+	
+		// Formfield ['figure_371'] = "Images:"; --> figure_show_images
+		echo form_checkbox("figure_show_images", $locale['figure_371'], $data['figure_show_images'], ["reverse_label" => true]);
+		
+		// Formfield ['figure_372'] = "Data:"; --> figure_show_data	
+		echo form_checkbox("figure_show_data", $locale['figure_372'], $data['figure_show_data'], ["reverse_label" => true]);
+		
+		// Formfield ['figure_367'] = "Videos:"; --> figure_show_videos
+		echo form_checkbox("figure_show_videos", $locale['figure_367'], $data['figure_show_videos'], ["reverse_label" => true]);
+		
+		// Formfield ['figure_368'] = "Affiliate:"; --> figure_show_affiliates
+		echo form_checkbox("figure_show_affiliates", $locale['figure_368'], $data['figure_show_affiliates'], ["reverse_label" => true]);
+				
+		// Formfield ['figure_369'] = "Amazon Affiliate:"; --> figure_show_amazon
+		echo form_checkbox("figure_show_amazon", $locale['figure_369'], $data['figure_show_amazon'], ["reverse_label" => true]);
+		
+
+
+	// Display LEFT Column END
+		echo "</div>\n";			
+	// Display Right Column BEGINN	
+		echo "<div class='col-md-6 col-xs-12'>\n";
+		
+		/*--------------------------------------------------
+		|               		|figure_show_ebay			|
+		|						|figure_show_related		|
+		|						|figure_show_comments		|
+		|						|figure_show_ratings		|
+		|						|figure_show_social_sharing	|
+		---------------------------------------------------*/
+
+		// Formfield ['figure_370'] = "Ebay Affiliate"; --> figure_show_ebay
+		echo form_checkbox("figure_show_ebay", $locale['figure_370'], $data['figure_show_ebay'], ["reverse_label" => true]);
+		
+		// Formfield ['figure_348'] = "Related"; --> figure_show_related	
+		echo form_checkbox("figure_show_related", $locale['figure_348'], $data['figure_show_related'], ["reverse_label" => true]);
+		
+		// Formfield ['figure_363'] = "Comments"; --> figure_show_comments
+		echo form_checkbox("figure_show_comments", $locale['figure_363'], $data['figure_show_comments'], ["reverse_label" => true]);
+		
+		// Formfield ['figure_364'] = "Ratings"; --> figure_show_ratings
+		echo form_checkbox("figure_show_ratings", $locale['figure_364'], $data['figure_show_ratings'], ["reverse_label" => true]);
+				
+		// Formfield ['figure_344'] = "Social Sharing"; --> figure_show_social_sharing
+		echo form_checkbox("figure_show_social_sharing", $locale['figure_344'], $data['figure_show_social_sharing'], ["reverse_label" => true]);
+
+	
+	echo "</div>\n";	
+	echo "</div>\n";
+	// MODULE ON/OFF END
     closeside();
 	
-	
+/*#################################################################################################*/	
 	
 	// Images
     openside("<strong>IMAGES</strong>");
@@ -419,7 +478,7 @@ if (!empty($result)) {
 	// Images
     closeside();
 
-	
+/*#################################################################################################*/	
 	
 	// Basedata 
     openside("<strong>FIGURE BASEDATA</strong>");
@@ -508,7 +567,7 @@ if (!empty($result)) {
 	// Basedata 
     closeside();
 	
-	
+/*#################################################################################################*/	
 	
 	// Dimsensions and More
     openside("<strong>DIMENSIONS & MORE</strong>");
@@ -614,22 +673,22 @@ if (!empty($result)) {
 	// Dimsensions and More
     closeside();
 	
+/*#################################################################################################*/	
 	
-	
-	// Prices / Limitations / Goodies
-    openside("<strong>PRICES & LIMITATIONS & GOODIES</strong>");
+	// Prices / Limitations
+    openside("<strong>PRICES & LIMITATIONS</strong>");
 	
 	// Formfield "Figure Pubdate"
-	echo form_datepicker("figure_pubdate", $locale['figurelib/admin/figurelib.php_047'], $data['figure_pubdate'], [
-		"placeholder"    => $locale['figurelib/admin/figurelib.php_048'],
-        "error_text"     => $locale['figurelib/admin/figurelib.php_049'],
-		"inline"         => true,
-        "width"          => "520px",
-        "required"       => true,
-		"date_format_js" => "MM.YYYY"
-		
-	]);
-	
+	echo "<div id='figure_pubdate-field' class='form-group'>\n";
+		echo "<label class='control-label col-xs-12 col-sm-3 col-md-3 col-lg-3 p-l-0' for='figure_pubdate'>". $locale['figurelib/admin/figurelib.php_047']."</label>\n";
+		echo "<div class='col-xs-12 col-sm-9 col-md-9 col-lg-9'>\n";
+			echo "<div class='input-group date' style='width: 520px;'>\n";
+				echo "<input type='text' name='figure_pubdate' id='figure_pubdate' value='".$data['figure_pubdate']."' class='form-control textbox' placeholder='".$locale['figurelib/admin/figurelib.php_048']."' />\n";
+				echo "<span class='input-group-addon'><i class='entypo calendar'></i></span>\n";
+			echo "</div>\n";
+		echo "</div>\n";
+	echo "</div>\n";
+
 	// Formfield "Figure Retailprice"
     echo form_text("figure_retailprice", $locale['figurelib/admin/figurelib.php_050'], $data['figure_retailprice'], [
 		"placeholder"   => $locale['figurelib/admin/figurelib.php_051'],
@@ -672,6 +731,14 @@ if (!empty($result)) {
 		"type"          => "number"
     ]);
 	
+	// Prices / Limitations
+    closeside();
+	
+/*#################################################################################################*/	
+	
+	// VIDEO
+    openside("<strong>VIDEO</strong>");
+	
 	// Formfield "Figure Video Url"
     echo form_text("figure_videourl", $locale['figure_461'], $data['figure_videourl'], [
 		"placeholder"   => $locale['figure_1818'],
@@ -681,24 +748,21 @@ if (!empty($result)) {
 		"max_lenght"    => 40
     ]);
 
-	// Diplay Video
-	#if ($data['figure_videourl']) { 	
-		echo "<hr />\n";
-		echo "<div class='row'>\n";	
-			echo "<div class='col-lg-3 col-md-3 col-sm-12 col-xs-12'>\n";
-				echo "<strong>Video Preview</strong>\n";
-			echo "</div>\n";									
-			echo "<div class='col-lg-9 col-md-9 col-sm-12 col-xs-12'>\n";
-				#echo "<div class='embed-responsive embed-responsive-16by9' ><iframe class='embed-responsive-item' src='https://www.youtube.com/embed/".$data['figure_videourl']."'></iframe></div>";
-				echo "<div id='figure_videopreview'></div>\n";
-			echo "</div>\n";
-		echo "</div>\n";			
-	#}				
+	// Diplay Video	
+	echo "<hr />\n";
+	echo "<div class='row'>\n";	
+		echo "<div class='col-lg-3 col-md-3 col-sm-12 col-xs-12'>\n";
+			echo "<strong>Video Preview</strong>\n";
+		echo "</div>\n";									
+		echo "<div class='col-lg-9 col-md-9 col-sm-12 col-xs-12'>\n";
+			echo "<div id='figure_videopreview'></div>\n";
+		echo "</div>\n";
+	echo "</div>\n";					
 				   
-	// Prices / Limitations / Goodies
+	// VIDEO
     closeside();
 
-	
+/*#################################################################################################*/	
 	
 	// Accessories and Discreptions
     openside("<strong>ACCESSORIES & DESCRIPTIONS</strong>");
@@ -724,7 +788,7 @@ if (!empty($result)) {
 	// Accessories and Discreptions
     closeside();
 	
-	
+/*#################################################################################################*/	
 	
 	// Terms
     openside("");
@@ -735,7 +799,7 @@ if (!empty($result)) {
 	// Terms
     closeside();
 
-	
+/*#################################################################################################*/	
 	
 	
 	// Divider
@@ -743,8 +807,6 @@ if (!empty($result)) {
     echo "<strong>EXTENDET ADMIN AREA</strong>";
     echo "</div>\n";
     echo "<br />\n";
-	
-	
 	
 
 	// Forum and E-Shop Url
@@ -759,7 +821,7 @@ if (!empty($result)) {
 	// Forum and E-Shop Url
     closeside();
 	
-	
+/*#################################################################################################*/
 	
 	// Amazon
     openside("<strong>AMAZON LINKS</strong>");
@@ -791,7 +853,7 @@ if (!empty($result)) {
 	// Amazon
     closeside();
 	
-	
+/*#################################################################################################*/	
 	
 	// Affiliate Links
     openside("<strong>AFFILIATE LINKS</strong>");
@@ -829,7 +891,7 @@ if (!empty($result)) {
 	// Affiliate Links
     closeside();
 	
-	
+/*#################################################################################################*/	
 	
 	// Buttons
     openside("");
@@ -861,6 +923,15 @@ if (!empty($result)) {
 	echo "</div>\n";
 }
 
+// Datepicker include
+if (!defined('DATEPICKER')) {
+	define('DATEPICKER', TRUE);
+    add_to_head("<link href='".DYNAMICS."assets/datepicker/css/datetimepicker.min.css' rel='stylesheet' />");
+    add_to_footer("<script src='".DYNAMICS."assets/datepicker/js/moment.min.js'></script>");
+    add_to_footer("<script src='".DYNAMICS."assets/datepicker/js/datetimepicker.min.js'></script>");
+    add_to_head("<script src='".DYNAMICS."assets/datepicker/locale/".$locale['datepicker'].".js'></script>");
+}
+	
 // Add jQuery
 add_to_footer("
 <script type='text/javascript'>
@@ -903,6 +974,15 @@ $(function(){
         }
     });
 });
+
+$('#figure_pubdate-field .input-group.date').datetimepicker({
+		showTodayButton: true,
+		showClear: true,
+		showClose: true,
+		allowInputToggle: true,
+		format: 'MM/YYYY',
+});
 </script>");
+	
 
 ?>
