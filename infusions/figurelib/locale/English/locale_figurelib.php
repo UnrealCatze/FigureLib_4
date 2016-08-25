@@ -362,6 +362,13 @@ $locale['figure_372'] = "Data";
 $locale['figure_373'] = "Collection";
 $locale['figure_374'] = "Affiliate ON/OFF";
 
+$locale['figure_375'] = "Global General Settings";
+$locale['figure_376'] = "Global Modules ON/OFF";
+$locale['figure_377'] = "Global Figure Image Settings";
+$locale['figure_378'] = "Global Category Image Settings";
+$locale['figure_379'] = "Global Manufacturer Image Settings";
+$locale['figure_380'] = "Global Notification Settings";
+
 // figure.php
 $locale['figure_410'] = "[NEW]";
 $locale['figure_411'] = "Name";
