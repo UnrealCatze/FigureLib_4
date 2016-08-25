@@ -52,18 +52,18 @@ if (isset($_POST['savesettings'])) {
 		"figure_notification_subject" => form_sanitizer($_POST['figure_notification_subject'], "",   "figure_notification_subject"),
 		"figure_notification_message" => form_sanitizer($_POST['figure_notification_message'], "",   "figure_notification_message"),	
 		
-		"figure_allow_submit_videos"  		  => form_sanitizer($_POST['figure_allow_submit_videos'],         1,    "figure_allow_submit_videos"), 
+		"figure_allow_submit_videos"  		  => form_sanitizer($_POST['figure_allow_submit_videos'],         0,    "figure_allow_submit_videos"), 
 		
-		"figure_show_images_global"      	  => form_sanitizer($_POST['figure_show_images_global'],          1,    "figure_show_images_global"),
-		"figure_show_data_global"        	  => form_sanitizer($_POST['figure_show_data_global'],            1,    "figure_show_data_global"),
-		"figure_show_videos_global"      	  => form_sanitizer($_POST['figure_show_videos_global'],          1,    "figure_show_videos_global"),
-		"figure_show_affiliate_global"   	  => form_sanitizer($_POST['figure_show_affiliate_global'],       1,    "figure_show_affiliate_global"),
-		"figure_show_amazon_global"      	  => form_sanitizer($_POST['figure_show_amazon_global'],          1,    "figure_show_amazon_global"),
-		"figure_show_ebay_global"        	  => form_sanitizer($_POST['figure_show_ebay_global'],            1,    "figure_show_ebay_global"),
-		"figure_show_related_global"          => form_sanitizer($_POST['figure_show_related_global'],         1,    "figure_show_related_global"),
-		"figure_show_comments_global"   	  => form_sanitizer($_POST['figure_show_comments_global'],        1,    "figure_show_comments_global"),
-		"figure_show_ratings_global"    	  => form_sanitizer($_POST['figure_show_ratings_global'],         1,    "figure_show_ratings_global"),
-		"figure_show_social_sharing_global"   => form_sanitizer($_POST['figure_show_social_sharing_global'],  1,    "figure_show_social_sharing_global"),
+		"figure_show_images_global"      	  => form_sanitizer($_POST['figure_show_images_global'],          0,    "figure_show_images_global"),
+		"figure_show_data_global"        	  => form_sanitizer($_POST['figure_show_data_global'],            0,    "figure_show_data_global"),
+		"figure_show_videos_global"      	  => form_sanitizer($_POST['figure_show_videos_global'],          0,    "figure_show_videos_global"),
+		"figure_show_affiliate_global"   	  => form_sanitizer($_POST['figure_show_affiliate_global'],       0,    "figure_show_affiliate_global"),
+		"figure_show_amazon_global"      	  => form_sanitizer($_POST['figure_show_amazon_global'],          0,    "figure_show_amazon_global"),
+		"figure_show_ebay_global"        	  => form_sanitizer($_POST['figure_show_ebay_global'],            0,    "figure_show_ebay_global"),
+		"figure_show_related_global"          => form_sanitizer($_POST['figure_show_related_global'],         0,    "figure_show_related_global"),
+		"figure_show_comments_global"   	  => form_sanitizer($_POST['figure_show_comments_global'],        0,    "figure_show_comments_global"),
+		"figure_show_ratings_global"    	  => form_sanitizer($_POST['figure_show_ratings_global'],         0,    "figure_show_ratings_global"),
+		"figure_show_social_sharing_global"   => form_sanitizer($_POST['figure_show_social_sharing_global'],  0,    "figure_show_social_sharing_global"),
 		
 		"figure_per_page"             => form_sanitizer($_POST['figure_per_page'],             0,    "figure_per_page"),
 		"figure_per_line"             => form_sanitizer($_POST['figure_per_line'],             0,    "figure_per_line"),
@@ -144,7 +144,7 @@ figure_per_line				|  figure_allow_submit_videos 		 |
 figure_display 				|  									 | 
 ----------------------------------------------------------------*/
 
-openside("General Settings Part 1");
+openside("General Settings");
 
 echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";	
 	echo "<div class='col-lg-6 col-md-6 col-sm-12 col-xs-12'>\n";			
@@ -244,7 +244,7 @@ closeside();
 
 echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";				
 
-openside("Module ON/OFF");
+openside("MODULE ON/OFF - GLOBAL ALL FIGURES");
 
 echo "<div class='col-lg-6 col-md-6 col-sm-12 col-xs-12'>\n";
 
