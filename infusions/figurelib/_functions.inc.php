@@ -54,6 +54,12 @@ if (!@function_exists("figures_displayMyCollectionForm")) {
 
 		// Standard Variables
 		$return = "";
+		// LANGUAGE
+			if (file_exists(INFUSIONS."figurelib/locale/".LOCALESET."locale_figurelib.php")) {
+				include INFUSIONS."figurelib/locale/".LOCALESET."locale_figurelib.php";
+			} else {
+				include INFUSIONS."figurelib/locale/English/locale_figurelib.php";
+			}
 		
 		// Display Mini Form for Members
 		if (iMEMBER && $formDesign == "mini") {
