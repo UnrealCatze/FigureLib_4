@@ -727,7 +727,7 @@ closeside();
 // ###########  RELATED FIGURES  ##############################################################			
 
 	if ($fil_settings['figure_show_related_global']) { // related global on/off ???
-		if ($data['figure_show_related']) { // related for this figure on/off ???	
+			if ($data['figure_show_related']) { // related for this figure on/off ???	
 	
 		openside("<div class='well clearfix'><strong>RELATED FIGURES</strong></div>");	
 					
@@ -791,29 +791,24 @@ closeside();
 // ######  RATING UND COMMENTS	###############################################################
 	
 	if ($fil_settings['figure_show_comments_global']) { // Comments	global on/off ???
-		if ($data['figure_show_comments']) { // Comment for this figure on/off ???
-			openside("<div class='well clearfix'><strong>COMMENTS</strong></div>");	
-			showcomments("FI", DB_FIGURE_ITEMS, "figure_id", $_GET['figure_id'], INFUSIONS."figurelib/figures.php?figure_id=".$_GET['figure_id']);
-			closeside();
-		}
+			if ($data['figure_show_comments']) { // Comment for this figure on/off ???
+				openside("<div class='well clearfix'><strong>COMMENTS</strong></div>");	
+					showcomments("FI", DB_FIGURE_ITEMS, "figure_id", $_GET['figure_id'], INFUSIONS."figurelib/figures.php?figure_id=".$_GET['figure_id']);
+				closeside();
+			}
 	}
-	if ($fil_settings['figure_show_comments_global']) { // Ratings	global on/off ???		
-		if ($data['figure_show_ratings']) { // Rating for this figure on /off ???
-			openside("<div class='well clearfix'><strong>RATINGS</strong></div>");
-			showratings("FI", $_GET['figure_id'], INFUSIONS."figurelib/figures.php?figure_id=".$_GET['figure_id']);
-			closeside();
-		}
+	if ($fil_settings['figure_show_ratings_global']) { // Ratings	global on/off ???		
+			if ($data['figure_show_ratings']) { // Rating for this figure on /off ???
+				openside("<div class='well clearfix'><strong>RATINGS</strong></div>");
+					showratings("FI", $_GET['figure_id'], INFUSIONS."figurelib/figures.php?figure_id=".$_GET['figure_id']);
+				closeside();
+			}
 	}
 	
 // ####### SOCIAL_SHARING   ###################################################################	
-															
-	// SETTINGS HOLEN
-	//$settings = fusion_get_settings();
-	$settings = fusion_get_settings();
-	$fil_settings = get_settings("figurelib"); 
-	
+																
 	if ($fil_settings['figure_show_social_sharing_global']) { // social_sharing	global on/off ???
-		if ($data['figure_show_social_sharing']) { // social_sharing for this figure on/off ???						
+			if ($data['figure_show_social_sharing']) { // social_sharing for this figure on/off ???						
 
 						openside("<div class='well clearfix'><strong>SOCIAL SHARING</strong></div>");	
 							echo "<div style='text-align:center'>\n";
