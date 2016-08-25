@@ -55,7 +55,7 @@ if (isset($_POST['savesettings'])) {
 		"figure_show_images_global"      	  => form_sanitizer($_POST['figure_show_images_global'],          0,    "figure_show_images_global"),
 		"figure_show_data_global"        	  => form_sanitizer($_POST['figure_show_data_global'],            0,    "figure_show_data_global"),
 		"figure_show_videos_global"      	  => form_sanitizer($_POST['figure_show_videos_global'],          0,    "figure_show_videos_global"),
-		"figure_show_affiliate_global"   	  => form_sanitizer($_POST['figure_show_affiliate_global'],       0,    "figure_show_affiliate_global"),
+		"figure_show_affiliates_global"   	  => form_sanitizer($_POST['figure_show_affiliates_global'],       0,    "figure_show_affiliates_global"),
 		"figure_show_amazon_global"      	  => form_sanitizer($_POST['figure_show_amazon_global'],          0,    "figure_show_amazon_global"),
 		"figure_show_ebay_global"        	  => form_sanitizer($_POST['figure_show_ebay_global'],            0,    "figure_show_ebay_global"),
 		"figure_show_collection_global"       => form_sanitizer($_POST['figure_show_collection_global'],      0,    "figure_show_collection_global"),
@@ -234,7 +234,7 @@ closeside();
 | figure_show_images_global			| 		figure_show_collection_global		|
 | figure_show_data_global			| 		figure_show_related					|
 | figure_show_videos_global			| 		figure_show_comments_global			|
-| figure_show_affiliate_global		| 		figure_show_ratings_global			|
+| figure_show_affiliates_global		| 		figure_show_ratings_global			|
 | figure_show_amazon_global			| 		figure_show_social_sharing_global	|
 |figure_show_ebay_global			|											|
 -------------------------------------------------------------------------------*/
@@ -283,11 +283,11 @@ echo "<div class='col-lg-6 col-md-6 col-sm-12 col-xs-12'>\n";
 								"options" => array($locale['disable'], $locale['enable'])
 							));			
 				
-				// ['figure_368'] = "Affiliate:"; --> figure_show_affiliate_global
+				// ['figure_368'] = "Affiliate:"; --> figure_show_affiliates_global
 						// ALS CHECKBOX
-							//echo form_checkbox('figure_show_affiliate_global', $locale['figure_368'], $fil_settings['figure_show_affiliate_global']);				
+							//echo form_checkbox('figure_show_affiliates_global', $locale['figure_368'], $fil_settings['figure_show_affiliates_global']);				
 						// ALS DROPDOWN
-							echo form_select("figure_show_affiliate_global", $locale['figure_368'], $fil_settings['figure_show_affiliate_global'], array(
+							echo form_select("figure_show_affiliates_global", $locale['figure_368'], $fil_settings['figure_show_affiliates_global'], array(
 								"inline" => TRUE, 
 								"options" => array($locale['disable'], $locale['enable'])
 							));
