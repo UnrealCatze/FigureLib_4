@@ -79,7 +79,8 @@ if (!empty($result)) {
 			"figure_show_affiliates"   		=> 1,
 			"figure_show_amazon"        	=> 1,
 			"figure_show_ebay"         		=> 1,
-			"figure_show_related"      		=> 1,
+			"figure_show_related"      		=> 1,			
+			"figure_show_collection"     	=> 1,
 			"figure_show_comments"     		=> 1,
 			"figure_show_ratings"       	=> 1,
 			"figure_show_social_sharing" 	=> 1,					
@@ -153,19 +154,18 @@ if (!empty($result)) {
 		if (isset($_POST['save_figure'])) {
 			$data = [
 				"figure_freigabe"       		=> isset($_POST['figure_freigabe'])       ? "1" : "0",
-				"figure_agb"            		=> isset($_POST['figure_agb'])            ? "1" : "0",
-								
+				"figure_agb"            		=> isset($_POST['figure_agb'])            ? "1" : "0",								
 				"figure_show_images"      		=> form_sanitizer($_POST['figure_show_images'],     	"", "figure_show_images"),
 				"figure_show_data"        		=> form_sanitizer($_POST['figure_show_data'],     		"", "figure_show_data"),
 				"figure_show_videos"      		=> form_sanitizer($_POST['figure_show_videos'],     	"", "figure_show_videos"),
 				"figure_show_affiliates"   		=> form_sanitizer($_POST['figure_show_affiliates'],     "", "figure_show_affiliates"),
 				"figure_show_amazon"      		=> form_sanitizer($_POST['figure_show_amazon'],     	"", "figure_show_amazon"),
-				"figure_show_ebay"        		=> form_sanitizer($_POST['figure_show_ebay'],     		"", "figure_show_ebay"),
+				"figure_show_ebay"        		=> form_sanitizer($_POST['figure_show_ebay'],     		"", "figure_show_ebay"),				
 				"figure_show_related"       	=> form_sanitizer($_POST['figure_show_related'],     	"", "figure_show_related"),
+				"figure_show_collection"       	=> form_sanitizer($_POST['figure_show_collection'],     "", "figure_show_collection"),
 				"figure_show_comments"   		=> form_sanitizer($_POST['figure_show_comments'],     	"", "figure_show_comments"),
 				"figure_show_ratings"    		=> form_sanitizer($_POST['figure_show_ratings'],     	"", "figure_show_ratings"),
-				"figure_show_social_sharing"	=> form_sanitizer($_POST['figure_show_social_sharing'], "", "figure_show_social_sharing"),
-						
+				"figure_show_social_sharing"	=> form_sanitizer($_POST['figure_show_social_sharing'], "", "figure_show_social_sharing"),						
 				"figure_id"             		=> form_sanitizer($_POST['figure_id'],           0,  "figure_id"),
 				"figure_language"       		=> form_sanitizer($_POST['figure_language'],     "", "figure_language"),
 				"figure_title"         			=> form_sanitizer($_POST['figure_title'],        "", "figure_title"),
@@ -217,7 +217,7 @@ if (!empty($result)) {
 				"figure_accessories"    		=> addslash(nl2br(parseubb(stripinput($_POST['figure_accessories']))))
 			];
 			
-			print_r($_POST);
+			//print_r($_POST); CHECK WAS BEI POST RAUSKOMMT
 
 			// Check AGBs
 			if (!$data['figure_agb']) {
@@ -358,14 +358,16 @@ if (!empty($result)) {
 
 	// Display LEFT Column BEGIN
 		echo "<div class='row'>\n";
-		echo "<div class='col-md-6 col-xs-12'>\n";
-		/*---------------------------------------------------
-		| figure_show_images		|						|
-		| figure_show_data			|						|
-		| figure_show_videos		|						|
-		| figure_show_affiliates	|						|
-		| figure_show_amazon		|						|
-		---------------------------------------------------*/
+		echo "<div class='col-md-4 col-xs-12'>\n";
+		
+		/*----------------------------------------------------------------------------------
+		/         1					|             2				|             3				|			
+		/*----------------------------------------------------------------------------------
+		| figure_show_images		|							|							|
+		| figure_show_data			|							|							|		
+		| figure_show_videos		|							|							|		
+		| figure_show_affiliates	|							|							|
+		-----------------------------------------------------------------------------------*/
 	
 		// Formfield ['figure_371'] = "Images:"; --> figure_show_images
 		echo form_checkbox("figure_show_images", $locale['figure_371'], $data['figure_show_images'], ["reverse_label" => true]);
@@ -379,30 +381,43 @@ if (!empty($result)) {
 		// Formfield ['figure_368'] = "Affiliate:"; --> figure_show_affiliates
 		echo form_checkbox("figure_show_affiliates", $locale['figure_368'], $data['figure_show_affiliates'], ["reverse_label" => true]);
 				
+
+		echo "</div>\n";			
+		echo "<div class='col-md-4 col-xs-12'>\n";
+		
+		/*----------------------------------------------------------------------------------
+		/         1					|             2				|             3				|			
+		/*----------------------------------------------------------------------------------
+		| 							|figure_show_amazon			|							|
+		| 							|figure_show_ebay			|							|		
+		| 							|figure_show_related		|							|		
+		| 							|figure_show_collection		|							|
+		-----------------------------------------------------------------------------------*/
+
 		// Formfield ['figure_369'] = "Amazon Affiliate:"; --> figure_show_amazon
 		echo form_checkbox("figure_show_amazon", $locale['figure_369'], $data['figure_show_amazon'], ["reverse_label" => true]);
 		
-
-
-	// Display LEFT Column END
-		echo "</div>\n";			
-	// Display Right Column BEGINN	
-		echo "<div class='col-md-6 col-xs-12'>\n";
-		
-		/*--------------------------------------------------
-		|               		|figure_show_ebay			|
-		|						|figure_show_related		|
-		|						|figure_show_comments		|
-		|						|figure_show_ratings		|
-		|						|figure_show_social_sharing	|
-		---------------------------------------------------*/
-
 		// Formfield ['figure_370'] = "Ebay Affiliate"; --> figure_show_ebay
 		echo form_checkbox("figure_show_ebay", $locale['figure_370'], $data['figure_show_ebay'], ["reverse_label" => true]);
 		
 		// Formfield ['figure_348'] = "Related"; --> figure_show_related	
 		echo form_checkbox("figure_show_related", $locale['figure_348'], $data['figure_show_related'], ["reverse_label" => true]);
 		
+		// Formfield ['figure_373'] = "Collection"; --> figure_show_collection
+		echo form_checkbox("figure_show_collection", $locale['figure_373'], $data['figure_show_collection'], ["reverse_label" => true]);
+	
+	echo "</div>\n";
+	echo "<div class='col-md-4 col-xs-12'>\n";
+	
+		/*----------------------------------------------------------------------------------
+		/         1					|             2				|             3				|			
+		/*----------------------------------------------------------------------------------
+		| 							|							|figure_show_comments		|
+		| 							|							|figure_show_ratings		|		
+		| 							|							|figure_show_social_sharing	|		
+		| 							|							|							|
+		-----------------------------------------------------------------------------------*/
+	
 		// Formfield ['figure_363'] = "Comments"; --> figure_show_comments
 		echo form_checkbox("figure_show_comments", $locale['figure_363'], $data['figure_show_comments'], ["reverse_label" => true]);
 		
@@ -411,7 +426,7 @@ if (!empty($result)) {
 				
 		// Formfield ['figure_344'] = "Social Sharing"; --> figure_show_social_sharing
 		echo form_checkbox("figure_show_social_sharing", $locale['figure_344'], $data['figure_show_social_sharing'], ["reverse_label" => true]);
-
+	
 	
 	echo "</div>\n";	
 	echo "</div>\n";
@@ -906,9 +921,7 @@ if (!empty($result)) {
 	
 	// Buttons
 	closeside();
-	
-	
-	
+		
 	// Form End
     echo closeform();
 
@@ -980,7 +993,7 @@ $('#figure_pubdate-field .input-group.date').datetimepicker({
 		showClear: true,
 		showClose: true,
 		allowInputToggle: true,
-		format: 'MM/YYYY',
+		format: 'MMMM / YYYY',
 });
 </script>");
 	
