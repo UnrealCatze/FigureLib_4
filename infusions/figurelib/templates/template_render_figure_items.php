@@ -72,81 +72,124 @@ $result = dbquery(
 		while ($data = dbarray($result)) {
 
 // IMAGES ####################################################################################	
+	$fil_settings = get_settings("figurelib");
+	if ($fil_settings['figure_show_images_global']) { // show images global on/off ???
+		if ($data['figure_show_images']) { // show images for this figure on/off ???
+			
+			openside("<div class='well clearfix'><strong></strong>&nbsp;&nbsp;<a href='".INFUSIONS."figurelib/figures.php?figure_id=".$data['figure_id']."'>".trimlink($data['figure_title'], 23)." (".trimlink($data['figure_manufacturer_name'], 23).") [".$data['figure_pubdate']."]</a></div>");
 
-	openside("<div class='well clearfix'><strong></strong>&nbsp;&nbsp;<a href='".INFUSIONS."figurelib/figures.php?figure_id=".$data['figure_id']."'>".trimlink($data['figure_title'], 23)." (".trimlink($data['figure_manufacturer_name'], 23).") [".$data['figure_pubdate']."]</a></div>");
+			// Figure ID
+			$figure_id = $data['figure_id'];
 
-	// Figure ID
-	$figure_id = $data['figure_id'];
+			// Alle Bilder zählen - (image count)
+			$image_count = dbcount("(figure_images_image_id)", DB_FIGURE_IMAGES, "figure_images_figure_id='".$figure_id."'");
 
-	// Alle Bilder zählen - (image count)
-	$image_count = dbcount("(figure_images_image_id)", DB_FIGURE_IMAGES, "figure_images_figure_id='".$figure_id."'");
-
-	// Insofern Bilder vorhanden sind, Ausgabe beginnen
-	if ($image_count) {
+			// Insofern Bilder vorhanden sind, Ausgabe beginnen
+	
+		
+			if ($image_count) {
 		   
-			   // Standard Variablen  (standard variables)
-			   $indicators = "";
-			   $images     = "";
-			   $i          = 0;
-   
-				// Bilder auslesen (get image data)
-				$resultimage = dbquery("SELECT * FROM ".DB_FIGURE_IMAGES." WHERE figure_images_figure_id='".$figure_id."'");
-		while ($image_data = dbarray($resultimage)) {
-
-				// Indikator einfügen (add indicators)
-				$indicators .= "<li data-target='#myCarousel' data-slide-to='".$i."'".($i == 0 ? " class='active'" : "")."></li>\n";
+					   // Standard Variablen  (standard variables)
+					   $indicators = "";
+					   $images     = "";
+					   $i          = 0;
 		   
-				// Bild auslesen (get image)
-				$image_thumb = get_figure_image_path($image_data['figure_images_image'], $image_data['figure_images_thumb']);
-			  if (!$image_thumb) {
-				 $image_thumb = IMAGES."imagenotfound70.jpg";
-			  }
-			  
-				$image_image = get_figure_image_path($image_data['figure_images_image'], $image_data['figure_images_image']);
-			  if (!$image_image) {
-				 $image_image = IMAGES."imagenotfound70.jpg";
-			  }
-				
-					$images .= "<div class='item".($i == 0 ? " active" : "")."'>\n";
-					$images .= "<center><a href='".$image_image."'  height='100%' width='100%' alt='".$data['figure_title']."'><img src='".$image_thumb."' alt='".$locale['figure_588']."' /></a>\n";
-					$images .= "</div>\n";
+						// Bilder auslesen (get image data)
+						$resultimage = dbquery("SELECT * FROM ".DB_FIGURE_IMAGES." WHERE figure_images_figure_id='".$figure_id."'");
+					while ($image_data = dbarray($resultimage)) {
 
-				// Counter erhöhen (counter +1)
-				$i++;
+						// Indikator einfügen (add indicators)
+						$indicators .= "<li data-target='#myCarousel' data-slide-to='".$i."'".($i == 0 ? " class='active'" : "")."></li>\n";
+				   
+						// Bild auslesen (get image)
+						$image_thumb = get_figure_image_path($image_data['figure_images_image'], $image_data['figure_images_thumb']);
+					  if (!$image_thumb) {
+						 $image_thumb = IMAGES."imagenotfound70.jpg";
+					  }
+					  
+						$image_image = get_figure_image_path($image_data['figure_images_image'], $image_data['figure_images_image']);
+					  if (!$image_image) {
+						 $image_image = IMAGES."imagenotfound70.jpg";
+					  }
+						
+							$images .= "<div class='item".($i == 0 ? " active" : "")."'>\n";
+							$images .= "<center><a href='".$image_image."'  height='100%' width='100%' alt='".$data['figure_title']."'><img src='".$image_thumb."' alt='".$locale['figure_588']."' /></a>\n";
+							$images .= "</div>\n";
+
+						// Counter erhöhen (counter +1)
+						$i++;
+						
+						}
+      
+						   // Carousel anzeigen (show carousel)
+						   echo "<div id='myCarousel' class='carousel slide' data-ride='carousel'>\n";
+							  echo "<ol class='carousel-indicators'>\n";
+								 echo $indicators;
+							  echo "</ol>\n";
+							  echo "<div class='carousel-inner' role='listbox'>\n";
+								 echo $images;
+							  echo "</div>\n";
+							  echo "<a class='left carousel-control' href='#myCarousel' role='button' data-slide='prev'>\n";
+							if ($image_count > 1) {
+								 echo "<span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span>\n";
+							} else {
+							
+							}
+								 echo "<span class='sr-only'>Previous</span>\n";
+							  echo "</a>\n";
+							  echo "<a class='right carousel-control' href='#myCarousel' role='button' data-slide='next'>\n";
+							if ($image_count > 1) {
+								 echo "<span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span>\n";
+							} else {
+							
+							}
+								 echo "<span class='sr-only'>Next</span>\n";
+							  echo "</a>\n";
+						   echo "</div>\n";
+				   
+							// Variablen löschen (delete variables)
+							unset($indicators, $images, $i);
+						
+			} else {
+							
+						   // Carousel anzeigen (show carousel)
+						   echo "<div id='myCarousel' class='carousel slide' data-ride='carousel'>\n";
+							 // echo "<ol class='carousel-indicators'>\n";
+								// echo $indicators;
+							 // echo "</ol>\n";
+							  //echo "<div class='carousel-inner' role='listbox'>\n";
+								 echo $images;
+							  echo "</div>\n";
+							  //echo "<a class='left carousel-control' href='#myCarousel' role='button' data-slide='prev'>\n";
+								 //echo "<span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span>\n";
+								 //echo "<span class='sr-only'>Previous</span>\n";
+							  echo "</a>\n";
+							  //echo "<a class='right carousel-control' href='#myCarousel' role='button' data-slide='next'>\n";
+								// echo "<span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span>\n";
+								// echo "<span class='sr-only'>Next</span>\n";
+							  echo "</a>\n";
+						   echo "</div>\n";
+						
+								// Variablen löschen (delete variables)
+							unset($indicators, $images, $i);	
+								
+			}
+
+			closeside();		
+		
 		}
-   
-			   // Carousel anzeigen (show carousel)
-			   echo "<div id='myCarousel' class='carousel slide' data-ride='carousel'>\n";
-				  echo "<ol class='carousel-indicators'>\n";
-					 echo $indicators;
-				  echo "</ol>\n";
-				  echo "<div class='carousel-inner' role='listbox'>\n";
-					 echo $images;
-				  echo "</div>\n";
-				  echo "<a class='left carousel-control' href='#myCarousel' role='button' data-slide='prev'>\n";
-					 echo "<span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span>\n";
-					 echo "<span class='sr-only'>Previous</span>\n";
-				  echo "</a>\n";
-				  echo "<a class='right carousel-control' href='#myCarousel' role='button' data-slide='next'>\n";
-					 echo "<span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span>\n";
-					 echo "<span class='sr-only'>Next</span>\n";
-				  echo "</a>\n";
-			   echo "</div>\n";
-	   
-			// Variablen löschen (delete variables)
-				unset($indicators, $images, $i);
 	}
-//closeside();
+
 // ############################################################################################	
 
 // ###########  FIGURE DETAILS   ##############################################################
-//openside('');
 
-	echo "<hr>";
+if ($fil_settings['figure_show_data_global']) { // show figure data global on/off ???
+		if ($data['figure_show_data']) { // show figure data for this figure on/off ???	
 
+	openside('');
+	
 	// BEGINN OF BOOTSTRAP GRID
-	echo "<table class='table'>";
-
 			
 				echo "<div class='container-fluid'>\n";
 				echo "<div class='table-responsive'>\n";
@@ -477,9 +520,13 @@ $result = dbquery(
 			// MODUL 5 END ########################################################################################################					
 				
 	// END OF BOOTSTRAP GRID	
-	echo "</table>\n";
 		
 closeside();
+
+
+		}
+	}
+
 
 // ############################################################################################
 
@@ -500,11 +547,11 @@ if (iADMIN || iSUPERADMIN) {
 
 // ########  AFFILIATE PANEL  #################################################################
 
-	$fil_settings = get_settings("figurelib");
+		
 	
-	if ($fil_settings['figure_show_affiliates_global']) { // Affiliate global on/off ???
-		if ($data['figure_show_affiliates']) { // Affiliate for this figure on/off ???
-
+	if ($fil_settings['figure_show_affiliates_global']) { // Affiliates global on/off ???
+		if ($data['figure_show_affiliates']) { //Affiliates for this figure on/off ???
+	
 		openside("<div class='well clearfix'><strong>AFFILIATES</strong></div>");						
 				
 		// CSS 
@@ -543,7 +590,9 @@ if (iADMIN || iSUPERADMIN) {
 							} else { echo "<a href='".$data['figure_affiliate_4']."'</a>".trimlink($data['figure_affiliate_4'],15)."</td>\n"; }	
 				 echo "</tr>\n";
 			 } else { 
+			 
 			 }
+			 
 			 
 		// THIRD LINE AFFILIATE (PRIORITY 2)		 
 			if ($data['figure_affiliate_5']  ||  $data['figure_affiliate_6'] ||  $data['figure_affiliate_7'] || $data['figure_affiliate_8'] != "") { 
@@ -565,11 +614,16 @@ if (iADMIN || iSUPERADMIN) {
 				 echo "</tr>\n";
 			
 			} else { 
-			 }
 			
+			}
+				echo "</tr></table>\n";
+				
+if ($fil_settings['figure_show_amazon_global']) { // Amazon Affiliates global on/off ???
+	if ($data['figure_show_amazon']) { // Amazon Affiliates for this figure on/off ???
+			 
 		// FOURTH LINE AMAZON COM CA UK DE	
 
-				echo "<tr>\n";
+				echo "<table style='cellspacing:10px; cellpadding:10px;' class='table' width='100%'>\n";
 				echo "<colgroup><col width='25%'><col width='25%'><col width='25%'><col width='25%'></colgroup>\n"; 
 						
 				echo "<td style='text-align:center; vertical-align:middle;'>	\n";	 
@@ -609,13 +663,19 @@ if (iADMIN || iSUPERADMIN) {
 				echo "<td align='center'>\n";
 			 		if ($data['figure_amazon_it'] == "") { echo "<img src='".INFUSIONS."figurelib/images/flags/flag_italy_sw.png"."' alt='".$locale['figure_029a']."' title='".$locale['figure_029a']."'>";
 						} else { echo "<a href='".$data['figure_amazon_it']."'><img src='".INFUSIONS."figurelib/images/flags/flag_italy.png"."' alt='".trimlink($data['figure_amazon_it'],50)."' title='".trimlink($data['figure_amazon_it'],100)."'></td>\n"; }	
-				echo "</tr></table>\n";			
+				echo "</tr></table>\n";
+
+		}
+  }
 		closeside();
 		}
 	}
 // ############################################################################################
 				
 // ####### USERFIGURES  #######################################################################
+
+if ($fil_settings['figure_show_collection_global']) { // show collection global on/off ???
+		if ($data['figure_show_collection']) { // show figure collection  for this figure on/off ???	
 			
 	openside("<div class='well clearfix'><strong>".$locale['userfigure_005']."</strong></div>");
 	echo figures_displayMyCollectionForm($data['figure_id'], FUSION_REQUEST, "big");
@@ -658,10 +718,11 @@ global $userdata;
 				echo "</div>";				
 		}	
 closeside();
+		}
+	}
 // ############################################################################################
 
 // ###########  RELATED FIGURES  ##############################################################			
-	$fil_settings = get_settings("figurelib");
 
 	if ($fil_settings['figure_show_related_global']) { // related global on/off ???
 		if ($data['figure_show_related']) { // related for this figure on/off ???	
@@ -726,8 +787,6 @@ closeside();
 // ############################################################################################
 
 // ######  RATING UND COMMENTS	###############################################################
-	
-	$fil_settings = get_settings("figurelib");
 	
 	if ($fil_settings['figure_show_comments_global']) { // Comments	global on/off ???
 		if ($data['figure_show_comments']) { // Comment for this figure on/off ???
