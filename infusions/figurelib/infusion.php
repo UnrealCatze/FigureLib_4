@@ -118,6 +118,7 @@ $inf_newtable[] = DB_FIGURE_ITEMS." (
 		figure_show_affiliates TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
 		figure_show_amazon TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
 		figure_show_ebay TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
+		figure_show_collection TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
 		figure_show_related TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',		
 		figure_show_comments TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
 		figure_show_ratings TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',	
@@ -260,6 +261,7 @@ $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_show_affiliate_global', '1', 'figurelib')";
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_show_amazon_global', '1', 'figurelib')";
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_show_ebay_global', '1', 'figurelib')";
+$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_show_collection_global', '1', 'figurelib')";
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_show_related_global', '1', 'figurelib')";
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_show_comments_global', '1', 'figurelib')";
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_show_ratings_global', '1', 'figurelib')";
