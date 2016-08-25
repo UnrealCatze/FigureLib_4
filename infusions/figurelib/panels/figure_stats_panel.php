@@ -73,28 +73,31 @@ opentable("<strong>Figure Stats</strong>");
 				echo "<div class='row'>\n";
 				
 			// GESAMTZAHL ALLER FIGUREN /////////////////////////////////////////		
-						echo "<div class='col-lg-4 col-md-4 col-sm-12 col-xs-12'>\n";														
-								echo "<div class='navbar-default text-bold'>";	
+				echo "<div class='col-lg-4 col-md-4 col-sm-12 col-xs-12'>\n";														
+					echo "<div class='navbar-default text-bold'>";	
 						echo "<span>Total number of figures: </span>\n";
-								echo "</div>\n";
-						echo "</div>\n";
-						echo "<div class='col-lg-2 col-md-2 col-sm-12 col-xs-12'>\n";
-								$allFiguresCounter = dbcount("(figure_id)", DB_FIGURE_ITEMS, "figure_freigabe='1'");
-								//echo "<span class='badge'>".$allFiguresCounter."</span>\n";	
-								echo "<button class='btn btn-primary btn-xs' type='button'><span class='badge'>".$allFiguresCounter."</button>\n";
-						echo "</div>\n";
+					echo "</div>\n";
+				echo "</div>\n";
+						
+				echo "<div class='col-lg-2 col-md-2 col-sm-12 col-xs-12'>\n";
+						$allFiguresCounter = dbcount("(figure_id)", DB_FIGURE_ITEMS, "figure_freigabe='1'");
+						//echo "<span class='badge'>".$allFiguresCounter."</span>\n";	
+						echo "<button class='btn btn-primary btn-xs' type='button'><span class='badge'>".$allFiguresCounter."</button>\n";
+				echo "</div>\n";
 
 			// Gesamtzahl Figuren in Userbesitz //////////////////////////////////	
-						echo "<div class='col-lg-4 col-md-4 col-sm-12 col-xs-12'>\n";																		
-								echo "<div class='navbar-default text-bold'>";	
-								echo "<span>Total figures owned by user:</span>\n";
-								echo "</div>\n";
-						echo "</div>\n";
-						echo "<div class='col-lg-2 col-md-2 col-sm-12 col-xs-12'>\n";								
-								$allFiguresCounterUser = dbcount("(figure_userfigures_id)",  DB_FIGURE_USERFIGURES, "");
-								//echo "<span class='badge'>".$allFiguresCounterUser."</span>\n";	
-								echo "<button class='btn btn-primary btn-xs' type='button'><span class='badge'>".$allFiguresCounterUser."</button>\n";							
-						echo "</div>\n";
+				echo "<div class='col-lg-4 col-md-4 col-sm-12 col-xs-12'>\n";																		
+					echo "<div class='navbar-default text-bold'>";	
+						echo "<span>Total figures owned by user:</span>\n";
+					echo "</div>\n";
+					echo "</div>\n";
+				
+				
+					echo "<div class='col-lg-2 col-md-2 col-sm-12 col-xs-12'>\n";								
+							$allFiguresCounterUser = dbcount("(figure_userfigures_id)",  DB_FIGURE_USERFIGURES, "");
+							//echo "<span class='badge'>".$allFiguresCounterUser."</span>\n";	
+							echo "<button class='btn btn-primary btn-xs' type='button'><span class='badge'>".$allFiguresCounterUser."</button>\n";							
+				echo "</div>\n";
 			//////////////////////////////////////////////////////////////////////				
 				
 				echo "</div>\n";
@@ -110,8 +113,7 @@ opentable("<strong>Figure Stats</strong>");
 								tbc.figure_cat_id, tbc.figure_cat_name, 
 								tbu.user_id, tbu.user_name, tbu.user_status, tbu.user_avatar, 
 								tbm.figure_manufacturer_name, 
-								tbb.figure_brand_name, 
-								tby.figure_year_id, tby.figure_year, 
+								tbb.figure_brand_name, 							
 								tbs.figure_scale_id, tbs.figure_scale_name, 							
 								fuf.figure_userfigures_figure_id, fuf.figure_userfigures_user_id 
 							FROM ".DB_FIGURE_ITEMS." AS tb
@@ -121,9 +123,8 @@ opentable("<strong>Figure Stats</strong>");
 							LEFT JOIN ".DB_FIGURE_MANUFACTURERS." AS tbm ON tbm.figure_manufacturer_id = tb.figure_manufacturer
 							LEFT JOIN ".DB_FIGURE_BRANDS." AS tbb ON tbb.figure_brand_id = tb.figure_brand
 							LEFT JOIN ".DB_FIGURE_SCALES." AS tbs ON tbs.figure_scale_id = tb.figure_scale
-							LEFT JOIN ".DB_FIGURE_YEARS." AS tby ON tby.figure_year_id = tb.figure_pubdate
 							WHERE ".(multilang_table("FI") ? "tb.figure_language='".LANGUAGE."' AND" : "")." tb.figure_freigabe='1' 
-							ORDER BY tb.figure_retailprice DESC LIMIT 0,1
+							ORDER BY tb.figure_retailprice DESC LIMIT 0,5
 
 						");
 			
@@ -165,15 +166,15 @@ opentable("<strong>Figure Stats</strong>");
 				echo "<hr>";	
 
 				/*//// GRID SYSTEM FOR PANEL AS OVERVIEW ///////////////////////////////////////
-					echo "<div class='col-lg-1 col-md-2 col-sm-2 col-xs-2'>\n";		image
-					echo "<div class='col-lg-2 col-md-3 col-sm-4 col-xs-4'>\n";		title
-					echo "<div class='col-lg-2 col-md-3 col-sm-4 col-xs-4'>\n";		manufacturer
+					echo "<div class='col-lg-1 col-md-2 col-sm-2 col-xs-2'>\n";	image
+					echo "<div class='col-lg-2 col-md-3 col-sm-4 col-xs-4'>\n";	title
+					echo "<div class='col-lg-2 col-md-3 col-sm-4 col-xs-4'>\n";	manufacturer
 					echo "<div class='col-lg-2 hidden-md hidden-sm hidden-xs'>\n";	brand
 					echo "<div class='col-lg-1 hidden-md hidden-sm hidden-xs'>\n";	scale
 					echo "<div class='col-lg-1 col-md-2 hidden-sm hidden-xs'>\n";	year
 					echo "<div class='col-lg-1 hidden-md hidden-sm hidden-xs'>\n";	rating
-					echo "<div class='col-lg-1 col-md-1 col-sm-1 col-xs-1'>\n";		edit (only for admins)
-					echo "<div class='col-lg-1 col-md-1 col-sm-1 col-xs-1'>\n";		add/remove
+					echo "<div class='col-lg-1 col-md-1 col-sm-1 col-xs-1'>\n";	edit (only for admins)
+					echo "<div class='col-lg-1 col-md-1 col-sm-1 col-xs-1'>\n";	add/remove
 				//////////////////////////////////////////////////////////////////////////////*/
 		
 		
@@ -217,20 +218,22 @@ opentable("<strong>Figure Stats</strong>");
 							echo "<div class='text-smaller text-uppercase'>".$locale['CLFP_010']."</div>\n";
 						echo "</div>\n";
 						
-						if (iADMIN || iSUPERADMIN) {
-						// COLUMN 8 (rating)
+					if (iADMIN || iSUPERADMIN) {
+						// COLUMN 8 (edit) only for admins
 						echo "<div class='col-lg-1 hidden-md hidden-sm hidden-xs'>\n";
 							echo "<div class='text-smaller text-uppercase'>Edit</div>\n";
 						echo "</div>\n";
-						} else {}
+					} else {
+						
+					}
 												
 						// COLUMN 9 Usercount (only for Guests and members - admins will see edit button)if (iADMIN || iSUPERADMIN) {
-							if (iADMIN || iSUPERADMIN) {
-								} else {
+					if (iADMIN || iSUPERADMIN) {
+					} else {
 						echo "<div class='col-lg-1 col-md-2 col-sm-2 col-xs-2'>\n";	
 							echo "<div class='text-smaller text-uppercase'>Count</div>\n";
 						echo "</div>\n";
-						}
+					}
 						
 						// COLUMN 9 (action)
 						echo "<div class='col-lg-1 col-md-2 col-sm-2 col-xs-2'>\n";	
@@ -301,7 +304,7 @@ opentable("<strong>Figure Stats</strong>");
 							
 								echo "<div class='col-lg-1 col-md-2 hidden-sm hidden-xs'><div class='side-small' title='".$locale['CLFP_006']." : ".$locale['CLFP_008']."' alt='".$locale['CLFP_006']." : ".$locale['CLFP_008']."'>".trimlink($locale['CLFP_008'],6)."</div></div>\n";
 								} else {
-								echo "<div class='col-lg-1 col-md-2 hidden-sm hidden-xs'><div class='side-small' title='".$locale['CLFP_006']." : ".$data['figure_year']."' alt='".$locale['CLFP_006']." : ".$data['figure_year']."'>".trimlink($data['figure_year'],6)."</div></div>\n";
+								echo "<div class='col-lg-1 col-md-2 hidden-sm hidden-xs'><div class='side-small' title='".$locale['CLFP_006']." : ".$data['figure_pubdate']."' alt='".$locale['CLFP_006']." : ".$data['figure_pubdate']."'>".trimlink($data['figure_pubdate'],7)."</div></div>\n";
 								} 
 		
 						// COLUMN 7 (rating)
@@ -391,7 +394,6 @@ opentable("<strong>Figure Stats</strong>");
 						tbu.user_id, tbu.user_name, tbu.user_status, tbu.user_avatar, 
 						tbm.figure_manufacturer_name, 
 						tbb.figure_brand_name, 
-						tby.figure_year_id, tby.figure_year, 
 						tbs.figure_scale_id, tbs.figure_scale_name, 							
 						fuf.figure_userfigures_figure_id, fuf.figure_userfigures_user_id 
 					FROM ".DB_FIGURE_ITEMS." AS tb
@@ -401,10 +403,8 @@ opentable("<strong>Figure Stats</strong>");
 					LEFT JOIN ".DB_FIGURE_MANUFACTURERS." AS tbm ON tbm.figure_manufacturer_id = tb.figure_manufacturer
 					LEFT JOIN ".DB_FIGURE_BRANDS." AS tbb ON tbb.figure_brand_id = tb.figure_brand
 					LEFT JOIN ".DB_FIGURE_SCALES." AS tbs ON tbs.figure_scale_id = tb.figure_scale
-					LEFT JOIN ".DB_FIGURE_YEARS." AS tby ON tby.figure_year_id = tb.figure_pubdate
 					WHERE ".(multilang_table("FI") ? "tb.figure_language='".LANGUAGE."' AND" : "")." tb.figure_freigabe='1' 
-					ORDER BY tb.figure_usedprice DESC LIMIT 0,1 
-				");
+					ORDER BY tb.figure_usedprice DESC LIMIT 0,5 ");
 				
     if (dbrows($resultteuerstegebraucht) == 0) {
 		
@@ -493,7 +493,7 @@ opentable("<strong>Figure Stats</strong>");
 						echo "</div>\n";
 						
 						if (iADMIN || iSUPERADMIN) {
-						// COLUMN 8 (rating)
+						// COLUMN 8 (edit) only for admins
 						echo "<div class='col-lg-1 hidden-md hidden-sm hidden-xs'>\n";
 							echo "<div class='text-smaller text-uppercase'>Edit</div>\n";
 						echo "</div>\n";
@@ -578,7 +578,7 @@ opentable("<strong>Figure Stats</strong>");
 							
 								echo "<div class='col-lg-1 col-md-2 hidden-sm hidden-xs'><div class='side-small' title='".$locale['CLFP_006']." : ".$locale['CLFP_008']."' alt='".$locale['CLFP_006']." : ".$locale['CLFP_008']."'>".trimlink($locale['CLFP_008'],6)."</div></div>\n";
 								} else {
-								echo "<div class='col-lg-1 col-md-2 hidden-sm hidden-xs'><div class='side-small' title='".$locale['CLFP_006']." : ".$data['figure_year']."' alt='".$locale['CLFP_006']." : ".$data['figure_year']."'>".trimlink($data['figure_year'],6)."</div></div>\n";
+								echo "<div class='col-lg-1 col-md-2 hidden-sm hidden-xs'><div class='side-small' title='".$locale['CLFP_006']." : ".$data['figure_pubdate']."' alt='".$locale['CLFP_006']." : ".$data['figure_pubdate']."'>".trimlink($data['figure_pubdate'],7)."</div></div>\n";
 								} 
 		
 						// COLUMN 7 (rating)
@@ -669,7 +669,6 @@ opentable("<strong>Figure Stats</strong>");
 						tbu.user_id, tbu.user_name, tbu.user_status, tbu.user_avatar, 
 						tbm.figure_manufacturer_name, 
 						tbb.figure_brand_name, 
-						tby.figure_year_id, tby.figure_year, 
 						tbs.figure_scale_id, tbs.figure_scale_name, 							
 						fuf.figure_userfigures_figure_id, fuf.figure_userfigures_user_id 
 					FROM ".DB_FIGURE_ITEMS." AS tb
@@ -679,10 +678,8 @@ opentable("<strong>Figure Stats</strong>");
 					LEFT JOIN ".DB_FIGURE_MANUFACTURERS." AS tbm ON tbm.figure_manufacturer_id = tb.figure_manufacturer
 					LEFT JOIN ".DB_FIGURE_BRANDS." AS tbb ON tbb.figure_brand_id = tb.figure_brand
 					LEFT JOIN ".DB_FIGURE_SCALES." AS tbs ON tbs.figure_scale_id = tb.figure_scale
-					LEFT JOIN ".DB_FIGURE_YEARS." AS tby ON tby.figure_year_id = tb.figure_pubdate
 					WHERE ".(multilang_table("FI") ? "tb.figure_language='".LANGUAGE."' AND" : "")." tb.figure_freigabe='1' 
-					ORDER BY fuf.figure_userfigures_figure_id DESC LIMIT 0,1 
-				");
+					ORDER BY fuf.figure_userfigures_figure_id DESC LIMIT 0,5");
 				
     if (dbrows($resultmostusercount) == 0) {
 		
@@ -771,7 +768,7 @@ opentable("<strong>Figure Stats</strong>");
 						echo "</div>\n";
 						
 						if (iADMIN || iSUPERADMIN) {
-						// COLUMN 8 (rating)
+						// COLUMN 8 (edit) only for admins
 						echo "<div class='col-lg-1 hidden-md hidden-sm hidden-xs'>\n";
 							echo "<div class='text-smaller text-uppercase'>Edit</div>\n";
 						echo "</div>\n";
@@ -856,7 +853,7 @@ opentable("<strong>Figure Stats</strong>");
 							
 								echo "<div class='col-lg-1 col-md-2 hidden-sm hidden-xs'><div class='side-small' title='".$locale['CLFP_006']." : ".$locale['CLFP_008']."' alt='".$locale['CLFP_006']." : ".$locale['CLFP_008']."'>".trimlink($locale['CLFP_008'],6)."</div></div>\n";
 								} else {
-								echo "<div class='col-lg-1 col-md-2 hidden-sm hidden-xs'><div class='side-small' title='".$locale['CLFP_006']." : ".$data['figure_year']."' alt='".$locale['CLFP_006']." : ".$data['figure_year']."'>".trimlink($data['figure_year'],6)."</div></div>\n";
+								echo "<div class='col-lg-1 col-md-2 hidden-sm hidden-xs'><div class='side-small' title='".$locale['CLFP_006']." : ".$data['figure_pubdate']."' alt='".$locale['CLFP_006']." : ".$data['figure_pubdate']."'>".trimlink($data['figure_pubdate'],7)."</div></div>\n";
 								} 
 		
 						// COLUMN 7 (rating)
