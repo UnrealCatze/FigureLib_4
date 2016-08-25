@@ -44,8 +44,6 @@ $result = dbquery(
 				fman.figure_manufacturer_id,
 				fman.figure_manufacturer_name, 
 				fb.figure_brand_name, 
-				fy.figure_year_id, 
-				fy.figure_year, 
 				fs.figure_scale_id, 
 				fs.figure_scale_name, 
 				fl.figure_limitation_id, 
@@ -58,15 +56,14 @@ $result = dbquery(
 				fmat.figure_material_name				
 			FROM ".DB_FIGURE_ITEMS." f
 			LEFT JOIN ".DB_USERS." fu ON f.figure_submitter=fu.user_id
-			INNER JOIN ".DB_FIGURE_CATS." fc ON f.figure_cat=fc.figure_cat_id
-			INNER JOIN ".DB_FIGURE_MANUFACTURERS." fman ON fman.figure_manufacturer_id = f.figure_manufacturer
-			INNER JOIN ".DB_FIGURE_BRANDS." fb ON fb.figure_brand_id = f.figure_brand
-			INNER JOIN ".DB_FIGURE_SCALES." fs ON fs.figure_scale_id = f.figure_scale
-			INNER JOIN ".DB_FIGURE_YEARS." fy ON fy.figure_year_id = f.figure_pubdate
-			INNER JOIN ".DB_FIGURE_LIMITATIONS." fl ON fl.figure_limitation_id = f.figure_limitation
-			INNER JOIN ".DB_FIGURE_POAS." fpoa ON fpoa.figure_poa_id = f.figure_poa
-			INNER JOIN ".DB_FIGURE_PACKAGINGS." fpack ON fpack.figure_packaging_id = f.figure_packaging
-			INNER JOIN ".DB_FIGURE_MATERIALS." fmat ON fmat.figure_material_id = f.figure_material
+			LEFT JOIN ".DB_FIGURE_CATS." fc ON f.figure_cat=fc.figure_cat_id
+			LEFT JOIN ".DB_FIGURE_MANUFACTURERS." fman ON fman.figure_manufacturer_id = f.figure_manufacturer
+			LEFT JOIN ".DB_FIGURE_BRANDS." fb ON fb.figure_brand_id = f.figure_brand
+			LEFT JOIN ".DB_FIGURE_SCALES." fs ON fs.figure_scale_id = f.figure_scale
+			LEFT JOIN ".DB_FIGURE_LIMITATIONS." fl ON fl.figure_limitation_id = f.figure_limitation
+			LEFT JOIN ".DB_FIGURE_POAS." fpoa ON fpoa.figure_poa_id = f.figure_poa
+			LEFT JOIN ".DB_FIGURE_PACKAGINGS." fpack ON fpack.figure_packaging_id = f.figure_packaging
+			LEFT JOIN ".DB_FIGURE_MATERIALS." fmat ON fmat.figure_material_id = f.figure_material
 			".(multilang_table("FI") ? "WHERE figure_language='".LANGUAGE."' AND" : "WHERE")." f.figure_freigabe='1'  
 			AND figure_id='".$_GET['figure_id']."'
 			");
@@ -76,7 +73,7 @@ $result = dbquery(
 
 // IMAGES ####################################################################################	
 
-	openside("<div class='well clearfix'><strong></strong>&nbsp;&nbsp;<a href='".INFUSIONS."figurelib/figures.php?figure_id=".$data['figure_id']."'>".trimlink($data['figure_title'], 23)." (".trimlink($data['figure_manufacturer_name'], 23).") [".$data['figure_year']."]</a></div>");
+	openside("<div class='well clearfix'><strong></strong>&nbsp;&nbsp;<a href='".INFUSIONS."figurelib/figures.php?figure_id=".$data['figure_id']."'>".trimlink($data['figure_title'], 23)." (".trimlink($data['figure_manufacturer_name'], 23).") [".$data['figure_pubdate']."]</a></div>");
 
 	// Figure ID
 	$figure_id = $data['figure_id'];
@@ -111,7 +108,7 @@ $result = dbquery(
 			  }
 				
 					$images .= "<div class='item".($i == 0 ? " active" : "")."'>\n";
-					$images .= "<center><a href='".$image_image."'  target='_blank' height='100%' width='100%' alt='".$data['figure_title']."'><img src='".$image_thumb."' alt='".$locale['figure_588']."' /></a>\n";
+					$images .= "<center><a href='".$image_image."'  height='100%' width='100%' alt='".$data['figure_title']."'><img src='".$image_thumb."' alt='".$locale['figure_588']."' /></a>\n";
 					$images .= "</div>\n";
 
 				// Counter erhöhen (counter +1)
@@ -127,81 +124,20 @@ $result = dbquery(
 					 echo $images;
 				  echo "</div>\n";
 				  echo "<a class='left carousel-control' href='#myCarousel' role='button' data-slide='prev'>\n";
-					 if ($image_count > 1) {		
-						echo "<span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span>\n";
-					 	} else {
-							
-						}
-	
+					 echo "<span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span>\n";
 					 echo "<span class='sr-only'>Previous</span>\n";
 				  echo "</a>\n";
 				  echo "<a class='right carousel-control' href='#myCarousel' role='button' data-slide='next'>\n";
-				  if ($image_count > 1) {
 					 echo "<span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span>\n";
-					 	} else {
-							
-						}					 
 					 echo "<span class='sr-only'>Next</span>\n";
 				  echo "</a>\n";
 			   echo "</div>\n";
 	   
 			// Variablen löschen (delete variables)
 				unset($indicators, $images, $i);
-	} else {
-				
-				// Carousel anzeigen (show carousel)
-			   echo "<div id='myCarousel' class='carousel slide' data-ride='carousel'>\n";
-				  //echo "<ol class='carousel-indicators'>\n";
-					 //echo $indicators;
-				  //echo "</ol>\n";
-				  echo "<div class='carousel-inner' role='listbox'>\n";
-					 echo "<center><img src='".INFUSIONS."figurelib/images/default.png' alt='".$locale['CLFP_002']." : ".$data['figure_title']."' title='".$locale['CLFP_002']." : ".$data['figure_title']."' style='border:0px;max-height:300px;max-width:300px'/><br><br>
-						<div class='alert alert-warning' role='alert'>
-						Photo unavailable. Submit as a registered member. <a href='".BASEDIR."register.php'>Register HERE</a></div>";
-				  echo "</div>\n";
-				  echo "<a class='left carousel-control'  role='button' data-slide='prev'>\n";
-					 //echo "<span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span>\n";
-					 echo "<span class='sr-only'>Previous</span>\n";
-				  echo "</a>\n";
-				  echo "<a class='right carousel-control'  role='button' data-slide='next'>\n";
-					 //echo "<span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span>\n";
-					 echo "<span class='sr-only'>Next</span>\n";
-				  echo "</a>\n";
-			   echo "</div>\n";
-			
-					// Variablen löschen (delete variables)
-				unset($indicators, $images, $i);	
-
-   }
-
+	}
 //closeside();
 // ############################################################################################	
-
-
-// ####### SOCIAL_SHARING   ###################################################################	
-															
-						// SETTINGS HOLEN
-						//$settings = fusion_get_settings();
-						$settings = fusion_get_settings();
-						$fil_settings = get_settings("figurelib"); 
-
-						if ($fil_settings['figure_social_sharing']) {
-						//openside("<div class='well clearfix'><strong>SOCIAL SHARING</strong></div>");	
-							echo "<div style='text-align:center'>\n";
-							$link = $settings['siteurl'].str_replace("../","",INFUSIONS)."figurelib/figure.php?figure_id=".$_GET['figure_id'];
-							echo "<a href='http://www.facebook.com/share.php?u=".$link."' target='_blank'><img alt='Facebook' src='".INFUSIONS."figurelib/images/facebook.png' border='0'></a>&nbsp;\n";
-							echo "<a href='http://twitter.com/share?url=".$link."' target='_blank'><img alt='Twitter' src='".INFUSIONS."figurelib/images/twitter.png' border='0'></a>&nbsp;\n";
-							echo "<a href='http://digg.com/submit?url=".$link."' target='_blank'><img alt='Digg' src='".INFUSIONS."figurelib/images/digg.png' border='0'></a>&nbsp;\n";
-							echo "<a href='http://reddit.com/submit?url=".$link."' target='_blank'><img alt='Reddit' src='".INFUSIONS."figurelib/images/reddit.png' border='0'></a>&nbsp;\n";
-							echo "<a href='http://del.icio.us/post?url=".$link."' target='_blank'><img alt='Del.icio.us' src='".INFUSIONS."figurelib/images/delicious.png' border='0'></a>&nbsp;\n";
-							echo "</div>\n";
-						//closeside();
-						}	
-
-// ############################################################################################	
-
-
-
 
 // ###########  FIGURE DETAILS   ##############################################################
 //openside('');
@@ -261,7 +197,7 @@ $result = dbquery(
 						
 						// Release Date DATA
 						echo "<div class='col-lg-8 col-md-8 col-sm-12 col-xs-12'>\n";
-								echo "<span class='small'>&nbsp;".$data['figure_year']."</span>\n";
+								echo "<span class='small'>&nbsp;".$data['figure_pubdate']."</span>\n";
 						echo "</div>\n";
 						
 						// ++++++++++++++++
@@ -273,7 +209,7 @@ $result = dbquery(
 						
 						// Country DATA
 						echo "<div class='col-lg-8 col-md-8 col-sm-12 col-xs-12'>\n";
-								echo "<span class='small'>&nbsp;".$data['figure_country']."</span>\n";		
+								echo "<span class='small'>&nbsp;".figures_getCountryName($data['figure_country'])."</span>\n";		
 						echo "</div>\n";
 						
 						// ++++++++++++++++
@@ -506,39 +442,9 @@ $result = dbquery(
 			echo "</div>\n";
 			// MODUL 4 END ########################################################################################################			
 				
-			
-			// MODUL 5 Begin (Video)  #############################################################################################		
-		if ($data['figure_videourl']  != "") { 	
-	
-	echo "<hr>";
-		
-			echo "<div class='container-fluid'>\n";
-			echo "<div class='table-responsive'>\n";
-			echo "<div class='row'>\n";	
-		
-			$videourl = $data['figure_videourl'];
-			
-				// TEXT
-						echo "<div class='col-lg-4 col-md-12 col-sm-12 col-xs-12'>\n";
-							echo "<div class='navbar-default'><div class='text-smaller text-uppercase'><strong>Unboxing Video</strong>\n";
-						echo "</div></div></div>\n";									
-						
-				// VIDEO
-						echo "<div class='col-lg-8 col-md-12 col-sm-12 col-xs-12'>\n";
-						// dieser code geht nicht 
-							echo "<div class='embed-responsive embed-responsive-16by9' ><iframe class='embed-responsive-item' src='https://www.youtube.com/embed/".$videourl."'></iframe></div>";					
-						echo "</div>\n";
-				
-			echo "</div>\n";
-			echo "</div>\n";
-			echo "</div>\n";
-			} else { 			
-			}		
-			// MODUL 5 End  (Video) ################################################################################################
-	
 	echo "<hr>";
 
-			// MODUL 6 Begin  #####################################################################################################
+			// MODUL 5 Begin  #####################################################################################################
 			echo "<div class='container-fluid'>\n";
 			echo "<div class='table-responsive'>\n";
 			echo "<div class='row'>\n";	
@@ -561,8 +467,8 @@ $result = dbquery(
 						echo "</div></div></div>\n";
 						
 						// Discreption  DATA
-						echo "<div class='col-lg-8 col-md-8 col-sm-12 col-xs-12'>\n";	
-							echo "<span class='small' style='word-break: break-all; word-wrap: break-word;'>&nbsp;".$data['figure_description']."</span>\n";			
+						echo "<div class='col-lg-8 col-md-8 col-sm-12 col-xs-12'>\n";
+								echo "<span class='small' style='word-break: break-all; word-wrap: break-word;'>&nbsp;".($data['figure_description'] ? $data['figure_description'] : "-")."</span>\n";
 						echo "</div>\n";
 					
 			echo "</div>\n";
@@ -593,6 +499,12 @@ if (iADMIN || iSUPERADMIN) {
 // ############################################################################################	
 
 // ########  AFFILIATE PANEL  #################################################################
+
+	$fil_settings = get_settings("figurelib");
+	
+if ($fil_settings['figure_show_affiliates_global']) { // Affiliate global on/off ???
+	if ($fil_settings['figure_show_affiliates']) { // Affiliate for this figure on/off ???
+
 openside("<div class='well clearfix'><strong>AFFILIATES</strong></div>");						
 				
 	// CSS 
@@ -699,98 +611,18 @@ openside("<div class='well clearfix'><strong>AFFILIATES</strong></div>");
 						} else { echo "<a href='".$data['figure_amazon_it']."'><img src='".INFUSIONS."figurelib/images/flags/flag_italy.png"."' alt='".trimlink($data['figure_amazon_it'],50)."' title='".trimlink($data['figure_amazon_it'],100)."'></td>\n"; }	
 				echo "</tr></table>\n";			
 closeside();
+		}
+	}
 // ############################################################################################
 				
 // ####### USERFIGURES  #######################################################################
 			
-	openside("<div class='well clearfix'><strong>".$locale['userfigure_005']."</strong></div>");	
-	
-	if (iMEMBER) {
-		global $userdata;
-							
-			$resultuf = dbquery(
-				"SELECT             
-					fu.user_id, 
-					fu.user_name, 
-					fu.user_status, 
-					fu.user_avatar, 
-					fuf.figure_userfigures_figure_id,
-					fuf.figure_userfigures_user_id          
-            FROM ".DB_FIGURE_USERFIGURES." fuf
-            INNER JOIN ".DB_USERS." fu ON fuf.figure_userfigures_user_id=fu.user_id  
-            WHERE fuf.figure_userfigures_figure_id='".$data['figure_id']."'
-            AND fu.user_id='".$userdata['user_id']."' 
-			GROUP BY fu.user_id 
-            ");
-								
-				$rows = dbrows($resultuf);
+	openside("<div class='well clearfix'><strong>".$locale['userfigure_005']."</strong></div>");
+	echo figures_displayMyCollectionForm($data['figure_id'], FUSION_REQUEST, "big");
 
-			// USER HAVE THE FIGURE
-			if ($rows > 0) { 
-						
-					while ($datauf = dbarray($resultuf)) {
-													
-						if (isset($_POST['delete_from_collection'])) {
-									
-									dbquery("
-										DELETE FROM ".DB_FIGURE_USERFIGURES." 
-										WHERE figure_userfigures_figure_id=".$data['figure_id']." 
-										AND figure_userfigures_user_id=".$userdata['user_id']." 
-										");									
-									redirect(clean_request("", array("delete_from_collection"), FALSE));
-
-						}
-					}
-							echo openform('inputform', 'post', FUSION_REQUEST, array("class" => "",));
-								echo "<div align='center'>\n";
-								echo form_button("delete_from_collection", $locale['userfigure_002'], $locale['userfigure_002'], array("class" => "btn btn-sm btn-danger"));
-								echo "  <a href='".INFUSIONS."figurelib/mycollection.php' class='btn btn-sm btn-primary'>".$locale['userfigure_006']."</a>";								
-								//echo "  <a href='http://google.com' class='btn btn-sm btn-primary'>".$locale['sale']."</a>";
-								echo "<p>";
-								echo "</div>\n";
-							echo closeform();
-							
-
-			// USER DOSEN'T HAVE THE FIGURE					
-			} else { 
-									
-						if (isset($_POST['add_to_collection'])) {
-											
-							// Standard Values for Fields
-							$inputArray = array(
-							"figure_userfigures_figure_id" => $data['figure_id'], 
-							"figure_userfigures_figure_id" => $userdata['user_id'], 
-							);
-
-							// SAVE DATA
-							if (defender::safe()) {
-									$inputArray = array(
-										"figure_userfigures_figure_id" => $data['figure_id'],
-										"figure_userfigures_user_id" => $userdata['user_id'],);
-									dbquery_insert(DB_FIGURE_USERFIGURES, $inputArray, "save", array());	
-									redirect(clean_request("", array("add_to_collection"), FALSE));									
-							}
-						}
-					
-							echo openform('inputform', 'post', FUSION_REQUEST, array("class" => "",));
-								echo "<div align='center'>\n";
-								echo form_button("add_to_collection", $locale['userfigure_001'], $locale['userfigure_001'], array("class" => "btn btn-sm btn-success"));
-								echo "  <a href='".INFUSIONS."figurelib/mycollection.php' class='btn btn-sm btn-primary'>".$locale['userfigure_006']."</a>";								
-								//echo "  <a href='http://google.com' class='btn btn-sm btn-primary'>".$locale['sale']."</a>";
-								echo "</div>\n";
-								echo "<p>";
-							echo closeform();															
-					}						
-	}
-	
 // ########### 	LIST OF ALL USER WHERE HAVE THIS FIGURE  ##################################				
 global $userdata;
-
-
-
-
-
-/*        $resultufc = dbquery(
+        $resultufc = dbquery(
 				"SELECT             
 					fu.user_id, 
 					fu.user_name, 
@@ -804,44 +636,21 @@ global $userdata;
             AND fu.user_id='".$userdata['user_id']."' 
 			GROUP BY fu.user_id 			
             ");	
-*/
-
-			$resultufc = dbquery(
-				"SELECT             
-					fu.user_id, 
-					fu.user_name, 
-					fu.user_status, 
-					fu.user_avatar, 
-					fuf.figure_userfigures_figure_id,
-					fuf.figure_userfigures_user_id          
-            FROM ".DB_FIGURE_USERFIGURES." fuf
-            INNER JOIN ".DB_USERS." fu ON fuf.figure_userfigures_user_id=fu.user_id  
-            WHERE fuf.figure_userfigures_figure_id='".$data['figure_id']."'
-			GROUP BY fu.user_id 			
-            ");	
-			
+	
 		if (dbrows($resultufc) != 0) {
 				echo "<div align='center'>\n";
 				echo $locale['userfigure_003'];		
-				//echo "<p>";	
-				echo "</div>";	
-			echo "<div class='side-small text-center'>";	
+				echo "<p>";	
+				
+				
 			while ($data = dbarray($resultufc)) {
 				
-				// Text von rechts
-				//echo "<tr><td class='side-small'>\n";
-				//echo "<a href='".BASEDIR."profile.php?lookup=".$data['user_id']."' title='".$data['user_name']."'>\n";
-				//echo "<span>".THEME_BULLET." ".trimlink($data['user_name'], 15)."</a></span>\n";
-				//echo "</td></tr>\n";
-				
-				//text center
-				echo "<a href='".BASEDIR."profile.php?lookup=".$data['user_id']."' title='".$data['user_name']."'>
-				<span>".THEME_BULLET." ".trimlink($data['user_name'], 15)."</span>
-				</a>";
-	
+				echo "<tr>\n<td class='side-small' align='left'>".THEME_BULLET."\n";
+				echo "<a href='".BASEDIR."profile.php?lookup=".$data['user_id']."' title='".$data['user_name']."' class='side'>\n";
+				echo trimlink($data['user_name'], 15)."</a></td>\n</tr>\n";
+				echo "</div>";	
 			}
-				echo "</div>\n";
-		
+
 		} else {
 				echo "<div align='center'>\n";
 				echo $locale['userfigure_004'];	
@@ -859,23 +668,23 @@ closeside();
 				//echo "<div class='panel panel-default'>\n";
 
 					$result3 = dbquery("
-                        SELECT 
-                            f.figure_id, 
-                            f.figure_title, 
-                            f.figure_datestamp, 
-                            f.figure_visibility, 
-                            fc.figure_cat_id, 
-                            fc.figure_cat_name,
-                            fm.figure_manufacturer_id,
-                            fm.figure_manufacturer_name                         
-                        FROM ".DB_FIGURE_ITEMS." f 
-                        INNER JOIN ".DB_FIGURE_CATS." fc ON f.figure_cat=fc.figure_cat_id
-                        INNER JOIN ".DB_FIGURE_MANUFACTURERS." fm ON f.figure_manufacturer=fm.figure_manufacturer_id                        
-                        WHERE MATCH (figure_title) AGAINST ('".$data['figure_title']."' IN BOOLEAN MODE) 
-                        AND figure_id != '".$data['figure_id']."' ".(iSUPERADMIN ? "" : "AND ".groupaccess('figure_visibility'))." 
-                        ORDER BY RAND() LIMIT 0,5");
-						
-					
+						SELECT 
+							f.figure_id, 
+							f.figure_title, 
+							f.figure_datestamp, 
+							f.figure_visibility, 
+							fc.figure_cat_id, 
+							fc.figure_cat_name,
+							fm.figure_manufacturer_id,
+							fm.figure_manufacturer_name							
+						FROM ".DB_FIGURE_ITEMS." f 
+						INNER JOIN ".DB_FIGURE_CATS." fc ON f.figure_cat=fc.figure_cat_id
+						INNER JOIN ".DB_FIGURE_MANUFACTURERS." fm ON f.figure_manufacturer=fm.figure_manufacturer_id 						
+						WHERE MATCH (figure_title) AGAINST ('".$data['figure_title']."' IN BOOLEAN MODE)
+						AND figure_id != '".$data['figure_id']."' ".(iSUPERADMIN ? "" : "AND ".groupaccess('figure_visibility'))." 
+						ORDER BY RAND() 
+						LIMIT 0,5");
+				
 					if (dbrows($result3)) {
 						$i = 0;
 												
@@ -894,9 +703,9 @@ closeside();
 							$rating = ($num_votes > 0 ? str_repeat("<img src='".INFUSIONS."figurelib/images/starsmall.png'>",ceil($drating['sum_rating']/$num_votes)) : "-");
 							$cell_color = ($i % 2 == 0 ? "tbl1" : "tbl2"); $i++;
 							echo "<tr>\n";
-							echo "<td class='$cell_color' width='50%'><a href='figure.php?figure_id=".$data3['figure_id']."' title='".$data3['figure_title']."'>".$data3['figure_title']."</a></td>\n";
-							echo "<td class='$cell_color' width='25%' align=''>".trimlink($data3['figure_manufacturer_name'],20)."</td>\n";
-							echo "<td class='$cell_color' width='25%' align=''>".trimlink($data3['figure_cat_name'],10)."</td>\n";
+							echo "<td class='$cell_color' width='50%'><a href='figures.php?figure_id=".$data3['figure_id']."' title='".$data3['figure_title']."'>".$data3['figure_title']."</a></td>\n";
+							echo "<td class='$cell_color' width='25%' align=''>".trimlink($data3['figure_manufacturer_name'],30)."</td>\n";
+							echo "<td class='$cell_color' width='25%' align=''>".$data3['figure_cat_name']."</td>\n";
 							echo "<td class='$cell_color' width='25%' align=''>".$rating."</td>\n";
 							echo "</tr>\n";
 						} 
@@ -915,16 +724,20 @@ closeside();
 // ######  RATING UND COMMENTS	###############################################################
 	
 	$fil_settings = get_settings("figurelib");
-	if ($fil_settings['figure_allow_comments']) { // Comments
+	
+if ($fil_settings['figure_show_comments_global']) { // Comments	global on/off ???
+	if ($fil_settings['figure_show_comments']) { // Comment for this figure on/off ???
 		openside("<div class='well clearfix'><strong>COMMENTS</strong></div>");	
 		showcomments("FI", DB_FIGURE_ITEMS, "figure_id", $_GET['figure_id'], INFUSIONS."figurelib/figures.php?figure_id=".$_GET['figure_id']);
 		closeside();
 	}
-		
-	if ($fil_settings['figure_allow_ratings']) { // Ratings
+	}
+if ($fil_settings['figure_show_comments_global']) { // Ratings	global on/off ???		
+	if ($fil_settings['figure_show_ratings']) { // Rating for this figure on /off ???
 		openside("<div class='well clearfix'><strong>RATINGS</strong></div>");
 		showratings("FI", $_GET['figure_id'], INFUSIONS."figurelib/figures.php?figure_id=".$_GET['figure_id']);
 		closeside();
+	}
 	}
 	
 // ####### SOCIAL_SHARING   ###################################################################	
@@ -967,7 +780,7 @@ echo "</aside>\n";
 	
 } 					// TO LINE 32
 	
-// ##### FUNCTIONS FOR IMAGES  #################################################################
+// ##### FUNCTINS FOR IMAGES  #################################################################
 
 function get_figure_image_path($figure_images_image, $figure_images_thumb, $hiRes = FALSE) {
     if (!$hiRes) {
