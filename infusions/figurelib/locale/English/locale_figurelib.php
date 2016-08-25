@@ -315,55 +315,51 @@ $locale['figure_189'] = " to go to Figure Submissions";
 // figure_settings.php
 $locale['figure_300'] = "Settings Updated";
 $locale['figure_301'] = "Database update error occurs: Settings were not Updated!";
-$locale['figure_302'] = "Admin password:";
+$locale['figure_302'] = "Admin password";
 
-$locale['figure_330'] = "Maximum size uploads:";
+$locale['figure_330'] = "Maximum size uploads";
 $locale['figure_331'] = "(Maximum file size in bytes)";
-$locale['figure_332'] = "Allowed file types:";
-$locale['figure_334'] = "Figures per page:";
-$locale['figure_335'] = "Allow Submit Figures:";
+$locale['figure_332'] = "Allowed file types";
+$locale['figure_334'] = "Figures per page";
+$locale['figure_335'] = "Allow Submit Figures";
 $locale['figure_336'] = "Yes";
 $locale['figure_337'] = "No";
-$locale['figure_338'] = "Allow guests to download figures:";
+$locale['figure_338'] = "Allow guests to download figures";
 $locale['figure_339'] = "Gallery Mode on";
 $locale['figure_340'] = "Table";
 $locale['figure_341'] = "Gallery";
-$locale['figure_342'] = "Activate sub-categories:";
-$locale['figure_343'] = "Figures per row:";
-$locale['figure_344'] = "Social Sharing:";
+$locale['figure_342'] = "Activate sub-categories";
+$locale['figure_343'] = "Figures per row";
+$locale['figure_344'] = "Social Sharing";
 $locale['figure_345'] = "Save Settings";
 $locale['figure_346'] = "Recount figures";
 $locale['figure_347'] = "Figures recounted";
-$locale['figure_348'] = "Related:";
-$locale['figure_349'] = "Activate sub-manufacturers:";
-$locale['figure_350'] = "Activate sub-brands:";
-$locale['figure_351'] = "Activate sub-materials:";
-$locale['figure_352'] = "Activate sub-scales:";
-$locale['figure_353'] = "Activate sub-poas:";
-$locale['figure_354'] = "Activate sub-tpos:";
-$locale['figure_355'] = "Activate sub-packaging:";
-$locale['figure_356'] = "Activate sub-limitation:";
-$locale['figure_357'] = "Figures per line:";
+$locale['figure_348'] = "Related";
+$locale['figure_349'] = "Activate sub-manufacturers";
+$locale['figure_350'] = "Activate sub-brands";
+$locale['figure_351'] = "Activate sub-materials";
+$locale['figure_352'] = "Activate sub-scales";
+$locale['figure_353'] = "Activate sub-poas";
+$locale['figure_354'] = "Activate sub-tpos";
+$locale['figure_355'] = "Activate sub-packaging";
+$locale['figure_356'] = "Activate sub-limitation";
+$locale['figure_357'] = "Figures per line";
 $locale['figure_358'] = "Figure photo max size";
-$locale['figure_359'] = "Figure photo max width:";
-$locale['figure_360'] = "Figure photo max heigh:";
+$locale['figure_359'] = "Figure photo max width";
+$locale['figure_360'] = "Figure photo max heigh";
 $locale['figure_361'] = "Only values 1-500 allowed!";
 $locale['figure_362'] = "Only values 1-10 allowed!";
-$locale['figure_363'] = "Comments:";
-$locale['figure_364'] = "Ratings:";
-$locale['figure_365'] = "Image upload count per figure:";
+$locale['figure_363'] = "Comments";
+$locale['figure_364'] = "Ratings";
+$locale['figure_365'] = "Image upload count per figure";
 $locale['figure_366'] = "Allow Submit Videos:";
-$locale['figure_367'] = "Videos:";
-$locale['figure_368'] = "Affiliate:";
-$locale['figure_369'] = "Amazon Affiliate:";
-$locale['figure_370'] = "Ebay Affiliate:";
-
-$locale['figure_371'] = "Images:";
-$locale['figure_372'] = "Data:";
-
-
-
-
+$locale['figure_367'] = "Videos";
+$locale['figure_368'] = "Affiliate";
+$locale['figure_369'] = "Amazon Affiliate";
+$locale['figure_370'] = "Ebay Affiliate";
+$locale['figure_371'] = "Images";
+$locale['figure_372'] = "Data";
+$locale['figure_373'] = "Collection";
 
 // figure.php
 $locale['figure_410'] = "[NEW]";
