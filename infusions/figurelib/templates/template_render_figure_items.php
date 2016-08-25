@@ -503,7 +503,7 @@ if (iADMIN || iSUPERADMIN) {
 	$fil_settings = get_settings("figurelib");
 	
 	if ($fil_settings['figure_show_affiliates_global']) { // Affiliate global on/off ???
-		if ($fil_settings['figure_show_affiliates']) { // Affiliate for this figure on/off ???
+		if ($data['figure_show_affiliates']) { // Affiliate for this figure on/off ???
 
 		openside("<div class='well clearfix'><strong>AFFILIATES</strong></div>");						
 				
@@ -663,11 +663,8 @@ closeside();
 // ###########  RELATED FIGURES  ##############################################################			
 	$fil_settings = get_settings("figurelib");
 
-	
-
-	
-if ($fil_settings['figure_show_related_global']) { // related global on/off ???
-	if ($fil_settings['figure_show_related']) { // related for this figure on/off ???	
+	if ($fil_settings['figure_show_related_global']) { // related global on/off ???
+		if ($data['figure_show_related']) { // related for this figure on/off ???	
 	
 		openside("<div class='well clearfix'><strong>RELATED FIGURES</strong></div>");	
 					
@@ -724,8 +721,8 @@ if ($fil_settings['figure_show_related_global']) { // related global on/off ???
 							//echo "</div>\n";
 							echo "</tbody></table>\n";
 		closeside();										
-	}
-}		
+		}
+	}		
 // ############################################################################################
 
 // ######  RATING UND COMMENTS	###############################################################
@@ -733,14 +730,14 @@ if ($fil_settings['figure_show_related_global']) { // related global on/off ???
 	$fil_settings = get_settings("figurelib");
 	
 	if ($fil_settings['figure_show_comments_global']) { // Comments	global on/off ???
-		if ($fil_settings['figure_show_comments']) { // Comment for this figure on/off ???
+		if ($data['figure_show_comments']) { // Comment for this figure on/off ???
 			openside("<div class='well clearfix'><strong>COMMENTS</strong></div>");	
 			showcomments("FI", DB_FIGURE_ITEMS, "figure_id", $_GET['figure_id'], INFUSIONS."figurelib/figures.php?figure_id=".$_GET['figure_id']);
 			closeside();
 		}
 	}
 	if ($fil_settings['figure_show_comments_global']) { // Ratings	global on/off ???		
-		if ($fil_settings['figure_show_ratings']) { // Rating for this figure on /off ???
+		if ($data['figure_show_ratings']) { // Rating for this figure on /off ???
 			openside("<div class='well clearfix'><strong>RATINGS</strong></div>");
 			showratings("FI", $_GET['figure_id'], INFUSIONS."figurelib/figures.php?figure_id=".$_GET['figure_id']);
 			closeside();
@@ -749,13 +746,13 @@ if ($fil_settings['figure_show_related_global']) { // related global on/off ???
 	
 // ####### SOCIAL_SHARING   ###################################################################	
 															
-						// SETTINGS HOLEN
-						//$settings = fusion_get_settings();
-						$settings = fusion_get_settings();
-						$fil_settings = get_settings("figurelib"); 
+	// SETTINGS HOLEN
+	//$settings = fusion_get_settings();
+	$settings = fusion_get_settings();
+	$fil_settings = get_settings("figurelib"); 
 	
 	if ($fil_settings['figure_show_social_sharing_global']) { // social_sharing	global on/off ???
-		if ($fil_settings['figure_show_social_sharing']) { // social_sharing for this figure on/off ???						
+		if ($data['figure_show_social_sharing']) { // social_sharing for this figure on/off ???						
 
 						openside("<div class='well clearfix'><strong>SOCIAL SHARING</strong></div>");	
 							echo "<div style='text-align:center'>\n";
