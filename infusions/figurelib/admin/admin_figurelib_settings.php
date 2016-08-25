@@ -48,15 +48,17 @@ if (isset($_POST['savesettings'])) {
 	
 	// Check posted Fields and save to Array
 	$inputArray = [
-		"figure_notification"         => form_sanitizer($_POST['figure_notification'],         1,    "figure_notification"),
-		"figure_notification_subject" => form_sanitizer($_POST['figure_notification_subject'], "",   "figure_notification_subject"),
-		"figure_notification_message" => form_sanitizer($_POST['figure_notification_message'], "",   "figure_notification_message"),			
+		"figure_notification"         		  => form_sanitizer($_POST['figure_notification'],         		 1,     "figure_notification"),
+		"figure_notification_subject" 		  => form_sanitizer($_POST['figure_notification_subject'], 		"",     "figure_notification_subject"),
+		"figure_notification_message" 		  => form_sanitizer($_POST['figure_notification_message'], 		"",     "figure_notification_message"),			
 		"figure_allow_submit_videos"  		  => form_sanitizer($_POST['figure_allow_submit_videos'],         0,    "figure_allow_submit_videos"), 		
 		"figure_show_images_global"      	  => form_sanitizer($_POST['figure_show_images_global'],          0,    "figure_show_images_global"),
 		"figure_show_data_global"        	  => form_sanitizer($_POST['figure_show_data_global'],            0,    "figure_show_data_global"),
 		"figure_show_videos_global"      	  => form_sanitizer($_POST['figure_show_videos_global'],          0,    "figure_show_videos_global"),
-		"figure_show_affiliates_complete_global" => form_sanitizer($_POST['figure_show_affiliates_complete_global'],  0, "figure_show_affiliates_complete_global"),
+		
+		"figure_show_affiliates_complete_global" => form_sanitizer($_POST['figure_show_affiliates_complete_global'],  0,    "figure_show_affiliates_complete_global"),
 		"figure_show_affiliates_other_global"    => form_sanitizer($_POST['figure_show_affiliates_other_global'],     0,    "figure_show_affiliates_other_global"),
+		
 		"figure_show_amazon_global"      	  => form_sanitizer($_POST['figure_show_amazon_global'],          0,    "figure_show_amazon_global"),
 		"figure_show_ebay_global"        	  => form_sanitizer($_POST['figure_show_ebay_global'],            0,    "figure_show_ebay_global"),
 		"figure_show_collection_global"       => form_sanitizer($_POST['figure_show_collection_global'],      0,    "figure_show_collection_global"),
@@ -64,6 +66,7 @@ if (isset($_POST['savesettings'])) {
 		"figure_show_comments_global"   	  => form_sanitizer($_POST['figure_show_comments_global'],        0,    "figure_show_comments_global"),
 		"figure_show_ratings_global"    	  => form_sanitizer($_POST['figure_show_ratings_global'],         0,    "figure_show_ratings_global"),
 		"figure_show_social_sharing_global"   => form_sanitizer($_POST['figure_show_social_sharing_global'],  0,    "figure_show_social_sharing_global"),		
+		
 		"figure_per_page"             => form_sanitizer($_POST['figure_per_page'],             0,    "figure_per_page"),
 		"figure_per_line"             => form_sanitizer($_POST['figure_per_line'],             0,    "figure_per_line"),
 		"figure_image_upload_count"   => form_sanitizer($_POST['figure_image_upload_count'],   10,   "figure_image_upload_count"),	
@@ -81,9 +84,11 @@ if (isset($_POST['savesettings'])) {
 		"figure_photo_cat_max_h"      => form_sanitizer($_POST['figure_photo_cat_max_h'],      1600, "figure_photo_cat_max_h"),
 		"figure_photo_man_max_w"      => form_sanitizer($_POST['figure_photo_man_max_w'],      1800, "figure_photo_man_max_w"),
 		"figure_photo_man_max_h"      => form_sanitizer($_POST['figure_photo_man_max_h'],      1600, "figure_photo_man_max_h"),
+		
 		"figure_photo_max_b"          => form_sanitizer($_POST['calc_b'], 150, "calc_b") * form_sanitizer($_POST['calc_c'], 100000, "calc_c"),				
 		"figure_photo_cat_max_b"      => form_sanitizer($_POST['calc_b_cat'], 150, "calc_b_cat") * form_sanitizer($_POST['calc_c_cat'], 100000, "calc_c_cat"),
 		"figure_photo_man_max_b"      => form_sanitizer($_POST['calc_b_man'], 150, "calc_b_man") * form_sanitizer($_POST['calc_c_man'], 100000, "calc_c_man"),			
+		
 		"figure_display"              		 => isset($_POST['figure_display'])        ? 1 : 0,
 		"figure_submit"                      => isset($_POST['figure_submit'])         ? 1 : 0	
 		];
@@ -134,16 +139,15 @@ echo openform('settingsform', 'post', FUSION_REQUEST, array('class' => "m-t-20")
 // Display Form
 echo "<div class='row'><div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";
 
-
 #################### General Settings ########################################################
 
-/*-----------------------------------------------------------------------
-figure_per_page 			|  figure_submit  	                 		| 
-figure_per_line				|  figure_allow_submit_videos 		 		| 
-figure_display 				|   										| 
-------------------------------------------------------------------------*/
+		/*-----------------------------------------------------------------------
+		|figure_per_page 				|  figure_submit  	                 	| 
+		|figure_per_line				|  figure_allow_submit_videos 		 	| 
+		|figure_display 				|   									| 
+		------------------------------------------------------------------------*/
 
-openside("General Settings");
+openside("<div class='text-bold text-uppercase'>".$locale['figure_375']."</div>");
 
 echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";	
 	echo "<div class='col-lg-6 col-md-6 col-sm-12 col-xs-12'>\n";			
@@ -230,35 +234,35 @@ closeside();
 
 #################### General Settings Module on/off ########################################################
 
-/*---------------------------------------------------------------------------------------
-| figure_show_images_global				| 	----------------------------------------	|
-| figure_show_data_global				| 	|figure_show_affiliates_complete_global|	|
-| figure_show_videos_global				|	----------------------------------------	|
-| figure_show_collection_global			|												|
-| figure_show_related					|	figure_show_affiliates_other_global			|
-| figure_show_comments_global			|	figure_show_amazon_global					|	
-| figure_show_ratings_global			|	figure_show_ebay_global						|
-| figure_show_social_sharing_global		|												|
------------------------------------------------------------------------------------------
-| HINWEIS: WENN CHECKBOX DANN --> => isset($_POST['figure_display'])  ? 1 : 0, 	  		|
----------------------------------------------------------------------------------------*/
+		/*---------------------------------------------------------------------------------------
+		| figure_show_images_global				| 	----------------------------------------	|
+		| figure_show_data_global				| 	|figure_show_affiliates_complete_global|	|
+		| figure_show_videos_global				|	----------------------------------------	|
+		| figure_show_collection_global			|												|
+		| figure_show_related					|	figure_show_affiliates_other_global			|
+		| figure_show_comments_global			|	figure_show_amazon_global					|	
+		| figure_show_ratings_global			|	figure_show_ebay_global						|
+		| figure_show_social_sharing_global		|												|
+		-----------------------------------------------------------------------------------------
+		| HINWEIS: WENN CHECKBOX DANN --> => isset($_POST['figure_display'])  ? 1 : 0, 	  		|
+		---------------------------------------------------------------------------------------*/
 
 	echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";				
 
-openside("MODULE ON/OFF - GLOBAL");
+openside("<div class='text-bold text-uppercase'>".$locale['figure_376']."</div>");
 
 	echo "<div class='col-lg-6 col-md-6 col-sm-12 col-xs-12'>\n";
 
-/*--------------------------------------------------------------------------------------
-| figure_show_images_global				| 											  	|
-| figure_show_data_global				| 											  	|
-| figure_show_videos_global				| 											  	|
-| figure_show_collection_global			| 											  	|
-| figure_show_related					|											  	|
-| figure_show_comments_global			|											  	|	
-| figure_show_ratings_global			|												|
-| figure_show_social_sharing_global		|												|
----------------------------------------------------------------------------------------*/
+		/*--------------------------------------------------------------------------------------
+		| figure_show_images_global				| 											  	|
+		| figure_show_data_global				| 											  	|
+		| figure_show_videos_global				| 											  	|
+		| figure_show_collection_global			| 											  	|
+		| figure_show_related					|											  	|
+		| figure_show_comments_global			|											  	|	
+		| figure_show_ratings_global			|												|
+		| figure_show_social_sharing_global		|												|
+		---------------------------------------------------------------------------------------*/
 
 				// ['figure_371'] = "Images:"; --> figure_show_images_global
 						// ALS CHECKBOX
@@ -335,16 +339,16 @@ openside("MODULE ON/OFF - GLOBAL");
 	echo "</div>\n";
 	echo "<div class='col-lg-6 col-md-6 col-sm-12 col-xs-12'>\n";
 
-/*---------------------------------------------------------------------------------------
-| 	´									| 	----------------------------------------	|
-| 										| 	|figure_show_affiliates_complete_global|	|
-| 										|	----------------------------------------	|
-| 										|												|
-| 										|	figure_show_affiliates_other_global			|
-| 										|	figure_show_amazon_global					|	
-| 										|	figure_show_ebay_global						|
-| 										|												|
----------------------------------------------------------------------------------------*/
+		/*---------------------------------------------------------------------------------------
+		| 	´									| 	----------------------------------------	|
+		| 										| 	|figure_show_affiliates_complete_global|	|
+		| 										|	----------------------------------------	|
+		| 										|												|
+		| 										|	figure_show_affiliates_other_global			|
+		| 										|	figure_show_amazon_global					|	
+		| 										|	figure_show_ebay_global						|
+		| 										|												|
+		---------------------------------------------------------------------------------------*/
 													
 openside("");
 
@@ -403,7 +407,8 @@ openside("");
 
 // Display Figure Image Settings START
 echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";	
-	openside("Figure Image Settings");
+	
+	openside("<div class='text-bold text-uppercase'>".$locale['figure_377']."</div>");
 	
 	//$locale['figure_365'] = "Image upload count per figure:";
 	echo form_text('figure_image_upload_count', $locale['figure_365'], $fil_settings['figure_image_upload_count'], array(
@@ -522,7 +527,9 @@ echo "
 // #######################################################################################################
 // Display Category Image Settings START
 echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";
-	openside("Category Image Settings");
+	
+	openside("<div class='text-bold text-uppercase'>".$locale['figure_378']."</div>");
+	
 
 // $locale['admin_figurelib_settings.php_011'] = "Thumb Category size:";	
 // $locale['admin_figurelib_settings.php_006'] = "Width x Height";
@@ -590,7 +597,8 @@ echo "</div>\n";
 // #######################################################################################################
 // Display Manufacturer Image Settings START
 echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";	
-	openside("Manufacturer Image Settings");
+	
+	openside("<div class='text-bold text-uppercase'>".$locale['figure_379']."</div>");
 
 // $locale['admin_figurelib_settings.php_015'] = "Thumb Manufacturer size:";	
 // $locale['admin_figurelib_settings.php_006'] = "Width x Height";
@@ -658,7 +666,9 @@ echo "</div>\n";
 
 // Display Notification Settings START ###################################################################
 echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";
-	openside("Notification Settings");
+	
+	openside("<div class='text-bold text-uppercase'>".$locale['figure_380']."</div>");
+	
 	$notificationOptions = [
 		"1" => $locale['notification-103'],
 		"2" => $locale['notification-104'],
@@ -696,7 +706,8 @@ echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";
 echo "</div>\n";
 
 // Save Settings Button
-echo form_button("savesettings", $locale['figure_345'], $locale['figure_345'], ["class" => "btn-success"]);
+
+echo form_button("savesettings", $locale['figure_345'], $locale['figure_345'], ["class" => "btn-success center-block"]);
 
 // Closeform
 echo closeform();
@@ -712,4 +723,3 @@ function calculate_byte($total_bit) {
 	}
 	return 1000000;
 }
-
