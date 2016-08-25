@@ -55,7 +55,8 @@ if (isset($_POST['savesettings'])) {
 		"figure_show_images_global"      	  => form_sanitizer($_POST['figure_show_images_global'],          0,    "figure_show_images_global"),
 		"figure_show_data_global"        	  => form_sanitizer($_POST['figure_show_data_global'],            0,    "figure_show_data_global"),
 		"figure_show_videos_global"      	  => form_sanitizer($_POST['figure_show_videos_global'],          0,    "figure_show_videos_global"),
-		"figure_show_affiliates_global"   	  => form_sanitizer($_POST['figure_show_affiliates_global'],       0,    "figure_show_affiliates_global"),
+		"figure_show_affiliates_complete_global" => form_sanitizer($_POST['figure_show_affiliates_complete_global'],  0, "figure_show_affiliates_complete_global"),
+		"figure_show_affiliates_other_global"    => form_sanitizer($_POST['figure_show_affiliates_other_global'],     0,    "figure_show_affiliates_other_global"),
 		"figure_show_amazon_global"      	  => form_sanitizer($_POST['figure_show_amazon_global'],          0,    "figure_show_amazon_global"),
 		"figure_show_ebay_global"        	  => form_sanitizer($_POST['figure_show_ebay_global'],            0,    "figure_show_ebay_global"),
 		"figure_show_collection_global"       => form_sanitizer($_POST['figure_show_collection_global'],      0,    "figure_show_collection_global"),
@@ -136,11 +137,11 @@ echo "<div class='row'><div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";
 
 #################### General Settings ########################################################
 
-/*----------------------------------------------------------------
-figure_per_page 			|  figure_submit  	                 | 
-figure_per_line				|  figure_allow_submit_videos 		 | 
-figure_display 				|  									 | 
-----------------------------------------------------------------*/
+/*-----------------------------------------------------------------------
+figure_per_page 			|  figure_submit  	                 		| 
+figure_per_line				|  figure_allow_submit_videos 		 		| 
+figure_display 				|   										| 
+------------------------------------------------------------------------*/
 
 openside("General Settings");
 
@@ -201,8 +202,7 @@ echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";
 	
 	echo "</div>\n";
 	echo "<div class='col-lg-6 col-md-6 col-sm-12 col-xs-12'>\n";
-	
-		
+			
 				// ['figure_335'] = "Allow users to submit figures:";
 					// ALS CHECKBOX
 						//echo form_checkbox("figure_submit", $locale['figure_335'], $fil_settings['figure_submit']);		
@@ -219,7 +219,7 @@ echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";
 						echo form_select("figure_allow_submit_videos", $locale['figure_366'], $fil_settings['figure_allow_submit_videos'], array(
 								"inline" => TRUE, 
 								"options" => array($locale['disable'], $locale['enable'])
-						));
+						));												
 				
 	echo "</div>\n";
 	echo "</div>\n";
@@ -230,31 +230,35 @@ closeside();
 
 #################### General Settings Module on/off ########################################################
 
-/*-------------------------------------------------------------------------------
-| figure_show_images_global			| 		figure_show_collection_global		|
-| figure_show_data_global			| 		figure_show_related					|
-| figure_show_videos_global			| 		figure_show_comments_global			|
-| figure_show_affiliates_global		| 		figure_show_ratings_global			|
-| figure_show_amazon_global			| 		figure_show_social_sharing_global	|
-|figure_show_ebay_global			|											|
--------------------------------------------------------------------------------*/
-/* HINWEIS: WENN CHECKBOX DANN --> => isset($_POST['figure_display'])  ? 1 : 0, 
--------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------
+| figure_show_images_global				| 	----------------------------------------	|
+| figure_show_data_global				| 	|figure_show_affiliates_complete_global|	|
+| figure_show_videos_global				|	----------------------------------------	|
+| figure_show_collection_global			|												|
+| figure_show_related					|	figure_show_affiliates_other_global			|
+| figure_show_comments_global			|	figure_show_amazon_global					|	
+| figure_show_ratings_global			|	figure_show_ebay_global						|
+| figure_show_social_sharing_global		|												|
+-----------------------------------------------------------------------------------------
+| HINWEIS: WENN CHECKBOX DANN --> => isset($_POST['figure_display'])  ? 1 : 0, 	  		|
+---------------------------------------------------------------------------------------*/
 
-echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";				
+	echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";				
 
-openside("MODULE ON/OFF - GLOBAL ALL FIGURES");
+openside("MODULE ON/OFF - GLOBAL");
 
-echo "<div class='col-lg-6 col-md-6 col-sm-12 col-xs-12'>\n";
+	echo "<div class='col-lg-6 col-md-6 col-sm-12 col-xs-12'>\n";
 
-/*--------------------------------------------------------------------------------
-| figure_show_images_global			| 											 |
-| figure_show_data_global			| 											 |
-| figure_show_videos_global			| 											 |
-| figure_show_affiliate_global		| 											 |
-| figure_show_amazon_global			|											 |
-| figure_show_ebay_global			|											 |
---------------------------------------------------------------------------------*/
+/*--------------------------------------------------------------------------------------
+| figure_show_images_global				| 											  	|
+| figure_show_data_global				| 											  	|
+| figure_show_videos_global				| 											  	|
+| figure_show_collection_global			| 											  	|
+| figure_show_related					|											  	|
+| figure_show_comments_global			|											  	|	
+| figure_show_ratings_global			|												|
+| figure_show_social_sharing_global		|												|
+---------------------------------------------------------------------------------------*/
 
 				// ['figure_371'] = "Images:"; --> figure_show_images_global
 						// ALS CHECKBOX
@@ -281,8 +285,83 @@ echo "<div class='col-lg-6 col-md-6 col-sm-12 col-xs-12'>\n";
 							echo form_select("figure_show_videos_global", $locale['figure_367'], $fil_settings['figure_show_videos_global'], array(
 								"inline" => TRUE, 
 								"options" => array($locale['disable'], $locale['enable'])
-							));			
+							));	
+							
+				// ['figure_373'] = "Collection:"; --> figure_show_collection_global
+						// ALS CHECKBOX
+							//echo form_checkbox('figure_show_collection_global', $locale['figure_373'], $fil_settings['figure_show_related_global']);	
+						// ALS DROPDOWN
+							echo form_select("figure_show_collection_global", $locale['figure_373'], $fil_settings['figure_show_collection_global'], array(
+								"inline" => TRUE, 
+								"options" => array($locale['disable'], $locale['enable'])
+							));
 				
+				// ['figure_348'] = "Related:"; --> figure_releated show_related
+						// ALS CHECKBOX
+							//echo form_checkbox('figure_show_related_global', $locale['figure_348'], $fil_settings['figure_show_related_global']);	
+						// ALS DROPDOWN
+							echo form_select("figure_show_related_global", $locale['figure_348'], $fil_settings['figure_show_related_global'], array(
+								"inline" => TRUE, 
+								"options" => array($locale['disable'], $locale['enable'])
+							));
+
+				// ['figure_363'] = "Comments:"; --> figure_show_comments_global
+						// ALS CHECKBOX
+							//echo form_checkbox('figure_show_comments_global', $locale['figure_363'], $fil_settings['figure_show_comments_global']);
+						// ALS DROPDOWN
+							echo form_select("figure_show_comments_global", $locale['figure_363'], $fil_settings['figure_show_comments_global'], array(
+								"inline" => TRUE, 
+								"options" => array($locale['disable'], $locale['enable'])
+							));
+				
+				// ['figure_364'] = "Ratings:"; --> figure_show_ratings_global
+						// ALS CHECKBOX 
+							//echo form_checkbox('figure_show_ratings_global', $locale['figure_364'], $fil_settings['figure_show_ratings_global']);
+						// ALS DROPDOWN
+							echo form_select("figure_show_ratings_global", $locale['figure_364'], $fil_settings['figure_show_ratings_global'], array(
+								"inline" => TRUE, 
+								"options" => array($locale['disable'], $locale['enable'])
+							));
+					
+				// ['figure_344'] = "Social Sharing:";	--> figure_show_social_sharing_global
+							// ALS CHECKBOX
+								//echo form_checkbox('figure_show_social_sharing_global', $locale['figure_344'], $fil_settings['figure_show_social_sharing_global']);	
+							// ALS DROPDOWN
+							echo form_select("figure_show_social_sharing_global", $locale['figure_344'], $fil_settings['figure_show_social_sharing_global'], array(
+								"inline" => TRUE, 
+								"options" => array($locale['disable'], $locale['enable'])
+							));								
+
+	echo "</div>\n";
+	echo "<div class='col-lg-6 col-md-6 col-sm-12 col-xs-12'>\n";
+
+/*---------------------------------------------------------------------------------------
+| 	´									| 	----------------------------------------	|
+| 										| 	|figure_show_affiliates_complete_global|	|
+| 										|	----------------------------------------	|
+| 										|												|
+| 										|	figure_show_affiliates_other_global			|
+| 										|	figure_show_amazon_global					|	
+| 										|	figure_show_ebay_global						|
+| 										|												|
+---------------------------------------------------------------------------------------*/
+													
+openside("");
+
+	echo "<div class='alert alert-danger' role='alert'>";
+				// $locale['figure_374'] = "Affiliate Complete Global"; --> figure_show_affiliates_complete_global
+					// ALS CHECKBOX
+						//echo form_checkbox("figure_show_affiliates_complete_global", $locale['figure_374'], $data['figure_show_affiliates_complete_global'], ["reverse_label" => true]);
+						//echo form_checkbox("figure_show_affiliates_complete_global", $locale['figure_374'], $fil_settings['figure_show_affiliates_complete_global']);
+					// ALS DROPDOWN 	
+						
+						echo form_select("figure_show_affiliates_complete_global", $locale['figure_374'], $fil_settings['figure_show_affiliates_complete_global'], array(
+								"inline" => TRUE, 
+								"options" => array($locale['disable'], $locale['enable'])
+						));	
+	echo "</div>\n";
+						
+	echo "<div class='alert alert-info' role='alert'>";	
 				// ['figure_368'] = "Affiliate:"; --> figure_show_affiliates_global
 						// ALS CHECKBOX
 							//echo form_checkbox('figure_show_affiliates_global', $locale['figure_368'], $fil_settings['figure_show_affiliates_global']);				
@@ -300,8 +379,7 @@ echo "<div class='col-lg-6 col-md-6 col-sm-12 col-xs-12'>\n";
 									"inline" => TRUE, 
 									"options" => array($locale['disable'], $locale['enable'])
 								));
-								
-								
+																
 				// ['figure_370'] = "Ebay Affiliate:"; --> figure_show_ebay_global
 						// ALS CHECKBOX
 							//echo form_checkbox('figure_show_ebay_global', $locale['figure_370'], $fil_settings['figure_show_ebay_global']);				
@@ -309,66 +387,15 @@ echo "<div class='col-lg-6 col-md-6 col-sm-12 col-xs-12'>\n";
 							echo form_select("figure_show_ebay_global", $locale['figure_370'], $fil_settings['figure_show_ebay_global'], array(
 								"inline" => TRUE, 
 								"options" => array($locale['disable'], $locale['enable'])
-							));					
-
-echo "</div>\n";
-echo "<div class='col-lg-6 col-md-6 col-sm-12 col-xs-12'>\n";
-
-/*-----------------------------------------------------------------------------------
-| 									| 		figure_show_collection_global			|
-| 									| 		figure_show_related_global				|
-| 									| 		figure_show_comments_global				|
-| 									| 		figure_show_ratings_global				|
-| 									| 		figure_show_social_sharing_global		|
-------------------------------------------------------------------------------------*/
-
-				// ['figure_373'] = "Collection:"; --> figure_show_collection_global
-						// ALS CHECKBOX
-							//echo form_checkbox('figure_show_collection_global', $locale['figure_373'], $fil_settings['figure_show_related_global']);	
-						// ALS DROPDOWN
-							echo form_select("figure_show_collection_global", $locale['figure_373'], $fil_settings['figure_show_collection_global'], array(
-								"inline" => TRUE, 
-								"options" => array($locale['disable'], $locale['enable'])
-							));
-				
-				// ['figure_348'] = "Related:"; --> figure_show_related
-						// ALS CHECKBOX
-							//echo form_checkbox('figure_show_related_global', $locale['figure_348'], $fil_settings['figure_show_related_global']);	
-						// ALS DROPDOWN
-							echo form_select("figure_show_related_global", $locale['figure_348'], $fil_settings['figure_show_related_global'], array(
-								"inline" => TRUE, 
-								"options" => array($locale['disable'], $locale['enable'])
-							));
-
-				// ['figure_363'] = "Comments:"; --> figure_show_comments_global
-						// ALS CHECKBOX
-							//echo form_checkbox('figure_show_comments_global', $locale['figure_363'], $fil_settings['figure_show_comments_global']);
-						// ALS DROPDOWN
-							echo form_select("figure_show_comments_global", $locale['figure_363'], $fil_settings['figure_show_comments_global'], array(
-								"inline" => TRUE, 
-								"options" => array($locale['disable'], $locale['enable'])
-							));
-				// ['figure_364'] = "Ratings:"; --> figure_show_ratings_global
-						// ALS CHECKBOX 
-							//echo form_checkbox('figure_show_ratings_global', $locale['figure_364'], $fil_settings['figure_show_ratings_global']);
-						// ALS DROPDOWN
-							echo form_select("figure_show_ratings_global", $locale['figure_364'], $fil_settings['figure_show_ratings_global'], array(
-								"inline" => TRUE, 
-								"options" => array($locale['disable'], $locale['enable'])
-							));
-					
-				// ['figure_344'] = "Social Sharing:";	--> figure_show_social_sharing_global
-							// ALS CHECKBOX
-								//echo form_checkbox('figure_show_social_sharing_global', $locale['figure_344'], $fil_settings['figure_show_social_sharing_global']);	
-							// ALS DROPDOWN
-							echo form_select("figure_show_social_sharing_global", $locale['figure_344'], $fil_settings['figure_show_social_sharing_global'], array(
-								"inline" => TRUE, 
-								"options" => array($locale['disable'], $locale['enable'])
 							));	
-				
+							
+	echo "</div>\n";
+	
+	closeside();							
+										
 	echo "</div>\n";	
 	
-closeside();
+	closeside();
 
 	echo "</div>\n";	
 
