@@ -1,4 +1,4 @@
-<?php
+^<?php
 /*-------------------------------------------------------+
 | PHP-Fusion Content Management System
 | Copyright © 2002 - 2011 Nick Jones
@@ -115,7 +115,7 @@ $inf_newtable[] = DB_FIGURE_ITEMS." (
 		figure_show_images TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
 		figure_show_data TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
 		figure_show_videos TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
-		figure_show_affiliates TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
+		figure_show_affiliates_other TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
 		figure_show_amazon TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
 		figure_show_ebay TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
 		figure_show_collection TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
@@ -245,7 +245,7 @@ $inf_newtable[] = DB_FIGURE_IMAGES." (
 		figure_images_image VARCHAR(255) NOT NULL DEFAULT '',
 		figure_images_thumb VARCHAR(255) NOT NULL DEFAULT '',
 		figure_images_thumb2 VARCHAR(255) NOT NULL DEFAULT '',
-		figure_images_sorting VARCHAR(50) NOT NULL DEFAULT '',
+		figure_images_toppic TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
 		figure_images_language VARCHAR(50) NOT NULL DEFAULT '".LANGUAGE."',
 PRIMARY KEY (figure_images_image_id)
 	) ENGINE=MyISAM DEFAULT CHARSET=UTF8 COLLATE=utf8_unicode_ci";
@@ -258,7 +258,8 @@ $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_show_images_global', '1', 'figurelib')";
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_show_data_global', '1', 'figurelib')";
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_show_videos_global', '1', 'figurelib')";
-$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_show_affiliates_global', '1', 'figurelib')";
+$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_show_affiliates_complete_global', '1', 'figurelib')";
+$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_show_affiliates_other_global', '1', 'figurelib')";
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_show_amazon_global', '1', 'figurelib')";
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_show_ebay_global', '1', 'figurelib')";
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_show_collection_global', '1', 'figurelib')";
