@@ -76,7 +76,7 @@ if (!empty($result)) {
 			"figure_show_images"      		=> 1,
 			"figure_show_data"          	=> 1,
 			"figure_show_videos"       		=> 1,
-			"figure_show_affiliates"   		=> 1,
+			"figure_show_affiliates_other"  => 1,
 			"figure_show_amazon"        	=> 1,
 			"figure_show_ebay"         		=> 1,
 			"figure_show_related"      		=> 1,			
@@ -158,7 +158,7 @@ if (!empty($result)) {
 				"figure_show_images"      		=> form_sanitizer($_POST['figure_show_images'],     	"", "figure_show_images"),
 				"figure_show_data"        		=> form_sanitizer($_POST['figure_show_data'],     		"", "figure_show_data"),
 				"figure_show_videos"      		=> form_sanitizer($_POST['figure_show_videos'],     	"", "figure_show_videos"),
-				"figure_show_affiliates"   		=> form_sanitizer($_POST['figure_show_affiliates'],     "", "figure_show_affiliates"),
+				"figure_show_affiliates_other"  => form_sanitizer($_POST['figure_show_affiliates_other'],  "", "figure_show_affiliates_other"),
 				"figure_show_amazon"      		=> form_sanitizer($_POST['figure_show_amazon'],     	"", "figure_show_amazon"),
 				"figure_show_ebay"        		=> form_sanitizer($_POST['figure_show_ebay'],     		"", "figure_show_ebay"),				
 				"figure_show_related"       	=> form_sanitizer($_POST['figure_show_related'],     	"", "figure_show_related"),
@@ -216,6 +216,7 @@ if (!empty($result)) {
 				"figure_description"    		=> addslash(nl2br(parseubb(stripinput($_POST['figure_description'])))),
 				"figure_accessories"    		=> addslash(nl2br(parseubb(stripinput($_POST['figure_accessories']))))
 			];
+			$imageTopPic = isset($_POST['image_toppic']) ? form_sanitizer($_POST['image_toppic'], false, "image_toppic") : false;
 			
 			//print_r($_POST); CHECK WAS BEI POST RAUSKOMMT
 
@@ -244,6 +245,10 @@ if (!empty($result)) {
 				// Update a Figure
 				if ($data['figure_id'] && $formEdit) {
 					dbquery_insert(DB_FIGURE_ITEMS, $data, "update", ["keep_session" => true]);
+					if ($imageTopPic) {
+						dbquery("UPDATE ".DB_FIGURE_IMAGES." SET figure_images_toppic='0' WHERE figure_images_figure_id='".$data['figure_id']."'");
+						dbquery("UPDATE ".DB_FIGURE_IMAGES." SET figure_images_toppic='1' WHERE figure_images_image_id='".$imageTopPic."' AND figure_images_figure_id='".$data['figure_id']."'");
+					}
 					$message = "Figure Updated";
 					
 				// Save a Figure 
@@ -360,26 +365,26 @@ if (!empty($result)) {
 		echo "<div class='row'>\n";
 		echo "<div class='col-md-4 col-xs-12'>\n";
 		
-		/*----------------------------------------------------------------------------------
-		/         1					|             2				|             3				|			
-		/*----------------------------------------------------------------------------------
-		| figure_show_images		|							|							|
-		| figure_show_data			|							|							|		
-		| figure_show_videos		|							|							|		
-		| figure_show_affiliates	|							|							|
-		-----------------------------------------------------------------------------------*/
+		/*--------------------------------------------------------------------------------------
+		/         1						|             2				|             3				|			
+		/*---------------------------------------------------------------------------------------
+		| figure_show_images			|							|							|
+		| figure_show_data				|							|							|		
+		| figure_show_videos			|							|							|		
+		| figure_show_affiliates_other	|							|							|
+		---------------------------------------------------------------------------------------*/
 	
-		// Formfield ['figure_371'] = "Images:"; --> figure_show_images
+		// Formfield ['figure_371'] = "Images"; --> figure_show_images
 		echo form_checkbox("figure_show_images", $locale['figure_371'], $data['figure_show_images'], ["reverse_label" => true]);
 		
-		// Formfield ['figure_372'] = "Data:"; --> figure_show_data	
+		// Formfield ['figure_372'] = "Data"; --> figure_show_data	
 		echo form_checkbox("figure_show_data", $locale['figure_372'], $data['figure_show_data'], ["reverse_label" => true]);
 		
-		// Formfield ['figure_367'] = "Videos:"; --> figure_show_videos
+		// Formfield ['figure_367'] = "Videos"; --> figure_show_videos
 		echo form_checkbox("figure_show_videos", $locale['figure_367'], $data['figure_show_videos'], ["reverse_label" => true]);
 		
-		// Formfield ['figure_368'] = "Affiliate:"; --> figure_show_affiliates
-		echo form_checkbox("figure_show_affiliates", $locale['figure_368'], $data['figure_show_affiliates'], ["reverse_label" => true]);
+		// Formfield ['figure_368'] = "Affiliate Other"; --> figure_show_affiliates_other
+		echo form_checkbox("figure_show_affiliates_other", $locale['figure_368'], $data['figure_show_affiliates_other'], ["reverse_label" => true]);
 				
 
 		echo "</div>\n";			
@@ -394,10 +399,10 @@ if (!empty($result)) {
 		| 							|figure_show_collection		|							|
 		-----------------------------------------------------------------------------------*/
 
-		// Formfield ['figure_369'] = "Amazon Affiliate:"; --> figure_show_amazon
+		// Formfield ['figure_369'] = "Affiliate Amazon"; --> figure_show_amazon
 		echo form_checkbox("figure_show_amazon", $locale['figure_369'], $data['figure_show_amazon'], ["reverse_label" => true]);
 		
-		// Formfield ['figure_370'] = "Ebay Affiliate"; --> figure_show_ebay
+		// Formfield ['figure_370'] = "Affiliate Ebay"; --> figure_show_ebay
 		echo form_checkbox("figure_show_ebay", $locale['figure_370'], $data['figure_show_ebay'], ["reverse_label" => true]);
 		
 		// Formfield ['figure_348'] = "Related"; --> figure_show_related	
@@ -484,6 +489,8 @@ if (!empty($result)) {
 							"input_id" => "delete-image-".$avaibleImage['id'],
 							"reverse_label" => true
 						]);
+						echo "<br />\n";
+						echo form_checkbox("image_toppic", "Set this as Toppic", ($avaibleImage['toppic'] ? $avaibleImage['id'] : 0), ["type" => "radio", "input_id" => "image_titlepic_".$avaibleImage['id'], "value" => $avaibleImage['id'], "reverse_label" => true]);
 					echo "</div>\n";
 				}
 			}
@@ -993,7 +1000,7 @@ $('#figure_pubdate-field .input-group.date').datetimepicker({
 		showClear: true,
 		showClose: true,
 		allowInputToggle: true,
-		format: 'MMMM / YYYY',
+		format: 'YYYY / MMMM',
 });
 </script>");
 	
