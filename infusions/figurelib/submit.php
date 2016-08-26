@@ -25,8 +25,10 @@ include "infusion_db.php";
 require_once THEMES . "templates/header.php";
 require_once INCLUDES."html_buttons_include.php";
 require_once INCLUDES."infusions_include.php";
+
 // get settings
 $fil_settings = get_settings("figurelib");
+
 // get language
 if (file_exists(INFUSIONS."figurelib/locale/".LOCALESET."locale_figurelib.php")) {
     include INFUSIONS."figurelib/locale/".LOCALESET."locale_figurelib.php";
@@ -34,8 +36,9 @@ if (file_exists(INFUSIONS."figurelib/locale/".LOCALESET."locale_figurelib.php"))
     include INFUSIONS."figurelib/locale/English/locale_figurelib.php";
 }
 
-/*
-// Feld Limation - wenn NO gewählt dann mache Feld Anzahl nicht beschreibbar
+$formEdit = false;
+
+/* Feld Limation - wenn NO gewählt dann mache Feld Anzahl nicht beschreibbar
 // Add jQuery
 add_to_footer("
 <script type='text/javascript'>
@@ -51,7 +54,7 @@ $(function(){
 </script>");
 */
 
-//Feld Limitation - man kann man das Feld davor ausfüllen, wird allerdings dann "no" gewählt, wird der Inhalt entfernt.
+//Feld Limitation - man kann das Feld davor ausfüllen, wird allerdings dann "no" gewählt, wird der Inhalt entfernt.
 // Add jQuery
 add_to_footer("
 <script type='text/javascript'>
@@ -485,7 +488,8 @@ if (iMEMBER && $fil_settings['figure_submit']) {
 		echo "<div class='tbl1'>\n";
 			echo "<hr>\n";
 		echo "</div>\n";
-		// Select Field "Pub Date"
+		
+/*		// Select Field "Pub Date"
 		echo form_select_tree("figure_pubdate", $locale['figure_419'], $submitdata['figure_pubdate'], 
 			array(
 				"inline" => TRUE,
@@ -499,7 +503,20 @@ if (iMEMBER && $fil_settings['figure_submit']) {
 				"allowclear" => TRUE,
 			),
 		DB_FIGURE_YEARS, "figure_year", "figure_year_id", "figure_year_parent");
-		
+*/	
+
+
+	// Formfield "Figure Pubdate"
+	echo "<div id='figure_pubdate-field' class='form-group'>\n";
+		echo "<label class='control-label col-xs-12 col-sm-3 col-md-3 col-lg-3 p-l-0' for='figure_pubdate'>". $locale['figurelib/admin/figurelib.php_047']."</label>\n";
+		echo "<div class='col-xs-12 col-sm-9 col-md-9 col-lg-9'>\n";
+			echo "<div class='input-group date' style='width: 400px;'>\n";
+				echo "<input type='text' name='figure_pubdate' id='figure_pubdate' value='".$data['figure_pubdate']."' class='form-control textbox' placeholder='".$locale['figurelib/admin/figurelib.php_048']."' />\n";
+				echo "<span class='input-group-addon'><i class='entypo calendar'></i></span>\n";
+			echo "</div>\n";
+		echo "</div>\n";
+	echo "</div>\n";
+	
 		// Text Field "Retail Price"
 		echo form_text("figure_retailprice", $locale['figure_449'], $submitdata['figure_retailprice'],
 			array(
@@ -574,7 +591,6 @@ if (iMEMBER && $fil_settings['figure_submit']) {
 		echo "</div>\n";
 				
 		// File Field "Images"
-		//$max_image_allowed = 10;
 		$max_image_allowed = $asettings['figure_image_upload_count'];
 		echo form_fileinput("figure_image[]", $locale['figure_136'], "", 
 			array(
@@ -590,8 +606,7 @@ if (iMEMBER && $fil_settings['figure_submit']) {
 				"max_count" => $max_image_allowed
 			)
 		);	
-		
-	
+			
 		// Form "Space"
 		echo "<div class='tbl1'>\n";
 			echo "<hr>\n";
@@ -638,20 +653,7 @@ if (iMEMBER && $fil_settings['figure_submit']) {
 		  // ['figure_521'] = "Submit Figure";
 			echo form_button("submit_figure", $locale['figure_521'], $locale['figure_521'], array("class" => "btn-primary"));
 			echo closeform();
-				
-				// message to admins - dosent work at moment
-				//require_once(INCLUDES."infusions_include.php");
-				
-				//    if (isset($_GET['pm'])) {
-					require_once(INCLUDES."infusions_include.php");
-				//	send_pm("1", "2", "Hi - Subject", "Your Message", "y", "FALSE");
-				//	echo "PM sent";
-				//	}
-				
-				
-				//self::send_pm(-103, 1, "Figure Submission", "Figure Submission is done", "y", TRUE);
-				//send_pm(-103, 1, "Figure Submission", "Figure Submission is done", "y", TRUE);
-				
+							
 			echo "</div>\n</div>\n";
 		}
 	} else {
@@ -667,4 +669,65 @@ if (iMEMBER && $fil_settings['figure_submit']) {
 }
 closeside();
 require_once THEMES."templates/footer.php";
-?>
+
+// Datepicker include
+if (!defined('DATEPICKER')) {
+	define('DATEPICKER', TRUE);
+    add_to_head("<link href='".DYNAMICS."assets/datepicker/css/datetimepicker.min.css' rel='stylesheet' />");
+    add_to_footer("<script src='".DYNAMICS."assets/datepicker/js/moment.min.js'></script>");
+    add_to_footer("<script src='".DYNAMICS."assets/datepicker/js/datetimepicker.min.js'></script>");
+    add_to_head("<script src='".DYNAMICS."assets/datepicker/locale/".$locale['datepicker'].".js'></script>");
+}
+	
+// Add jQuery
+add_to_footer("
+<script type='text/javascript'>
+$(function() {
+	$('#figure_videourl').blur(function(){
+		var embed = $('#figure_videourl').val();
+		if (embed) {
+			$('#figure_videopreview').html('<div class=\"embed-responsive embed-responsive-16by9\"><iframe class=\"embed-responsive-item\" src=\"https://www.youtube.com/embed/' + embed + '\"></iframe></div>');
+		} else {
+			$('#figure_videopreview').html('<div>Sorry! There is no Video avaible to this Figure.</div>');
+		}
+    });
+	$('#figure_videourl').ready(function(){
+		var embed = $('#figure_videourl').val();
+		if (embed) {
+			$('#figure_videopreview').html('<div class=\"embed-responsive embed-responsive-16by9\"><iframe class=\"embed-responsive-item\" src=\"https://www.youtube.com/embed/' + embed + '\"></iframe></div>');
+		} else {
+			$('#figure_videopreview').html('<div>Sorry! There is no Video avaible to this Figure.</div>');
+		}
+    });
+});
+
+$(function() {
+	$('#figure_limitation').ready(function(){
+		var opt = $('#figure_limitation').val();
+        if (opt != 2) {
+			$('#figure_editionsize').val('');
+            $('#figure_editionsize').prop('disabled', true);
+		}
+    });
+});
+
+$(function(){
+    $('#figure_limitation').change(function(){
+        if ($(this).val() != 2) {
+            $('#figure_editionsize').val('');
+            $('#figure_editionsize').prop('disabled', true);
+        } else {
+            $('#figure_editionsize').prop('disabled', false);
+        }
+    });
+});
+
+$('#figure_pubdate-field .input-group.date').datetimepicker({
+		showTodayButton: true,
+		showClear: true,
+		showClose: true,
+		allowInputToggle: true,
+		format: 'YYYY / MMMM',
+});
+</script>");
+	
