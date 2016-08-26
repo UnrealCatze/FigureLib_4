@@ -169,7 +169,7 @@ if (dbrows($result) != 0) {
 		if ($data['figure_pubdate'] == "") {
 			echo "<div class='col-lg-1 col-md-2 hidden-sm hidden-xs'><div class='side-small figurelib-inforow-height' title='".$locale['CLFP_006']." : ".$locale['CLFP_008']."' alt='".$locale['CLFP_006']." : ".$locale['CLFP_008']."'>".trimlink($locale['CLFP_008'],6)."</div></div>\n";
 		} else {
-			echo "<div class='col-lg-1 col-md-2 hidden-sm hidden-xs'><div class='side-small figurelib-inforow-height' title='".$locale['CLFP_006']." : ".$data['figure_year']."' alt='".$locale['CLFP_006']." : ".$data['figure_pubdate']."'>".trimlink($data['figure_pubdate'],12)."</div></div>\n";
+			echo "<div class='col-lg-1 col-md-2 hidden-sm hidden-xs'><div class='side-small figurelib-inforow-height' title='".$locale['CLFP_006']." : ".$data['figure_pubdate']."' alt='".$locale['CLFP_006']." : ".$data['figure_pubdate']."'>".trimlink($data['figure_pubdate'],7)."</div></div>\n";
 		} 
 
 		// COLUMN 7 (rating)
@@ -211,11 +211,20 @@ if (dbrows($result) != 0) {
 				echo "<div class='side-small figurelib-inforow-height' title='".$locale['CLFP_020']." : ".$count."' alt='".$locale['CLFP_020']." : ".$count."'>".trimlink($count,6)."</div>\n";
 			echo "</div>\n";	
 		}		
-			
+
+		
 		// COLUMN 9 (add/remove)
 		echo "<div class='col-lg-1 col-md-1 col-sm-1 col-xs-1'>\n";
 			echo "<div class='figurelib-inforow-height'>\n";
-				echo figures_displayMyCollectionForm($data['figure_id']);
+				
+				if (iMEMBER || iADMIN || iSUPERADMIN){
+				echo figures_displayMyCollectionForm($data['figure_id']);				
+				} else {
+					
+				
+					
+				echo "<div class='glyphicon glyphicon-eye-close' data-toggle='tooltip' data-placement='glyphicon glyphicon-eye-close' title='".$locale['mc_0011']."'></div>";
+				}
 			echo "</div>\n";
 		echo "</div>\n";
 		
@@ -224,118 +233,7 @@ if (dbrows($result) != 0) {
 		echo "</div>\n";
 	}
 
-	if (iADMIN || iSUPERADMIN) {		
-		echo "<hr>\n";
-				
-		echo "<div class='navbar-default'>";					
-		echo "<div class='container-fluid'>\n";
-		echo "<div class='table-responsive'>\n";
-		echo "<div class='row'>\n";
-			
-			// ['CLFP_009']= "Categories";
-			echo "<div class='col-lg-3 col-md-6 col-sm-6 col-xs-6'>\n";
-				echo "<div align='center' class='text-smaller text-uppercase'><a href='".INFUSIONS."figurelib/figures.php'>".$locale['CLFP_013']."</a></div>\n";
-			echo "</div>\n";
 
-			// ['CLFP_010']= "Submit";
-			echo "<div class='col-lg-3 col-md-6 col-sm-6 col-xs-6'>\n";
-				echo "<div align='center' class='text-smaller text-uppercase'><a href='".INFUSIONS."figurelib/submit.php'>".$locale['CLFP_014']."</a></div>\n";
-			echo "</div>\n";
-			
-			// ['CLFP_023']= "Figure Stats";
-			echo "<div class='col-lg-3 col-md-6 col-sm-6 col-xs-6'>\n";
-				echo "<div align='center' class='text-smaller text-uppercase'><a href='".INFUSIONS."figurelib/panels/figure_stats_panel.php'>".$locale['CLFP_023']."</a></div>\n";
-			echo "</div>\n";
-			
-			// ['CLFP_017']." = "My Collection"
-			echo "<div class='col-lg-3 col-md-6 col-sm-6 col-xs-6'>\n";
-				echo "<div align='center' class='text-smaller text-uppercase'><a href='".INFUSIONS."figurelib/mycollection.php'>".$locale['CLFP_017']."</a>\n";
-			echo "</div></div>\n";
-				
-		echo "</div>\n";
-		echo "</div>\n";
-		echo "</div>\n";
-		echo "</div>\n";	
-		echo "<hr>\n";	
-		
-		echo "<div class='navbar-default'>";
-		echo "<div class='container-fluid'>\n";
-		echo "<div class='table-responsive'>\n";
-		echo "<div class='row'>\n";	
-			// ['CLFP_016']." = "Admin"
-			echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";
-				echo "<div align='center'><a href='".INFUSIONS.'figurelib/admin.php'.$aidlink."'>".$locale['CLFP_016']."</a></div>\n";
-			echo "</div>\n";
-		echo "</div>\n";
-		echo "</div>\n";
-		echo "</div>\n";
-		echo "</div>\n";
-		echo "<hr>\n";
-		
-	} else if (iMEMBER) {  
-			
-		// Menü für Member
-		echo "<hr>\n";
-				
-		echo "<div class='navbar-default'>";					
-		echo "<div class='container-fluid'>\n";
-		echo "<div class='table-responsive'>\n";
-		echo "<div class='row'>\n";
-			// ['CLFP_009']= "Categories";
-			echo "<div class='col-lg-3 col-md-6 col-sm-6 col-xs-6'>\n";
-				echo "<div align='center' class='text-smaller text-uppercase'><a href='".INFUSIONS."figurelib/figures.php'>".$locale['CLFP_013']."</a></div>\n";
-			echo "</div>\n";
-
-			// ['CLFP_010']= "Submit";
-			echo "<div class='col-lg-3 col-md-6 col-sm-6 col-xs-6'>\n";
-				echo "<div align='center' class='text-smaller text-uppercase'><a href='".INFUSIONS."figurelib/submit.php'>".$locale['CLFP_014']."</a></div>\n";
-			echo "</div>\n";
-			
-			// ['CLFP_011']= "Most viewed";
-			echo "<div class='col-lg-3 col-md-6 col-sm-6 col-xs-6'>\n";
-				echo "<div align='center' class='text-smaller text-uppercase'><a href='".INFUSIONS."figurelib/panels/most_clicked_figures_center_panel.php'>".$locale['CLFP_015']."</a></div>\n";
-			echo "</div>\n";
-			
-			// ['CLFP_017']." = "My Collection"
-			echo "<div class='col-lg-3 col-md-6 col-sm-6 col-xs-6'>\n";
-				echo "<div align='center' class='text-smaller text-uppercase'><a href='".INFUSIONS."figurelib/mycollection.php'>".$locale['CLFP_017']."</a></div>\n";
-			echo "</div>\n";
-
-		echo "</div>\n";
-		echo "</div>\n";
-		echo "</div>\n";
-		echo "</div>\n";				
-
-	} else {
-		
-		// Menü unterhalb nur für gäste	
-		echo "<hr>\n";
-		echo "<div class='row'>\n";
-		echo "<div class='navbar-default'>";					
-		echo "<div class='container-fluid'>\n";
-		echo "<div class='table-responsive'>\n";
-		
-				// ['CLFP_009']= "Categories";
-				echo "<div class='col-lg-4 col-md-4 col-sm-4 col-xs-4'>\n";
-					echo "<div align='center' class='text-smaller text-uppercase'><a href='".INFUSIONS."figurelib/figures.php'>".$locale['CLFP_013']."</a></div>\n";
-				echo "</div>\n";
-	
-				// ['CLFP_010']= "Submit";
-				echo "<div class='col-lg-4 col-md-4 col-sm-4 col-xs-4'>\n";
-					echo "<div align='center' class='text-smaller text-uppercase'><a href='".INFUSIONS."figurelib/submit.php'>".$locale['CLFP_014']."</a>\n";
-				echo "</div></div>\n";
-				
-				// ['CLFP_011']= "Most viewed";
-				echo "<div class='col-lg-4 col-md-4 col-sm-4 col-xs-4'>\n";
-					echo "<div align='center' class='text-smaller text-uppercase'><a href='".INFUSIONS."figurelib/panels/most_clicked_figures_center_panel.php'>".$locale['CLFP_015']."</a></div>\n";
-				echo "</div>\n";						
-
-		echo "</div>\n";
-		echo "</div>\n";
-		echo "</div>\n";
-		echo "</div>\n";
-			
-	}
 	
 } else {
 	echo "<div style='text-align: center;'>".$locale['CLFP_001']."</div>"; // 001 = No figures available"
