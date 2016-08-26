@@ -311,6 +311,9 @@ $locale['figure_187'] = " to go to Figure Limitations";
 $locale['figure_188'] = " to go to Figure Settings";
 $locale['figure_189'] = " to go to Figure Submissions";
 
+$locale['figure_190'] = "Admin Option";
+$locale['figure_191'] = "Affiliates";
+
 
 // figure_settings.php
 $locale['figure_300'] = "Settings Updated";
@@ -909,7 +912,7 @@ $locale['mc_0006']= "My figures counter";
 $locale['mc_0007']= "Figure Counter: ";
 $locale['mc_0008']= " figures in your collection!";
 $locale['mc_0009']= "Last figure: ";
-$locale['mc_0010']= "You have no figures";
+$locale['mc_0010']= "Sorry, You have no figures :(";
 $locale['mc_0011']= "This feature is only available for registered members. Please Sign up ";
 $locale['mc_0012']= "HERE";	
 
@@ -920,3 +923,6 @@ $locale['userfigure_003'] ="The following members have this Figure: ";
 $locale['userfigure_004'] ="No members have this Figure - be the first :)";
 $locale['userfigure_005'] ="FIGURE STATS";
 $locale['userfigure_006'] ="Your Collection";
+
+// stats
+$locale['stats_001'] ="Global Figure Stats";
