@@ -1,5 +1,4 @@
 <?php
-
 	//error_reporting(E_ALL);
 	// Formularinhalte prüfen
 	//echo "Formularinhalte prüfen:";
@@ -36,6 +35,7 @@ include INFUSIONS."figurelib/infusion_db.php";
 require_once THEMES."templates/header.php";
 require_once INCLUDES."infusions_include.php";
 if (!db_exists(DB_FIGURE_ITEMS)) { redirect(BASEDIR."error.php?code=404"); }
+require_once INFUSIONS."figurelib/_functions.inc.php";
 
 // Handle Admin Catcher
 if (
@@ -45,7 +45,6 @@ if (
 ) {
 	redirect(INFUSIONS."figurelib/admin.php".$aidlink."&amp;section=figurelib_form&amp;action=edit&amp;figure_id=".$_GET['figure_id']);
 }
-
 // GET GLOBAL VARIABLES
 global $aidlink;
 global $settings;
@@ -56,14 +55,13 @@ if (file_exists(INFUSIONS."figurelib/locale/".LOCALESET."locale_figurelib.php"))
 } else {
     include INFUSIONS."figurelib/locale/English/locale_figurelib.php";
 }
-
 include INFUSIONS."figurelib/templates/template_render_figure.php"; // TEMPLATE FOR FIGURE OVERVIEW PER CATEGORY
 include INFUSIONS."figurelib/templates/template_render_figure_cats.php"; // TEMPLATE FOR CATEGORIES OVERVIEW
 include INFUSIONS."figurelib/templates/template_render_figure_items.php"; // TEMPLATE FOR DETAILS OF A FIGURE
 include INFUSIONS."figurelib/templates/template_render_figure_manufacturers.php"; // TEMPLATE FOR MANUFACTURERS
 
 // Get Settings
-$fil_settings = get_settings("figurelib");
+$figurelibSettings = get_settings("figurelib");
 
 // Figure Cat Index
 $figure_cat_index = dbquery_tree(DB_FIGURE_CATS, 'figure_cat_id', 'figure_cat_parent');
@@ -81,7 +79,7 @@ if (
 	// Comments and Ratings
 	include INCLUDES."comments_include.php";
 	include INCLUDES."ratings_include.php";
-
+	
 	// Update Counter
 	dbquery("UPDATE ".DB_FIGURE_ITEMS." SET figure_clickcount=figure_clickcount+1 WHERE figure_id='".intval($_GET['figure_id'])."'");
 	
@@ -107,8 +105,7 @@ if (
 	$info = array();
 	$info['item'] = array();
 	render_figure_items($info);	
-
-
+	
 // Display a Category
 } elseif (
 	isset($_GET['figure_cat_id']) && 
@@ -142,7 +139,7 @@ if (
 		// Set Empty Arrays
 		$info = array("figure_rows" => 0, "page_nav" => false);
 		$info['item'] = array();
-
+		
 		// Get Figure Manufacturer Datas
 		$mdata = dbarray(dbquery("
 			SELECT
@@ -150,14 +147,14 @@ if (
 				figure_manufacturer_name
 			FROM ".DB_FIGURE_MANUFACTURERS."
 			WHERE figure_manufacturer_id='".intval($_GET['figure_manufacturer'])."'
-		"));	
-
+		"));
+		
 		// Merge Info Array with Category Data Array and Manufacturer Data Array
 		$info = array_merge($info, $cdata, $mdata);
 		
 		// Add Sitetitle And Meta Description
 		add_to_meta("description", $info['figure_manufacturer_name']);
-
+		
 		// Breadcrumbs
 		add_breadcrumb(["link" => INFUSIONS."figurelib/figures.php?figure_id=".$info['figure_cat_id']."&amp;figure_manufacturer=".$info['figure_manufacturer_id'], "title" => trimlink($info['figure_manufacturer_name'], 20)]);
 		
@@ -172,49 +169,27 @@ if (
 			
 			// Get Figure Datas
 			$result = dbquery("
-				SELECT figure_id, 
-					f.figure_title, 
-					f.figure_freigabe,
-					f.figure_description, 
-					f.figure_datestamp, 
-					f.figure_clickcount,
-					f.figure_manufacturer,
-					f.figure_submitter,
-					f.figure_brand,
-					f.figure_scale,
-					f.figure_pubdate,
-					f.figure_variant,
-					f.figure_series,
-					fm.figure_manufacturer_id,
+				SELECT
+					f.figure_id, f.figure_title, f.figure_variant, f.figure_pubdate, f.figure_series, f.figure_clickcount, f.figure_datestamp, 
 					fm.figure_manufacturer_name,
-					fb.figure_brand_id,
 					fb.figure_brand_name,
-					fs.figure_scale_id,
 					fs.figure_scale_name,
-					fy.figure_year_id,
-					fy.figure_year,
-					fu.user_id,
-					fu.user_name,
-					fu.user_status
-				FROM ".DB_FIGURE_ITEMS." f
-				INNER JOIN ".DB_USERS." fu ON f.figure_submitter=fu.user_id
-				INNER JOIN ".DB_FIGURE_MANUFACTURERS." fm ON fm.figure_manufacturer_id = f.figure_manufacturer
-				INNER JOIN ".DB_FIGURE_BRANDS." fb ON fb.figure_brand_id = f.figure_brand
-				INNER JOIN ".DB_FIGURE_SCALES." fs ON fs.figure_scale_id = f.figure_scale
-				INNER JOIN ".DB_FIGURE_YEARS." fy ON fy.figure_year_id = f.figure_pubdate	
-				WHERE ".groupaccess('figure_visibility')." 
-				AND figure_cat='".intval($_GET['figure_cat_id'])."'
-				AND figure_manufacturer='".intval($_GET['figure_manufacturer'])."'
-				AND figure_freigabe = '1'
-				ORDER BY ".$cdata['figure_cat_sorting']." 
-				LIMIT ".$_GET['rowstart'].",".$fil_settings['figure_per_page']
-			);	
+					fu.user_id, fu.user_name, fu.user_status
+				FROM ".DB_FIGURE_ITEMS." AS f 
+				LEFT JOIN ".DB_FIGURE_MANUFACTURERS." AS fm ON fm.figure_manufacturer_id=f.figure_manufacturer
+				LEFT JOIN ".DB_FIGURE_BRANDS." AS fb ON fb.figure_brand_id=f.figure_brand
+				LEFT JOIN ".DB_FIGURE_SCALES." AS fs ON fs.figure_scale_id=f.figure_scale
+				LEFT JOIN ".DB_USERS." AS fu ON fu.user_id=f.figure_submitter
+				WHERE f.figure_freigabe='1' AND figure_cat='".intval($_GET['figure_cat_id'])."' AND figure_manufacturer='".intval($_GET['figure_manufacturer'])."' AND ".groupaccess("figure_visibility")."
+				ORDER BY ".$cdata['figure_cat_sorting']."
+				LIMIT ".$_GET['rowstart'].",".$figurelibSettings['figure_per_page']."
+			");
 			
 			// Count Items
 			$info['figure_rows'] = dbrows($result);
 			
 			// Pagenav
-			$info['page_nav'] = $max_rows > $fil_settings['figure_per_page'] ? makepagenav($_GET['rowstart'], $fil_settings['figure_per_page'], $max_rows, 3, INFUSIONS."figurelib/figures.php?figure_cat_id=".$info['figure_cat_id']."&amp;") : false;
+			$info['page_nav'] = $max_rows > $figurelibSettings['figure_per_page'] ? makepagenav($_GET['rowstart'], $figurelibSettings['figure_per_page'], $max_rows, 3, INFUSIONS."figurelib/figures.php?figure_cat_id=".$info['figure_cat_id']."&amp;") : false;
 			
 			// Add Figure Informations into Array
 			while ($data = dbarray($result)) {
@@ -224,11 +199,11 @@ if (
 					'name' => $data['figure_title'],
 					'manufacturer' => $data['figure_manufacturer_name'],
 					'scale' => $data['figure_scale_name'],
-					'year' => $data['figure_year'],
+					'year' => $data['figure_pubdate'],
 					'brand' => $data['figure_brand_name'],
 					'series' => $data['figure_series'],
 					'variant' => $data['figure_variant'],
-					'submitter' => $data['figure_submitter'],
+					'submitter' => $data['user_id'],
 					'views' => $data['figure_clickcount'],
 					'userid' => $data['user_id'],
 					'username' => $data['user_name'],
@@ -246,7 +221,7 @@ if (
 		
 		// Set Standard Array
 		$info = array("rows" => "0", "items" => []);
-
+		
 		// Get all Manufacturers
 		$result = dbquery("
 			SELECT
@@ -268,7 +243,8 @@ if (
 				"manufacturer-id"      => $data['figure_manufacturer_id'],
 				"manufacturer-title"   => $data['figure_manufacturer_name'],
 				"manufacturer-counter" => $data['figure_counter'],
-				"manufacturer-link"    => FUSION_SELF."?figure_cat_id=".$info['figure_cat_id']."&amp;figure_manufacturer=".$data['figure_manufacturer_id']
+				"manufacturer-link"    => FUSION_SELF."?figure_cat_id=".$info['figure_cat_id']."&amp;figure_manufacturer=".$data['figure_manufacturer_id'],
+				"manufacturer-image"   => figures_getImagePath("manufacturers", "thumb", $data['figure_manufacturer_id'])
 			];
 		}
 		
@@ -281,10 +257,10 @@ if (
 	
 	// Add Sitetitle
 	add_to_title($locale['INF_TITLE']);
-
+	
 	// Set empty Array
 	$info['item'] = array();
-
+	
 	// Get Category Datas
     $result = dbquery("
 		SELECT 
@@ -300,16 +276,17 @@ if (
 		GROUP BY figure_cat_id
 		ORDER BY figure_cat_name
 	");
-
+	
 	// Add Rows to Array
     $info['figure_cat_rows'] = dbrows($result);
-
+	
 	// Add Categories to Array
     if ($info['figure_cat_rows']) {
 		while ($data = dbarray($result)) {
 			$data['figure_item'] = array(
 				'link' => INFUSIONS."figurelib/figures.php?figure_cat_id=".$data['figure_cat_id'],
-				'name' => $data['figure_cat_name']
+				'name' => $data['figure_cat_name'],
+				'image' => figures_getImagePath("cats", "thumb", $data['figure_cat_id'])
 			);
 			$info['item'][$data['figure_cat_id']] = $data;
 		}
@@ -319,7 +296,6 @@ if (
 	render_figure_cats($info);
 	
 }
-
 
 require_once THEMES."templates/footer.php";
 
@@ -349,9 +325,7 @@ function figure_cat_breadcrumbs($figure_cat_index) {
 		return $crumb;
 	}
 	
-
 	
-
 	// then we make a infinity recursive function to loop/break it out.
 	$crumb = breadcrumb_arrays($figure_cat_index, $_GET['figure_cat_id']);
 	// then we sort in reverse.
