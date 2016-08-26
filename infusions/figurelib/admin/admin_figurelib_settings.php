@@ -65,7 +65,10 @@ if (isset($_POST['savesettings'])) {
 		"figure_show_related_global"          => form_sanitizer($_POST['figure_show_related_global'],         0,    "figure_show_related_global"),
 		"figure_show_comments_global"   	  => form_sanitizer($_POST['figure_show_comments_global'],        0,    "figure_show_comments_global"),
 		"figure_show_ratings_global"    	  => form_sanitizer($_POST['figure_show_ratings_global'],         0,    "figure_show_ratings_global"),
-		"figure_show_social_sharing_global"   => form_sanitizer($_POST['figure_show_social_sharing_global'],  0,    "figure_show_social_sharing_global"),		
+		"figure_show_social_sharing_global"   => form_sanitizer($_POST['figure_show_social_sharing_global'],  0,    "figure_show_social_sharing_global"),			
+		"figure_display"              		  => form_sanitizer($_POST['figure_display'],                     0,    "figure_display"),
+		"figure_submit"                       => form_sanitizer($_POST['figure_submit'],                      0,    "figure_submit"),
+		
 		
 		"figure_per_page"             => form_sanitizer($_POST['figure_per_page'],             0,    "figure_per_page"),
 		"figure_per_line"             => form_sanitizer($_POST['figure_per_line'],             0,    "figure_per_line"),
@@ -87,10 +90,8 @@ if (isset($_POST['savesettings'])) {
 		
 		"figure_photo_max_b"          => form_sanitizer($_POST['calc_b'], 150, "calc_b") * form_sanitizer($_POST['calc_c'], 100000, "calc_c"),				
 		"figure_photo_cat_max_b"      => form_sanitizer($_POST['calc_b_cat'], 150, "calc_b_cat") * form_sanitizer($_POST['calc_c_cat'], 100000, "calc_c_cat"),
-		"figure_photo_man_max_b"      => form_sanitizer($_POST['calc_b_man'], 150, "calc_b_man") * form_sanitizer($_POST['calc_c_man'], 100000, "calc_c_man"),			
+		"figure_photo_man_max_b"      => form_sanitizer($_POST['calc_b_man'], 150, "calc_b_man") * form_sanitizer($_POST['calc_c_man'], 100000, "calc_c_man")			
 		
-		"figure_display"              		 => isset($_POST['figure_display'])        ? 1 : 0,
-		"figure_submit"                      => isset($_POST['figure_submit'])         ? 1 : 0	
 		];
 	
 	// Check Notifications
@@ -364,18 +365,18 @@ openside("");
 								"options" => array($locale['disable'], $locale['enable'])
 						));	
 	echo "</div>\n";
-						
+
 	echo "<div class='alert alert-info' role='alert'>";	
-				// ['figure_368'] = "Affiliate:"; --> figure_show_affiliates_global
+				// ['figure_368'] = "Affiliate Other"; --> figure_show_affiliates_other_global
 						// ALS CHECKBOX
-							//echo form_checkbox('figure_show_affiliates_global', $locale['figure_368'], $fil_settings['figure_show_affiliates_global']);				
+							//echo form_checkbox('figure_show_affiliates_other_global', $locale['figure_368'], $fil_settings['figure_show_affiliates_other_global']);				
 						// ALS DROPDOWN
-							echo form_select("figure_show_affiliates_global", $locale['figure_368'], $fil_settings['figure_show_affiliates_global'], array(
+							echo form_select("figure_show_affiliates_other_global", $locale['figure_368'], $fil_settings['figure_show_affiliates_other_global'], array(
 								"inline" => TRUE, 
 								"options" => array($locale['disable'], $locale['enable'])
 							));
 				
-				// ['figure_369'] = "Amazon Affiliate:"; --> figure_show_amazon_global
+				// ['figure_369'] = "Affiliate Amazon"; --> figure_show_amazon_global
 						// ALS CHECKBOX
 							//echo form_checkbox('figure_show_amazon_global', $locale['figure_369'], $fil_settings['figure_show_amazon_global']);				
 							// ALS DROPDOWN
@@ -384,7 +385,7 @@ openside("");
 									"options" => array($locale['disable'], $locale['enable'])
 								));
 																
-				// ['figure_370'] = "Ebay Affiliate:"; --> figure_show_ebay_global
+				// ['figure_370'] = " Affiliate Ebay"; --> figure_show_ebay_global
 						// ALS CHECKBOX
 							//echo form_checkbox('figure_show_ebay_global', $locale['figure_370'], $fil_settings['figure_show_ebay_global']);				
 						// ALS DROPDOWN
@@ -530,7 +531,6 @@ echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";
 	
 	openside("<div class='text-bold text-uppercase'>".$locale['figure_378']."</div>");
 	
-
 // $locale['admin_figurelib_settings.php_011'] = "Thumb Category size:";	
 // $locale['admin_figurelib_settings.php_006'] = "Width x Height";
 echo "
