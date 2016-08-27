@@ -190,7 +190,7 @@ if ($fil_settings['figure_show_data_global']) { // show figure data global on/of
 				echo "<div class='table-responsive'>\n";
 				echo "<div class='row'>\n";	
 				
-				// MODUL 1 BEGIN ##################################################################################################
+				// PART 1 BEGIN ##################################################################################################
 									
 						// VARIANT LOCALE
 						echo "<div class='col-lg-4 col-md-4 col-sm-12 col-xs-12'>\n";
@@ -265,11 +265,11 @@ if ($fil_settings['figure_show_data_global']) { // show figure data global on/of
 			echo "</div>\n";
 			echo "</div>\n";
 			echo "</div>\n";
-			// MODUL 1 END ########################################################################################################
+			// PART 1 END ########################################################################################################
 						
 	echo "<hr>";
 
-			// MODUL 2 Begin  #####################################################################################################
+			// PART 2 Begin  #####################################################################################################
 			echo "<div class='container-fluid'>\n";
 			echo "<div class='table-responsive'>\n";
 			echo "<div class='row'>\n";	
@@ -362,11 +362,11 @@ if ($fil_settings['figure_show_data_global']) { // show figure data global on/of
 			echo "</div>\n";
 			echo "</div>\n";
 			echo "</div>\n";
-			// MODUL 2 END ########################################################################################################
+			// PART 2 END ########################################################################################################
 			
 	echo "<hr>";
 
-			// MODUL 3 Begin  #####################################################################################################
+			// PART 3 Begin  #####################################################################################################
 			echo "<div class='container-fluid'>\n";
 			echo "<div class='table-responsive'>\n";
 			echo "<div class='row'>\n";	
@@ -420,11 +420,11 @@ if ($fil_settings['figure_show_data_global']) { // show figure data global on/of
 			echo "</div>\n";
 			echo "</div>\n";
 			echo "</div>\n";
-			// MODUL 3 END ########################################################################################################
+			// PART 3 END ########################################################################################################
 			
 	echo "<hr>";
 
-			// MODUL 4 Begin  #####################################################################################################
+			// PART 4 Begin  #####################################################################################################
 			echo "<div class='container-fluid'>\n";
 			echo "<div class='table-responsive'>\n";
 			echo "<div class='row'>\n";	
@@ -478,11 +478,11 @@ if ($fil_settings['figure_show_data_global']) { // show figure data global on/of
 			echo "</div>\n";
 			echo "</div>\n";
 			echo "</div>\n";
-			// MODUL 4 END ########################################################################################################			
+			// PART 4 END ########################################################################################################			
 				
 	echo "<hr>";
 
-			// MODUL 5 Begin  #####################################################################################################
+// PART 5 Begin  #####################################################################################################
 			echo "<div class='container-fluid'>\n";
 			echo "<div class='table-responsive'>\n";
 			echo "<div class='row'>\n";	
@@ -512,8 +512,46 @@ if ($fil_settings['figure_show_data_global']) { // show figure data global on/of
 			echo "</div>\n";
 			echo "</div>\n";
 			echo "</div>\n";
-			// MODUL 5 END ########################################################################################################					
+// ############################################################################################					
+			
+// ###### VIDEO ###############################################################################
+	
+	if ($fil_settings['figure_show_videos_global']) { // Video global on/off ???
+		if ($data['figure_show_videos']) { // Video for figure on/off ???
+	
+					if ($data['figure_videourl']  != "") { 	
 				
+				echo "<hr>";
+					
+						echo "<div class='container-fluid'>\n";
+						echo "<div class='table-responsive'>\n";
+						echo "<div class='row'>\n";	
+					
+						$videourl = $data['figure_videourl'];
+						
+							// TEXT
+									echo "<div class='col-lg-4 col-md-12 col-sm-12 col-xs-12'>\n";
+										echo "<div class='navbar-default'><div class='text-smaller text-uppercase'><strong>Unboxing Video</strong>\n";
+									echo "</div></div></div>\n";									
+									
+							// VIDEO
+									echo "<div class='col-lg-8 col-md-12 col-sm-12 col-xs-12'>\n";
+									// dieser code geht nicht 
+										echo "<div class='embed-responsive embed-responsive-16by9' ><iframe class='embed-responsive-item' src='https://www.youtube.com/embed/".$videourl."'></iframe></div>";					
+									echo "</div>\n";
+							
+						echo "</div>\n";
+						echo "</div>\n";
+						echo "</div>\n";
+						} else { 			
+						}		
+
+		}
+	}
+// ###### VIDEO END ###############################################################################
+
+
+			
 		
 closeside();
 
@@ -521,8 +559,8 @@ closeside();
 		}
 	}
 
-
-// ############################################################################################
+// ############################################################################################	
+	
 
 // ###### LINK FOR ADMINS TO EDIT THE FIGURE ##################################################
 if (iADMIN || iSUPERADMIN) {
