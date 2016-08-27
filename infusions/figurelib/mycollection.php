@@ -42,21 +42,26 @@ opentable("<strong>".$locale['mc_0001']."</strong>");
 			  openside("");				
 
 				echo "<div class='row'>\n";	
-																									
-								// My figures counter
+									
+								// YOUR FIGURE COUNTER + YOUR LAST FIGURE 	
+								// echo "<div class='col-lg-4 col-md-4 col-sm-12 col-xs-12'>\n";
+								// echo "<div class='col-lg-2 col-md-2 col-sm-12 col-xs-12'>\n";
+								// echo "<div class='col-lg-4 col-md-4 col-sm-12 col-xs-12'>\n";
+								// echo "<div class='col-lg-2 col-md-2 col-sm-12 col-xs-12'>\n";	
+								
+								// MY FIGURES COUNTER
 									echo "<div class='col-lg-4 col-md-4 col-sm-12 col-xs-12'>\n";
-										echo "<div class='navbar-default text-bold'>";										
-											// $locale['mc_0007']= "Figure Counter: ";
-											echo $locale['mc_0007'];			
-										echo "</div>";
+									echo "<div class='navbar-default text-bold'>";										
+									// ['mc_0007']= "Figure Counter: ";
+									echo $locale['mc_0007'];			
+									echo "</div>";
 									echo "</div>";
 						
 									echo "<div class='col-lg-2 col-md-2 col-sm-12 col-xs-12'>\n";				
 										echo "<button class='btn btn-primary btn-xs' type='button'><span class='badge'>".$count." / ".$total_rows."</button>\n";
 									echo "</div>";
 
-								// YOUR LAST FIGURE  			
-							
+								// YOUR LAST FIGURE  										
 									global $userdata;
 									$resultlast = dbquery(
 										"SELECT f.figure_id,
@@ -92,7 +97,7 @@ opentable("<strong>".$locale['mc_0001']."</strong>");
 										
 												echo "<div class='col-lg-4 col-md-4 col-sm-12 col-xs-12'>\n";
 													echo "<div class='navbar-default text-bold'>";													
-														// $locale['mc_0009']= "Last figure: ";
+														//['mc_0009']= "Last figure: ";
 														echo "<div class='side-small'>".$locale['mc_0009']."</div>";
 													echo "</div>";
 												echo "</div>";												
@@ -184,14 +189,10 @@ opentable("<strong>".$locale['mc_0001']."</strong>");
 					
 					$info['page_nav'] = $max_rows > $figurelibSettings['figure_per_page'] ? makepagenav($_GET['rowstart'], $figurelibSettings['figure_per_page'], $max_rows, 3, INFUSIONS."figurelib/mycollection.php?") : 0;
 					
-					//$info['page_nav'] = $max_rows > $figurelibSettings['figure_per_page'] ? makepagenav($_GET['rowstart'], $figurelibSettings['figure_per_page'], $max_rows, 3, INFUSIONS."figurelib/mycollection.php?figure_id=".$_GET['figure_id']."&amp;") : 0;
-					
-					//$info['page_nav'] = ($max_rows > $figurelibSettings['figure_per_page']) ? makepagenav($_GET['rowstart'], $figurelibSettings['figure_per_page'], $max_rows, 3, FUSION_SELF."?&amp;") : "";
-
+				// WENN DATEN UNGLEICH = 0 DANN DARSTELLUNG DER DATEN
 				if (dbrows($result) > 0) {				
-
-						// WENN DATEN UNGLEICH = 0 DANN DARSTELLUNG DER DATEN
-					
+				
+							// TITLE LINE
 							echo "<div class='row'>\n";	
 							echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";
 							echo "<div class='navbar-default text-bold'>";					
@@ -201,10 +202,7 @@ opentable("<strong>".$locale['mc_0001']."</strong>");
 							echo "</div>\n";							
 
 						echo "<hr>";	
-													
-						// Get Image
-						$imageURL = figures_getImagePath("figure", "thumb2", $data['figure_id']);
-		
+															
 				echo "<div class='text-bold'>";				
 				echo "<div class='container-fluid'>\n";
 				echo "<div class='table-responsive'>\n";
@@ -222,7 +220,7 @@ opentable("<strong>".$locale['mc_0001']."</strong>");
 								//////////////////////////////////////////////////////////////////////////////*/
 				
 								// COLUMN 1 (image)
-								echo "<div class='col-lg-1 col-md-1 col-sm-2 col-xs-2'>\n";
+								echo "<div class='col-lg-1 col-md-1 col-sm-2 col-xs-2'>\n";	
 									echo "<div class='text-smaller text-uppercase'>".$locale['CLFP_018']."</div>\n";
 								echo "</div>\n";
 
@@ -259,34 +257,36 @@ opentable("<strong>".$locale['mc_0001']."</strong>");
 								// COLUMN 8 (edit)
 								echo "<div class='col-lg-1 col-md-1 col-sm-2 col-xs-2'>\n";	
 									echo "<div class='text-smaller text-uppercase'>Opt.</div>\n";
-								echo "</div>\n";						
+								echo "</div>\n";												
 						
-						
 						echo "</div>\n";
 						echo "</div>\n";
 						echo "</div>\n";
 						echo "</div>\n";
-
 						
 						echo "<hr>";
 				 
-
-				echo "<div class='container-fluid'>\n";
-				echo "<div class='table-responsive'>\n";
-				echo "<div class='row'>\n";		
+				 while($data = dbarray($result)){
+					 
+						echo "<div class='container-fluid'>\n";
+						echo "<div class='table-responsive'>\n";
+						echo "<div class='row'>\n";		
 				 
-						while($data = dbarray($result)){
+							
+								
+								// Get Image
+									$imageURL = figures_getImagePath("figure", "thumb2", $data['figure_id']);
 					
-									// COLUMN 1 (image clickable)
-									echo "<div class='col-lg-1 col-md-1 col-sm-2 col-xs-2'>\n";
+								// COLUMN 1 (image clickable)
+									echo "<div class='col-lg-1 col-md-1 col-sm-2 col-xs-2'>\n";	
 										echo "<div class='side-small figurelib-inforow-height'><a href='".INFUSIONS."figurelib/figures.php?figure_id=".$data['figure_id']."'>\n<img src='".figures_getImagePath("figure", "thumb2", $data['figure_id'])."' alt='".$locale['CLFP_002']." : ".$data['figure_title']."' title='".$locale['CLFP_002']." : ".$data['figure_title']."' /></a>";
 									echo "</div></div>\n";					
 									
 								// COLUMN 2 (name of figure)
 									echo "<div class='col-lg-2 col-md-2 col-sm-4 col-xs-4'>\n";
-											echo "<div class='side-small figurelib-inforow-height'><a href='".INFUSIONS."figurelib/figures.php?figure_id=".$data['figure_id']."' title='".$locale['CLFP_002']." : ".$data['figure_title']."' alt='".$locale['CLFP_002']." : ".$data['figure_title']."'>".trimlink($data['figure_title'],10)."</a>";
+											echo "<div class='side-small figurelib-inforow-height'><a href='".INFUSIONS."figurelib/figures.php?figure_id=".$data['figure_id']."' title='".$locale['CLFP_002']." : ".$data['figure_title']."' alt='".$locale['CLFP_002']." : ".$data['figure_title']."'>".trimlink($data['figure_title'],8)."</a>";
 											echo "</div></div>\n";	
-
+																				
 								// COLUMN 3 (manufacturer)
 									echo "<div class='col-lg-2 col-md-2 col-sm-4 col-xs-4'>\n";
 											echo "<div class='side-small figurelib-inforow-height' title='".$locale['CLFP_003']." : ".$data['figure_manufacturer_name']."' alt='".$locale['CLFP_003']." : ".$data['figure_manufacturer_name']."'>".trimlink($data['figure_manufacturer_name'],10)."</div>\n";
@@ -302,19 +302,19 @@ opentable("<strong>".$locale['mc_0001']."</strong>");
 											echo "<div class='side-small figurelib-inforow-height' title='".$locale['CLFP_005']." : ".$data['figure_scale_name']."' alt='".$locale['CLFP_005']." : ".$data['figure_scale_name']."'>".trimlink($data['figure_scale_name'],6)."</div>\n";
 											echo "</div>\n";
 					
-								// No release date or unknown = "no data" / WENN KEIN WERT ZUM DATUM IN DB DANN ZEIGE HINWEIS "NO DATA"
-								if ($data['figure_pubdate'] == "") {
-									
-											// COLUMN 6 (release date)
-											echo "<div class='col-lg-1 col-md-1 hidden-sm hidden-xs'>\n";
-												echo "<div class='side-small figurelib-inforow-height' title='".$locale['CLFP_006']." : ".$locale['CLFP_008']."' alt='".$locale['CLFP_006']." : ".$locale['CLFP_008']."'>".trimlink($locale['CLFP_008'],7)."</div>\n";
-											echo "</div>\n";			
-								} else {
-									
-											echo "<div class='col-lg-1 col-md-1 hidden-sm hidden-xs'>\n";
-												echo "<div class='side-small figurelib-inforow-height' title='".$locale['CLFP_006']." : ".$data['figure_pubdate']."' alt='".$locale['CLFP_006']." : ".$data['figure_pubdate']."'>".trimlink($data['figure_pubdate'],7)."</div>\n";
-											echo "</div>\n";						
-								} 
+									// No release date or unknown = "no data" 
+									if ($data['figure_pubdate'] == "") {
+										
+												// COLUMN 6 (release date)
+												echo "<div class='col-lg-1 col-md-1 hidden-sm hidden-xs'>\n";
+													echo "<div class='side-small figurelib-inforow-height' title='".$locale['CLFP_006']." : ".$locale['CLFP_008']."' alt='".$locale['CLFP_006']." : ".$locale['CLFP_008']."'>".trimlink($locale['CLFP_008'],7)."</div>\n";
+												echo "</div>\n";			
+									} else {
+										
+												echo "<div class='col-lg-1 col-md-1 hidden-sm hidden-xs'>\n";
+													echo "<div class='side-small figurelib-inforow-height' title='".$locale['CLFP_006']." : ".$data['figure_pubdate']."' alt='".$locale['CLFP_006']." : ".$data['figure_pubdate']."'>".trimlink($data['figure_pubdate'],7)."</div>\n";
+												echo "</div>\n";						
+									} 
 
 								// COLUMN 7 (rating)
 								$drating = dbarray(dbquery("
@@ -331,28 +331,26 @@ opentable("<strong>".$locale['mc_0001']."</strong>");
 								echo "<div class='col-lg-2 hidden-2 hidden-sm hidden-xs'>\n";
 									echo "<div class='side-small figurelib-inforow-height' title='".$locale['CLFP_010']."' alt='".$locale['CLFP_010']."'>".$rating."</div>\n";
 								echo "</div>\n";
-								
-								
+																
 								// COLUMN 8 (edit)
 								echo "<div class='col-lg-1 col-md-1 col-sm-2 col-xs-2'>\n";	
 									echo "<div class='side-small figurelib-inforow-height'>\n";
 										echo figures_displayMyCollectionForm($data['figure_id']);
 								echo "</div>\n";
 								echo "</div>\n";
-						}	
+							echo "</div>\n";
+						echo "</div>\n";
+						echo "</div>\n";
+							
+							}	
 	
-						echo "</div>\n";
-						echo "</div>\n";
-						echo "</div>\n";						
-					
-						//echo "<hr>\n";
+												
 						
 						// PAGE NAV
 						echo $info['page_nav'] ? "<div class='text-right'>".$info['page_nav']."</div>" : '';
 						
 						echo "<hr>\n";
-							
-												
+																			
 				}
 			
 			} 
@@ -362,25 +360,25 @@ opentable("<strong>".$locale['mc_0001']."</strong>");
 	
 		} else {	
 									
-								// $locale['mc_0010']= "You have no figures";
+								//['mc_0010']= "You have no figures";
 								echo "<div class='alert alert-info' role='alert'>";
 									echo $locale['mc_0010'];
 								echo "</div>\n";
 		}		
 		
 	} else {
-				
-				$locale['mc_0001']= "My Figure Collection";
-				$locale['mc_0011']= "This feature is only available for registered members. Please Sign up ";
-				$locale['mc_0012']= "HERE";
-								
-				openside("");
-							echo "<div class='alert alert-danger' role='alert'>";
-								echo $locale['mc_0011'];
-								echo "<a href='".BASEDIR."register.php'>".$locale['mc_0012']."</a>";
-							echo "</div>\n";
-				closeside();
+									
+			openside("");
+				echo "<div class='alert alert-danger' role='alert'>";
+					//$locale['mc_0011']= "This feature is only available for registered members. Please Sign up ";
+					echo $locale['mc_0011'];
+					//$locale['mc_0012']= "HERE";
+					echo "<a href='".BASEDIR."register.php'>".$locale['mc_0012']."</a>";
+				echo "</div>\n";
+			closeside();
+			
 			}
+			
 closetable();
 
 /////////////////////////////////////////////////////////////////////////////////////////////	
