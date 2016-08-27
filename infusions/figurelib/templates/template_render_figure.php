@@ -61,7 +61,7 @@ global $settings;
 					// ['cifg_0009'] = "Filter by:";
 					//opentable($locale['cifg_0009']);			
 					
-					//echo "<aside class='list-group-item m-b-20'>\n";
+					echo "<aside class='list-group-item m-b-20'>\n";
 					
 		if ($info['figure_rows'] != 0) {						
 						$counter = 0;
@@ -359,6 +359,7 @@ echo "</div>\n";
 			
 			}
 				echo $info['page_nav'] ? "<div class='text-right'>".$info['page_nav']."</div>" : '';
+				echo "</aside";
 
 		}
 	}					
