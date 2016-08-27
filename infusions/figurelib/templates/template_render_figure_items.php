@@ -759,90 +759,79 @@ closeside();
 
 // ###########  RELATED FIGURES  ##############################################################			
 	
-	echo "<div class='row'>\n";		
-		echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";
+echo "<div class='row'>\n";     
+        echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";
 
-	if ($fil_settings['figure_show_related_global']) { // related global on/off ???
-			if ($data['figure_show_related']) { // related for this figure on/off ???	
-	
-		openside("<div class='well clearfix text-uppercase text-bold'>".$locale['figure_425']."</div>");	
-					
+    if ($fil_settings['figure_show_related_global']) { // related global on/off ???
+            if ($data['figure_show_related']) { // related for this figure on/off ???   
 
-					$result3 = dbquery("
-						SELECT 
-							f.figure_id, 
-							f.figure_title, 
-							f.figure_datestamp, 
-							f.figure_visibility, 
-							fc.figure_cat_id, 
-							fc.figure_cat_name,
-							fm.figure_manufacturer_id,
-							fm.figure_manufacturer_name							
-						FROM ".DB_FIGURE_ITEMS." f 
-						INNER JOIN ".DB_FIGURE_CATS." fc ON f.figure_cat=fc.figure_cat_id
-						INNER JOIN ".DB_FIGURE_MANUFACTURERS." fm ON f.figure_manufacturer=fm.figure_manufacturer_id 						
-						WHERE MATCH (figure_title) AGAINST ('".$data['figure_title']."' IN BOOLEAN MODE)
-						AND figure_id != '".$data['figure_id']."' ".(iSUPERADMIN ? "" : "AND ".groupaccess('figure_visibility'))." 
-						ORDER BY RAND() 
-						LIMIT 0,5");
-				
-					if (dbrows($result3)) {
-						$i = 0;
-												
-						echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";
-							
-							echo "<div class='col-lg-3 col-md-3 col-sm-12 col-xs-12'>\n";
-							echo "<div class=''>".$locale['figure_411']."</div>\n";
-							echo "</div>\n";
+        openside("<div class='well clearfix text-uppercase text-bold'>".$locale['figure_425']."</div>");    
 
-							echo "<div class='col-lg-3 col-md-3 col-sm-12 col-xs-12'>\n";
-							echo "<div class=''>".$locale['figure_417']."</div>\n";
-							echo "</div>\n";
-														
-							echo "<div class='col-lg-3 col-md-3 col-sm-12 col-xs-12'>\n";
-							echo "<div class=''>".$locale['figure_413']."</div>\n";
-							echo "</div>\n";
+                    $result3 = dbquery("
+                        SELECT 
+                            f.figure_id, 
+                            f.figure_title, 
+                            f.figure_datestamp, 
+                            f.figure_visibility, 
+                            fc.figure_cat_id, 
+                            fc.figure_cat_name,
+                            fm.figure_manufacturer_id,
+                            fm.figure_manufacturer_name                         
+                        FROM ".DB_FIGURE_ITEMS." f 
+                        INNER JOIN ".DB_FIGURE_CATS." fc ON f.figure_cat=fc.figure_cat_id
+                        INNER JOIN ".DB_FIGURE_MANUFACTURERS." fm ON f.figure_manufacturer=fm.figure_manufacturer_id                        
+                        WHERE MATCH (figure_title) AGAINST ('".$data['figure_title']."' IN BOOLEAN MODE)
+                        AND figure_id != '".$data['figure_id']."' ".(iSUPERADMIN ? "" : "AND ".groupaccess('figure_visibility'))." 
+                        ORDER BY RAND() 
+                        LIMIT 0,5");
 
-							echo "<div class='col-lg-3 col-md-3 col-sm-12 col-xs-12'>\n";
-							echo "<div class=''>".$locale['figure_418']."</div>\n";							
-							echo "</div>\n";
-						
-						echo "</div>\n";
-						
-						while ($data3 = dbarray($result3)) {
+                    if (dbrows($result3)) {
+                        $i = 0;
 
-							$drating = dbarray(dbquery("SELECT SUM(rating_vote) sum_rating, COUNT(rating_item_id) count_votes FROM ".DB_RATINGS." WHERE rating_item_id='".$data3['figure_id']."' AND rating_type='FI'"));
-							$num_votes = $drating['count_votes'];
-							$rating = ($num_votes > 0 ? str_repeat("<img src='".INFUSIONS."figurelib/images/starsmall.png'>",ceil($drating['sum_rating']/$num_votes)) : "-");
-							$cell_color = ($i % 2 == 0 ? "tbl1" : "tbl2"); $i++;
-							
-							
-						echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";
-							
-							echo "<div class='col-lg-3 col-md-3 col-sm-12 col-xs-12'>\n";
-							echo "<a href='figures.php?figure_id=".$data3['figure_id']."' title='".$data3['figure_title']."'>".$data3['figure_title']."</a></div>\n";
-							
-							echo "<div class='col-lg-3 col-md-3 col-sm-12 col-xs-12'>".trimlink($data3['figure_manufacturer_name'],10)."</div>\n";
-							echo "<div class='col-lg-3 col-md-3 col-sm-12 col-xs-12'>".$data3['figure_cat_name']."</div>\n";
-							echo "<div class='col-lg-3 col-md-3 col-sm-12 col-xs-12'>".$rating."</div>\n";
+                        echo "<div class='row'>\n";
 
-						echo "</div>\n";	
+                            echo "<div class='col-lg-3 col-md-3 col-sm-12 col-xs-12'>\n";
+                            echo "<div class=''>".$locale['figure_411']."</div>\n";
+                            echo "</div>\n";
+                            echo "<div class='col-lg-3 col-md-3 col-sm-12 col-xs-12'>\n";
+                            echo "<div class=''>".$locale['figure_417']."</div>\n";
+                            echo "</div>\n";        
+                            echo "<div class='col-lg-3 col-md-3 col-sm-12 col-xs-12'>\n";
+                            echo "<div class=''>".$locale['figure_413']."</div>\n";
+                            echo "</div>\n";
+                            echo "<div class='col-lg-3 col-md-3 col-sm-12 col-xs-12'>\n";
+                            echo "<div class=''>".$locale['figure_418']."</div>\n";                         
+                            echo "</div>\n";
 
-						} 
-					
-					} else {
-							// ['figure_426'] = "No related figures found.";
-							echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>".$locale['figure_426']."</div><p><p>"; 
+                        echo "</div>\n";
 
-					}
+                        while ($data3 = dbarray($result3)) {
+                            $drating = dbarray(dbquery("SELECT SUM(rating_vote) sum_rating, COUNT(rating_item_id) count_votes FROM ".DB_RATINGS." WHERE rating_item_id='".$data3['figure_id']."' AND rating_type='FI'"));
+                            $num_votes = $drating['count_votes'];
+                            $rating = ($num_votes > 0 ? str_repeat("<img src='".INFUSIONS."figurelib/images/starsmall.png'>",ceil($drating['sum_rating']/$num_votes)) : "-");
+                            $cell_color = ($i % 2 == 0 ? "tbl1" : "tbl2"); $i++;
 
 
-		closeside();										
-		}
-	}
+                        echo "<div class='row'>\n";
 
-			echo "</div>\n";
-	echo "</div>\n";
+                            echo "<div class='col-lg-3 col-md-3 col-sm-12 col-xs-12'>\n";
+                            echo "<a href='figures.php?figure_id=".$data3['figure_id']."' title='".$data3['figure_title']."'>".$data3['figure_title']."</a></div>\n";
+
+                            echo "<div class='col-lg-3 col-md-3 col-sm-12 col-xs-12'>".trimlink($data3['figure_manufacturer_name'],10)."</div>\n";
+                            echo "<div class='col-lg-3 col-md-3 col-sm-12 col-xs-12'>".$data3['figure_cat_name']."</div>\n";
+                            echo "<div class='col-lg-3 col-md-3 col-sm-12 col-xs-12'>".$rating."</div>\n";
+                        echo "</div>\n";    
+                        } 
+
+                    } else {
+                            // ['figure_426'] = "No related figures found.";
+                            echo "<div class='row'><div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>".$locale['figure_426']."</div></div>"; 
+                    }
+        closeside();                                        
+        }
+    }
+            echo "</div>\n";
+    echo "</div>\n";
 	
 // ############################################################################################
 
