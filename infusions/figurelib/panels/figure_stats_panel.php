@@ -75,7 +75,8 @@ opentable("<div class='text-bold'>".$locale['stats_001']."</div>");
 			// GESAMTZAHL ALLER FIGUREN /////////////////////////////////////////		
 				echo "<div class='col-lg-4 col-md-4 col-sm-12 col-xs-12'>\n";														
 					echo "<div class='navbar-default text-bold'>";	
-						echo "<span>Total number of figures: </span>\n";
+						//['stats_004'] ="Total number of figures:";
+						echo "<span>".$locale['stats_004']."</span>\n";
 					echo "</div>\n";
 				echo "</div>\n";
 						
@@ -88,7 +89,8 @@ opentable("<div class='text-bold'>".$locale['stats_001']."</div>");
 			// Gesamtzahl Figuren in Userbesitz //////////////////////////////////	
 				echo "<div class='col-lg-4 col-md-4 col-sm-12 col-xs-12'>\n";																		
 					echo "<div class='navbar-default text-bold'>";	
-						echo "<span>Total figures owned by user:</span>\n";
+						//['stats_005'] ="Total figures owned by user:";
+						echo "<span>".$locale['stats_005']."</span>\n";
 					echo "</div>\n";
 					echo "</div>\n";
 				
@@ -161,21 +163,20 @@ opentable("<div class='text-bold'>".$locale['stats_001']."</div>");
 					echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";
 					echo "<div class='navbar-default text-bold'>";	
 					//$locale['CLFP_027']= "Highest retailprice";					
-					echo "<span><strong>".$locale['CLFP_027']."</strong></span>\n";
+					echo "<span><strong>".$locale['CLFP_027']." (".$locale['stats_003'].")</strong></span>\n";
 					echo "</div></div></div>\n";			 
 
 				echo "<hr>";	
 
 				/*//// GRID SYSTEM FOR PANEL AS OVERVIEW ///////////////////////////////////////
-					echo "<div class='col-lg-1 col-md-2 col-sm-2 col-xs-2'>\n";	image
-					echo "<div class='col-lg-2 col-md-3 col-sm-4 col-xs-4'>\n";	title
-					echo "<div class='col-lg-2 col-md-3 col-sm-4 col-xs-4'>\n";	manufacturer
+					echo "<div class='col-lg-1 col-md-2 col-sm-2 col-xs-2'>\n";		image
+					echo "<div class='col-lg-2 col-md-3 col-sm-4 col-xs-4'>\n";		title
+					echo "<div class='col-lg-2 col-md-3 col-sm-4 col-xs-4'>\n";		manufacturer
 					echo "<div class='col-lg-2 hidden-md hidden-sm hidden-xs'>\n";	brand
-					echo "<div class='col-lg-1 hidden-md hidden-sm hidden-xs'>\n";	scale
 					echo "<div class='col-lg-1 col-md-2 hidden-sm hidden-xs'>\n";	year
-					echo "<div class='col-lg-1 hidden-md hidden-sm hidden-xs'>\n";	rating
-					echo "<div class='col-lg-1 col-md-1 col-sm-1 col-xs-1'>\n";	edit (only for admins)
-					echo "<div class='col-lg-1 col-md-1 col-sm-1 col-xs-1'>\n";	add/remove
+					echo "<div class='col-lg-2 col-md-2 hidden-sm hidden-xs'>\n";	retailprice
+					echo "<div class='col-lg-1 col-md-1 col-sm-1 col-xs-1'>\n";		edit (only for admins)
+					echo "<div class='col-lg-1 col-md-1 col-sm-1 col-xs-1'>\n";		add/remove
 				//////////////////////////////////////////////////////////////////////////////*/
 		
 		
@@ -204,23 +205,18 @@ opentable("<div class='text-bold'>".$locale['stats_001']."</div>");
 							echo "<div class='text-smaller text-uppercase'>".$locale['CLFP_004']."</div>\n";
 						echo "</div>\n";
 						
-						// COLUMN 5 (scale)
-						echo "<div class='col-lg-1 hidden-md hidden-sm hidden-xs'>\n";
-							echo "<div class='text-smaller text-uppercase'>".$locale['CLFP_005']."</div>\n";
-						echo "</div>\n";
-						
-						// COLUMN 6 (release date)
+						// COLUMN 5 (release date)
 						echo "<div class='col-lg-1 col-md-2 hidden-sm hidden-xs'>\n";
 							echo "<div class='text-smaller text-uppercase'>".$locale['CLFP_006']."</div>\n";
 						echo "</div>\n";
 						
-						// COLUMN 7 (rating)
-						echo "<div class='col-lg-1 hidden-md hidden-sm hidden-xs'>\n";
-							echo "<div class='text-smaller text-uppercase'>".$locale['CLFP_010']."</div>\n";
+						// COLUMN 6 (retailprice) 
+						echo "<div class='col-lg-2 col-md-2 hidden-sm hidden-xs'>\n";
+							echo "<div class='text-smaller text-uppercase'>".$locale['figure_449']."</div>\n";
 						echo "</div>\n";
 						
 					if (iADMIN || iSUPERADMIN) {
-						// COLUMN 8 (edit) only for admins
+						// COLUMN 7 (edit) only for admins
 						echo "<div class='col-lg-1 hidden-md hidden-sm hidden-xs'>\n";
 							echo "<div class='text-smaller text-uppercase'>Edit</div>\n";
 						echo "</div>\n";
@@ -228,7 +224,7 @@ opentable("<div class='text-bold'>".$locale['stats_001']."</div>");
 						
 					}
 												
-						// COLUMN 9 Usercount (only for Guests and members - admins will see edit button)if (iADMIN || iSUPERADMIN) {
+						// COLUMN 8 Usercount (only for Guests and members - admins will see edit button)if (iADMIN || iSUPERADMIN) {
 					if (iADMIN || iSUPERADMIN) {
 					} else {
 						echo "<div class='col-lg-1 col-md-2 col-sm-2 col-xs-2'>\n";	
@@ -236,7 +232,7 @@ opentable("<div class='text-bold'>".$locale['stats_001']."</div>");
 						echo "</div>\n";
 					}
 						
-						// COLUMN 9 (action)
+						// COLUMN 8 (action)
 						echo "<div class='col-lg-1 col-md-2 col-sm-2 col-xs-2'>\n";	
 							echo "<div class='text-smaller text-uppercase'>Opt.</div>\n";
 						echo "</div>\n";
@@ -293,13 +289,8 @@ opentable("<div class='text-bold'>".$locale['stats_001']."</div>");
 						echo "<div class='col-lg-2 hidden-md hidden-sm hidden-xs'>\n";
 							echo "<div class='side-small' title='".$locale['CLFP_004']." : ".$data['figure_brand_name']."' alt='".$locale['CLFP_004']." : ".$data['figure_brand_name']."'>".trimlink($data['figure_brand_name'],10)."</div>\n";
 						echo "</div>\n";
-						
-						// COLUMN 5 (scale)
-						echo "<div class='col-lg-1 hidden-md hidden-sm hidden-xs'>\n";
-							echo "<div class='side-small' title='".$locale['CLFP_005']." : ".$data['figure_scale_name']."' alt='".$locale['CLFP_005']." : ".$data['figure_scale_name']."'>".trimlink($data['figure_scale_name'],6)."</div>\n";
-						echo "</div>\n";
 			
-						// COLUMN 6 (release date)
+						// COLUMN 5 (release date)
 						// No release date or unknown = "no data" / WENN KEIN WERT ZUM DATUM IN DB DANN ZEIGE HINWEIS "NO DATA"
 						if ($data['figure_pubdate'] == "") {
 							
@@ -308,23 +299,12 @@ opentable("<div class='text-bold'>".$locale['stats_001']."</div>");
 								echo "<div class='col-lg-1 col-md-2 hidden-sm hidden-xs'><div class='side-small' title='".$locale['CLFP_006']." : ".$data['figure_pubdate']."' alt='".$locale['CLFP_006']." : ".$data['figure_pubdate']."'>".trimlink($data['figure_pubdate'],6)."</div></div>\n";
 								} 
 		
-						// COLUMN 7 (rating)
-								$drating = dbarray(dbquery("
-								   SELECT 
-										SUM(rating_vote) sum_rating, 
-										COUNT(rating_item_id) count_votes 
-										FROM ".DB_RATINGS." 
-										WHERE rating_type='FI' 
-										AND  rating_item_id='".$data['figure_id']."'
-									")); 
-   
-								$rating = ($drating['count_votes'] > 0 ? str_repeat("<img src='".INFUSIONS.$inf_folder."/images/starsmall.png'>", ceil($drating['sum_rating']/$drating['count_votes'])) : "-");
-						
-						echo "<div class='col-lg-1 hidden-md hidden-sm hidden-xs'>\n";
-							echo "<div class='side-small' title='".$locale['CLFP_010']."' alt='".$locale['CLFP_010']."'>".$rating."</div>\n";
+						// COLUMN 6 (retailprice)														
+						echo "<div class='col-lg-2 col-md-2 hidden-sm hidden-xs'>\n";
+							echo "<div class='side-small text-danger' title='".$locale['figure_449']." : ".$data['figure_retailprice']." ($)' alt='".$locale['figure_449']."'>".TRIMLINK($data['figure_retailprice'],6)."</div>\n";
 						echo "</div>\n";
 						
-						// COLUMN 8 (edit) only for admins
+						// COLUMN 7 (edit) only for admins
 						
 						if (iADMIN || iSUPERADMIN) {
 						echo "<div class='col-lg-1 col-md-1 col-sm-1 col-xs-1'>\n";	
@@ -355,7 +335,7 @@ opentable("<div class='text-bold'>".$locale['stats_001']."</div>");
 									echo "</div>\n";	
 							}		
 							
-						// COLUMN 9 (add/remove)
+						// COLUMN 8 (add/remove)
 						echo "<div class='col-lg-1 col-md-1 col-sm-1 col-xs-1'>\n";	
 	
 							// MyCollection
@@ -443,21 +423,20 @@ opentable("<div class='text-bold'>".$locale['stats_001']."</div>");
 				echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";
 				echo "<div class='navbar-default'>";	
 				//$locale['CLFP_026']= "Highest usedprice";					
-				echo "<span><strong>".$locale['CLFP_026']."</strong></span>\n";
+				echo "<span><strong>".$locale['CLFP_026']." (".$locale['stats_003'].")</strong></span>\n";
 				echo "</div></div></div>\n";			 
 
 				echo "<hr>";	
 
 				/*//// GRID SYSTEM FOR PANEL AS OVERVIEW ///////////////////////////////////////
-					echo "<div class='col-lg-1 col-md-2 col-sm-2 col-xs-2'>\n";	image
-					echo "<div class='col-lg-2 col-md-3 col-sm-4 col-xs-4'>\n";	title
-					echo "<div class='col-lg-2 col-md-3 col-sm-4 col-xs-4'>\n";	manufacturer
+					echo "<div class='col-lg-1 col-md-2 col-sm-2 col-xs-2'>\n";		image
+					echo "<div class='col-lg-2 col-md-3 col-sm-4 col-xs-4'>\n";		title
+					echo "<div class='col-lg-2 col-md-3 col-sm-4 col-xs-4'>\n";		manufacturer
 					echo "<div class='col-lg-2 hidden-md hidden-sm hidden-xs'>\n";	brand
-					echo "<div class='col-lg-1 hidden-md hidden-sm hidden-xs'>\n";	scale
 					echo "<div class='col-lg-1 col-md-2 hidden-sm hidden-xs'>\n";	year
-					echo "<div class='col-lg-1 hidden-md hidden-sm hidden-xs'>\n";	rating
-					echo "<div class='col-lg-1 col-md-1 col-sm-1 col-xs-1'>\n";	edit (only for admins)
-					echo "<div class='col-lg-1 col-md-1 col-sm-1 col-xs-1'>\n";	add/remove
+					echo "<div class='col-lg-1 col-md-2 hidden-sm hidden-xs'>\n";	usedprice
+					echo "<div class='col-lg-1 col-md-1 col-sm-1 col-xs-1'>\n";		edit (only for admins)
+					echo "<div class='col-lg-1 col-md-1 col-sm-1 col-xs-1'>\n";		add/remove
 				//////////////////////////////////////////////////////////////////////////////*/
 								
 				echo "<div class='text-bold'>";				
@@ -480,24 +459,19 @@ opentable("<div class='text-bold'>".$locale['stats_001']."</div>");
 							echo "<div class='text-smaller text-uppercase'>".$locale['CLFP_003']."</div>\n";
 						echo "</div>\n";
 						
-						// COLUMN 4 (brand)
+						// COLUMN 4 (usedprice)
 						echo "<div class='col-lg-2 hidden-md hidden-sm hidden-xs'>\n";
 							echo "<div class='text-smaller text-uppercase'>".$locale['CLFP_004']."</div>\n";
 						echo "</div>\n";
-						
-						// COLUMN 5 (scale)
-						echo "<div class='col-lg-1 hidden-md hidden-sm hidden-xs'>\n";
-							echo "<div class='text-smaller text-uppercase'>".$locale['CLFP_005']."</div>\n";
-						echo "</div>\n";
-						
+										
 						// COLUMN 6 (release date)
 						echo "<div class='col-lg-1 col-md-2 hidden-sm hidden-xs'>\n";
 							echo "<div class='text-smaller text-uppercase'>".$locale['CLFP_006']."</div>\n";
 						echo "</div>\n";
 						
-						// COLUMN 7 (rating)
-						echo "<div class='col-lg-1 hidden-md hidden-sm hidden-xs'>\n";
-							echo "<div class='text-smaller text-uppercase'>".$locale['CLFP_010']."</div>\n";
+						// COLUMN 7 (usedprice)
+						echo "<div class='col-lg-2 col-md-2 hidden-sm hidden-xs'>\n";
+							echo "<div class='text-smaller text-uppercase'>".$locale['figure_456']."</div>\n";
 						echo "</div>\n";
 						
 						if (iADMIN || iSUPERADMIN) {
@@ -574,13 +548,8 @@ opentable("<div class='text-bold'>".$locale['stats_001']."</div>");
 						echo "<div class='col-lg-2 hidden-md hidden-sm hidden-xs'>\n";
 							echo "<div class='side-small' title='".$locale['CLFP_004']." : ".$data['figure_brand_name']."' alt='".$locale['CLFP_004']." : ".$data['figure_brand_name']."'>".trimlink($data['figure_brand_name'],10)."</div>\n";
 						echo "</div>\n";
-						
-						// COLUMN 5 (scale)
-						echo "<div class='col-lg-1 hidden-md hidden-sm hidden-xs'>\n";
-							echo "<div class='side-small' title='".$locale['CLFP_005']." : ".$data['figure_scale_name']."' alt='".$locale['CLFP_005']." : ".$data['figure_scale_name']."'>".trimlink($data['figure_scale_name'],6)."</div>\n";
-						echo "</div>\n";
-			
-						// COLUMN 6 (release date)
+									
+						// COLUMN 5 (release date)
 						// No release date or unknown = "no data" / WENN KEIN WERT ZUM DATUM IN DB DANN ZEIGE HINWEIS "NO DATA"
 						if ($data['figure_pubdate'] == "") {
 							
@@ -589,23 +558,13 @@ opentable("<div class='text-bold'>".$locale['stats_001']."</div>");
 								echo "<div class='col-lg-1 col-md-2 hidden-sm hidden-xs'><div class='side-small' title='".$locale['CLFP_006']." : ".$data['figure_pubdate']."' alt='".$locale['CLFP_006']." : ".$data['figure_pubdate']."'>".trimlink($data['figure_pubdate'],7)."</div></div>\n";
 								} 
 		
-						// COLUMN 7 (rating)
-								$drating = dbarray(dbquery("
-								   SELECT 
-										SUM(rating_vote) sum_rating, 
-										COUNT(rating_item_id) count_votes 
-										FROM ".DB_RATINGS." 
-										WHERE rating_type='FI' 
-										AND  rating_item_id='".$data['figure_id']."'
-									")); 
-   
-								$rating = ($drating['count_votes'] > 0 ? str_repeat("<img src='".INFUSIONS.$inf_folder."/images/starsmall.png'>", ceil($drating['sum_rating']/$drating['count_votes'])) : "-");
-						
-						echo "<div class='col-lg-1 hidden-md hidden-sm hidden-xs'>\n";
-							echo "<div class='side-small' title='".$locale['CLFP_010']."' alt='".$locale['CLFP_010']."'>".$rating."</div>\n";
+						// COLUMN 6 (usedprice)
+														
+						echo "<div class='col-lg-2 col-md-2 hidden-sm hidden-xs'>\n";
+							echo "<div class='side-small text-danger' title='".$locale['figure_456']." : ".$data['figure_usedprice']." ($)' alt='".$locale['figure_456']."'>".TRIMLINK($data['figure_usedprice'],6)."</div>\n";
 						echo "</div>\n";
 						
-						// COLUMN 8 (edit) only for admins
+						// COLUMN 7 (edit) only for admins
 						
 						if (iADMIN || iSUPERADMIN) {
 						echo "<div class='col-lg-1 col-md-1 col-sm-1 col-xs-1'>\n";	
@@ -720,7 +679,7 @@ $resultmostusercount = dbquery("
 				echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";
 				echo "<div class='navbar-default'>";	
 				// $locale['CLFP_025']= "The figure, which most be in the user's possession.				
-				echo "<span><strong>".$locale['CLFP_025']."</strong></span>\n";
+				echo "<span><strong>".$locale['CLFP_025']." (".$locale['stats_003'].")</strong></span>\n";
 				echo "</div></div></div>\n";			 
 
 				echo "<hr>";	
@@ -844,12 +803,12 @@ $resultmostusercount = dbquery("
 		
 						// COLUMN 3 (manufacturer)
 						echo "<div class='col-lg-2 col-md-3 col-sm-4 col-xs-4'>\n";	
-							echo "<div class='side-small' title='".$locale['CLFP_003']." : ".$data['figure_manufacturer_name']."' alt='".$locale['CLFP_003']." : ".$data['figure_manufacturer_name']."'>".trimlink($data['figure_manufacturer_name'],12)."</div>\n";
+							echo "<div class='side-small' title='".$locale['CLFP_003']." : ".$data['figure_manufacturer_name']."' alt='".$locale['CLFP_003']." : ".$data['figure_manufacturer_name']."'>".trimlink($data['figure_manufacturer_name'],10)."</div>\n";
 						echo "</div>\n";
 						
 						// COLUMN 4 (brand)
 						echo "<div class='col-lg-2 hidden-md hidden-sm hidden-xs'>\n";
-							echo "<div class='side-small' title='".$locale['CLFP_004']." : ".$data['figure_brand_name']."' alt='".$locale['CLFP_004']." : ".$data['figure_brand_name']."'>".trimlink($data['figure_brand_name'],12)."</div>\n";
+							echo "<div class='side-small' title='".$locale['CLFP_004']." : ".$data['figure_brand_name']."' alt='".$locale['CLFP_004']." : ".$data['figure_brand_name']."'>".trimlink($data['figure_brand_name'],10)."</div>\n";
 						echo "</div>\n";
 						
 						// COLUMN 5 (scale)
@@ -909,7 +868,7 @@ $resultmostusercount = dbquery("
 									echo "<div class='col-lg-1 hidden-md hidden-sm hidden-xs'>\n";
 									$count = dbcount("(figure_userfigures_id)", DB_FIGURE_USERFIGURES, "figure_userfigures_figure_id='".$data['figure_id']."'");	
 							
-										echo "<div class='side-small' title='".$locale['CLFP_020']." : ".$count."' alt='".$locale['CLFP_020']." : ".$count."'>".trimlink($count,6)."</div>\n";
+										echo "<div class='side-small text-danger' title='".$locale['CLFP_020']." : ".$count."' alt='".$locale['CLFP_020']." : ".$count."'>".trimlink($count,6)."</div>\n";
 									echo "</div>\n";	
 							}		
 							
