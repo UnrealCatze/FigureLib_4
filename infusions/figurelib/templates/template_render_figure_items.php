@@ -542,185 +542,171 @@ if (iADMIN || iSUPERADMIN) {
 // ########  AFFILIATE PANEL  #################################################################
 
 		
-	if ($fil_settings['figure_show_affiliates_complete_global']) { // Affiliates Complete global on/off ???	
+if ($fil_settings['figure_show_affiliates_complete_global']) { // Affiliates Complete global on/off ??? 
+        if (
+            ($fil_settings['figure_show_affiliates_other_global'] && $data['figure_show_affiliates_other']) ||
+            ($fil_settings['figure_show_amazon_global']           && $data['figure_show_amazon'])
+        ) {
 
-		if (
-			($fil_settings['figure_show_affiliates_other_global'] && $data['figure_show_affiliates_other']) ||
-			($fil_settings['figure_show_amazon_global']           && $data['figure_show_amazon'])
-		) {
-		
-			// Display Header
-			openside("<div class='well clearfix text-uppercase text-bold'>".$locale['figure_191']."</strong></div>");	
+            // Display Header
+            openside("<div class='well clearfix text-uppercase text-bold'>".$locale['figure_191']."</strong></div>");   
+            echo "<div class='container-fluid'>\n";
+            echo "<div class='table-responsive'>\n";
+            echo "<div class='row'>\n";     
 
-			echo "<div class='container-fluid'>\n";
-			echo "<div class='table-responsive'>\n";
-			echo "<div class='row'>\n";		
-		
-			// Display Affiliates Other
-			if ($fil_settings['figure_show_affiliates_other_global']) { // Affiliates Other global on/off ???
-					if ($data['figure_show_affiliates_other']) { //Affiliates Other for this figure on/off ???
+            // Display Affiliates Other
+            if ($fil_settings['figure_show_affiliates_other_global']) { // Affiliates Other global on/off ???
+                    if ($data['figure_show_affiliates_other']) { //Affiliates Other for this figure on/off ???
 
-		
-							// FIRST LINE ESHOP (PRIORITY 1)
-							echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";		
-									if ($data['figure_eshop'] == "") { 
-									
-									} else { 
-								
-								echo "<div class='text-center'><a href='".$data['figure_eshop']."'</a>".trimlink($data['figure_eshop'],15)."</div>\n"; }
-							echo "</div>\n";
-			 
-							// SECOND LINE AFFILIATE (PRIORITY 2)
-							echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";
-			
-								 if ($data['figure_affiliate_1']  ||  $data['figure_affiliate_2'] ||  $data['figure_affiliate_3'] || $data['figure_affiliate_4']) { 
-								 
-									echo "<div class='col-lg-3 col-md-6 col-sm-6 col-xs-12'>\n";
-									echo "<div class='text-center'>	\n";	 
-											if ($data['figure_affiliate_1'] == "") { echo "<strike>".$locale['figure_033']."</strike>";
-												} else { echo "<a href='".$data['figure_affiliate_1']."'</a>".trimlink($data['figure_affiliate_1'],15)."\n"; }
-									echo "</div></div>\n";				
-									
-									echo "<div class='col-lg-3 col-md-6 col-sm-6 col-xs-12'>\n";
-									echo "<div class='text-center'>	\n";	 
-											if ($data['figure_affiliate_2'] == "") { echo "<strike>".$locale['figure_033']."</strike>";
-												} else { echo "<a href='".$data['figure_affiliate_2']."'</a>".trimlink($data['figure_affiliate_2'],15)."\n"; }
-									echo "</div></div>\n";				
-									
-									echo "<div class='col-lg-3 col-md-6 col-sm-6 col-xs-12'>\n";
-									echo "<div class='text-center'>	\n"; 
-											if ($data['figure_affiliate_3'] == "") { echo "<strike>".$locale['figure_033']."</strike>";
-												} else { echo "<a href='".$data['figure_affiliate_3']."'</a>".trimlink($data['figure_affiliate_3'],15)."\n"; }
-									echo "</div></div>\n";								
-									
-									echo "<div class='col-lg-3 col-md-6 col-sm-6 col-xs-12'>\n";
-									echo "<div class='text-center'>	\n";	 
-											if ($data['figure_affiliate_4'] == "") { echo "<strike>".$locale['figure_033']."</strike>";
-												} else { echo "<a href='".$data['figure_affiliate_4']."'</a>".trimlink($data['figure_affiliate_4'],15)."\n"; }	
-									echo "</div></div>\n";	
-									
-								echo "</div>\n";			
+                            // FIRST LINE ESHOP (PRIORITY 1)
+                            echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";     
+                                    if ($data['figure_eshop'] == "") { 
 
-								 } else { 
-								 
-								 }
-							
-									 
-					 
-							// THIRD LINE AFFILIATE (PRIORITY 2)
-							
-							echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";		
-								
-								if ($data['figure_affiliate_5']  ||  $data['figure_affiliate_6'] ||  $data['figure_affiliate_7'] || $data['figure_affiliate_8']) { 
-								 
-									echo "<div class='col-lg-3 col-md-6 col-sm-6 col-xs-12'>\n";
-									echo "<div class='text-center'>	\n";
-											if ($data['figure_affiliate_5'] == "") { echo "<strike>".$locale['figure_033']."</strike>";
-												} else { echo "<a href='".$data['figure_affiliate_5']."'</a>".trimlink($data['figure_affiliate_5'],15)."\n"; }		 
-									echo "</div></div>\n";
+                                    } else { 
 
-									echo "<div class='col-lg-3 col-md-6 col-sm-6 col-xs-12'>\n";
-									echo "<div class='text-center'>	\n";	 
-											if ($data['figure_affiliate_6'] == "") { echo "<strike>".$locale['figure_033']."</strike>";
-												} else { echo "<a href='".$data['figure_affiliate_6']."'</a>".trimlink($data['figure_affiliate_6'],15)."\n"; }	
-									echo "</div></div>\n";
-									
-									echo "<div class='col-lg-3 col-md-6 col-sm-6 col-xs-12'>\n";
-									echo "<div class='text-center'>	\n";	 
-											if ($data['figure_affiliate_7'] == "") { echo "<strike>".$locale['figure_033']."</strike>";
-												} else { echo "<a href='".$data['figure_affiliate_7']."'</a>".trimlink($data['figure_affiliate_7'],15)."\n"; }	
-									echo "</div></div>\n";
-									
-									echo "<div class='col-lg-3 col-md-6 col-sm-6 col-xs-12'>\n";
-									echo "<div class='text-center'>	\n";	 
-											if ($data['figure_affiliate_8'] == "") { echo "<strike>".$locale['figure_033']."</strike>";
-												} else { echo "<a href='".$data['figure_affiliate_8']."'</a>".trimlink($data['figure_affiliate_8'],15)."\n"; }	
-									echo "</div></div>\n";
-									
-								echo "</div>\n";
-								
-								} else { 
-								
-								}								
+                                echo "<div class='text-center'><a href='".$data['figure_eshop']."'</a>".trimlink($data['figure_eshop'],15)."</div>\n"; }
+                            echo "</div>\n";
 
-					}
-			}
-			
-			if ($fil_settings['figure_show_amazon_global']) { // Amazon Affiliates global on/off ???
-					if ($data['figure_show_amazon']) { // Amazon Affiliates for this figure on/off ???
-								 
-							// FOURTH LINE AMAZON COM CA UK DE	
-							
-							echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";
-											
-									echo "<div class='col-lg-3 col-md-6 col-sm-6 col-xs-6'>\n";
-									echo "<div class='text-center'>	\n";	 
-										if ($data['figure_amazon_com'] == "") { echo "<img src='".INFUSIONS."figurelib/images/flags/flag_usa_sw.png"."' alt='".$locale['figure_031a']."' title='".$locale['figure_031a']."'>";
-											} else { echo "<a href='".$data['figure_amazon_com']."'><img src='".INFUSIONS."figurelib/images/flags/flag_usa.png"."' alt='".trimlink($data['figure_amazon_com'],50)."' title='".trimlink($data['figure_amazon_com'],100)."'></a>\n"; }	
-									echo "</div></div>\n";						
-								
-									echo "<div class='col-lg-3 col-md-6 col-sm-6 col-xs-6'>\n";
-									echo "<div class='text-center'>	\n";	 
-										if ($data['figure_amazon_ca'] == "") { echo "<img src='".INFUSIONS."figurelib/images/flags/flag_canada_sw.png"."' alt='".$locale['figure_032a']."' title='".$locale['figure_032a']."'>";
-											} else { echo "<a href='".$data['figure_amazon_ca']."'><img src='".INFUSIONS."figurelib/images/flags/flag_canada.png"."' alt='".trimlink($data['figure_amazon_ca'],50)."' title='".trimlink($data['figure_amazon_ca'],100)."'></a>\n"; }	
-									echo "</div></div>\n";
-									
-									echo "<div class='col-lg-3 col-md-6 col-sm-6 col-xs-6'>\n";
-									echo "<div class='text-center'>	\n";
-										if ($data['figure_amazon_uk'] == "") { echo "<img src='".INFUSIONS."figurelib/images/flags/flag_great_britain_sw.png"."' alt='".$locale['figure_026a']."' title='".$locale['figure_026a']."'>";
-											} else { echo "<a href='".$data['figure_amazon_ca']."'><img src='".INFUSIONS."figurelib/images/flags/flag_great_britain.png"."' alt='".trimlink($data['figure_amazon_ca'],50)."' title='".trimlink($data['figure_amazon_ca'],100)."'></a>\n"; }	
-									echo "</div></div>\n";
-									
-									echo "<div class='col-lg-3 col-md-6 col-sm-6 col-xs-6'>\n";
-									echo "<div class='text-center'>	\n";	 
-										if ($data['figure_amazon_de'] == "") { echo "<img src='".INFUSIONS."figurelib/images/flags/flag_germany_sw.png"."' alt='".$locale['figure_025a']."' title='".$locale['figure_025a']."'>";
-											} else { echo "<a href='".$data['figure_amazon_de']."'><img src='".INFUSIONS."figurelib/images/flags/flag_germany.png"."' alt='".trimlink($data['figure_amazon_de'],50)."' title='".trimlink($data['figure_amazon_de'],100)."'></a>\n"; }	
-									echo "</div></div>\n";
-							
-							echo "</div>\n";
-							
-										 
-							// FIFTH LINE AMAZON JP FR ES IT
+                            // SECOND LINE AFFILIATE (PRIORITY 2)
+                            echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";
 
-							echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";	
+                                 if ($data['figure_affiliate_1']  ||  $data['figure_affiliate_2'] ||  $data['figure_affiliate_3'] || $data['figure_affiliate_4']) { 
 
-									echo "<div class='col-lg-3 col-md-6 col-sm-6 col-xs-6'>\n";
-									echo "<div class='text-center'>	\n";
-										if ($data['figure_amazon_jp'] == "") { echo "<img src='".INFUSIONS."figurelib/images/flags/flag_japan_sw.png"."' alt='".$locale['figure_030a']."' title='".$locale['figure_030a']."'>";
-											} else { echo "<a href='".$data['figure_amazon_jp']."'><img src='".INFUSIONS."figurelib/images/flags/flag_japan.png"."' alt='".trimlink($data['figure_amazon_jp'],50)."' title='".trimlink($data['figure_amazon_jp'],100)."'></a>\n"; }		
-									echo "</div></div>\n";
-								
-									echo "<div class='col-lg-3 col-md-6 col-sm-6 col-xs-6'>\n";
-									echo "<div class='text-center'>	\n";
-										if ($data['figure_amazon_fr'] == "") { echo "<img src='".INFUSIONS."figurelib/images/flags/flag_france_sw.png"."' alt='".$locale['figure_027a']."' title='".$locale['figure_027a']."'>";
-											} else { echo "<a href='".$data['figure_amazon_fr']."'><img src='".INFUSIONS."figurelib/images/flags/flag_france.png"."' alt='".trimlink($data['figure_amazon_fr'],50)."' title='".trimlink($data['figure_amazon_fr'],100)."'></a>\n"; }	
-									echo "</div></div>\n";
-									
-									echo "<div class='col-lg-3 col-md-6 col-sm-6 col-xs-6'>\n";
-									echo "<div class='text-center'>	\n";
-										if ($data['figure_amazon_es'] == "") { echo "<img src='".INFUSIONS."figurelib/images/flags/flag_spain_sw.png"."' alt='".$locale['figure_028a']."' title='".$locale['figure_028a']."'>";
-											} else { echo "<a href='".$data['figure_amazon_es']."'><img src='".INFUSIONS."figurelib/images/flags/flag_spain.png"."' alt='".trimlink($data['figure_amazon_es'],50)."' title='".trimlink($data['figure_amazon_es'],100)."'></a>\n"; }	
-									echo "</div></div>\n";
-									
-									echo "<div class='col-lg-3 col-md-6 col-sm-6 col-xs-6'>\n";
-									echo "<div class='text-center'>	\n";
-										if ($data['figure_amazon_it'] == "") { echo "<img src='".INFUSIONS."figurelib/images/flags/flag_italy_sw.png"."' alt='".$locale['figure_029a']."' title='".$locale['figure_029a']."'>";
-											} else { echo "<a href='".$data['figure_amazon_it']."'><img src='".INFUSIONS."figurelib/images/flags/flag_italy.png"."' alt='".trimlink($data['figure_amazon_it'],50)."' title='".trimlink($data['figure_amazon_it'],100)."'></a>\n"; }
-									echo "</div></div>\n";						
+                                    echo "<div class='col-lg-3 col-md-6 col-sm-6 col-xs-12'>\n";
+                                    echo "<div class='text-center'> \n";     
+                                            if ($data['figure_affiliate_1'] == "") { echo "<strike>".$locale['figure_033']."</strike>";
+                                                } else { echo "<a href='".$data['figure_affiliate_1']."'</a>".trimlink($data['figure_affiliate_1'],15)."\n"; }
+                                    echo "</div></div>\n";              
 
-							echo "</div>\n";
-												
+                                    echo "<div class='col-lg-3 col-md-6 col-sm-6 col-xs-12'>\n";
+                                    echo "<div class='text-center'> \n";     
+                                            if ($data['figure_affiliate_2'] == "") { echo "<strike>".$locale['figure_033']."</strike>";
+                                                } else { echo "<a href='".$data['figure_affiliate_2']."'</a>".trimlink($data['figure_affiliate_2'],15)."\n"; }
+                                    echo "</div></div>\n";              
 
-					}
-			}
+                                    echo "<div class='col-lg-3 col-md-6 col-sm-6 col-xs-12'>\n";
+                                    echo "<div class='text-center'> \n"; 
+                                            if ($data['figure_affiliate_3'] == "") { echo "<strike>".$locale['figure_033']."</strike>";
+                                                } else { echo "<a href='".$data['figure_affiliate_3']."'</a>".trimlink($data['figure_affiliate_3'],15)."\n"; }
+                                    echo "</div></div>\n";                              
 
-			echo "</div>\n";
-			echo "</div>\n";
-			echo "</div>\n";
-			closeside();	
-		}
+                                    echo "<div class='col-lg-3 col-md-6 col-sm-6 col-xs-12'>\n";
+                                    echo "<div class='text-center'> \n";     
+                                            if ($data['figure_affiliate_4'] == "") { echo "<strike>".$locale['figure_033']."</strike>";
+                                                } else { echo "<a href='".$data['figure_affiliate_4']."'</a>".trimlink($data['figure_affiliate_4'],15)."\n"; }  
+                                    echo "</div></div>\n";  
 
-	}
+                                 } else { 
+
+                                 }
+                            echo "</div>\n";
+
+
+                            // THIRD LINE AFFILIATE (PRIORITY 2)
+
+                            echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";     
+
+                                if ($data['figure_affiliate_5']  ||  $data['figure_affiliate_6'] ||  $data['figure_affiliate_7'] || $data['figure_affiliate_8']) { 
+
+                                    echo "<div class='col-lg-3 col-md-6 col-sm-6 col-xs-12'>\n";
+                                    echo "<div class='text-center'> \n";
+                                            if ($data['figure_affiliate_5'] == "") { echo "<strike>".$locale['figure_033']."</strike>";
+                                                } else { echo "<a href='".$data['figure_affiliate_5']."'</a>".trimlink($data['figure_affiliate_5'],15)."\n"; }       
+                                    echo "</div></div>\n";
+                                    echo "<div class='col-lg-3 col-md-6 col-sm-6 col-xs-12'>\n";
+                                    echo "<div class='text-center'> \n";     
+                                            if ($data['figure_affiliate_6'] == "") { echo "<strike>".$locale['figure_033']."</strike>";
+                                                } else { echo "<a href='".$data['figure_affiliate_6']."'</a>".trimlink($data['figure_affiliate_6'],15)."\n"; }  
+                                    echo "</div></div>\n";
+
+                                    echo "<div class='col-lg-3 col-md-6 col-sm-6 col-xs-12'>\n";
+                                    echo "<div class='text-center'> \n";     
+                                            if ($data['figure_affiliate_7'] == "") { echo "<strike>".$locale['figure_033']."</strike>";
+                                                } else { echo "<a href='".$data['figure_affiliate_7']."'</a>".trimlink($data['figure_affiliate_7'],15)."\n"; }  
+                                    echo "</div></div>\n";
+
+                                    echo "<div class='col-lg-3 col-md-6 col-sm-6 col-xs-12'>\n";
+                                    echo "<div class='text-center'> \n";     
+                                            if ($data['figure_affiliate_8'] == "") { echo "<strike>".$locale['figure_033']."</strike>";
+                                                } else { echo "<a href='".$data['figure_affiliate_8']."'</a>".trimlink($data['figure_affiliate_8'],15)."\n"; }  
+                                    echo "</div></div>\n";
+
+                                } else { 
+
+                                }
+                            echo "</div>\n";                                
+                    }
+            }
+
+            if ($fil_settings['figure_show_amazon_global']) { // Amazon Affiliates global on/off ???
+                    if ($data['figure_show_amazon']) { // Amazon Affiliates for this figure on/off ???
+
+                            // FOURTH LINE AMAZON COM CA UK DE  
+
+                            echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";
+
+                                    echo "<div class='col-lg-3 col-md-6 col-sm-6 col-xs-6'>\n";
+                                    echo "<div class='text-center'> \n";     
+                                        if ($data['figure_amazon_com'] == "") { echo "<img src='".INFUSIONS."figurelib/images/flags/flag_usa_sw.png"."' alt='".$locale['figure_031a']."' title='".$locale['figure_031a']."'>";
+                                            } else { echo "<a href='".$data['figure_amazon_com']."'><img src='".INFUSIONS."figurelib/images/flags/flag_usa.png"."' alt='".trimlink($data['figure_amazon_com'],50)."' title='".trimlink($data['figure_amazon_com'],100)."'></a>\n"; }    
+                                    echo "</div></div>\n";                      
+
+                                    echo "<div class='col-lg-3 col-md-6 col-sm-6 col-xs-6'>\n";
+                                    echo "<div class='text-center'> \n";     
+                                        if ($data['figure_amazon_ca'] == "") { echo "<img src='".INFUSIONS."figurelib/images/flags/flag_canada_sw.png"."' alt='".$locale['figure_032a']."' title='".$locale['figure_032a']."'>";
+                                            } else { echo "<a href='".$data['figure_amazon_ca']."'><img src='".INFUSIONS."figurelib/images/flags/flag_canada.png"."' alt='".trimlink($data['figure_amazon_ca'],50)."' title='".trimlink($data['figure_amazon_ca'],100)."'></a>\n"; }    
+                                    echo "</div></div>\n";
+
+                                    echo "<div class='col-lg-3 col-md-6 col-sm-6 col-xs-6'>\n";
+                                    echo "<div class='text-center'> \n";
+                                        if ($data['figure_amazon_uk'] == "") { echo "<img src='".INFUSIONS."figurelib/images/flags/flag_great_britain_sw.png"."' alt='".$locale['figure_026a']."' title='".$locale['figure_026a']."'>";
+                                            } else { echo "<a href='".$data['figure_amazon_ca']."'><img src='".INFUSIONS."figurelib/images/flags/flag_great_britain.png"."' alt='".trimlink($data['figure_amazon_ca'],50)."' title='".trimlink($data['figure_amazon_ca'],100)."'></a>\n"; } 
+                                    echo "</div></div>\n";
+
+                                    echo "<div class='col-lg-3 col-md-6 col-sm-6 col-xs-6'>\n";
+                                    echo "<div class='text-center'> \n";     
+                                        if ($data['figure_amazon_de'] == "") { echo "<img src='".INFUSIONS."figurelib/images/flags/flag_germany_sw.png"."' alt='".$locale['figure_025a']."' title='".$locale['figure_025a']."'>";
+                                            } else { echo "<a href='".$data['figure_amazon_de']."'><img src='".INFUSIONS."figurelib/images/flags/flag_germany.png"."' alt='".trimlink($data['figure_amazon_de'],50)."' title='".trimlink($data['figure_amazon_de'],100)."'></a>\n"; }   
+                                    echo "</div></div>\n";
+
+                            echo "</div>\n";
+
+
+                            // FIFTH LINE AMAZON JP FR ES IT
+                            echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n"; 
+                                    echo "<div class='col-lg-3 col-md-6 col-sm-6 col-xs-6'>\n";
+                                    echo "<div class='text-center'> \n";
+                                        if ($data['figure_amazon_jp'] == "") { echo "<img src='".INFUSIONS."figurelib/images/flags/flag_japan_sw.png"."' alt='".$locale['figure_030a']."' title='".$locale['figure_030a']."'>";
+                                            } else { echo "<a href='".$data['figure_amazon_jp']."'><img src='".INFUSIONS."figurelib/images/flags/flag_japan.png"."' alt='".trimlink($data['figure_amazon_jp'],50)."' title='".trimlink($data['figure_amazon_jp'],100)."'></a>\n"; }     
+                                    echo "</div></div>\n";
+
+                                    echo "<div class='col-lg-3 col-md-6 col-sm-6 col-xs-6'>\n";
+                                    echo "<div class='text-center'> \n";
+                                        if ($data['figure_amazon_fr'] == "") { echo "<img src='".INFUSIONS."figurelib/images/flags/flag_france_sw.png"."' alt='".$locale['figure_027a']."' title='".$locale['figure_027a']."'>";
+                                            } else { echo "<a href='".$data['figure_amazon_fr']."'><img src='".INFUSIONS."figurelib/images/flags/flag_france.png"."' alt='".trimlink($data['figure_amazon_fr'],50)."' title='".trimlink($data['figure_amazon_fr'],100)."'></a>\n"; }    
+                                    echo "</div></div>\n";
+
+                                    echo "<div class='col-lg-3 col-md-6 col-sm-6 col-xs-6'>\n";
+                                    echo "<div class='text-center'> \n";
+                                        if ($data['figure_amazon_es'] == "") { echo "<img src='".INFUSIONS."figurelib/images/flags/flag_spain_sw.png"."' alt='".$locale['figure_028a']."' title='".$locale['figure_028a']."'>";
+                                            } else { echo "<a href='".$data['figure_amazon_es']."'><img src='".INFUSIONS."figurelib/images/flags/flag_spain.png"."' alt='".trimlink($data['figure_amazon_es'],50)."' title='".trimlink($data['figure_amazon_es'],100)."'></a>\n"; } 
+                                    echo "</div></div>\n";
+
+                                    echo "<div class='col-lg-3 col-md-6 col-sm-6 col-xs-6'>\n";
+                                    echo "<div class='text-center'> \n";
+                                        if ($data['figure_amazon_it'] == "") { echo "<img src='".INFUSIONS."figurelib/images/flags/flag_italy_sw.png"."' alt='".$locale['figure_029a']."' title='".$locale['figure_029a']."'>";
+                                            } else { echo "<a href='".$data['figure_amazon_it']."'><img src='".INFUSIONS."figurelib/images/flags/flag_italy.png"."' alt='".trimlink($data['figure_amazon_it'],50)."' title='".trimlink($data['figure_amazon_it'],100)."'></a>\n"; }
+                                    echo "</div></div>\n";                      
+                            echo "</div>\n";
+
+                    }
+            }
+            echo "</div>\n";
+            echo "</div>\n";
+            echo "</div>\n";
+            closeside();    
+        }
+    }
 
 // ############################################################################################
 				
