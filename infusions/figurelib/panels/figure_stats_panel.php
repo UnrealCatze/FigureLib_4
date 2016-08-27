@@ -63,7 +63,7 @@ if (!db_exists(DB_FIGURE_ITEMS)) { redirect(BASEDIR."error.php?code=404"); }
 $fil_settings = get_settings("figurelib");
 		
 // Start Site
-opentable("<strong>Figure Stats</strong>");
+opentable("<div class='text-bold'>".$locale['stats_001']."</div>");
 
 ###########################################################################################################################
 ###########################################################################################################################
@@ -107,26 +107,27 @@ opentable("<strong>Figure Stats</strong>");
 ############################################### TEUERSTE FIGUR  ###########################################################
 ###########################################################################################################################			
 
-						$resultteuerste = dbquery("
-							SELECT 
-								tb.figure_id, tb.figure_submitter, tb.figure_retailprice, tb.figure_usedprice, tb.figure_freigabe, tb.figure_pubdate, tb.figure_scale, tb.figure_title, tb.figure_manufacturer, tb.figure_brand, tb.figure_datestamp, tb.figure_cat, 
-								tbc.figure_cat_id, tbc.figure_cat_name, 
-								tbu.user_id, tbu.user_name, tbu.user_status, tbu.user_avatar, 
-								tbm.figure_manufacturer_name, 
-								tbb.figure_brand_name, 							
-								tbs.figure_scale_id, tbs.figure_scale_name, 							
-								fuf.figure_userfigures_figure_id, fuf.figure_userfigures_user_id 
-							FROM ".DB_FIGURE_ITEMS." AS tb
-							LEFT JOIN ".DB_USERS." AS tbu ON tb.figure_submitter=tbu.user_id
-							LEFT JOIN ".DB_FIGURE_USERFIGURES." AS fuf ON fuf.figure_userfigures_figure_id=tb.figure_id
-							LEFT JOIN ".DB_FIGURE_CATS." AS tbc ON tb.figure_cat=tbc.figure_cat_id
-							LEFT JOIN ".DB_FIGURE_MANUFACTURERS." AS tbm ON tbm.figure_manufacturer_id = tb.figure_manufacturer
-							LEFT JOIN ".DB_FIGURE_BRANDS." AS tbb ON tbb.figure_brand_id = tb.figure_brand
-							LEFT JOIN ".DB_FIGURE_SCALES." AS tbs ON tbs.figure_scale_id = tb.figure_scale
-							WHERE ".(multilang_table("FI") ? "tb.figure_language='".LANGUAGE."' AND" : "")." tb.figure_freigabe='1' 
-							ORDER BY tb.figure_retailprice DESC LIMIT 0,5
-
-						");
+				$resultteuerste = dbquery("
+                     SELECT
+                        tb.figure_id, tb.figure_submitter, tb.figure_retailprice, tb.figure_usedprice, tb.figure_freigabe, tb.figure_pubdate, tb.figure_scale, tb.figure_title, tb.figure_manufacturer, tb.figure_brand, tb.figure_datestamp, tb.figure_cat,
+                        tbc.figure_cat_id, tbc.figure_cat_name,
+                        tbu.user_id, tbu.user_name, tbu.user_status, tbu.user_avatar,
+                        tbm.figure_manufacturer_name,
+                        tbb.figure_brand_name,                     
+                        tbs.figure_scale_id, tbs.figure_scale_name,                     
+                        fuf.figure_userfigures_figure_id, fuf.figure_userfigures_user_id
+                     FROM ".DB_FIGURE_ITEMS." AS tb
+                     LEFT JOIN ".DB_USERS." AS tbu ON tb.figure_submitter=tbu.user_id
+                     LEFT JOIN ".DB_FIGURE_USERFIGURES." AS fuf ON fuf.figure_userfigures_figure_id=tb.figure_id
+                     LEFT JOIN ".DB_FIGURE_CATS." AS tbc ON tb.figure_cat=tbc.figure_cat_id
+                     LEFT JOIN ".DB_FIGURE_MANUFACTURERS." AS tbm ON tbm.figure_manufacturer_id = tb.figure_manufacturer
+                     LEFT JOIN ".DB_FIGURE_BRANDS." AS tbb ON tbb.figure_brand_id = tb.figure_brand
+                     LEFT JOIN ".DB_FIGURE_SCALES." AS tbs ON tbs.figure_scale_id = tb.figure_scale
+                     WHERE ".(multilang_table("FI") ? "tb.figure_language='".LANGUAGE."' AND" : "")." tb.figure_freigabe='1'
+						GROUP BY tb.figure_id
+						ORDER BY tb.figure_retailprice DESC
+						LIMIT 0,5						
+                  ");
 			
  	 
 		// WENN DATEN UNGLEICH = 0 DANN DARSTELLUNG DER DATEN
@@ -285,12 +286,12 @@ opentable("<strong>Figure Stats</strong>");
 		
 						// COLUMN 3 (manufacturer)
 						echo "<div class='col-lg-2 col-md-3 col-sm-4 col-xs-4'>\n";	
-							echo "<div class='side-small' title='".$locale['CLFP_003']." : ".$data['figure_manufacturer_name']."' alt='".$locale['CLFP_003']." : ".$data['figure_manufacturer_name']."'>".trimlink($data['figure_manufacturer_name'],12)."</div>\n";
+							echo "<div class='side-small' title='".$locale['CLFP_003']." : ".$data['figure_manufacturer_name']."' alt='".$locale['CLFP_003']." : ".$data['figure_manufacturer_name']."'>".trimlink($data['figure_manufacturer_name'],10)."</div>\n";
 						echo "</div>\n";
 						
 						// COLUMN 4 (brand)
 						echo "<div class='col-lg-2 hidden-md hidden-sm hidden-xs'>\n";
-							echo "<div class='side-small' title='".$locale['CLFP_004']." : ".$data['figure_brand_name']."' alt='".$locale['CLFP_004']." : ".$data['figure_brand_name']."'>".trimlink($data['figure_brand_name'],12)."</div>\n";
+							echo "<div class='side-small' title='".$locale['CLFP_004']." : ".$data['figure_brand_name']."' alt='".$locale['CLFP_004']." : ".$data['figure_brand_name']."'>".trimlink($data['figure_brand_name'],10)."</div>\n";
 						echo "</div>\n";
 						
 						// COLUMN 5 (scale)
@@ -304,7 +305,7 @@ opentable("<strong>Figure Stats</strong>");
 							
 								echo "<div class='col-lg-1 col-md-2 hidden-sm hidden-xs'><div class='side-small' title='".$locale['CLFP_006']." : ".$locale['CLFP_008']."' alt='".$locale['CLFP_006']." : ".$locale['CLFP_008']."'>".trimlink($locale['CLFP_008'],6)."</div></div>\n";
 								} else {
-								echo "<div class='col-lg-1 col-md-2 hidden-sm hidden-xs'><div class='side-small' title='".$locale['CLFP_006']." : ".$data['figure_pubdate']."' alt='".$locale['CLFP_006']." : ".$data['figure_pubdate']."'>".trimlink($data['figure_pubdate'],7)."</div></div>\n";
+								echo "<div class='col-lg-1 col-md-2 hidden-sm hidden-xs'><div class='side-small' title='".$locale['CLFP_006']." : ".$data['figure_pubdate']."' alt='".$locale['CLFP_006']." : ".$data['figure_pubdate']."'>".trimlink($data['figure_pubdate'],6)."</div></div>\n";
 								} 
 		
 						// COLUMN 7 (rating)
@@ -381,30 +382,37 @@ opentable("<strong>Figure Stats</strong>");
 	}
  closeside();
  }
-
 						
 ###########################################################################################################################
 ############################################### HÖCHSTER GEBRAUCHTPREIS  ##################################################
 ###########################################################################################################################
-
-	$resultteuerstegebraucht = dbquery("
-					SELECT 
-						tb.figure_id, tb.figure_submitter, tb.figure_retailprice, tb.figure_usedprice, tb.figure_freigabe, tb.figure_pubdate, tb.figure_scale, tb.figure_title, tb.figure_manufacturer, tb.figure_brand, tb.figure_datestamp, tb.figure_cat, 
-						tbc.figure_cat_id, tbc.figure_cat_name, 
-						tbu.user_id, tbu.user_name, tbu.user_status, tbu.user_avatar, 
-						tbm.figure_manufacturer_name, 
-						tbb.figure_brand_name, 
-						tbs.figure_scale_id, tbs.figure_scale_name, 							
-						fuf.figure_userfigures_figure_id, fuf.figure_userfigures_user_id 
-					FROM ".DB_FIGURE_ITEMS." AS tb
-					LEFT JOIN ".DB_USERS." AS tbu ON tb.figure_submitter=tbu.user_id
-					LEFT JOIN ".DB_FIGURE_USERFIGURES." AS fuf ON fuf.figure_userfigures_figure_id=tb.figure_id
-					LEFT JOIN ".DB_FIGURE_CATS." AS tbc ON tb.figure_cat=tbc.figure_cat_id
-					LEFT JOIN ".DB_FIGURE_MANUFACTURERS." AS tbm ON tbm.figure_manufacturer_id = tb.figure_manufacturer
-					LEFT JOIN ".DB_FIGURE_BRANDS." AS tbb ON tbb.figure_brand_id = tb.figure_brand
-					LEFT JOIN ".DB_FIGURE_SCALES." AS tbs ON tbs.figure_scale_id = tb.figure_scale
-					WHERE ".(multilang_table("FI") ? "tb.figure_language='".LANGUAGE."' AND" : "")." tb.figure_freigabe='1' 
-					ORDER BY tb.figure_usedprice DESC LIMIT 0,5 ");
+				
+				$resultteuerstegebraucht = dbquery("
+                     SELECT
+                        tb.figure_id, tb.figure_submitter, tb.figure_retailprice, tb.figure_usedprice, tb.figure_freigabe, tb.figure_pubdate, tb.figure_scale, tb.figure_title, tb.figure_manufacturer, tb.figure_brand, tb.figure_datestamp, tb.figure_cat,
+                        tbc.figure_cat_id, tbc.figure_cat_name,
+                        tbu.user_id, tbu.user_name, tbu.user_status, tbu.user_avatar,
+                        tbm.figure_manufacturer_name,
+                        tbb.figure_brand_name,                     
+                        tbs.figure_scale_id, tbs.figure_scale_name,                     
+                        fuf.figure_userfigures_figure_id, fuf.figure_userfigures_user_id
+                     FROM ".DB_FIGURE_ITEMS." AS tb
+                     LEFT JOIN ".DB_USERS." AS tbu ON tb.figure_submitter=tbu.user_id
+                     LEFT JOIN ".DB_FIGURE_USERFIGURES." AS fuf ON fuf.figure_userfigures_figure_id=tb.figure_id
+                     LEFT JOIN ".DB_FIGURE_CATS." AS tbc ON tb.figure_cat=tbc.figure_cat_id
+                     LEFT JOIN ".DB_FIGURE_MANUFACTURERS." AS tbm ON tbm.figure_manufacturer_id = tb.figure_manufacturer
+                     LEFT JOIN ".DB_FIGURE_BRANDS." AS tbb ON tbb.figure_brand_id = tb.figure_brand
+                     LEFT JOIN ".DB_FIGURE_SCALES." AS tbs ON tbs.figure_scale_id = tb.figure_scale
+                     WHERE ".(multilang_table("FI") ? "tb.figure_language='".LANGUAGE."' AND" : "")." tb.figure_freigabe='1'
+						GROUP BY tb.figure_id
+						ORDER BY tb.figure_usedprice DESC
+						LIMIT 0,5	
+						
+                  ");			
+					
+					
+					
+					
 				
     if (dbrows($resultteuerstegebraucht) == 0) {
 		
@@ -559,12 +567,12 @@ opentable("<strong>Figure Stats</strong>");
 		
 						// COLUMN 3 (manufacturer)
 						echo "<div class='col-lg-2 col-md-3 col-sm-4 col-xs-4'>\n";	
-							echo "<div class='side-small' title='".$locale['CLFP_003']." : ".$data['figure_manufacturer_name']."' alt='".$locale['CLFP_003']." : ".$data['figure_manufacturer_name']."'>".trimlink($data['figure_manufacturer_name'],12)."</div>\n";
+							echo "<div class='side-small' title='".$locale['CLFP_003']." : ".$data['figure_manufacturer_name']."' alt='".$locale['CLFP_003']." : ".$data['figure_manufacturer_name']."'>".trimlink($data['figure_manufacturer_name'],10)."</div>\n";
 						echo "</div>\n";
 						
 						// COLUMN 4 (brand)
 						echo "<div class='col-lg-2 hidden-md hidden-sm hidden-xs'>\n";
-							echo "<div class='side-small' title='".$locale['CLFP_004']." : ".$data['figure_brand_name']."' alt='".$locale['CLFP_004']." : ".$data['figure_brand_name']."'>".trimlink($data['figure_brand_name'],12)."</div>\n";
+							echo "<div class='side-small' title='".$locale['CLFP_004']." : ".$data['figure_brand_name']."' alt='".$locale['CLFP_004']." : ".$data['figure_brand_name']."'>".trimlink($data['figure_brand_name'],10)."</div>\n";
 						echo "</div>\n";
 						
 						// COLUMN 5 (scale)
@@ -662,24 +670,26 @@ opentable("<strong>Figure Stats</strong>");
 ###############   The figure, which most be in the user's possession. ####################################################
 ##########################################################################################################################
 
-	$resultmostusercount = dbquery("
-					SELECT 
-						tb.figure_id, tb.figure_submitter, tb.figure_retailprice, tb.figure_usedprice, tb.figure_freigabe, tb.figure_pubdate, tb.figure_scale, tb.figure_title, tb.figure_manufacturer, tb.figure_brand, tb.figure_datestamp, tb.figure_cat, 
-						tbc.figure_cat_id, tbc.figure_cat_name, 
-						tbu.user_id, tbu.user_name, tbu.user_status, tbu.user_avatar, 
-						tbm.figure_manufacturer_name, 
-						tbb.figure_brand_name, 
-						tbs.figure_scale_id, tbs.figure_scale_name, 							
-						fuf.figure_userfigures_figure_id, fuf.figure_userfigures_user_id 
-					FROM ".DB_FIGURE_ITEMS." AS tb
-					LEFT JOIN ".DB_USERS." AS tbu ON tb.figure_submitter=tbu.user_id
-					LEFT JOIN ".DB_FIGURE_USERFIGURES." AS fuf ON fuf.figure_userfigures_figure_id=tb.figure_id
-					LEFT JOIN ".DB_FIGURE_CATS." AS tbc ON tb.figure_cat=tbc.figure_cat_id
-					LEFT JOIN ".DB_FIGURE_MANUFACTURERS." AS tbm ON tbm.figure_manufacturer_id = tb.figure_manufacturer
-					LEFT JOIN ".DB_FIGURE_BRANDS." AS tbb ON tbb.figure_brand_id = tb.figure_brand
-					LEFT JOIN ".DB_FIGURE_SCALES." AS tbs ON tbs.figure_scale_id = tb.figure_scale
-					WHERE ".(multilang_table("FI") ? "tb.figure_language='".LANGUAGE."' AND" : "")." tb.figure_freigabe='1' 
-					ORDER BY fuf.figure_userfigures_figure_id DESC LIMIT 0,5");
+$resultmostusercount = dbquery("
+                    SELECT 
+                        tb.figure_id, tb.figure_submitter, tb.figure_retailprice, tb.figure_usedprice, tb.figure_freigabe, tb.figure_pubdate, tb.figure_scale, tb.figure_title, tb.figure_manufacturer, tb.figure_brand, tb.figure_datestamp, tb.figure_cat, 
+                        tbc.figure_cat_id, tbc.figure_cat_name, 
+                        tbu.user_id, tbu.user_name, tbu.user_status, tbu.user_avatar, 
+                        tbm.figure_manufacturer_name, 
+                        tbb.figure_brand_name, 
+                        tbs.figure_scale_id, tbs.figure_scale_name,                             
+                        fuf.figure_userfigures_figure_id, fuf.figure_userfigures_user_id,
+                        count(fuf.figure_userfigures_user_id) AS users_counter
+                    FROM ".DB_FIGURE_ITEMS." AS tb
+                    LEFT JOIN ".DB_USERS." AS tbu ON tb.figure_submitter=tbu.user_id
+                    LEFT JOIN ".DB_FIGURE_USERFIGURES." AS fuf ON fuf.figure_userfigures_figure_id=tb.figure_id
+                    LEFT JOIN ".DB_FIGURE_CATS." AS tbc ON tb.figure_cat=tbc.figure_cat_id
+                    LEFT JOIN ".DB_FIGURE_MANUFACTURERS." AS tbm ON tbm.figure_manufacturer_id = tb.figure_manufacturer
+                    LEFT JOIN ".DB_FIGURE_BRANDS." AS tbb ON tbb.figure_brand_id = tb.figure_brand
+                    LEFT JOIN ".DB_FIGURE_SCALES." AS tbs ON tbs.figure_scale_id = tb.figure_scale
+                    WHERE ".(multilang_table("FI") ? "tb.figure_language='".LANGUAGE."' AND" : "")." tb.figure_freigabe='1' 
+                    GROUP BY fuf.figure_userfigures_figure_id
+                    ORDER BY users_counter DESC LIMIT 0,5");
 				
     if (dbrows($resultmostusercount) == 0) {
 		
