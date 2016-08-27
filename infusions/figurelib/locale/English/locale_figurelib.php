@@ -904,17 +904,21 @@ $locale['yours']= "Your Figures";
 
 // mycollection
 $locale['mc_0001']= "My Figure Collection";
-$locale['mc_0002']= "Collection Count: ";
+$locale['mc_0002']= "Collection Count:";
 $locale['mc_0003']= "Figures List";
 $locale['mc_0004']= "Submits";
 $locale['mc_0005']= "My newest figure";
 $locale['mc_0006']= "My figures counter";
-$locale['mc_0007']= "Figure Counter: ";
+$locale['mc_0007']= "Figure Counter:";
 $locale['mc_0008']= " figures in your collection!";
-$locale['mc_0009']= "Last figure: ";
+$locale['mc_0009']= "Last figure:";
 $locale['mc_0010']= "Sorry, You have no figures :(";
 $locale['mc_0011']= "This feature is only available for registered members. Please Sign up ";
 $locale['mc_0012']= "HERE";	
+$locale['mc_0013']= "Collection Value:";	
+
+
+
 
 // ####### USERFIGURES  
 $locale['userfigure_001'] ="Add to collection";
@@ -926,3 +930,8 @@ $locale['userfigure_006'] ="Your Collection";
 
 // stats
 $locale['stats_001'] ="Global Figure Stats";
+$locale['stats_002'] ="MSRP";
+$locale['stats_003'] ="Top 5";
+$locale['stats_004'] ="Total number of figures:";
+$locale['stats_005'] ="Total figures owned by user:";
+
