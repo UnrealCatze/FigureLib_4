@@ -90,9 +90,11 @@ global $settings;
 							</div>
 							
 							<div class='col-xs-6 col-sm-6 col-md-6 col-lg-6'>
-								<div class='pull-right'>
-									<img src='".figures_getImagePath("manufacturers", "thumb", $data['figure_manufacturer_id'])."' style='max-width: 50px;' />
-							</div>
+								<div class='pull-right'>";
+									if ($data['figure_manufacturer_id'])  {	
+									echo "<img src='".figures_getImagePath("manufacturers", "thumb", $data['figure_manufacturer_id'])."' style='max-width: 50px;' />";
+									}
+							echo "</div>
 						</div>
 					</li>";
 				
@@ -312,16 +314,18 @@ global $settings;
    
 				// ################################################      
 				
-				echo "<li class='list-group-item'>
+					echo "<li class='list-group-item'>
 						<div class='row'>
 							<div class='col-xs-6 col-sm-6 col-md-6 col-lg-6'>
 								<span><strong>Name:</strong> ".$data['figure_manufacturer_name']." </span>
 							</div>
 							
 							<div class='col-xs-6 col-sm-6 col-md-6 col-lg-6'>
-								<div class='pull-right'>
-									<img src='".figures_getImagePath("manufacturers", "thumb", $data['figure_manufacturer_id'])."' style='max-width: 50px;' />
-							</div>
+								<div class='pull-right'>";
+									if ($data['figure_manufacturer_id'])  {	
+									echo "<img src='".figures_getImagePath("manufacturers", "thumb", $data['figure_manufacturer_id'])."' style='max-width: 50px;' />";
+									}
+							echo "</div>
 						</div>
 					</li>";
 				
