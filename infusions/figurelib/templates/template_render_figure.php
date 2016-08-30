@@ -76,7 +76,8 @@ global $settings;
 				echo "	<div class='panel-group'>
 						<div class='panel panel-default'>
 							<div class='panel-heading'>
-								<h4 class='panel-title'><a data-toggle='collapse' href='#collapse1'>".$locale['figm_0046']."</a></h4>
+								
+								<a data-toggle='collapse' href='#collapse1'>".$locale['figm_0046']."</a>
 							</div>
 						<div id='collapse1' class='panel-collapse collapse'>
 						<ul class='list-group'>";	  
@@ -144,9 +145,7 @@ global $settings;
 								$manufacturer_address = strip_tags(parse_textarea($data['figure_manufacturer_address']));
 							echo $manufacturer_address;
 							echo "</li>";
-					} else {
-						
-					}	
+					} else 
 				// -----------------------------------------------	
 				 if ($data['figure_manufacturer_description'])  {
 							echo "<li class='list-group-item'>";
@@ -154,26 +153,35 @@ global $settings;
 								$manufacturer_description = strip_tags(parse_textarea($data['figure_manufacturer_description']));
 								echo $manufacturer_description;
 							echo "</li>";
-						} else {
-							
-						}	
+						} 
 				// -----------------------------------------------	
+				
+		// ADMIN INFOS MANUFACTURERS
+								
+				if (iADMIN || iSUPERADMIN) {
+											
+						if ($data['figure_manufacturer_info_admin'])  {
+							echo "<li class='list-group-item'>";
+								echo "<span class='text-bold'>".$locale['figm_0042'].": </span>";
+								$manufacturer_admin_info = strip_tags(parse_textarea($data['figure_manufacturer_info_admin']));
+								echo $manufacturer_admin_info;
+							echo "</li>";
+						} 				
+				}
+				
+					/*	$locale['figm_0039'] = "Affiliate Program";
+						$locale['figm_0040'] = "Affiliate URL";
+						$locale['figm_0041'] = "Affiliate Code";
+						'manufacturer_affiliate_program' => $data['figure_manufacturer_affiliate_program'],
+						'manufacturer_affiliate_url' => $data['figure_manufacturer_affiliate_url'],
+						'manufacturer_affiliate_code' => $data['figure_manufacturer_affiliate_code'],	*/				
+				
       echo "</ul>
       <div class='panel-footer'></div>
     </div>
   </div>
 </div>";
 
-					/*
-					$locale['figm_0039'] = "Affiliate Program";
-					$locale['figm_0040'] = "Affiliate URL";
-					$locale['figm_0041'] = "Affiliate Code";
-					$locale['figm_0042'] = "Info Admin";
-					'manufacturer_affiliate_program' => $data['figure_manufacturer_affiliate_program'],
-					'manufacturer_affiliate_url' => $data['figure_manufacturer_affiliate_url'],
-					'manufacturer_affiliate_code' => $data['figure_manufacturer_affiliate_code'],
-					'figure_manufacturer_info_admin' => $data['figure_manufacturer_info_admin'],					
-					*/
 	}	
 // ######################################################################################################		
 															
@@ -307,14 +315,15 @@ global $settings;
 				echo "	<div class='panel-group'>
 						<div class='panel panel-default'>
 							<div class='panel-heading'>
-								<h4 class='panel-title'><a data-toggle='collapse' href='#collapse1'>".$locale['figm_0046']."</a></h4>
+								
+								<a data-toggle='collapse' href='#collapse1'>".$locale['figm_0046']."</a>
 							</div>
 						<div id='collapse1' class='panel-collapse collapse'>
 						<ul class='list-group'>";	  
    
 				// ################################################      
 				
-					echo "<li class='list-group-item'>
+				echo "<li class='list-group-item'>
 						<div class='row'>
 							<div class='col-xs-6 col-sm-6 col-md-6 col-lg-6'>
 								<span><strong>Name:</strong> ".$data['figure_manufacturer_name']." </span>
@@ -375,9 +384,7 @@ global $settings;
 								$manufacturer_address = strip_tags(parse_textarea($data['figure_manufacturer_address']));
 							echo $manufacturer_address;
 							echo "</li>";
-					} else {
-						
-					}	
+					} else 
 				// -----------------------------------------------	
 				 if ($data['figure_manufacturer_description'])  {
 							echo "<li class='list-group-item'>";
@@ -385,28 +392,36 @@ global $settings;
 								$manufacturer_description = strip_tags(parse_textarea($data['figure_manufacturer_description']));
 								echo $manufacturer_description;
 							echo "</li>";
-						} else {
-							
-						}	
+						} 
 				// -----------------------------------------------	
+				
+		// ADMIN INFOS MANUFACTURERS
+								
+				if (iADMIN || iSUPERADMIN) {
+											
+						if ($data['figure_manufacturer_info_admin'])  {
+							echo "<li class='list-group-item'>";
+								echo "<span class='text-bold'>".$locale['figm_0042'].": </span>";
+								$manufacturer_admin_info = strip_tags(parse_textarea($data['figure_manufacturer_info_admin']));
+								echo $manufacturer_admin_info;
+							echo "</li>";
+						} 				
+				}
+				
+					/*	$locale['figm_0039'] = "Affiliate Program";
+						$locale['figm_0040'] = "Affiliate URL";
+						$locale['figm_0041'] = "Affiliate Code";
+						'manufacturer_affiliate_program' => $data['figure_manufacturer_affiliate_program'],
+						'manufacturer_affiliate_url' => $data['figure_manufacturer_affiliate_url'],
+						'manufacturer_affiliate_code' => $data['figure_manufacturer_affiliate_code'],	*/				
+				
       echo "</ul>
       <div class='panel-footer'></div>
     </div>
   </div>
 </div>";
 
-					/*
-					$locale['figm_0039'] = "Affiliate Program";
-					$locale['figm_0040'] = "Affiliate URL";
-					$locale['figm_0041'] = "Affiliate Code";
-					$locale['figm_0042'] = "Info Admin";
-					'manufacturer_affiliate_program' => $data['figure_manufacturer_affiliate_program'],
-					'manufacturer_affiliate_url' => $data['figure_manufacturer_affiliate_url'],
-					'manufacturer_affiliate_code' => $data['figure_manufacturer_affiliate_code'],
-					'figure_manufacturer_info_admin' => $data['figure_manufacturer_info_admin'],					
-					*/
 	}	
-// ######################################################################################################	
 			
 					
 					
