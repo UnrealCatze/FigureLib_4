@@ -1,5 +1,7 @@
 <?php
 $locale['comma'] = ",";
+$locale['yes'] = "YES";
+$locale['no'] = "NO";
 
 // infusion.php
 $locale['INF_TITLE'] = "Figures Library";
@@ -167,6 +169,37 @@ $locale['figm_0013'] = "There are no figure Manufacturers defined";
 $locale['figm_0014'] = "You must define at least one Manufacturer before you can add any figures";
 $locale['figm_0015'] = "Click here";
 $locale['figm_0016'] = " to go to figure Manufacturers";
+$locale['figm_0017'] = "Manufacturer URL";
+$locale['figm_0018'] = "Manufacturer E-MAIL";
+$locale['figm_0019'] = "Manufacturer Facebook";
+$locale['figm_0020'] = "Manufacturer Twitter";
+$locale['figm_0021'] = "Manufacturer YouTube";
+$locale['figm_0022'] = "Manufacturer Info";
+$locale['figm_0023'] = "Manufacturer Pinterest";
+$locale['figm_0024'] = "Manufacturer Instagram";
+$locale['figm_0025'] = "Manufacturer Google+";
+$locale['figm_0026'] = "Manufacturer Affiliate Program";
+$locale['figm_0027'] = "Manufacturer Affiliate URL";
+$locale['figm_0028'] = "Manufacturer Affiliate Code";
+$locale['figm_0029'] = "Manufacturer Info Admin";
+
+$locale['figm_0030'] = "Website";
+$locale['figm_0031'] = "E-Mail";
+$locale['figm_0032'] = "Facebook";
+$locale['figm_0033'] = "Twitter";
+$locale['figm_0034'] = "YouTube";
+$locale['figm_0035'] = "Info:";
+$locale['figm_0036'] = "Pinterest";
+$locale['figm_0037'] = "Instagram";
+$locale['figm_0038'] = "Google+";
+$locale['figm_0039'] = "Affiliate Program";
+$locale['figm_0040'] = "Affiliate URL";
+$locale['figm_0041'] = "Affiliate Code";
+$locale['figm_0042'] = "Info Admin";
+$locale['figm_0043'] = "Name";
+$locale['figm_0044'] = "Logo";
+$locale['figm_0045'] = "Description:";
+
 
 // Add/Edit Brand Form
 $locale['figbrand_0000'] = "Brand Name:";
@@ -703,6 +736,9 @@ $locale['figure_1706'] = "Packaging cannot be left empty.";
 $locale['figure_1707'] = "Limited Edition cannot be left empty.";
 $locale['figure_1708'] = "The selection fields marked with an asterisk (*) is required. Please enter the appropriate information or select from the list provided. If you are unsure, please select 'Unknown'.";
 $locale['figure_1709'] = "Deleting not possible .. one or more user have this figure in thier collection.";
+$locale['figure_1710'] = "There are no Figures in this Category!";
+$locale['figure_1711'] = "There are no Manufacturers or Figures in this Category!";
+
 
 //HELP TEXTS
 $locale['figure_1800'] = "Please Select the Category";
@@ -725,6 +761,21 @@ $locale['figure_1815'] = "Attention: only numeric input from 1 to ..... possible
 $locale['figure_1816'] = "Attention: only numeric input from 1 to ..... possible";
 $locale['figure_1817'] = "Attention: maximum upload 10 images is allowed";
 $locale['figure_1818'] = "Please enter only the embed video code (e.g. --> Q7RMpINVo)";
+$locale['figure_1819'] = "Admin Message: Modul IMAGES global deactivated! Activate ";
+$locale['figure_1820'] = "Admin Message: Modul FIGURE DATA global deactivated! Activate ";
+$locale['figure_1821'] = "Admin Message: Modul VIDEO global deactivated! Activate ";
+$locale['figure_1822'] = "Admin Message: Modul AFFILIATES global deactivated! Activate ";
+$locale['figure_1822a'] = "Admin Message: Modul AFFILIATES OTHER global deactivated! Activate ";
+$locale['figure_1822b'] = "Admin Message: Modul AFFILIATES AMAZON global deactivated! Activate ";
+
+$locale['figure_1823'] = "Admin Message: Modul COMMENTS global deactivated! Activate ";
+$locale['figure_1824'] = "Admin Message: Modul RATINGS global deactivated! Activate ";
+$locale['figure_1825'] = "Admin Message: Modul MYCOLLECTION global deactivated! Activate ";
+$locale['figure_1826'] = "Admin Message: Modul RELATED FIGURES global deactivated! Activate ";
+$locale['figure_1827'] = "Admin Message: Modul SOCIAL SHARING global deactivated! Activate ";
+
+
+
 
 // Error Messages
 $locale['figurelib-error-101'] = "You must specify a Name.";
@@ -927,6 +978,7 @@ $locale['userfigure_003'] ="The following members have this Figure: ";
 $locale['userfigure_004'] ="No members have this Figure - be the first :)";
 $locale['userfigure_005'] ="FIGURE STATS";
 $locale['userfigure_006'] ="Your Collection";
+$locale['userfigure_007'] ="My Collection";
 
 // stats
 $locale['stats_001'] ="Global Figure Stats";
