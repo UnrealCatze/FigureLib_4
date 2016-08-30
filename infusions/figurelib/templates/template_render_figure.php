@@ -58,133 +58,124 @@ global $settings;
 					global $locale, $fil_settings;
 					echo render_breadcrumbs();
 					
-				$result = dbquery("
-				SELECT
-					f.*, 
-					fm.*					
-				FROM ".DB_FIGURE_MANUFACTURERS." AS fm 
-				LEFT JOIN ".DB_FIGURE_ITEMS." AS f ON fm.figure_manufacturer_id=f.figure_manufacturer
-				WHERE f.figure_freigabe='1' AND figure_cat='".intval($_GET['figure_cat_id'])."' AND figure_manufacturer='".intval($_GET['figure_manufacturer'])."' AND ".groupaccess("figure_visibility")."
-				LIMIT 0,1
-				
-			");	
 
-				while ($data = dbarray($result)) {			
+// ################################################################################################ 				
 
+	// Get data for manufacturer Info
+	$result = dbquery("
+		SELECT	f.*, fm.*					
+			FROM ".DB_FIGURE_MANUFACTURERS." AS fm 
+			LEFT JOIN ".DB_FIGURE_ITEMS." AS f ON fm.figure_manufacturer_id=f.figure_manufacturer
+			WHERE f.figure_freigabe='1' AND figure_cat='".intval($_GET['figure_cat_id'])."' AND figure_manufacturer='".intval($_GET['figure_manufacturer'])."' 
+			AND ".groupaccess("figure_visibility")."
+			LIMIT 0,1				
+	");	
 
-		 	echo "	<div class='panel-group'>
-			<div class='panel panel-default'>
-				<div class='panel-heading'>
-					<h4 class='panel-title'><a data-toggle='collapse' href='#collapse1'>".$locale['figm_0046']."</a></h4>
-				</div>
-			<div id='collapse1' class='panel-collapse collapse'>
-				<ul class='list-group'>";
-	  
+	while ($data = dbarray($result)) {			
+
+				echo "	<div class='panel-group'>
+						<div class='panel panel-default'>
+							<div class='panel-heading'>
+								<h4 class='panel-title'><a data-toggle='collapse' href='#collapse1'>".$locale['figm_0046']."</a></h4>
+							</div>
+						<div id='collapse1' class='panel-collapse collapse'>
+						<ul class='list-group'>";	  
    
-// ################################################      
-	echo "<li class='list-group-item'>
-			<div class='row'>
-				<div class='col-xs-6 col-sm-6 col-md-6 col-lg-6'>
-					<span><strong>Name:</strong> ".$data['figure_manufacturer_name']." </span>
-				</div>
+				// ################################################      
 				
-				<div class='col-xs-6 col-sm-6 col-md-6 col-lg-6'>
-					<div class='pull-right'>
-						<img src='".figures_getImagePath("manufacturers", "thumb", $data['figure_manufacturer_id'])."' style='max-width: 50px;' />
-				</div>
-			</div>
-		</li>";
-// ################################################        
-	echo "<li class='list-group-item'>"; 
-	
-	echo "<span class='text-bold'>Online: </span>";
-		
-		if ($data['figure_manufacturer_url'])  {				
-					echo "&nbsp;<a class='' href='".$data['figure_manufacturer_url']."'><i class='fa fa-globe' aria-hidden='true'> ".$locale['figm_0030']."</i></a>\n";
-		} 
-// -----------------------------------------------		
-		 if ($data['figure_manufacturer_email'])  {					
-				echo "&nbsp;<a class='' href='".$data['figure_manufacturer_email']."'><i class='fa fa-envelope' aria-hidden='true'> ".$locale['figm_0031']."</i></a>\n";
-		} 
-// --------------------------------------- --------	
-		if ($data['figure_manufacturer_facebook'])  {
-					echo "&nbsp;<a class='' href='".$data['figure_manufacturer_facebook']."'><i class='fa fa-facebook-official' aria-hidden='true'> ".$locale['figm_0032']."</i></a>\n";
-		} 
-// -----------------------------------------------	
-		if ($data['figure_manufacturer_twitter'])  {
-					echo "&nbsp;<a class='' href='".$data['figure_manufacturer_twitter']."'><i class='fa fa-twitter' aria-hidden='true'> ".$locale['figm_0033']."</i></a>\n";
-		} 
-// -----------------------------------------------	
-		if ($data['figure_manufacturer_youtube'])  {
-					echo "&nbsp;<a class='' href='".$data['figure_manufacturer_youtube']."'><i class='fa fa-youtube' aria-hidden='true'> ".$locale['figm_0034']."</i></a>\n";
-		} 
-// -----------------------------------------------	
-		if ($data['figure_manufacturer_pinterest'])  {
-					echo "&nbsp;<a class='' href='".$data['figure_manufacturer_pinterest']."'><i class='fa fa-pinterest' aria-hidden='true'> ".$locale['figm_0036']."</i></a>\n";
-		} 
-// -----------------------------------------------			
-		if ($data['figure_manufacturer_instagram'])  {
-					echo "&nbsp;<a class='' href='".$data['figure_manufacturer_instagram']."'><i class='fa fa-instagram' aria-hidden='true'> ".$locale['figm_0037']."</i></a>\n";
-		} 
-// -----------------------------------------------	
-		if ($data['figure_manufacturer_googleplus'])  {
-					echo "&nbsp;<a class='' href='".$data['figure_manufacturer_googleplus']."'><i class='fa fa-google-plus' aria-hidden='true'> ".$locale['figm_0038']."</i></a>\n";				
-		} 
-		
-	echo "</li>";
-// ################################################ 
-		if ($data['figure_manufacturer_address'])  {
-				echo "<li class='list-group-item'>";
-					echo "<span class='text-bold'>".$locale['figm_0035']." </span>";
-					$manufacturer_address = strip_tags(parse_textarea($data['figure_manufacturer_address']));
-				echo $manufacturer_address;
-				echo "</li>";
-		} else {
-			
-		}	
-// -----------------------------------------------	
-	 if ($data['figure_manufacturer_description'])  {
-				echo "<li class='list-group-item'>";
-					echo "<span class='text-bold'>".$locale['figm_0045']." </span>";
-					$manufacturer_description = strip_tags(parse_textarea($data['figure_manufacturer_description']));
-					echo $manufacturer_description;
-				echo "</li>";
-			} else {
+				echo "<li class='list-group-item'>
+						<div class='row'>
+							<div class='col-xs-6 col-sm-6 col-md-6 col-lg-6'>
+								<span><strong>Name:</strong> ".$data['figure_manufacturer_name']." </span>
+							</div>
+							
+							<div class='col-xs-6 col-sm-6 col-md-6 col-lg-6'>
+								<div class='pull-right'>
+									<img src='".figures_getImagePath("manufacturers", "thumb", $data['figure_manufacturer_id'])."' style='max-width: 50px;' />
+							</div>
+						</div>
+					</li>";
 				
-			}	
-// -----------------------------------------------	
+				// ################################################        
+					
+					echo "<li class='list-group-item'>"; 			
+					echo "<span class='text-bold'>Online: </span>";
+						
+						if ($data['figure_manufacturer_url'])  {				
+									echo "&nbsp;<a class='' href='".$data['figure_manufacturer_url']."'><i class='fa fa-globe' aria-hidden='true'> ".$locale['figm_0030']."</i></a>\n";
+						} 
+				// -----------------------------------------------		
+						 if ($data['figure_manufacturer_email'])  {					
+								echo "&nbsp;<a class='' href='".$data['figure_manufacturer_email']."'><i class='fa fa-envelope' aria-hidden='true'> ".$locale['figm_0031']."</i></a>\n";
+						} 
+				// --------------------------------------- --------	
+						if ($data['figure_manufacturer_facebook'])  {
+									echo "&nbsp;<a class='' href='".$data['figure_manufacturer_facebook']."'><i class='fa fa-facebook-official' aria-hidden='true'> ".$locale['figm_0032']."</i></a>\n";
+						} 
+				// -----------------------------------------------	
+						if ($data['figure_manufacturer_twitter'])  {
+									echo "&nbsp;<a class='' href='".$data['figure_manufacturer_twitter']."'><i class='fa fa-twitter' aria-hidden='true'> ".$locale['figm_0033']."</i></a>\n";
+						} 
+				// -----------------------------------------------	
+						if ($data['figure_manufacturer_youtube'])  {
+									echo "&nbsp;<a class='' href='".$data['figure_manufacturer_youtube']."'><i class='fa fa-youtube' aria-hidden='true'> ".$locale['figm_0034']."</i></a>\n";
+						} 
+				// -----------------------------------------------	
+						if ($data['figure_manufacturer_pinterest'])  {
+									echo "&nbsp;<a class='' href='".$data['figure_manufacturer_pinterest']."'><i class='fa fa-pinterest' aria-hidden='true'> ".$locale['figm_0036']."</i></a>\n";
+						} 
+				// -----------------------------------------------			
+						if ($data['figure_manufacturer_instagram'])  {
+									echo "&nbsp;<a class='' href='".$data['figure_manufacturer_instagram']."'><i class='fa fa-instagram' aria-hidden='true'> ".$locale['figm_0037']."</i></a>\n";
+						} 
+				// -----------------------------------------------	
+						if ($data['figure_manufacturer_googleplus'])  {
+									echo "&nbsp;<a class='' href='".$data['figure_manufacturer_googleplus']."'><i class='fa fa-google-plus' aria-hidden='true'> ".$locale['figm_0038']."</i></a>\n";				
+						} 						
+					
+					echo "</li>";
+				
+				// ################################################ 
+					if ($data['figure_manufacturer_address'])  {
+							echo "<li class='list-group-item'>";
+								echo "<span class='text-bold'>".$locale['figm_0035']." </span>";
+								$manufacturer_address = strip_tags(parse_textarea($data['figure_manufacturer_address']));
+							echo $manufacturer_address;
+							echo "</li>";
+					} else {
+						
+					}	
+				// -----------------------------------------------	
+				 if ($data['figure_manufacturer_description'])  {
+							echo "<li class='list-group-item'>";
+								echo "<span class='text-bold'>".$locale['figm_0045']." </span>";
+								$manufacturer_description = strip_tags(parse_textarea($data['figure_manufacturer_description']));
+								echo $manufacturer_description;
+							echo "</li>";
+						} else {
+							
+						}	
+				// -----------------------------------------------	
       echo "</ul>
       <div class='panel-footer'></div>
     </div>
   </div>
 </div>";
 
-/*
-$locale['figm_0030'] = "Website";
-$locale['figm_0031'] = "E-MAIL";
-$locale['figm_0032'] = "Facebook";
-$locale['figm_0033'] = "Twitter";
-$locale['figm_0034'] = "YouTube";
-$locale['figm_0035'] = "Info";
-$locale['figm_0036'] = "Pinterest";
-$locale['figm_0037'] = "Instagram";
-$locale['figm_0038'] = "Google+";
-$locale['figm_0039'] = "Affiliate Program";
-$locale['figm_0040'] = "Affiliate URL";
-$locale['figm_0041'] = "Affiliate Code";
-$locale['figm_0042'] = "Info Admin";
-$locale['figm_0043'] = "Name";
-$locale['figm_0044'] = "Logo";
-'manufacturer_affiliate_program' => $data['figure_manufacturer_affiliate_program'],
-'manufacturer_affiliate_url' => $data['figure_manufacturer_affiliate_url'],
-'manufacturer_affiliate_code' => $data['figure_manufacturer_affiliate_code'],
-'figure_manufacturer_info_admin' => $data['figure_manufacturer_info_admin'],					
-*/
-}					
-					
-					// ['cifg_0009'] = "Filter by:";
-					//opentable($locale['cifg_0009']);			
-										
+					/*
+					$locale['figm_0039'] = "Affiliate Program";
+					$locale['figm_0040'] = "Affiliate URL";
+					$locale['figm_0041'] = "Affiliate Code";
+					$locale['figm_0042'] = "Info Admin";
+					'manufacturer_affiliate_program' => $data['figure_manufacturer_affiliate_program'],
+					'manufacturer_affiliate_url' => $data['figure_manufacturer_affiliate_url'],
+					'manufacturer_affiliate_code' => $data['figure_manufacturer_affiliate_code'],
+					'figure_manufacturer_info_admin' => $data['figure_manufacturer_info_admin'],					
+					*/
+	}	
+// ######################################################################################################		
+															
+					// Beginn Figure Datas
 					echo "<aside class='list-group-item m-b-20'>\n";
 					
 		if ($info['figure_rows'] != 0) {						
@@ -202,8 +193,6 @@ $locale['figm_0044'] = "Logo";
 							}	
 										
 
-		
-	
 		echo "<div class='col-xs-6 col-sm-3 col-md-3 col-lg-3 p-t-20'>\n";
 		echo "<div class='media'>\n";						
 		echo "<div class='row'>";
@@ -299,129 +288,121 @@ $locale['figm_0044'] = "Logo";
 					echo render_breadcrumbs();
 					
 					
-				$result = dbquery("
-				SELECT
-					f.*, 
-					fm.*					
-				FROM ".DB_FIGURE_MANUFACTURERS." AS fm 
-				LEFT JOIN ".DB_FIGURE_ITEMS." AS f ON fm.figure_manufacturer_id=f.figure_manufacturer
-				WHERE f.figure_freigabe='1' AND figure_cat='".intval($_GET['figure_cat_id'])."' AND figure_manufacturer='".intval($_GET['figure_manufacturer'])."' AND ".groupaccess("figure_visibility")."
-				LIMIT 0,1
-				
-			");	
+// ################################################################################################ 				
 
-				while ($data = dbarray($result)) {			
+	// Get data for manufacturer Info
+	$result = dbquery("
+		SELECT	f.*, fm.*					
+			FROM ".DB_FIGURE_MANUFACTURERS." AS fm 
+			LEFT JOIN ".DB_FIGURE_ITEMS." AS f ON fm.figure_manufacturer_id=f.figure_manufacturer
+			WHERE f.figure_freigabe='1' AND figure_cat='".intval($_GET['figure_cat_id'])."' AND figure_manufacturer='".intval($_GET['figure_manufacturer'])."' 
+			AND ".groupaccess("figure_visibility")."
+			LIMIT 0,1				
+	");	
 
+	while ($data = dbarray($result)) {			
 
-		 	echo "	<div class='panel-group'>
-			<div class='panel panel-default'>
-				<div class='panel-heading'>
-					<h4 class='panel-title'><a data-toggle='collapse' href='#collapse1'>".$locale['figm_0046']."</a></h4>
-				</div>
-			<div id='collapse1' class='panel-collapse collapse'>
-				<ul class='list-group'>";
-	  
+				echo "	<div class='panel-group'>
+						<div class='panel panel-default'>
+							<div class='panel-heading'>
+								<h4 class='panel-title'><a data-toggle='collapse' href='#collapse1'>".$locale['figm_0046']."</a></h4>
+							</div>
+						<div id='collapse1' class='panel-collapse collapse'>
+						<ul class='list-group'>";	  
    
-// ################################################      
-	echo "<li class='list-group-item'>
-			<div class='row'>
-				<div class='col-xs-6 col-sm-6 col-md-6 col-lg-6'>
-					<span><strong>Name:</strong> ".$data['figure_manufacturer_name']." </span>
-				</div>
+				// ################################################      
 				
-				<div class='col-xs-6 col-sm-6 col-md-6 col-lg-6'>
-					<div class='pull-right'>
-						<img src='".figures_getImagePath("manufacturers", "thumb", $data['figure_manufacturer_id'])."' style='max-width: 50px;' />
-				</div>
-			</div>
-		</li>";
-// ################################################        
-	echo "<li class='list-group-item'>"; 
-	
-	echo "<span class='text-bold'>Online: </span>";
-		
-		if ($data['figure_manufacturer_url'])  {				
-					echo "&nbsp;<a class='' href='".$data['figure_manufacturer_url']."'><i class='fa fa-globe' aria-hidden='true'> ".$locale['figm_0030']."</i></a>\n";
-		} 
-// -----------------------------------------------		
-		 if ($data['figure_manufacturer_email'])  {					
-				echo "&nbsp;<a class='' href='".$data['figure_manufacturer_email']."'><i class='fa fa-envelope' aria-hidden='true'> ".$locale['figm_0031']."</i></a>\n";
-		} 
-// --------------------------------------- --------	
-		if ($data['figure_manufacturer_facebook'])  {
-					echo "&nbsp;<a class='' href='".$data['figure_manufacturer_facebook']."'><i class='fa fa-facebook-official' aria-hidden='true'> ".$locale['figm_0032']."</i></a>\n";
-		} 
-// -----------------------------------------------	
-		if ($data['figure_manufacturer_twitter'])  {
-					echo "&nbsp;<a class='' href='".$data['figure_manufacturer_twitter']."'><i class='fa fa-twitter' aria-hidden='true'> ".$locale['figm_0033']."</i></a>\n";
-		} 
-// -----------------------------------------------	
-		if ($data['figure_manufacturer_youtube'])  {
-					echo "&nbsp;<a class='' href='".$data['figure_manufacturer_youtube']."'><i class='fa fa-youtube' aria-hidden='true'> ".$locale['figm_0034']."</i></a>\n";
-		} 
-// -----------------------------------------------	
-		if ($data['figure_manufacturer_pinterest'])  {
-					echo "&nbsp;<a class='' href='".$data['figure_manufacturer_pinterest']."'><i class='fa fa-pinterest' aria-hidden='true'> ".$locale['figm_0036']."</i></a>\n";
-		} 
-// -----------------------------------------------			
-		if ($data['figure_manufacturer_instagram'])  {
-					echo "&nbsp;<a class='' href='".$data['figure_manufacturer_instagram']."'><i class='fa fa-instagram' aria-hidden='true'> ".$locale['figm_0037']."</i></a>\n";
-		} 
-// -----------------------------------------------	
-		if ($data['figure_manufacturer_googleplus'])  {
-					echo "&nbsp;<a class='' href='".$data['figure_manufacturer_googleplus']."'><i class='fa fa-google-plus' aria-hidden='true'> ".$locale['figm_0038']."</i></a>\n";				
-		} 
-		
-	echo "</li>";
-// ################################################ 
-		if ($data['figure_manufacturer_address'])  {
-				echo "<li class='list-group-item'>";
-					echo "<span class='text-bold'>".$locale['figm_0035']." </span>";
-					$manufacturer_address = strip_tags(parse_textarea($data['figure_manufacturer_address']));
-				echo $manufacturer_address;
-				echo "</li>";
-		} else {
-			
-		}	
-// -----------------------------------------------	
-	 if ($data['figure_manufacturer_description'])  {
-				echo "<li class='list-group-item'>";
-					echo "<span class='text-bold'>".$locale['figm_0045']." </span>";
-					$manufacturer_description = strip_tags(parse_textarea($data['figure_manufacturer_description']));
-					echo $manufacturer_description;
-				echo "</li>";
-			} else {
+				echo "<li class='list-group-item'>
+						<div class='row'>
+							<div class='col-xs-6 col-sm-6 col-md-6 col-lg-6'>
+								<span><strong>Name:</strong> ".$data['figure_manufacturer_name']." </span>
+							</div>
+							
+							<div class='col-xs-6 col-sm-6 col-md-6 col-lg-6'>
+								<div class='pull-right'>
+									<img src='".figures_getImagePath("manufacturers", "thumb", $data['figure_manufacturer_id'])."' style='max-width: 50px;' />
+							</div>
+						</div>
+					</li>";
 				
-			}	
-// -----------------------------------------------	
+				// ################################################        
+					
+					echo "<li class='list-group-item'>"; 			
+					echo "<span class='text-bold'>Online: </span>";
+						
+						if ($data['figure_manufacturer_url'])  {				
+									echo "&nbsp;<a class='' href='".$data['figure_manufacturer_url']."'><i class='fa fa-globe' aria-hidden='true'> ".$locale['figm_0030']."</i></a>\n";
+						} 
+				// -----------------------------------------------		
+						 if ($data['figure_manufacturer_email'])  {					
+								echo "&nbsp;<a class='' href='".$data['figure_manufacturer_email']."'><i class='fa fa-envelope' aria-hidden='true'> ".$locale['figm_0031']."</i></a>\n";
+						} 
+				// --------------------------------------- --------	
+						if ($data['figure_manufacturer_facebook'])  {
+									echo "&nbsp;<a class='' href='".$data['figure_manufacturer_facebook']."'><i class='fa fa-facebook-official' aria-hidden='true'> ".$locale['figm_0032']."</i></a>\n";
+						} 
+				// -----------------------------------------------	
+						if ($data['figure_manufacturer_twitter'])  {
+									echo "&nbsp;<a class='' href='".$data['figure_manufacturer_twitter']."'><i class='fa fa-twitter' aria-hidden='true'> ".$locale['figm_0033']."</i></a>\n";
+						} 
+				// -----------------------------------------------	
+						if ($data['figure_manufacturer_youtube'])  {
+									echo "&nbsp;<a class='' href='".$data['figure_manufacturer_youtube']."'><i class='fa fa-youtube' aria-hidden='true'> ".$locale['figm_0034']."</i></a>\n";
+						} 
+				// -----------------------------------------------	
+						if ($data['figure_manufacturer_pinterest'])  {
+									echo "&nbsp;<a class='' href='".$data['figure_manufacturer_pinterest']."'><i class='fa fa-pinterest' aria-hidden='true'> ".$locale['figm_0036']."</i></a>\n";
+						} 
+				// -----------------------------------------------			
+						if ($data['figure_manufacturer_instagram'])  {
+									echo "&nbsp;<a class='' href='".$data['figure_manufacturer_instagram']."'><i class='fa fa-instagram' aria-hidden='true'> ".$locale['figm_0037']."</i></a>\n";
+						} 
+				// -----------------------------------------------	
+						if ($data['figure_manufacturer_googleplus'])  {
+									echo "&nbsp;<a class='' href='".$data['figure_manufacturer_googleplus']."'><i class='fa fa-google-plus' aria-hidden='true'> ".$locale['figm_0038']."</i></a>\n";				
+						} 						
+					
+					echo "</li>";
+				
+				// ################################################ 
+					if ($data['figure_manufacturer_address'])  {
+							echo "<li class='list-group-item'>";
+								echo "<span class='text-bold'>".$locale['figm_0035']." </span>";
+								$manufacturer_address = strip_tags(parse_textarea($data['figure_manufacturer_address']));
+							echo $manufacturer_address;
+							echo "</li>";
+					} else {
+						
+					}	
+				// -----------------------------------------------	
+				 if ($data['figure_manufacturer_description'])  {
+							echo "<li class='list-group-item'>";
+								echo "<span class='text-bold'>".$locale['figm_0045']." </span>";
+								$manufacturer_description = strip_tags(parse_textarea($data['figure_manufacturer_description']));
+								echo $manufacturer_description;
+							echo "</li>";
+						} else {
+							
+						}	
+				// -----------------------------------------------	
       echo "</ul>
       <div class='panel-footer'></div>
     </div>
   </div>
 </div>";
 
-/*
-$locale['figm_0030'] = "Website";
-$locale['figm_0031'] = "E-MAIL";
-$locale['figm_0032'] = "Facebook";
-$locale['figm_0033'] = "Twitter";
-$locale['figm_0034'] = "YouTube";
-$locale['figm_0035'] = "Info";
-$locale['figm_0036'] = "Pinterest";
-$locale['figm_0037'] = "Instagram";
-$locale['figm_0038'] = "Google+";
-$locale['figm_0039'] = "Affiliate Program";
-$locale['figm_0040'] = "Affiliate URL";
-$locale['figm_0041'] = "Affiliate Code";
-$locale['figm_0042'] = "Info Admin";
-$locale['figm_0043'] = "Name";
-$locale['figm_0044'] = "Logo";
-'manufacturer_affiliate_program' => $data['figure_manufacturer_affiliate_program'],
-'manufacturer_affiliate_url' => $data['figure_manufacturer_affiliate_url'],
-'manufacturer_affiliate_code' => $data['figure_manufacturer_affiliate_code'],
-'figure_manufacturer_info_admin' => $data['figure_manufacturer_info_admin'],					
-*/
-}
+					/*
+					$locale['figm_0039'] = "Affiliate Program";
+					$locale['figm_0040'] = "Affiliate URL";
+					$locale['figm_0041'] = "Affiliate Code";
+					$locale['figm_0042'] = "Info Admin";
+					'manufacturer_affiliate_program' => $data['figure_manufacturer_affiliate_program'],
+					'manufacturer_affiliate_url' => $data['figure_manufacturer_affiliate_url'],
+					'manufacturer_affiliate_code' => $data['figure_manufacturer_affiliate_code'],
+					'figure_manufacturer_info_admin' => $data['figure_manufacturer_info_admin'],					
+					*/
+	}	
+// ######################################################################################################	
 			
 					
 					
