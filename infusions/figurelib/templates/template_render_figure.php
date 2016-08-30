@@ -60,7 +60,7 @@ global $settings;
 					
 					// ['cifg_0009'] = "Filter by:";
 					//opentable($locale['cifg_0009']);			
-					
+										
 					echo "<aside class='list-group-item m-b-20'>\n";
 					
 		if ($info['figure_rows'] != 0) {						
@@ -75,12 +75,136 @@ global $settings;
 					foreach($info['item'] as $figure_id => $data) {
 							if ($counter != 0 && ($counter%$columns == 0)) {
 									echo "</div>\n<div class='row m-0'>\n";
-							}			
-					
+							}	
+							
+			
+			
+ echo "<div class='panel-group'>
+  <div class='panel panel-default'>
+    <div class='panel-heading'>
+      <h4 class='panel-title'>
+        <a data-toggle='collapse' href='#collapse1'>".$locale['figm_0022']."</a>
+      </h4>
+    </div>
+    <div id='collapse1' class='panel-collapse collapse'>
+      <ul class='list-group'>";
+	  
+    
+// ################################################      
+	echo "<li class='list-group-item'>";
+					echo "<span>NAME: ".$data['figure']['manufacturer']." </span>";
+	echo "</li>";
+// ################################################        
+	echo "<li class='list-group-item'>"; 
+		
+		if ($data['figure']['manufacturer_url'])  {				
+					echo "<a class='side' href='".$data['figure']['manufacturer_url']."'><i class='fa fa-globe' aria-hidden='true'> ".$locale['figm_0030']."</i></a>\n";
+		} else {
+			
+		}	
+// -----------------------------------------------		
+		 if ($data['figure']['manufacturer_email'])  {					
+				echo "<a class='side' href='".$data['figure']['manufacturer_email']."'><i class='fa fa-envelope-o' aria-hidden='true'> ".$locale['figm_0031']."</i></a>\n";
+		} else {
+			
+		}	
+// --------------------------------------- --------	
+		if ($data['figure']['manufacturer_facebook'])  {
+					echo "<a class='side' href='".$data['figure']['manufacturer_facebook']."'><i class='fa fa-facebook-official' aria-hidden='true'> ".$locale['figm_0032']."</i></a>\n";
+		} else {
+			
+		}	
+// -----------------------------------------------	
+		if ($data['figure']['manufacturer_twitter'])  {
+					echo "<a class='side' href='".$data['figure']['manufacturer_twitter']."'><i class='fa fa-twitter' aria-hidden='true'> ".$locale['figm_0033']."</i></a>\n";
+		} else {
+			
+		}	
+// -----------------------------------------------	
+		if ($data['figure']['manufacturer_youtube'])  {
+					echo "<a class='side' href='".$data['figure']['manufacturer_youtube']."'><i class='fa fa-youtube' aria-hidden='true'> ".$locale['figm_0034']."</i></a>\n";
+		} else {
+			
+		}	
+// -----------------------------------------------	
+		if ($data['figure']['manufacturer_pinterest'])  {
+					echo "<a class='side' href='".$data['figure']['manufacturer_pinterest']."'><i class='fa fa-pinterest' aria-hidden='true'> ".$locale['figm_0036']."</i></a>\n";
+		} else {
+			
+		}	
+// -----------------------------------------------			
+		if ($data['figure']['manufacturer_instagram'])  {
+					echo "<a class='side' href='".$data['figure']['manufacturer_instagram']."'><i class='fa fa-instagram' aria-hidden='true'> ".$locale['figm_0037']."</i></a>\n";
+		} else {
+			
+		}	
+// -----------------------------------------------	
+		if ($data['figure']['manufacturer_googleplus'])  {
+					echo "<a class='side' href='".$data['figure']['manufacturer_googleplus']."'><i class='fa fa-google-plus' aria-hidden='true'> ".$locale['figm_0038']."</i></a>\n";				
+		} else {
+			
+		}	
+		
+	echo "</li>";
+// ################################################ 
+		if ($data['figure']['manufacturer_info'])  {
+				echo "<li class='list-group-item'>";
+					echo "<span>".$locale['figm_0035']." </span>";
+					$info = strip_tags(parse_textarea($data['figure']['manufacturer_info']));
+				echo $info;
+				echo "</li>";
+		} else {
+			
+		}	
+// -----------------------------------------------	
+	 if ($data['figure']['manufacturer_description'])  {
+				echo "<li class='list-group-item'>";
+					echo "<span>".$locale['figm_0045']." </span>";
+					$descreption = strip_tags(parse_textarea($data['figure']['manufacturer_description']));
+					echo $descreption;
+				echo "</li>";
+			} else {
+				
+			}	
+// -----------------------------------------------	
+      echo "</ul>
+      <div class='panel-footer'></div>
+    </div>
+  </div>
+</div>";
+
+/*
+$locale['figm_0030'] = "Website";
+$locale['figm_0031'] = "E-MAIL";
+$locale['figm_0032'] = "Facebook";
+$locale['figm_0033'] = "Twitter";
+$locale['figm_0034'] = "YouTube";
+$locale['figm_0035'] = "Info";
+$locale['figm_0036'] = "Pinterest";
+$locale['figm_0037'] = "Instagram";
+$locale['figm_0038'] = "Google+";
+$locale['figm_0039'] = "Affiliate Program";
+$locale['figm_0040'] = "Affiliate URL";
+$locale['figm_0041'] = "Affiliate Code";
+$locale['figm_0042'] = "Info Admin";
+$locale['figm_0043'] = "Name";
+$locale['figm_0044'] = "Logo";
+*/	 
+
+
+			/*
+						'manufacturer_affiliate_program' => $data['figure_manufacturer_affiliate_program'],
+					'manufacturer_affiliate_url' => $data['figure_manufacturer_affiliate_url'],
+					'manufacturer_affiliate_code' => $data['figure_manufacturer_affiliate_code'],
+					'figure_manufacturer_info_admin' => $data['figure_manufacturer_info_admin'],			
+		
+		*/
+		
+	
 		echo "<div class='col-xs-6 col-sm-3 col-md-3 col-lg-3 p-t-20'>\n";
 		echo "<div class='media'>\n";						
 		echo "<div class='row'>";
-
+		
 	// ......................IMAGE				
 			echo "<center><a href='".$data['figure']['link']."'><img src='".figures_getImagePath("figure", "thumb", $data['figure_id'])."' alt='".trimlink($data['figure_title'],100)."' title='Figure Title: ".trimlink($data['figure_title'],50)."' style='border:0px;max-height:100px;max-width:100px' /><br /></a>";
 			
@@ -129,23 +253,10 @@ global $settings;
 		} else {
 			
 					// ['figc_0012'] = "No figure categories defined";
-					
 										
-					/*			
-					// graue Version der Box
-					echo "<div class='well text-center'><br />\n".$locale['figc_0012']."<br />\n";
-						if (iMEMBER && $fil_settings['figure_submit']) {
-							//['figure_521'] = "Submit Figure";
-								echo "<p><a href='submit.php?stype=f'>".$locale['figure_521']."</a></p>";
-								echo "</div>\n";
-						} else {
-								echo "</div>\n";
-								}
-					*/	
-					
 					// blaue Version der Box
-					// NEW Locale!
-					echo "<div class='alert alert-info m-b-20 submission-guidelines'><br /><center>\nThere are no Figures in this Category.<br>";
+					// ['figure_1710'] = "There are no Figures in this Category.";
+					echo "<div class='alert alert-info m-b-20 submission-guidelines'><br /><center>".$locale['figure_1710']."<br>";
 						if (iMEMBER && $fil_settings['figure_submit']) {
 							//['figure_521'] = "Submit Figure";
 								echo "<p><a href='submit.php?stype=f'>".$locale['figure_521']."</a></p>";
@@ -153,10 +264,12 @@ global $settings;
 						} else {
 								echo "</div>\n";
 								}
-							
+					
+					echo "</aside>";		
 				}
 		
 			echo $info['page_nav'] ? "<div class='text-right'>".$info['page_nav']."</div>" : '';
+			
 		}
 	}	
 /******************************************************************************************/	
@@ -179,10 +292,6 @@ global $settings;
 					global $locale, $fil_settings;
 					echo render_breadcrumbs();
 					
-					// ['cifg_0009'] = "Filter by:";
-					//opentable($locale['cifg_0009']);
-					echo "<aside class='list-group-item m-b-20'>\n";
-					
 			if ($info['figure_rows'] != 0) {
 						$counter = 0;
 						$columns = 1;
@@ -203,7 +312,7 @@ global $settings;
 //############################			
 		// ......................FIGURE TITLE		
 				echo "<div class='panel-heading'>\n";
-				echo "<a href='".$data['figure']['link']."' alt='Figure Title: ".$data['figure']['name']."' title='Figure Title: ".$data['figure']['name']."'>".trimlink($data['figure']['name'],20)."</a>\n";
+				echo "<a href='".$data['figure']['link']."' alt='Figure Title: ".$data['figure']['name']."' title='Figure Title: ".$data['figure']['name']."'>".trimlink($data['figure']['name'],40)."</a>\n";
 				echo "</div>\n";
 		// ..................................
 //############################				
@@ -212,34 +321,17 @@ global $settings;
 		
 		
 			echo "<div class='container-fluid'>\n";
-			echo "<div class='table-responsive'>\n";
-			
-			
+			echo "<div class='table-responsive'>\n";			
 				
 // ZEILE 1
 	// ..................... BILD			
 				echo "<div class='col-lg-4 col-md-12 col-sm-12 col-xs-12'>\n";
-										$result2 = dbquery("SELECT	
-											figure_images_image_id, 	
-											figure_images_figure_id, 	
-											figure_images_image, 	
-											figure_images_thumb 	
-										FROM ".DB_FIGURE_IMAGES."
-										WHERE figure_images_figure_id='".$data['figure_id']."' 
-										LIMIT 0,1");
-					 
-								if(dbrows($result2)){						 
-									while($data2 = dbarray($result2)){						
-										echo "<center><a href='".$data['figure']['link']."' alt='Figure Title: ".$data['figure']['name']."' title='Figure Title: ".$data['figure']['name']."'><img src='".($data2['figure_images_thumb'] ? THUMBS_FIGURES.$data2['figure_images_thumb'] : IMAGES."imagenotfound.jpg")."' alt='Figure Title: ".trimlink($data['figure_title'],100)."' title='Figure Title: ".trimlink($data['figure_title'],50)."' style='border:0px;max-height:120px;max-width:120px' /></a>";						
-									}										
-								} else { 									
-										echo "<center><a href='".$data['figure']['link']."' alt='Figure Title: ".$data['figure']['name']."' title='Figure Title: ".$data['figure']['name']."'><img src='".IMAGES."imagenotfound.jpg' alt='".trimlink($data['figure_title'],100)."' title='Figure Title: ".trimlink($data['figure_title'],50)."' style='border:0px;max-height:120px;max-width:120px' /></a>";
-										}
+					echo "<center><a href='".$data['figure']['link']."'><img src='".figures_getImagePath("figure", "thumb", $data['figure_id'])."' alt='".trimlink($data['figure_title'],100)."' title='Figure Title: ".trimlink($data['figure_title'],100)."' style='border:0px;max-height:120px;max-width:120px' /><br /></a>";
 				echo "</div>\n";
 	// ..................... VARIANT				
 				echo "<div class='col-lg-4 col-md-6 col-sm-12 col-xs-12'>\n";
 					if ($data['figure']['variant']) {
-							echo "<span class='small' alt='Variant: ".$data['figure']['variant']."' title='Variant: ".$data['figure']['variant']."'><strong>Variant: </strong>".trimlink($data['figure']['variant'],10)."</span>\n";
+							echo "<span class='small' alt='Variant: ".$data['figure']['variant']."' title='Variant: ".$data['figure']['variant']."'><strong>Variant: </strong>".trimlink($data['figure']['variant'],15)."</span>\n";
 					} else {
 							echo "<span class='small' alt='Variant: missing data' title='Variant: missing data'><strong>Variant: </strong> no data </span>";
 						}
@@ -247,24 +339,23 @@ global $settings;
 
 	// ..................... SUBMITTER					
 				echo "<div class='col-lg-4 col-md-6 col-sm-12 col-xs-12'>\n";
-					echo "<span class='small' alt='Submitted by:' title='Submitted by:'><strong>Submitted by: </strong>".profile_link($data['figure']['userid'], trimlink($data['figure']['username'],20), $data['figure']['userstatus'])."<br/></span>\n";
+					echo "<span class='small' alt='Submitted by:' title='Submitted by:'><strong>Submitted by: </strong>".profile_link($data['figure']['userid'], trimlink($data['figure']['username'],15), $data['figure']['userstatus'])."<br/></span>\n";
 				echo "</div>\n";
 				
 // ZEILE 2				
 	// ..................... MANUFACTURER								
 				echo "<div class='col-lg-4 col-md-6 col-sm-12 col-xs-12'>\n";
-					echo "<span class='small' alt='Manufacturer: ".$data['figure']['manufacturer']."' title='Manufacturer: ".$data['figure']['manufacturer']."'><strong>Manufacturer: </strong>".trimlink($data['figure']['manufacturer'],10)."<br/></span>\n";
+					echo "<span class='small' alt='Manufacturer: ".$data['figure']['manufacturer']."' title='Manufacturer: ".$data['figure']['manufacturer']."'><strong>Manufacturer: </strong>".trimlink($data['figure']['manufacturer'],15)."<br/></span>\n";
 				echo "</div>\n";
 
 	// ..................... SUBMITTED ON				
 				echo "<div class='col-lg-4 col-md-6 col-sm-12 col-xs-12'>\n";
-					//echo "<span class='small'><strong>Submitted on: </strong>".timer($data['figure_datestamp'])." - ".showdate("shortdate", $data['figure_datestamp'])."</span>\n";
 					echo "<span class='small' alt='Submitted on:' title='Submitted on:'><strong>Submitted on: </strong>".showdate("shortdate", $data['figure_datestamp'])."</span>\n";
 				echo "</div>\n";
 // ZEILE 3				
 	// ..................... BRAND				
 				echo "<div class='col-lg-4 col-md-6 col-sm-12 col-xs-12'>\n";
-					echo "<span class='small' alt='Brand: ".$data['figure']['brand']."' title='Brand: ".$data['figure']['brand']."'><strong>Brand: </strong>".trimlink($data['figure']['brand'],10)."</span>\n";
+					echo "<span class='small' alt='Brand: ".$data['figure']['brand']."' title='Brand: ".$data['figure']['brand']."'><strong>Brand: </strong>".trimlink($data['figure']['brand'],15)."</span>\n";
 				echo "</div>\n";
 
 	// ..................... VIEWS				
@@ -298,7 +389,7 @@ global $settings;
 	// ..................... SERIES			
 				echo "<div class='col-lg-4 col-md-6 col-sm-12 col-xs-12'>\n";
 					if ($data['figure']['series']) {
-						echo "<span class='small' alt='Serie: ".$data['figure']['series']."' title='Serie: ".$data['figure']['series']."'><strong>Series: </strong>".trimlink($data['figure']['series'],10)."</span>\n";
+						echo "<span class='small' alt='Serie: ".$data['figure']['series']."' title='Serie: ".$data['figure']['series']."'><strong>Series: </strong>".trimlink($data['figure']['series'],15)."</span>\n";
 					} else {
 						echo "<span class='small' alt='Serie: missing data' title='Serie: missing data'><strong>Series: </strong> no data </span>";
 					}
@@ -331,22 +422,11 @@ echo "</div>\n";
 	
 		} else {
 						
-			// ['figc_0012'] = "No figure categories defined";
-				
-						
-					/* graue Version der Box
-					echo "<div class='well text-center'><br />\n".$locale['figc_0012']."<br />\n";
-							if (iMEMBER && $fil_settings['figure_submit']) {
-								//['figure_521'] = "Submit Figure";
-								echo "<p><a href='submit.php?stype=f'>".$locale['figure_521']."</a></p>";
-								echo "</div>\n";
-					} else {
-								echo "</div>\n";
-					}
-					*/			
+			// ['figc_0012'] = "No figure categories defined";		
 			
 					// blaue Version der Box
-					echo "<div class='alert alert-info m-b-20 submission-guidelines'><br /><center>\nThere are no Figures in this Category.<br>";
+					// ['figure_1710'] = "There are no Figures in this Category.";
+					echo "<div class='alert alert-info m-b-20 submission-guidelines'><br /><center>".$locale['figure_1710']."<br>";
 					
 						if (iMEMBER && $fil_settings['figure_submit']) {
 								//['figure_521'] = "Submit Figure";
@@ -355,15 +435,12 @@ echo "</div>\n";
 						} else {
 								echo "</div>\n";
 						}
-					
-			
+								
 			}
 				echo $info['page_nav'] ? "<div class='text-right'>".$info['page_nav']."</div>" : '';
-				echo "</aside";
 
 		}
-	}					
-						
+	}											
 	
 }						
 
