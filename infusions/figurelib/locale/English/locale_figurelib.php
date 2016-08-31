@@ -4,6 +4,9 @@ $locale['yes'] = "YES";
 $locale['no'] = "NO";
 $locale['yours']= "Your Figures";	
 
+$locale['fig_pending'] = "pending|pendings";
+$locale['fig_inactive'] = "inactive|inactive";
+
 // infusion.php
 $locale['INF_TITLE'] = "Figures Library";
 $locale['INF_DESC'] = "Figure Collection System";
@@ -106,7 +109,7 @@ $locale['film_0002'] = "Figure updated";
 $locale['film_0003'] = "Figure deleted";
 $locale['film_0004'] = "Delete this Figure?";
 
-// Submissions
+// Submissions / Pendings / Inactive
 $locale['figs_0001'] = "Figure submissions";
 $locale['figs_0002'] = "Currently displaying %d of %d total figure/s entries";
 $locale['figs_0003'] = "Figures submissions has been published";
@@ -128,7 +131,14 @@ $locale['figs_0018'] = "Thank you for submitting your figure";
 $locale['figs_0019'] = "Submit another figure";
 $locale['figs_0020'] = "Return to [SITENAME]";
 $locale['figs_0021'] = "There are currently %s pending for your review.";
-$locale['figs_0022'] = "There are currently no figure pendings";
+$locale['figs_0022'] = "There are currently no figure on pending";
+$locale['figs_0023'] = "There are currently no figure as deactivated";
+$locale['figs_0024'] = "Subject on Status Pending";
+$locale['figs_0025'] = "Subject on Status Inactive";
+$locale['figs_0026'] = "There are currently %s figure(s).";
+$locale['figs_0027'] = "There are currently %s for your review.";
+
+
 
 // Filters
 $locale['figf_0001'] = "Filter by:";
