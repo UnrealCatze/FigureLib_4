@@ -348,11 +348,25 @@ if (!empty($result)) {
 		}
 		
 		// Formfield "Figure Freigabe"
+	
+		// Set Options for Selectlists
+		$freigabe_opts = [
+		
+		'0' => $locale['figure_1828'],
+		'1' => $locale['figure_1829'],
+		'2' => $locale['figure_1830'],
+		'3' => $locale['figure_1831'],
+		'4' => $locale['figure_1832']
+		];	
+	
+		// Formfield "Figure Freigabe"
 			//echo form_checkbox("figure_freigabe", $locale['figurelib/admin/figurelib.php_069'], $data['figure_freigabe'], ["reverse_label" => true]);
-			  echo form_select("figure_freigabe", $locale['figurelib/admin/figurelib.php_069'], $data['figure_freigabe'], array(
-								"inline" => TRUE, 
-								"options" => array($locale['disable'], $locale['enable'])
-						));
+		echo form_select("figure_freigabe", $locale['figurelib/admin/figurelib.php_069'], $data['figure_freigabe'], array(
+		"inline" => TRUE, 
+		"options" => $freigabe_opts
+		));	
+	
+	
 	echo "</div>\n";
 	echo "</div>\n";	
 		
