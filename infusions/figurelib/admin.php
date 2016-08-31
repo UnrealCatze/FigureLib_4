@@ -58,7 +58,8 @@ $allowed_pages = array(
 	//"figurelib_userfigures",
 	//"figurelib_images",
 	"figurelib_submissions",
-	"figurelib_settings"		
+	"figurelib_settings",
+	"figurelib_pendings"	
 );
 $_GET['section'] = isset($_GET['section']) && in_array($_GET['section'], $allowed_pages) ? $_GET['section'] : 'figurelib';
 $figure_edit = isset($_GET['action']) && $_GET['action'] == "edit" && isset($_GET['figure_id']) && isnum($_GET['figure_id']) ? TRUE : FALSE;
@@ -103,6 +104,12 @@ $figure_id = ($figure_edit) ? intval($_GET['figure_id']) : 0;
 		$master_title['id'][] = 'figurelib_submissions';
 		$master_title['icon'] = '';
 		
+		// $locale['filt_0019'] = "Figure Pendings";
+		$pendingCounter = dbcount("(figure_id)", DB_FIGURE_ITEMS, "figure_freigabe='2'");
+		$master_title['title'][] = $locale['filt_0019']."  <span class='badge'>".$pendingCounter."</span>"; 
+		$master_title['id'][] = 'figurelib_pendings';
+		$master_title['icon'] = '';
+		
 		// ['filt_0010'] = "Settings
 		$master_title['title'][] = $locale['filt_0010']; 
 		$master_title['id'][] = 'figurelib_settings';
@@ -138,6 +145,10 @@ switch ($_GET['section']) {
 		add_breadcrumb(array('link'=>"", 'title'=>$locale['filt_0009'])); // ['filt_0009'] = "Figure Submissions";
 		include "admin/admin_figurelib_submissions.php";
 		break;
+	case "figurelib_pendings":
+		add_breadcrumb(array('link'=>"", 'title'=>$locale['filt_0019'])); // $locale['filt_0019'] = Pendings
+		include "admin/admin_figurelib_pendings.php";
+		break;
 	default:
 		figurelib_listing();
 }
@@ -153,6 +164,7 @@ function figurelib_listing() {
 	$limit = 15;
 	$total_rows = dbcount("(figure_id)", DB_FIGURE_ITEMS);
 	$submissions = dbcount("(figure_id)", DB_FIGURE_ITEMS, "figure_freigabe = 0");
+	$pendings = dbcount("(figure_id)", DB_FIGURE_ITEMS, "figure_freigabe = 2");
 	$rowstart = isset($_GET['rowstart']) && ($_GET['rowstart'] <= $total_rows) ? $_GET['rowstart'] : 0;
 	// add a filter browser
 	$catOpts = array(
