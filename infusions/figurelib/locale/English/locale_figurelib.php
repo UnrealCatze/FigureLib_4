@@ -61,24 +61,25 @@ $locale['figbm_0006'] = "This Brand already exists.";
 $locale['figbm_0007'] = "Delete this Figure Brand?";
 
 // TITEL DER TABS IM AMINMENÜ 
-$locale['filt_0001'] = "Add Figure";
+$locale['filt_0001'] = "Add/New";
 $locale['filt_0002'] = "Edit Figure";
-$locale['filt_0003'] = "Current Figures";
-$locale['filt_0004'] = "Figure Categories";
+$locale['filt_0003'] = "Current";
+$locale['filt_0004'] = "Categories";
 $locale['filt_0005'] = "Edit Figure Category";
 $locale['filt_0006'] = "Configuration page for Figures";
 $locale['filt_0007'] = "There are currently %s pending for your review.";
 $locale['filt_0008'] = "There are currently no figure submissions";
-$locale['filt_0009'] = "Figure Submissions";
-$locale['filt_0010'] = "FigureLib Settings";
+$locale['filt_0009'] = "Submissions";
+$locale['filt_0010'] = "Settings";
 $locale['filt_0011'] = "FigureLib Admin Area";
 $locale['filt_0012'] = "All Figure Entries";
 $locale['filt_0013'] = "Edit Figure Manufacturer";
-$locale['filt_0014'] = "Figure Manufacturer";
+$locale['filt_0014'] = "Manufacturers";
 $locale['filt_0015'] = "Edit Figure Brand";
-$locale['filt_0016'] = "Figure Brand";
+$locale['filt_0016'] = "Brands";
 $locale['filt_0017'] = "Edit/Publish Figure";
 $locale['filt_0018'] = "Here can you add, delete, edit and publish figures";
+$locale['filt_0019'] = "Pendings";
 
 // CURRENT FIGURES
 $locale['cifg_0000'] = "Figure Name / Title";
@@ -124,7 +125,7 @@ $locale['figs_0018'] = "Thank you for submitting your figure";
 $locale['figs_0019'] = "Submit another figure";
 $locale['figs_0020'] = "Return to [SITENAME]";
 $locale['figs_0021'] = "There are currently %s pending for your review.";
-
+$locale['figs_0022'] = "There are currently no figure pendings";
 
 // Filters
 $locale['figf_0001'] = "Filter by:";
@@ -174,21 +175,20 @@ $locale['figm_0018'] = "Manufacturer E-MAIL";
 $locale['figm_0019'] = "Manufacturer Facebook";
 $locale['figm_0020'] = "Manufacturer Twitter";
 $locale['figm_0021'] = "Manufacturer YouTube";
-$locale['figm_0022'] = "Manufacturer Info";
+$locale['figm_0022'] = "Manufacturer Address";
 $locale['figm_0023'] = "Manufacturer Pinterest";
 $locale['figm_0024'] = "Manufacturer Instagram";
 $locale['figm_0025'] = "Manufacturer Google+";
 $locale['figm_0026'] = "Manufacturer Affiliate Program";
 $locale['figm_0027'] = "Manufacturer Affiliate URL";
 $locale['figm_0028'] = "Manufacturer Affiliate Code";
-$locale['figm_0029'] = "Manufacturer Info Admin";
-
+$locale['figm_0029'] = "Info Admin only!!!";
 $locale['figm_0030'] = "Website";
 $locale['figm_0031'] = "E-Mail";
 $locale['figm_0032'] = "Facebook";
 $locale['figm_0033'] = "Twitter";
 $locale['figm_0034'] = "YouTube";
-$locale['figm_0035'] = "Info:";
+$locale['figm_0035'] = "Address:";
 $locale['figm_0036'] = "Pinterest";
 $locale['figm_0037'] = "Instagram";
 $locale['figm_0038'] = "Google+";
@@ -199,7 +199,7 @@ $locale['figm_0042'] = "Info Admin";
 $locale['figm_0043'] = "Name";
 $locale['figm_0044'] = "Logo";
 $locale['figm_0045'] = "Description:";
-
+$locale['figm_0046'] = "Manufacturer Info";
 
 // Add/Edit Brand Form
 $locale['figbrand_0000'] = "Brand Name:";
@@ -458,7 +458,6 @@ $locale['figure_458'] = "Typ Artic. Points";
 $locale['figure_459'] = "Attention: Fields with * are required!";
 $locale['figure_460'] = "Link to Forum";
 $locale['figure_461'] = "Video URL";
-
 
 // Submit.php
 $locale['figure_501'] = "Figure deleted";
@@ -774,7 +773,11 @@ $locale['figure_1825'] = "Admin Message: Modul MYCOLLECTION global deactivated! 
 $locale['figure_1826'] = "Admin Message: Modul RELATED FIGURES global deactivated! Activate ";
 $locale['figure_1827'] = "Admin Message: Modul SOCIAL SHARING global deactivated! Activate ";
 
-
+$locale['figure_1828'] = "Submitting";
+$locale['figure_1829'] = "Show on Page";
+$locale['figure_1830'] = "Set on Pending";
+$locale['figure_1831'] = "Hide Figure";
+$locale['figure_1832'] = "For Deleting";
 
 
 // Error Messages
