@@ -82,12 +82,12 @@ $result = dbquery(
 			openside("");
 			
 			// TITLE LINE WITH ADMIN EDIT DIRECT LINK			
-			echo "<div class='well clearfix text-bold'><span>".trimlink($data['figure_title'], 23)." (".trimlink($data['figure_manufacturer_name'], 23).") [".$data['figure_pubdate']."]</span>";
+			echo "<div class='well clearfix text-bold'><span>".trimlink($data['figure_title'], 23)." (".trimlink($data['figure_manufacturer_name'], 23).") [".trimlink($data['figure_pubdate'],7)."]</span>";
 			
 							if (iADMIN || iSUPERADMIN) {
 								
 								global $aidlink;					
-								echo " <a class='fa fa-cog pull-right'  href='".INFUSIONS."figurelib/admin.php".$aidlink."&amp;section=figurelib_form&amp;action=edit&amp;figure_id=".intval($_GET['figure_id'])."'></a>&nbsp;";
+								echo " <a class='fa fa-cog pull-right'  href='".INFUSIONS."figurelib/admin.php".$aidlink."&amp;section=figurelib_form&amp;action=edit&amp;figure_id=".intval($_GET['figure_id'])."'></a>";
 							}										
 			echo"</div>";
 			
@@ -214,7 +214,19 @@ if ($fil_settings['figure_show_data_global']) { // show figure data global on/of
 				echo "<div class='row'>\n";	
 				
 				// PART 1 BEGIN ##################################################################################################
-									
+													
+						// TITLE LOCALE
+						echo "<div class='col-lg-4 col-md-4 col-sm-12 col-xs-12'>\n";
+							echo "<div class='navbar-default'><div class='text-smaller text-uppercase'><strong>".$locale['figurelib/admin/figurelib.php_005']."</strong>\n";
+						echo "</div></div></div>\n";
+						
+						// TITLE DATA
+						echo "<div class='col-lg-8 col-md-8 col-sm-12 col-xs-12'>\n";
+								echo "<span class='small'>&nbsp;".$data['figure_title']."</span>\n";		
+						echo "</div>\n";
+
+						// ++++++++++++++++
+						
 						// VARIANT LOCALE
 						echo "<div class='col-lg-4 col-md-4 col-sm-12 col-xs-12'>\n";
 							echo "<div class='navbar-default'><div class='text-smaller text-uppercase'><strong>".$locale['figure_441']."</strong>\n";
