@@ -71,7 +71,9 @@ if (!function_exists('render_figure_cats')) {
 			echo "</div>\n";
 		} else {
 			// ['figc_0012'] = "No figure categories defined";
+			echo "<div class='alert alert-info m-b-20 submission-guidelines'>";
 			echo "<div style='text-align:center'><br />\n".$locale['figc_0012']."<br /><br />\n</div>\n";
+			echo "</div>\n";
 		}
 		echo "</aside>\n";
 	}

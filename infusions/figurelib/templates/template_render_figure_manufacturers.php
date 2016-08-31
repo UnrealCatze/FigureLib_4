@@ -67,8 +67,11 @@ if (!function_exists('render_manufacturer')) {
 			echo "</div>\n";
 			
 		// Display Message
+		// $locale['figure_1711'] = "There are no Manufacturers or Figures in this Category!";
 		} else {
-			echo "<div style='text-align:center'><br />\nThere are no Manufacturers or Figures in this Category!<br /><br />\n</div>\n";
+			echo "<div class='alert alert-info m-b-20 submission-guidelines'>";
+			echo "<div style='text-align:center'><br />".$locale['figure_1711']."<br /><br />\n</div>\n";
+			echo "</div>\n";
 		}
 		
 		// Display Content

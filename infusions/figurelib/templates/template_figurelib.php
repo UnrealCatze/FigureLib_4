@@ -38,6 +38,7 @@ include INFUSIONS."figurelib/infusion_db.php";
 	// GET SETTING FOR SHOW AS GALLERY OR TABLE
 	$fil_settings = get_settings("figurelib"); 
 	if ($fil_settings['figure_display']) {	
+	 
 // ******************************************************************************************			
 // GALLERY VIEW 
 // ******************************************************************************************	
@@ -107,17 +108,7 @@ include INFUSIONS."figurelib/infusion_db.php";
 			
 			// SETTINGS HOLEN
 			$fil_settings = get_settings("figurelib");			
-			
-			
-/*			// graue Version der Box
-			echo "<div class='well text-center'><br />\n".$locale['figc_0012']."<br />\n";
-			if (iMEMBER && $fil_settings['figure_submit']) {
-			//['figure_521'] = "Submit Figure";
-					echo "<p><a href='submit.php?stype=f'>".$locale['figure_521']."</a></p>";
-				echo "</div>\n";
-			} else {echo "</div>\n";}
-			
-*/						
+								
 			// blaue Version der Box
 			echo "<div class='alert alert-info m-b-20 submission-guidelines'><br /><center>\n".$locale['figc_0012']."<br>";
 			if (iMEMBER && $fil_settings['figure_submit']) {

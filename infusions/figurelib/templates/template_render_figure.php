@@ -71,14 +71,22 @@ global $settings;
 			LIMIT 0,1				
 	");	
 
-	while ($data = dbarray($result)) {			
-
+	while ($data = dbarray($result)) {				
+				
 				echo "	<div class='panel-group'>
 						<div class='panel panel-default'>
 							<div class='panel-heading'>
 								
-								<a data-toggle='collapse' href='#collapse1'>".$locale['figm_0046']."</a>
-							</div>
+								<a data-toggle='collapse' href='#collapse1'>".$locale['figm_0046']."</a>";
+								
+							if (iADMIN || iSUPERADMIN) {
+								
+								global $aidlink;					
+								echo " <a class='fa fa-cog pull-right'  href='".INFUSIONS."figurelib/admin.php".$aidlink."&amp;section=figurelib_manufacturers&amp;action=edit&amp;manufacturer_id=".intval($_GET['figure_manufacturer'])."'></a>&nbsp;";
+							}
+								
+								
+							echo "</div>
 						<div id='collapse1' class='panel-collapse collapse'>
 						<ul class='list-group'>";	  
    
@@ -310,14 +318,22 @@ global $settings;
 			LIMIT 0,1				
 	");	
 
-	while ($data = dbarray($result)) {			
-
+	while ($data = dbarray($result)) {				
+				
 				echo "	<div class='panel-group'>
 						<div class='panel panel-default'>
 							<div class='panel-heading'>
 								
-								<a data-toggle='collapse' href='#collapse1'>".$locale['figm_0046']."</a>
-							</div>
+								<a data-toggle='collapse' href='#collapse1'>".$locale['figm_0046']."</a>";
+								
+							if (iADMIN || iSUPERADMIN) {
+								
+								global $aidlink;					
+								echo " <a class='fa fa-cog pull-right'  href='".INFUSIONS."figurelib/admin.php".$aidlink."&amp;section=figurelib_manufacturers&amp;action=edit&amp;manufacturer_id=".intval($_GET['figure_manufacturer'])."'></a>&nbsp;";
+							}
+								
+								
+							echo "</div>
 						<div id='collapse1' class='panel-collapse collapse'>
 						<ul class='list-group'>";	  
    
@@ -422,6 +438,7 @@ global $settings;
 </div>";
 
 	}	
+// ######################################################################################################
 			
 					
 					

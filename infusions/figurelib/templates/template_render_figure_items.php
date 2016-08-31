@@ -23,6 +23,8 @@ require_once INCLUDES."infusions_include.php";
 if (!defined("IN_FUSION")) { die("Access Denied"); }
 include INFUSIONS."figurelib/infusion_db.php";
 global $userdata;
+global $aidlink;
+$settings = fusion_get_settings();
 
 // ******************************************************************************************			
 // FIGURE
@@ -74,10 +76,21 @@ $result = dbquery(
 // IMAGES ####################################################################################	
 	$fil_settings = get_settings("figurelib");
 	if ($fil_settings['figure_show_images_global']) { // show images global on/off ???
+	
 		if ($data['figure_show_images']) { // show images for this figure on/off ???
 			
-			//openside("<div class='well clearfix'><strong></strong>&nbsp;&nbsp;<a href='".INFUSIONS."figurelib/figures.php?figure_id=".$data['figure_id']."'>".trimlink($data['figure_title'], 23)." (".trimlink($data['figure_manufacturer_name'], 23).") [".$data['figure_pubdate']."]</a></div>");
 			openside("");
+			
+			// TITLE LINE WITH ADMIN EDIT DIRECT LINK			
+			echo "<div class='well clearfix text-bold'><span>".trimlink($data['figure_title'], 23)." (".trimlink($data['figure_manufacturer_name'], 23).") [".$data['figure_pubdate']."]</span>";
+			
+							if (iADMIN || iSUPERADMIN) {
+								
+								global $aidlink;					
+								echo " <a class='fa fa-cog pull-right'  href='".INFUSIONS."figurelib/admin.php".$aidlink."&amp;section=figurelib_form&amp;action=edit&amp;figure_id=".intval($_GET['figure_id'])."'></a>&nbsp;";
+							}										
+			echo"</div>";
+			
 
 			// Figure ID
 			$figure_id = $data['figure_id'];
@@ -175,7 +188,17 @@ $result = dbquery(
 		closeside();		
 		
 		}
+	} else {
+		global $aidlink;
+		if (iADMIN || iSUPERADMIN) {
+			// ['figure_1819'] = "Modul IMAGES global deactivated!";
+			// ['mc_0012']= "HERE";			
+			openside("<div class='well clearfix'><strong>IMAGES</strong></div>");
+			echo "<div class='alert alert-default'><i class='fa fa-bolt fa-vtop'></i>\n".$locale['figure_1819']." <a href='".INFUSIONS."figurelib/admin.php".$aidlink."&amp;section=figurelib_settings'>".$locale['mc_0012']."</a></div>";
+			closeside();
+		}
 	}
+			
 // ###########  IMAGES ENDE      ##############################################################	
 
 
@@ -547,21 +570,37 @@ if ($fil_settings['figure_show_data_global']) { // show figure data global on/of
 						}		
 
 		}
+	} else {
+		
+		global $aidlink;
+		if (iADMIN || iSUPERADMIN) {
+			// ['figure_1821'] = "Admin Message: Modul VIDEO global deactivated! Activate ";
+			// ['mc_0012']= "HERE";			
+			openside("<div class='well clearfix'><strong>VIDEOS</strong></div>");
+			echo "<div class='alert alert-default'><i class='fa fa-bolt fa-vtop'></i>\n".$locale['figure_1821']." <a href='".INFUSIONS."figurelib/admin.php".$aidlink."&amp;section=figurelib_settings'>".$locale['mc_0012']."</a></div>";
+			closeside();
+		}
 	}
+	
 // ###### VIDEO END ###############################################################################
-
-
-			
 		
 closeside();
 
-
+		}
+	} else {
+		global $aidlink;
+		if (iADMIN || iSUPERADMIN) {
+			// ['figure_1820'] = "Admin Message: Modul FIGURE DATA global deactivated!";
+			// ['mc_0012']= "HERE";			
+			openside("<div class='well clearfix'><strong>FIGURE DATA</strong></div>");
+			echo "<div class='alert alert-default'><i class='fa fa-bolt fa-vtop'></i>\n".$locale['figure_1820']." <a href='".INFUSIONS."figurelib/admin.php".$aidlink."&amp;section=figurelib_settings'>".$locale['mc_0012']."</a></div>";
+			closeside();
 		}
 	}
-
+		
 // ############################################################################################	
 	
-
+/*
 // ###### LINK FOR ADMINS TO EDIT THE FIGURE ##################################################
 if (iADMIN || iSUPERADMIN) {
 
@@ -576,9 +615,9 @@ if (iADMIN || iSUPERADMIN) {
 	closeside();		
 }
 // ############################################################################################	
+*/
 
 // ########  AFFILIATE PANEL  #################################################################
-
 		
 if ($fil_settings['figure_show_affiliates_complete_global']) { // Affiliates Complete global on/off ??? 
         if (
@@ -674,7 +713,19 @@ if ($fil_settings['figure_show_affiliates_complete_global']) { // Affiliates Com
                                 }
                             echo "</div>\n";                                
                     }
-            }
+            } else {
+							global $aidlink;
+							if (iADMIN || iSUPERADMIN) {
+								// $locale['figure_1822a'] = "Admin Message: Modul AFFILIATES OTHER global deactivated! Activate ";
+								// ['mc_0012']= "HERE";			
+								openside("<div class='well clearfix'><strong>AFFILIATES OTHER</strong></div>");
+								echo "<div class='alert alert-default'><i class='fa fa-bolt fa-vtop'></i>\n".$locale['figure_1822a']." <a href='".INFUSIONS."figurelib/admin.php".$aidlink."&amp;section=figurelib_settings'>".$locale['mc_0012']."</a></div>";
+								closeside();
+							}
+						}
+			
+			
+			
 
             if ($fil_settings['figure_show_amazon_global']) { // Amazon Affiliates global on/off ???
                     if ($data['figure_show_amazon']) { // Amazon Affiliates for this figure on/off ???
@@ -738,13 +789,34 @@ if ($fil_settings['figure_show_affiliates_complete_global']) { // Affiliates Com
                             echo "</div>\n";
 
                     }
-            }
+            } else {
+						global $aidlink;
+						if (iADMIN || iSUPERADMIN) {
+							// ['figure_1822b'] = "Admin Message: Modul AFFILIATES AMAZON global deactivated! Activate ";
+							// ['mc_0012']= "HERE";			
+							openside("<div class='well clearfix'><strong>AFFILIATES AMAZON</strong></div>");
+							echo "<div class='alert alert-default'><i class='fa fa-bolt fa-vtop'></i>\n".$locale['figure_1822b']." <a href='".INFUSIONS."figurelib/admin.php".$aidlink."&amp;section=figurelib_settings'>".$locale['mc_0012']."</a></div>";
+							closeside();
+						}
+					}
+					
             echo "</div>\n";
             echo "</div>\n";
             echo "</div>\n";
             closeside();    
         }
-    }
+    } else {
+		
+		global $aidlink;
+		if (iADMIN || iSUPERADMIN) {
+			// ['figure_1822'] = "Admin Message: Modul AFFILIATES global deactivated! Activate ";
+			// ['mc_0012']= "HERE";			
+			 openside("<div class='well clearfix text-uppercase text-bold'>".$locale['figure_191']."</strong></div>");
+			echo "<div class='alert alert-default'>\n".$locale['figure_1822']." <a href='".INFUSIONS."figurelib/admin.php".$aidlink."&amp;section=figurelib_settings'>".$locale['mc_0012']."</a></div>";
+			closeside();
+		}
+	}
+	
 
 // ############################################################################################
 				
@@ -756,7 +828,7 @@ if ($fil_settings['figure_show_affiliates_complete_global']) { // Affiliates Com
 if ($fil_settings['figure_show_collection_global']) { // show collection global on/off ???
 		if ($data['figure_show_collection']) { // show figure collection  for this figure on/off ???	
 			
-	openside("<div class='well clearfix text-bold'>".$locale['userfigure_005']."</div>");
+	openside("<div class='well clearfix text-uppercase text-bold'>".$locale['userfigure_007']."</div>");
 	echo figures_displayMyCollectionForm($data['figure_id'], FUSION_REQUEST, "big");
 
 // ########### 	LIST OF ALL USER WHERE HAVE THIS FIGURE  ######################################				
@@ -790,7 +862,18 @@ global $userdata;
 		}	
 closeside();
 		}
+	} else {
+		
+		global $aidlink;
+		if (iADMIN || iSUPERADMIN) {
+			// ['figure_1825'] = "Admin Message: Modul MYCOLLECTION global deactivated! Activate ";
+			// ['mc_0012']= "HERE";			
+			openside("<div class='well clearfix text-uppercase text-bold'>".$locale['userfigure_007']."</div>");
+			echo "<div class='alert alert-default'><i class='fa fa-bolt fa-vtop'></i>\n".$locale['figure_1825']." <a href='".INFUSIONS."figurelib/admin.php".$aidlink."&amp;section=figurelib_settings'>".$locale['mc_0012']."</a></div>";
+			closeside();
+		}
 	}
+	
 			echo "</div>\n";
 	echo "</div>\n";
 // ############################################################################################
@@ -829,16 +912,16 @@ echo "<div class='row'>\n";
                         echo "<div class='row'>\n";
 
                             echo "<div class='col-lg-3 col-md-3 col-sm-12 col-xs-12'>\n";
-                            echo "<div class=''>".$locale['figure_411']."</div>\n";
+                            echo "<div class='text-bold'>".$locale['figure_411']."</div>\n";
                             echo "</div>\n";
                             echo "<div class='col-lg-3 col-md-3 col-sm-12 col-xs-12'>\n";
-                            echo "<div class=''>".$locale['figure_417']."</div>\n";
+                            echo "<div class='text-bold'>".$locale['figure_417']."</div>\n";
                             echo "</div>\n";        
                             echo "<div class='col-lg-3 col-md-3 col-sm-12 col-xs-12'>\n";
-                            echo "<div class=''>".$locale['figure_413']."</div>\n";
+                            echo "<div class='text-bold'>".$locale['figure_413']."</div>\n";
                             echo "</div>\n";
                             echo "<div class='col-lg-3 col-md-3 col-sm-12 col-xs-12'>\n";
-                            echo "<div class=''>".$locale['figure_418']."</div>\n";                         
+                            echo "<div class='text-bold'>".$locale['figure_418']."</div>\n";                         
                             echo "</div>\n";
 
                         echo "</div>\n";
@@ -849,11 +932,10 @@ echo "<div class='row'>\n";
                             $rating = ($num_votes > 0 ? str_repeat("<img src='".INFUSIONS."figurelib/images/starsmall.png'>",ceil($drating['sum_rating']/$num_votes)) : "-");
                             $cell_color = ($i % 2 == 0 ? "tbl1" : "tbl2"); $i++;
 
-
                         echo "<div class='row'>\n";
 
                             echo "<div class='col-lg-3 col-md-3 col-sm-12 col-xs-12'>\n";
-                            echo "<a href='figures.php?figure_id=".$data3['figure_id']."' title='".$data3['figure_title']."'>".$data3['figure_title']."</a></div>\n";
+                            echo "<a href='figures.php?figure_id=".$data3['figure_id']."' title='".$data3['figure_title']."'>".trimlink($data3['figure_title'],15)."</a></div>\n";
 
                             echo "<div class='col-lg-3 col-md-3 col-sm-12 col-xs-12'>".trimlink($data3['figure_manufacturer_name'],10)."</div>\n";
                             echo "<div class='col-lg-3 col-md-3 col-sm-12 col-xs-12'>".$data3['figure_cat_name']."</div>\n";
@@ -867,7 +949,18 @@ echo "<div class='row'>\n";
                     }
         closeside();                                        
         }
-    }
+    } else {
+		
+		global $aidlink;
+		if (iADMIN || iSUPERADMIN) {
+			// ['figure_1826'] = "Admin Message: Modul RELATED FIGURES global deactivated! Activate ";
+			// ['mc_0012']= "HERE";			
+			openside("<div class='well clearfix text-uppercase text-bold'>".$locale['figure_425']."</div>");   
+			echo "<div class='alert alert-default'><i class='fa fa-bolt fa-vtop'></i>\n".$locale['figure_1826']." <a href='".INFUSIONS."figurelib/admin.php".$aidlink."&amp;section=figurelib_settings'>".$locale['mc_0012']."</a></div>";
+			closeside();
+		}
+	}
+	
             echo "</div>\n";
     echo "</div>\n";
 	
@@ -884,13 +977,34 @@ echo "<div class='row'>\n";
 					showcomments("FI", DB_FIGURE_ITEMS, "figure_id", $_GET['figure_id'], INFUSIONS."figurelib/figures.php?figure_id=".$_GET['figure_id']);
 				closeside();
 			}
-	}
+	} else {
+		
+		global $aidlink;
+		if (iADMIN || iSUPERADMIN) {
+			// ['figure_1823'] = "Admin Message: Modul COMMENTS global deactivated! Activate ";
+			// ['mc_0012']= "HERE";			
+			openside("<div class='well clearfix'><strong>COMMENTS</strong></div>");	
+			echo "<div class='alert alert-default'><i class='fa fa-bolt fa-vtop'></i>\n".$locale['figure_1823']." <a href='".INFUSIONS."figurelib/admin.php".$aidlink."&amp;section=figurelib_settings'>".$locale['mc_0012']."</a></div>";
+			closeside();
+		}
+	}	
+	
 	if ($fil_settings['figure_show_ratings_global']) { // Ratings	global on/off ???		
 			if ($data['figure_show_ratings']) { // Rating for this figure on /off ???
 				openside("<div class='well clearfix'><strong>RATINGS</strong></div>");
 					showratings("FI", $_GET['figure_id'], INFUSIONS."figurelib/figures.php?figure_id=".$_GET['figure_id']);
 				closeside();
 			}
+	} else {
+		
+		global $aidlink;
+		if (iADMIN || iSUPERADMIN) {
+			// ['figure_1823'] = "Admin Message: Modul COMMENTS global deactivated! Activate ";
+			// ['mc_0012']= "HERE";						
+			openside("<div class='well clearfix'><strong>RATINGS</strong></div>");
+			echo "<div class='alert alert-default'><i class='fa fa-bolt fa-vtop'></i>\n".$locale['figure_1824']." <a href='".INFUSIONS."figurelib/admin.php".$aidlink."&amp;section=figurelib_settings'>".$locale['mc_0012']."</a></div>";
+			closeside();
+		}
 	}
 	
 			echo "</div>\n";
@@ -901,7 +1015,8 @@ echo "<div class='row'>\n";
 	if ($fil_settings['figure_show_social_sharing_global']) { // social_sharing	global on/off ???
 			if ($data['figure_show_social_sharing']) { // social_sharing for this figure on/off ???						
 
-						openside("<div class='well clearfix'><strong>SOCIAL SHARING</strong></div>");	
+						openside("<div class='well clearfix'><strong>SOCIAL SHARING</strong></div>");
+			$settings = fusion_get_settings();						
 							echo "<div style='text-align:center'>\n";
 							$link = $settings['siteurl'].str_replace("../","",INFUSIONS)."figurelib/figure.php?figure_id=".$_GET['figure_id'];
 							echo "<a href='http://www.facebook.com/share.php?u=".$link."' target='_blank'><img alt='Facebook' src='".INFUSIONS."figurelib/images/facebook.png' border='0'></a>&nbsp;\n";
@@ -911,8 +1026,21 @@ echo "<div class='row'>\n";
 							echo "<a href='http://del.icio.us/post?url=".$link."' target='_blank'><img alt='Del.icio.us' src='".INFUSIONS."figurelib/images/delicious.png' border='0'></a>&nbsp;\n";
 							echo "</div>\n";
 						closeside();
+
 		}	
-	}
+	} else {
+		
+		global $aidlink;
+		if (iADMIN || iSUPERADMIN) {
+			// ['figure_1827'] = "Admin Message: Modul SOCIAL SHARING global deactivated! Activate ";
+			// ['mc_0012']= "HERE";		
+			openside("<div class='well clearfix'><strong>SOCIAL SHARING</strong></div>");	
+			echo "<div class='alert alert-default'><i class='fa fa-bolt fa-vtop'></i> ".$locale['figure_1827']." <a href='".INFUSIONS."figurelib/admin.php".$aidlink."&amp;section=figurelib_settings'>".$locale['mc_0012']."</a></div>";
+			closeside();
+	
+		}
+	}	
+	
 // ############################################################################################		
 
 	} 				// TO LINE 75
