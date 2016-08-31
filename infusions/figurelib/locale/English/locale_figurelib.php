@@ -2,6 +2,7 @@
 $locale['comma'] = ",";
 $locale['yes'] = "YES";
 $locale['no'] = "NO";
+$locale['yours']= "Your Figures";	
 
 // infusion.php
 $locale['INF_TITLE'] = "Figures Library";
@@ -343,7 +344,6 @@ $locale['figure_186'] = " to go to Figure Packagings";
 $locale['figure_187'] = " to go to Figure Limitations";
 $locale['figure_188'] = " to go to Figure Settings";
 $locale['figure_189'] = " to go to Figure Submissions";
-
 $locale['figure_190'] = "Admin Option";
 $locale['figure_191'] = "Affiliates";
 
@@ -397,7 +397,6 @@ $locale['figure_371'] = "Images";
 $locale['figure_372'] = "Data";
 $locale['figure_373'] = "Collection";
 $locale['figure_374'] = "Affiliate ON/OFF";
-
 $locale['figure_375'] = "Global General Settings";
 $locale['figure_376'] = "Global Modules ON/OFF";
 $locale['figure_377'] = "Global Figure Image Settings";
@@ -434,7 +433,6 @@ $locale['figure_434'] = "Report a dead link";
 $locale['figure_435'] = "Are you sure to report dead link?";
 $locale['figure_436'] = "Country";
 $locale['figure_437'] = "On:";
-
 $locale['figure_438'] = "Brand";
 $locale['figure_439'] = "Series";
 $locale['figure_441'] = "Variant";
@@ -667,7 +665,6 @@ $locale['figure_1350'] = "Delete this download Point of Articulation?";
 
 // 1400 FREI
 
-
 // figure_packaging.php
 $locale['figure_1500'] = "Edit Figure Type Packaging";
 $locale['figure_1501'] = "Add Figure Type Packaging";
@@ -738,7 +735,6 @@ $locale['figure_1709'] = "Deleting not possible .. one or more user have this fi
 $locale['figure_1710'] = "There are no Figures in this Category!";
 $locale['figure_1711'] = "There are no Manufacturers or Figures in this Category!";
 
-
 //HELP TEXTS
 $locale['figure_1800'] = "Please Select the Category";
 $locale['figure_1801'] = "Title/name of figure (Original Name of figure!)";
@@ -766,19 +762,16 @@ $locale['figure_1821'] = "Admin Message: Modul VIDEO global deactivated! Activat
 $locale['figure_1822'] = "Admin Message: Modul AFFILIATES global deactivated! Activate ";
 $locale['figure_1822a'] = "Admin Message: Modul AFFILIATES OTHER global deactivated! Activate ";
 $locale['figure_1822b'] = "Admin Message: Modul AFFILIATES AMAZON global deactivated! Activate ";
-
 $locale['figure_1823'] = "Admin Message: Modul COMMENTS global deactivated! Activate ";
 $locale['figure_1824'] = "Admin Message: Modul RATINGS global deactivated! Activate ";
 $locale['figure_1825'] = "Admin Message: Modul MYCOLLECTION global deactivated! Activate ";
 $locale['figure_1826'] = "Admin Message: Modul RELATED FIGURES global deactivated! Activate ";
 $locale['figure_1827'] = "Admin Message: Modul SOCIAL SHARING global deactivated! Activate ";
-
 $locale['figure_1828'] = "Submitting";
 $locale['figure_1829'] = "Show on Page";
 $locale['figure_1830'] = "Set on Pending";
 $locale['figure_1831'] = "Hide Figure";
 $locale['figure_1832'] = "For Deleting";
-
 
 // Error Messages
 $locale['figurelib-error-101'] = "You must specify a Name.";
@@ -899,17 +892,15 @@ $locale['admin_figurelib_settings.php_005'] = "Maximum photo size:";
 $locale['admin_figurelib_settings.php_006'] = "Width x Height";
 $locale['admin_figurelib_settings.php_007'] = "Maximum file size (bytes):";	
 $locale['admin_figurelib_settings.php_008'] = "Thumb ratio:";
-
 $locale['admin_figurelib_settings.php_009'] = "Thumb2 size:";
 $locale['admin_figurelib_settings.php_010'] = "Thumb2 ratio:";
-
 $locale['admin_figurelib_settings.php_011'] = "Thumb Category size:";
 $locale['admin_figurelib_settings.php_012'] = "Thumb Category ratio:";
-
 $locale['admin_figurelib_settings.php_013'] = "Maximum photo Category size:";
 $locale['admin_figurelib_settings.php_014'] = "Maximum photo Manufacturer size:";
 $locale['admin_figurelib_settings.php_015'] = "Thumb Manufacturer size:";
 
+// notification
 $locale['notification-101'] = "You must specify a Subject if you activate Notifications.";
 $locale['notification-102'] = "You must specify a Message if you activate Notifications.";
 $locale['notification-103'] = "Deactivated";
@@ -920,7 +911,6 @@ $locale['notification-107'] = "Notification";
 $locale['notification-108'] = "Subject";
 $locale['notification-109'] = "Message";
 $locale['notification-110'] = "Insert the Keyword {FIGURELINK} for a direct Link for editing a Figure in Adminarea.";
-
 
 // LOCALE FÜR MITTELPANELE UND MYCOLLECTION
 $locale['CLFP_000']= "Alien Figures Database";
@@ -952,10 +942,6 @@ $locale['CLFP_025']= "The figure, which most be in the user's possession";
 $locale['CLFP_026']= "Highest usedprice";
 $locale['CLFP_027']= "Highest retailprice";
 
-
-
-$locale['yours']= "Your Figures";	
-
 // mycollection
 $locale['mc_0001']= "My Figure Collection";
 $locale['mc_0002']= "Collection Count:";
@@ -970,9 +956,6 @@ $locale['mc_0010']= "Sorry, You have no figures :(";
 $locale['mc_0011']= "This feature is only available for registered members. Please Sign up ";
 $locale['mc_0012']= "HERE";	
 $locale['mc_0013']= "Collection Value:";	
-
-
-
 
 // ####### USERFIGURES  
 $locale['userfigure_001'] ="Add to collection";
