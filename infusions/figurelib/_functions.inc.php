@@ -15,6 +15,16 @@ add_to_head("
 	max-height: ".$figurelibSettings['figure_thumb2_h']."px !important;
 }
 </style>");
+
+// jQuery
+add_to_footer("
+<script type='text/javascript'>
+$(function() {
+    $('button[name=\"remove_figure\"]').click(function(){
+        return confirm('Do you really want to delete this Figure from your Collection?');
+    });
+});
+</script>");
 	
 // Hande MyCollection Actions
 if (iMEMBER) {
@@ -246,6 +256,7 @@ if (!@function_exists("figures_getImagePath")) {
 						figure_images_image_id
 					FROM ".DB_FIGURE_IMAGES." 
 					WHERE figure_images_figure_id='".$itemID."'
+					ORDER BY figure_images_toppic DESC
 					".($counter != "all" ? " LIMIT 0,".$counter."" : "")."
 				");
 				
@@ -263,7 +274,7 @@ if (!@function_exists("figures_getImagePath")) {
 				
 			// Get a single Image for a Figure 
 			case "figure":
-				$result = dbquery("SELECT figure_images_image, figure_images_thumb, figure_images_thumb2 FROM ".DB_FIGURE_IMAGES." WHERE figure_images_figure_id='".$itemID."' LIMIT 0,1");
+				$result = dbquery("SELECT figure_images_image, figure_images_thumb, figure_images_thumb2 FROM ".DB_FIGURE_IMAGES." WHERE figure_images_figure_id='".$itemID."' ORDER BY figure_images_toppic DESC LIMIT 0,1");
 				if (dbrows($result)) {
 					$data = dbarray($result); $imgPath = false;
 		
@@ -304,7 +315,7 @@ if (!@function_exists("figures_getImagePath")) {
 				
 			// Give a Image with ID as Array back
 			case "figure-array":
-				$result = dbquery("SELECT figure_images_image, figure_images_thumb, figure_images_thumb2 FROM ".DB_FIGURE_IMAGES." WHERE figure_images_image_id='".$itemID."' LIMIT 0,1");
+				$result = dbquery("SELECT figure_images_image, figure_images_thumb, figure_images_thumb2, figure_images_toppic FROM ".DB_FIGURE_IMAGES." WHERE figure_images_image_id='".$itemID."' LIMIT 0,1");
 				if (dbrows($result)) {
 					$data = dbarray($result); $imgPath = false;
 		
@@ -338,7 +349,7 @@ if (!@function_exists("figures_getImagePath")) {
 						$imgPath = INFUSIONS."figurelib/images/default.png";
 					}
 					
-					return ["id" => $itemID, "image" => $imgPath];
+					return ["id" => $itemID, "image" => $imgPath, "toppic" => $data['figure_images_toppic']];
 				}
 				break;
 			
@@ -353,12 +364,14 @@ if (!@function_exists("figures_getCountryName")) {
 		// Get Array with all Countries
 		$countries = array();
 		require_once INCLUDES."geomap/geomap.inc.php";
-	
+		$countries = array_merge(["Unknown"], $countries);
+		
 		// Check if Country exists
 		if (isset($countries[$countryID])) {
 			return $countries[$countryID];
 		} else {
-			return "Sorry! We don't know this Country.";
+			//return "Sorry! We don't know this Country.";
+			return "Unknown";
 		}
 	}
 }

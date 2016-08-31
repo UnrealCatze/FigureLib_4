@@ -72,8 +72,7 @@ $figure_id = ($figure_edit) ? intval($_GET['figure_id']) : 0;
 		$master_title['title'][] = $locale['filt_0003']; 
 		$master_title['id'][] = 'figurelib';
 		$master_title['icon'] = '';
-		
-		
+				
 		// ['filt_0002'] = "Edit Figures";
 		// ['filt_0001'] = "Add Figures";
 		$master_title['title'][] = $figure_edit ? $locale['filt_0002'] : $locale['filt_0001']; 
@@ -315,9 +314,7 @@ $result = dbquery("
 				echo "<div style='line-height: 60px'>";
 		
 					while ($data = dbarray($result)) {
-			
-
- 	
+				
 						// COLUMN 1 (image clickable)
 							echo "<div class='col-lg-1 hidden-md hidden-sm hidden-xs'>\n";
 								echo "<div class='side-small figurelib-inforow-height'><a href='".INFUSIONS."figurelib/figures.php?figure_id=".$data['figure_id']."'>\n<img src='".figures_getImagePath("figure", "thumb2", $data['figure_id'])."' alt='".$locale['CLFP_002']." : ".$data['figure_title']."' title='".$locale['CLFP_002']." : ".$data['figure_title']."' /></a>";

@@ -1,4 +1,4 @@
-^<?php
+<?php
 /*-------------------------------------------------------+
 | PHP-Fusion Content Management System
 | Copyright © 2002 - 2011 Nick Jones
@@ -133,6 +133,19 @@ $inf_newtable[] = DB_FIGURE_ITEMS." (
 $inf_newtable[] = DB_FIGURE_MANUFACTURERS." (
 		figure_manufacturer_id MEDIUMINT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
 		figure_manufacturer_name VARCHAR(100) NOT NULL DEFAULT '',
+		figure_manufacturer_url VARCHAR(255) NOT NULL DEFAULT '',
+		figure_manufacturer_email VARCHAR(255) NOT NULL DEFAULT '',
+		figure_manufacturer_facebook VARCHAR(255) NOT NULL DEFAULT '',
+		figure_manufacturer_twitter VARCHAR(255) NOT NULL DEFAULT '',
+		figure_manufacturer_youtube VARCHAR(255) NOT NULL DEFAULT '',
+		figure_manufacturer_pinterest VARCHAR(255) NOT NULL DEFAULT '',
+		figure_manufacturer_instagram VARCHAR(255) NOT NULL DEFAULT '',
+		figure_manufacturer_googleplus VARCHAR(255) NOT NULL DEFAULT '',
+		figure_manufacturer_affiliate_program TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
+		figure_manufacturer_affiliate_url VARCHAR(255) NOT NULL DEFAULT '',
+		figure_manufacturer_affiliate_code VARCHAR(255) NOT NULL DEFAULT '',
+		figure_manufacturer_info_admin TEXT NOT NULL,
+		figure_manufacturer_address TEXT NOT NULL,
 		figure_manufacturer_description TEXT NOT NULL,
 		figure_manufacturer_parent MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
 		figure_manufacturer_image VARCHAR(255) NOT NULL DEFAULT '',
@@ -289,15 +302,15 @@ $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_
 //all other photo seetings
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_photo_w', '800', 'figurelib')";
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_photo_h', '600', 'figurelib')";
-$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_photo_max_w', '1800', 'figurelib')";
-$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_photo_max_h', '1600', 'figurelib')";
-$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_photo_max_b', '500000', 'figurelib')";
+$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_photo_max_w', '3600', 'figurelib')";
+$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_photo_max_h', '3200', 'figurelib')";
+$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_photo_max_b', '5000000', 'figurelib')";
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_photo_cat_max_w', '1800', 'figurelib')";
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_photo_cat_max_h', '1600', 'figurelib')";
-$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_photo_cat_max_b', '500000', 'figurelib')";
+$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_photo_cat_max_b', '5000000', 'figurelib')";
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_photo_man_max_w', '1800', 'figurelib')";
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_photo_man_max_h', '1600', 'figurelib')";
-$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_photo_man_max_b', '500000', 'figurelib')";
+$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_photo_man_max_b', '5000000', 'figurelib')";
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES('figure_image_upload_count', '10', 'figurelib')";
 
 // notifications seetings
@@ -496,122 +509,145 @@ $inf_insertdbrow[] = DB_FIGURE_MATERIALS." (figure_material_id, figure_material_
 (21, 'Vinyl', '', 'figure_id ASC')
 ";
 /////////////////////////////////////////////////////////////////////////////////
-$inf_insertdbrow[] = DB_FIGURE_MANUFACTURERS." (figure_manufacturer_id, figure_manufacturer_name, figure_manufacturer_description, figure_manufacturer_sorting) VALUES
-(1, 'Unknown', '', 'figure_id ASC'),
-(2, 'Alien Enterprise', '', 'figure_id ASC'),
-(3, 'Anatomic Monster', '', 'figure_id ASC'),
-(4, 'Aoshima / Skynet', '', 'figure_id ASC'),
-(5, 'AMT / ERTL', '', 'figure_id ASC'),
-(6, 'Art Storm', '', 'figure_id ASC'),
-(7, 'AEF Designs', '', 'figure_id ASC'),
-(8, 'Attakus', '', 'figure_id ASC'),
-(9, 'Bandai', '', 'figure_id ASC'),
-(10, 'Billiken', '', 'figure_id ASC'),
-(11, 'Black Label Modelz', '', 'figure_id ASC'),
-(12, 'Black Heart Enterprise', '', 'figure_id ASC'),
-(13, 'Bonapart Models', '', 'figure_id ASC'),
-(14, 'CoolProps', '', 'figure_id ASC'),
-(15, 'Cinemaquette', '', 'figure_id ASC'),
-(16, 'Cyper Model (Thailand Recasts Ebay)', '', 'figure_id ASC'),
-(17, 'Dark Horse', '', 'figure_id ASC'),
-(18, 'Dewar', '', 'figure_id ASC'),
-(19, 'Diamond Select', '', 'figure_id ASC'),
-(20, 'Diamond Select --> Sub  Art Asylum', '', 'figure_id ASC'),
-(21, 'Dimensional Designs', '', 'figure_id ASC'),
-(22, 'Distortions Studios', '', 'figure_id ASC'),
-(23, 'Elfin', '', 'figure_id ASC'),
-(24, 'Fewture Models', '', 'figure_id ASC'),
-(25, 'Franklin Mint Alien', '', 'figure_id ASC'),
-(26, 'Funko / Super 7', '', 'figure_id ASC'),
-(27, 'Furyu', '', 'figure_id ASC'),
-(28, 'Galoob', '', 'figure_id ASC'),
-(29, 'Gentle Giant', '', 'figure_id ASC'),
-(30, 'GEM Reproductions', '', 'figure_id ASC'),
-(31, 'Geometric Design', '', 'figure_id ASC'),
-(32, 'GF9 (GaleForce9 ) (Wizkids Horrorclix)', '', 'figure_id ASC'),
-(33, 'Good Smile Company', '', 'figure_id ASC'),
-(34, 'Gort Japan', '', 'figure_id ASC'),
-(35, 'Grey Zon Sculpture Lab', '', 'figure_id ASC'),
-(36, 'Henry Alvarez', '', 'figure_id ASC'),
-(37, 'Herocross', '', 'figure_id ASC'),
-(38, 'Hollywood Collectibles Group', '', 'figure_id ASC'),
-(39, 'Hollywood Collectors Gallery', '', 'figure_id ASC'),
-(40, 'Halcyon', '', 'figure_id ASC'),
-(41, 'Hallmark', '', 'figure_id ASC'),
-(42, 'Heartilysir', '', 'figure_id ASC'),
-(43, 'Hasbro Toys', '', 'figure_id ASC'),
-(44, 'Chinese Companies OGRM Manufacturing', '', 'figure_id ASC'),
-(45, 'Hiya Toys', '', 'figure_id ASC'),
-(46, 'Horizon', '', 'figure_id ASC'),
-(47, 'Horrorclix (Wizkids)', '', 'figure_id ASC'),
-(48, 'Hot Toys', '', 'figure_id ASC'),
-(49, 'Insight Collectibles', '', 'figure_id ASC'),
-(50, 'Inkworks', '', 'figure_id ASC'),
-(51, 'Jayco', '', 'figure_id ASC'),
-(52, 'JS Resines', '', 'figure_id ASC'),
-(53, 'Kaiyodo', '', 'figure_id ASC'),
-(54, 'Kenner', '', 'figure_id ASC'),
-(55, 'Kobyoshi Kits', '', 'figure_id ASC'),
-(56, 'Konami', '', 'figure_id ASC'),
-(57, 'Kotobukiya', '', 'figure_id ASC'),
-(58, 'Leading Edge Games', '', 'figure_id ASC'),
-(59, 'Lil Monsters', '', 'figure_id ASC'),
-(60, 'Mannetron', '', 'figure_id ASC'),
-(61, 'Marmit', '', 'figure_id ASC'),
-(62, 'Master Replicas', '', 'figure_id ASC'),
-(63, 'McFarlane', '', 'figure_id ASC'),
-(64, 'Medicom Toy', '', 'figure_id ASC'),
-(65, 'Mental Mischief', '', 'figure_id ASC'),
-(66, 'Model Kits', '', 'figure_id ASC'),
-(67, 'Model Giant', '', 'figure_id ASC'),
-(68, 'Modulart', '', 'figure_id ASC'),
-(69, 'Monsters.net', '', 'figure_id ASC'),
-(70, 'Morbid Model', '', 'figure_id ASC'),
-(71, 'Morpheus International', '', 'figure_id ASC'),
-(72, 'Multiverse Studio', '', 'figure_id ASC'),
-(73, 'MPC / Round2 Models', '', 'figure_id ASC'),
-(74, 'Narin Naward Productions Modelmagic5', '', 'figure_id ASC'),
-(75, 'Neca', '', 'figure_id ASC'),
-(76, 'Nexus', '', 'figure_id ASC'),
-(77, 'Ogawa Studio', '', 'figure_id ASC'),
-(78, 'Oyama', '', 'figure_id ASC'),
-(79, 'OZ Shop', '', 'figure_id ASC'),
-(80, 'Palisades', '', 'figure_id ASC'),
-(81, 'Polar Lights', '', 'figure_id ASC'),
-(82, 'Prodos Games', '', 'figure_id ASC'),
-(83, 'Psycho Monsterz', '', 'figure_id ASC'),
-(84, 'Real', '', 'figure_id ASC'),
-(85, 'Resin d etre', '', 'figure_id ASC'),
-(86, 'Revengemonst (Recasts)', '', 'figure_id ASC'),
-(87, 'Roswell Japan', '', 'figure_id ASC'),
-(88, 'Seahorse Models', '', 'figure_id ASC'),
-(89, 'Sega', '', 'figure_id ASC'),
-(90, 'Sideshow Collectibles', '', 'figure_id ASC'),
-(91, 'Sky W', '', 'figure_id ASC'),
-(92, 'Sota', '', 'figure_id ASC'),
-(93, 'Spacecraft Creation Models', '', 'figure_id ASC'),
-(94, 'Super 7 / Secret Base', '', 'figure_id ASC'),
-(95, 'Squareenix', '', 'figure_id ASC'),
-(96, 'Star Pics', '', 'figure_id ASC'),
-(97, 'Takara', '', 'figure_id ASC'),
-(98, 'Takeya Takayuki', '', 'figure_id ASC'),
-(99, 'The Flying Gung Brothers', '', 'figure_id ASC'),
-(100, 'Time Slip', '', 'figure_id ASC'),
-(101, 'Titan Books', '', 'figure_id ASC'),
-(102, 'Titan Merchandise', '', 'figure_id ASC'),
-(103, 'ThreeB', '', 'figure_id ASC'),
-(104, 'Tsukuda Hobby', '', 'figure_id ASC'),
-(105, 'TOPPS', '', 'figure_id ASC'),
-(106, 'Upper Deck', '', 'figure_id ASC'),
-(107, 'Vision2 Art Media Store', '', 'figure_id ASC'),
-(108, 'Voodoo Babe', '', 'figure_id ASC'),
-(109, 'Wizart Studio', '', 'figure_id ASC'),
-(110, 'Wizkids', '', 'figure_id ASC'),
-(111, 'X-Plus', '', 'figure_id ASC'),
-(112, 'Yellow Pearl', '', 'figure_id ASC'),
-(113, '3dwizzard (also Wizart Studio)', '', 'figure_id ASC'),
-(114, '3rd Eye Design', '', 'figure_id ASC')
-";
+$inf_insertdbrow[] = DB_FIGURE_MANUFACTURERS." (
+figure_manufacturer_id,
+figure_manufacturer_name,
+figure_manufacturer_url,
+figure_manufacturer_email,
+figure_manufacturer_facebook,
+figure_manufacturer_twitter,
+figure_manufacturer_youtube,
+figure_manufacturer_pinterest,
+figure_manufacturer_instagram,
+figure_manufacturer_googleplus,
+figure_manufacturer_affiliate_program,
+figure_manufacturer_affiliate_url,
+figure_manufacturer_affiliate_code,
+figure_manufacturer_info_admin,
+figure_manufacturer_address,
+figure_manufacturer_description,
+figure_manufacturer_parent,
+figure_manufacturer_image,
+figure_manufacturer_thumb,
+figure_manufacturer_sorting,
+figure_manufacturer_language
+) 
+
+VALUES
+(1, 'Unknown', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(2, 'Alien Enterprise', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(3, 'Anatomic Monster', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(4, 'Aoshima / Skynet', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(5, 'AMT / ERTL', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(6, 'Art Storm', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(7, 'AEF Designs', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(8, 'Attakus', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(9, 'Bandai', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(10, 'Billiken', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(11, 'Black Label Modelz', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(12, 'Black Heart Enterprise', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(13, 'Bonapart Models', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(14, 'CoolProps', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(15, 'Cinemaquette', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(16, 'Cyper Model (Thailand Recasts Ebay)', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(17, 'Dark Horse', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(18, 'Dewar', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(19, 'Diamond Select', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(20, 'Diamond Select --> Sub  Art Asylum', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(21, 'Dimensional Designs', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(22, 'Distortions Studios', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(23, 'Elfin', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(24, 'Fewture Models', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(25, 'Franklin Mint Alien', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(26, 'Funko / Super 7', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(27, 'Furyu', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(28, 'Galoob', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(29, 'Gentle Giant', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(30, 'GEM Reproductions', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(31, 'Geometric Design', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(32, 'GF9 (GaleForce9 ) (Wizkids Horrorclix)', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(33, 'Good Smile Company', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(34, 'Gort Japan', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(35, 'Grey Zon Sculpture Lab', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(36, 'Henry Alvarez', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(37, 'Herocross', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(38, 'Hollywood Collectibles Group', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(39, 'Hollywood Collectors Gallery', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(40, 'Halcyon', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(41, 'Hallmark', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(42, 'Heartilysir', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(43, 'Hasbro Toys', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(44, 'Chinese Companies OGRM Manufacturing', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(45, 'Hiya Toys', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(46, 'Horizon', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(47, 'Horrorclix (Wizkids)', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(48, 'Hot Toys', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(49, 'Insight Collectibles', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(50, 'Inkworks', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(51, 'Jayco', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(52, 'JS Resines', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(53, 'Kaiyodo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(54, 'Kenner', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(55, 'Kobyoshi Kits', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(56, 'Konami', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(57, 'Kotobukiya', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(58, 'Leading Edge Games', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(59, 'Lil Monsters', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(60, 'Mannetron', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(61, 'Marmit', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(62, 'Master Replicas', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(63, 'McFarlane', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(64, 'Medicom Toy', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(65, 'Mental Mischief', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(66, 'Model Kits', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(67, 'Model Giant', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(68, 'Modulart', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(69, 'Monsters.net', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(70, 'Morbid Model', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(71, 'Morpheus International', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(72, 'Multiverse Studio', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(73, 'MPC / Round2 Models', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(74, 'Narin Naward Productions Modelmagic5', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(75, 'Neca', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(76, 'Nexus', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(77, 'Ogawa Studio', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(78, 'Oyama', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(79, 'OZ Shop', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(80, 'Palisades', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(81, 'Polar Lights', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(82, 'Prodos Games', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(83, 'Psycho Monsterz', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(84, 'Real', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(85, 'Resin d etre', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(86, 'Revengemonst (Recasts)', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(87, 'Roswell Japan', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(88, 'Seahorse Models', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(89, 'Sega', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(90, 'Sideshow Collectibles', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(91, 'Sky W', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(92, 'Sota', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(93, 'Spacecraft Creation Models', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(94, 'Super 7 / Secret Base', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(95, 'Squareenix', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(96, 'Star Pics', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(97, 'Takara', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(98, 'Takeya Takayuki', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(99, 'The Flying Gung Brothers', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(100, 'Time Slip', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(101, 'Titan Books', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(102, 'Titan Merchandise', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(103, 'ThreeB', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(104, 'Tsukuda Hobby', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(105, 'TOPPS', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(106, 'Upper Deck', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(107, 'Vision2 Art Media Store', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(108, 'Voodoo Babe', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(109, 'Wizart Studio', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(110, 'Wizkids', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(111, 'X-Plus', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(112, 'Yellow Pearl', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(113, '3dwizzard (also Wizart Studio)', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English'),
+(114, '3rd Eye Design', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'figure_id ASC','English')";
 /////////////////////////////////////////////////////////////////////////////////
 // always find and loop ALL languages
 $enabled_languages = makefilelist(LOCALE, ".|..", TRUE, "folders");
@@ -665,6 +701,8 @@ $enabled_languages = makefilelist(LOCALE, ".|..", TRUE, "folders");
 						'2', 
 						'".$language."'
 						)";
+					
+					
 					//WENN SUBMIT FI DANN IN CORE ÄNDERN
 					$mlt_insertdbrow[$language][] = DB_SITE_LINKS." (
 						link_name, 
@@ -727,7 +765,7 @@ $enabled_languages = makefilelist(LOCALE, ".|..", TRUE, "folders");
 						)";
 	}
 */
-// Automatic enable of the latest figures panel
+// AUTOMATIC ENABLE PANELS
 					$inf_insertdbrow[] = DB_PANELS." (
 						panel_name, 
 						panel_filename, 
@@ -741,21 +779,47 @@ $enabled_languages = makefilelist(LOCALE, ".|..", TRUE, "folders");
 						panel_url_list, 
 						panel_restriction
 						) VALUES(
-						'Latest figure panel', 
-						'latest_figures_center_panel', 
+						'FigureLib Center Panel', 
+						'figurelib_center_panel', 
 						'', 
 						'2', 
-						'2', 
+						'1', 
 						'file', 
 						'0', 
-						'0', 
+						'1', 
+						'1', 
+						'home.php', 
+						'2'
+						)";
+												
+					$inf_insertdbrow[] = DB_PANELS." (
+						panel_name, 
+						panel_filename, 
+						panel_content, 
+						panel_side, 
+						panel_order, 
+						panel_type, 
+						panel_access, 
+						panel_display, 
+						panel_status, 
+						panel_url_list, 
+						panel_restriction
+						) VALUES(
+						'FigureLib Admin Panel', 
+						'figurelib_admin_panel', 
+						'', 
+						'1', 
+						'1', 
+						'file', 
+						'-102', 
+						'1', 
 						'1', 
 						'', 
-						'0'
-						)";
-// so lange betaphase erstmal teilweise auskommentieren weil sond die ganzen submittings weg sind 
-// und alle mühesam per hand neu eingereicht werden müssen						
+						'3'
+						)";						
 						
+				
+					
 // Defuse cleaning	
 $inf_droptable[] = DB_FIGURE_CATS;
 $inf_droptable[] = DB_FIGURE_ITEMS;
@@ -777,5 +841,6 @@ $inf_deldbrow[] = DB_SITE_LINKS." WHERE link_url='infusions/figurelib/submit.php
 $inf_deldbrow[] = DB_SITE_LINKS." WHERE link_url='infusions/figurelib/mycollection.php'";
 $inf_deldbrow[] = DB_SITE_LINKS." WHERE link_url='infusions/figurelib/panels/figure_stats_panel.php'";
 $inf_deldbrow[] = DB_LANGUAGE_TABLES." WHERE mlt_rights='FI'";
-$inf_deldbrow[] = DB_PANELS." WHERE panel_filename='latest_figures_center_panel'";
 $inf_deldbrow[] = DB_SETTINGS_INF." WHERE settings_inf='figurelib'";
+$inf_deldbrow[] = DB_PANELS." WHERE panel_filename='figurelib_center_panel'";
+$inf_deldbrow[] = DB_PANELS." WHERE panel_filename='figurelib_admin_panel'";

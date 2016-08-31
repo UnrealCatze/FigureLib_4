@@ -44,20 +44,20 @@ opentable("<strong>".$locale['mc_0001']."</strong>");
 				echo "<div class='row'>\n";	
 									
 								// YOUR FIGURE COUNTER + YOUR LAST FIGURE 	
-								// echo "<div class='col-lg-4 col-md-4 col-sm-12 col-xs-12'>\n";
-								// echo "<div class='col-lg-2 col-md-2 col-sm-12 col-xs-12'>\n";
-								// echo "<div class='col-lg-4 col-md-4 col-sm-12 col-xs-12'>\n";
-								// echo "<div class='col-lg-2 col-md-2 col-sm-12 col-xs-12'>\n";	
+								// echo "<div class='col-lg-3 col-md-3 col-sm-12 col-xs-12'>\n";
+								// echo "<div class='col-lg-3 col-md-3 col-sm-12 col-xs-12'>\n";
+								// echo "<div class='col-lg-3 col-md-3 col-sm-12 col-xs-12'>\n";
+								// echo "<div class='col-lg-3 col-md-3 col-sm-12 col-xs-12'>\n";	
 								
 								// MY FIGURES COUNTER
-									echo "<div class='col-lg-4 col-md-4 col-sm-12 col-xs-12'>\n";
+									echo "<div class='col-lg-3 col-md-3 col-sm-12 col-xs-12'>\n";
 									echo "<div class='navbar-default text-bold'>";										
 									// ['mc_0007']= "Figure Counter: ";
 									echo $locale['mc_0007'];			
 									echo "</div>";
 									echo "</div>";
 						
-									echo "<div class='col-lg-2 col-md-2 col-sm-12 col-xs-12'>\n";				
+									echo "<div class='col-lg-3 col-md-3 col-sm-12 col-xs-12'>\n";				
 										echo "<button class='btn btn-primary btn-xs' type='button'><span class='badge'>".$count." / ".$total_rows."</button>\n";
 									echo "</div>";
 
@@ -95,16 +95,16 @@ opentable("<strong>".$locale['mc_0001']."</strong>");
 										if (dbrows($resultlast) != 0) {
 											while($data = dbarray($resultlast)){
 										
-												echo "<div class='col-lg-4 col-md-4 col-sm-12 col-xs-12'>\n";
+												echo "<div class='col-lg-3 col-md-3 col-sm-12 col-xs-12'>\n";
 													echo "<div class='navbar-default text-bold'>";													
 														//['mc_0009']= "Last figure: ";
 														echo "<div class='side-small'>".$locale['mc_0009']."</div>";
 													echo "</div>";
 												echo "</div>";												
 												
-												echo "<div class='col-lg-2 col-md-2 col-sm-12 col-xs-12'>\n";						
+												echo "<div class='col-lg-3 col-md-3 col-sm-12 col-xs-12'>\n";						
 													// TEXT ANZEIGEN
-													echo"<a href='".INFUSIONS."figurelib/figures.php?figure_id=".$data['figure_id']."' alt='".$data['figure_title']." [".$data['figure_manufacturer_name']."]' title='".trimlink($data['figure_title'],20)." [".$data['figure_manufacturer_name']."]'>".trimlink($data['figure_title'], 10)."</a>";
+													echo"<a href='".INFUSIONS."figurelib/figures.php?figure_id=".$data['figure_id']."' alt='".$data['figure_title']." [".$data['figure_manufacturer_name']."]' title='".trimlink($data['figure_title'],20)." [".$data['figure_manufacturer_name']."]'>".trimlink($data['figure_title'], 20)."</a>";
 													
 													// BILD ANZEIGEN
 													//echo "<div class='side-small figurelib-inforow-height'><a href='".INFUSIONS."figurelib/figures.php?figure_id=".$data['figure_id']."'>\n<img src='".figures_getImagePath("figure", "thumb2", $data['figure_id'])."' alt='".$locale['CLFP_002']." : ".$data['figure_title']."' title='".$locale['CLFP_002']." : ".$data['figure_title']."' /></a></div>";
