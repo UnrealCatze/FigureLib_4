@@ -28,6 +28,7 @@ $locale['LFS_0009']= "Brands";
 $locale['LFS_0010']= "Submits";
 $locale['LFS_0011']= "Images";
 $locale['LFS_0012']= "Settings";
+$locale['LFS_0013']= "Pendings";
 
 opensidex("<i class='fa fa-cog fa-vtop'> ".$locale['LFS_0001']."</i>");
 
@@ -96,8 +97,16 @@ opensidex("<i class='fa fa-cog fa-vtop'> ".$locale['LFS_0001']."</i>");
 						
 						//Alternative: <span class='badge badge-success badge-xs pull-right'>0</span>
 									
-					} 			
+					} 
+
+				// ['LFS_0013']= "Pendings";						
+				echo "<li><a class='side' href='".INFUSIONS."figurelib/admin.php".$aidlink."&amp;section=figurelib_pendings'>".$locale['LFS_0013']." ";	
 					
+				$pendings = dbcount("(figure_id)", DB_FIGURE_ITEMS, "figure_freigabe='2'");	
+					
+				echo "<span class='label label-info pull-right'>".$pendings."</span></a>\n";	
+					
+		
 				// ['LFS_0011']= "Images";	
 				$allImgCounter = dbcount("(figure_images_image_id)", DB_FIGURE_IMAGES);	
 				echo "<li><a class='side' href='".INFUSIONS."figurelib/admin.php".$aidlink."&amp;section=figurelib'>".$locale['LFS_0011']." </a><span class='pull-right'>".$allImgCounter."</span></li>\n";
