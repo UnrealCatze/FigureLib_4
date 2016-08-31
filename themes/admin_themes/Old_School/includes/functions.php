@@ -52,10 +52,8 @@ function render_admin_dashboard() {
 }
 
 function render_dashboard() {
-
-    global $members, $forum, $download, $news, $articles, $weblinks, $figurelib, $photos, $global_comments, $global_ratings, $global_submissions, $link_type, $submit_type, $comments_type, $locale, $aidlink, $settings, $infusions_count;
-	
-	$mobile = '12';
+   global $members, $forum, $download, $news, $articles, $weblinks, $figurelib, $photos, $global_comments, $global_ratings, $global_submissions, $link_type, $submit_type, $comments_type, $locale, $aidlink, $settings, $infusions_count;
+    $mobile = '12';
     $tablet = '12';
     $laptop = '6';
     $desktop = '3';
@@ -220,20 +218,33 @@ function render_dashboard() {
 		echo "<div class='pull-left display-inline-block m-r-10'>\n";
 		echo "<span class='text-smaller'>".$locale['257']."</span>\n<br/>\n";
 		echo "<h4 class='m-t-0'>".number_format($figurelib['comment'])."</h4>\n";
+		
 		echo "</div>\n";
 		echo "<div class='pull-left display-inline-block m-r-10'>\n";
 		echo "<span class='text-smaller'>".$locale['254']."</span>\n<br/>\n";
-	 
-	 // wenn submit daten da sind mache anzahl rot ansonsten schwarz
-		if ($figurelib['submit'] != 0) {
-				echo "<h4 class='m-t-0'><font color='red'>".number_format($figurelib['submit'])."</font></h4>\n";
-				} else {
-				echo "<h4 class='m-t-0'>".number_format($figurelib['submit'])."</font></h4>\n";
-				}	
+					 
+		 // wenn submit daten da sind mache anzahl rot ansonsten schwarz
+		 $submits = dbcount("(figure_id)", DB_FIGURE_ITEMS, "figure_freigabe='0'");
+			if ($submits != "0") {
+				echo "<h4 class='m-t-0'><font color='red'>".$submits."</font></h4>\n";
+								} else {
+				echo "<h4 class='m-t-0'>".$submits."</font></h4>\n";
+								}	
+		echo "</div>\n";		
+		echo "<div class='pull-left display-inline-block m-r-10'>\n";
+		echo "<span class='text-smaller'>Pendings</span>\n<br/>\n";
 		
-		echo "</div>\n";
-		echo "</div>\n";
-		closeside();
+		// wenn pending daten da sind mache anzahl rot ansonsten schwarz				
+		$pendings = dbcount("(figure_id)", DB_FIGURE_ITEMS, "figure_freigabe='2'");
+			if ($pendings != "0") {
+				echo "<h4 class='m-t-0'><font color='red'>".$pendings."</font></h4>\n";
+								} else {
+				echo "<h4 class='m-t-0'>".$pendings."</font></h4>\n";
+								}		
+		
+			echo "</div>\n";
+			echo "</div>\n";
+			closeside();
 		echo "</div>";
 	}
     if (db_exists(DB_PHOTOS)) {
