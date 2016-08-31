@@ -52,7 +52,7 @@
 	while ($data = dbarray($result)) {
 					
 			echo "<tr>\n";			
-				echo "<td><a href='".FUSION_SELF.$aidlink."&amp;section=figurelib_form&amp;action=edit&amp;figure_id=".$data['figure_id']."'>".$data['figure_title']."</a></td>\n";
+				echo "<td><a href='".FUSION_SELF.$aidlink."&amp;section=figurelib_form&amp;action=edit&amp;figure_id=".$data['figure_id']."'>".trimlink($data['figure_title'],30)."</a></td>\n";
 			
 									$category = dbquery("
 										SELECT 
@@ -97,7 +97,7 @@
 				echo "<td>".$datascale['figure_scale_name']."</td>\n";
 									}	}	
 			
-				echo "<td>".profile_link($data['user_id'], $data['user_name'], $data['user_status'])."</td>\n";
+				echo "<td>".profile_link($data['user_id'], trimlink($data['user_name'],10), $data['user_status'])."</td>\n";
 				echo "<td>".timer($data['figure_datestamp'])."</td>\n";
 				//echo "<td>".$data['figure_id']."</td>\n";
 			echo "</tr>\n";
