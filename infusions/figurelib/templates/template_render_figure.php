@@ -184,9 +184,9 @@ global $settings;
 						'manufacturer_affiliate_url' => $data['figure_manufacturer_affiliate_url'],
 						'manufacturer_affiliate_code' => $data['figure_manufacturer_affiliate_code'],	*/				
 				
-      echo "</ul>
-      <div class='panel-footer'></div>
-    </div>
+      echo "</ul>";
+      //echo "<div class='panel-footer'></div>";
+    echo "</div>
   </div>
 </div>";
 
@@ -431,9 +431,9 @@ global $settings;
 						'manufacturer_affiliate_url' => $data['figure_manufacturer_affiliate_url'],
 						'manufacturer_affiliate_code' => $data['figure_manufacturer_affiliate_code'],	*/				
 				
-      echo "</ul>
-      <div class='panel-footer'></div>
-    </div>
+      echo "</ul>";
+      //echo "<div class='panel-footer'></div>";
+    echo "</div>
   </div>
 </div>";
 
