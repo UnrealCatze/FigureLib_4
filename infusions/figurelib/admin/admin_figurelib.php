@@ -355,8 +355,7 @@ if (!empty($result)) {
 		'0' => $locale['figure_1828'],
 		'1' => $locale['figure_1829'],
 		'2' => $locale['figure_1830'],
-		'3' => $locale['figure_1831'],
-		'4' => $locale['figure_1832']
+		'3' => $locale['figure_1831']
 		];	
 	
 		// Formfield "Figure Freigabe"
