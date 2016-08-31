@@ -29,6 +29,7 @@ $locale['LFS_0010']= "Submits";
 $locale['LFS_0011']= "Images";
 $locale['LFS_0012']= "Settings";
 $locale['LFS_0013']= "Pendings";
+$locale['LFS_0014']= "Inactive";
 
 opensidex("<i class='fa fa-cog fa-vtop'> ".$locale['LFS_0001']."</i>");
 
@@ -105,6 +106,13 @@ opensidex("<i class='fa fa-cog fa-vtop'> ".$locale['LFS_0001']."</i>");
 				$pendings = dbcount("(figure_id)", DB_FIGURE_ITEMS, "figure_freigabe='2'");	
 					
 				echo "<span class='label label-info pull-right'>".$pendings."</span></a>\n";	
+				
+				// ['LFS_0014'] = "Inactive";						
+				echo "<li><a class='side' href='".INFUSIONS."figurelib/admin.php".$aidlink."&amp;section=figurelib_inactive'>".$locale['LFS_0014']." ";	
+					
+				$inactive = dbcount("(figure_id)", DB_FIGURE_ITEMS, "figure_freigabe='3'");	
+					
+				echo "<span class='label label-info pull-right'>".$inactive."</span></a>\n";	
 					
 		
 				// ['LFS_0011']= "Images";	
