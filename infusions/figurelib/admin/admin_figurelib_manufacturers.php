@@ -45,14 +45,27 @@ if ((isset($_GET['action']) && $_GET['action'] == "delete") && (isset($_GET['man
 	
 	// Empty Arrays
 	$data = [
-		"figure_manufacturer_id"          => 0,
-		"figure_manufacturer_name"        => "",
-		"figure_manufacturer_image"       => "",
-		"figure_manufacturer_thumb"       => "",
-		"figure_manufacturer_description" => "",
-		"figure_manufacturer_language"    => LANGUAGE,
-		"figure_manufacturer_parent"      => "",
-		"figure_manufacturer_sorting"     => "figure_title ASC"
+		"figure_manufacturer_id"          		=> 0,
+		"figure_manufacturer_name"        		=> "",
+		"figure_manufacturer_image"      		=> "",
+		"figure_manufacturer_thumb"      		=> "",
+		"figure_manufacturer_url"      	  		=> "",
+		"figure_manufacturer_email"      		=> "",
+		"figure_manufacturer_facebook"    		=> "",
+		"figure_manufacturer_twitter"     		=> "",
+		"figure_manufacturer_youtube"     		=> "",
+		"figure_manufacturer_pinterest"     	=> "",
+		"figure_manufacturer_instagram"     	=> "",
+		"figure_manufacturer_googleplus"     	=> "",
+		"figure_manufacturer_affiliate_program" => "",
+		"figure_manufacturer_affiliate_url"    	=> "",
+		"figure_manufacturer_affiliate_code"    => "",
+		"figure_manufacturer_info_admin"     	=> "",
+		"figure_manufacturer_address"        	=> "",
+		"figure_manufacturer_description" 		=> "",
+		"figure_manufacturer_language"    		=> LANGUAGE,
+		"figure_manufacturer_parent"      		=> "",
+		"figure_manufacturer_sorting"     		=> "figure_title ASC"
 	];
 	
 	// Edit a Manufacturer?
@@ -62,9 +75,7 @@ if ((isset($_GET['action']) && $_GET['action'] == "delete") && (isset($_GET['man
 		dbcount("(figure_manufacturer_id)", DB_FIGURE_MANUFACTURERS, "figure_manufacturer_id='".$_GET['manufacturer_id']."'")
 	) {
 		$data = dbarray(dbquery("
-			SELECT 
-				figure_manufacturer_id, figure_manufacturer_name, figure_manufacturer_image, figure_manufacturer_thumb, figure_manufacturer_description,
-				figure_manufacturer_language, figure_manufacturer_parent, figure_manufacturer_sorting
+			SELECT *
 			FROM ".DB_FIGURE_MANUFACTURERS."
 			WHERE figure_manufacturer_id='".$_GET['manufacturer_id']."'
 			LIMIT 0,1
@@ -74,11 +85,24 @@ if ((isset($_GET['action']) && $_GET['action'] == "delete") && (isset($_GET['man
 	// Handle posted Informations
 	if (isset($_POST['save_manufacturer'])) {
 		$data = [
-			"figure_manufacturer_id"          => form_sanitizer($_POST['figure_manufacturer_id'],          0,        "figure_manufacturer_id"),
-			"figure_manufacturer_name"        => form_sanitizer($_POST['figure_manufacturer_name'],        "",       "figure_manufacturer_name"),
-			"figure_manufacturer_description" => form_sanitizer($_POST['figure_manufacturer_description'], "",       "figure_manufacturer_description"),
-			"figure_manufacturer_language"    => form_sanitizer($_POST['figure_manufacturer_language'],    LANGUAGE, "figure_manufacturer_language"),
-			"figure_manufacturer_parent"      => form_sanitizer($_POST['figure_manufacturer_parent'],      0,        "figure_manufacturer_parent")
+			"figure_manufacturer_id"          		=> form_sanitizer($_POST['figure_manufacturer_id'],          		0,        "figure_manufacturer_id"),
+			"figure_manufacturer_name"        		=> form_sanitizer($_POST['figure_manufacturer_name'],        		"",       "figure_manufacturer_name"),		
+			"figure_manufacturer_url"      	  		=> form_sanitizer($_POST['figure_manufacturer_url'],         		"",       "figure_manufacturer_url"),
+			"figure_manufacturer_email"       		=> form_sanitizer($_POST['figure_manufacturer_email'],       		"",       "figure_manufacturer_email"),
+			"figure_manufacturer_facebook"   	 	=> form_sanitizer($_POST['figure_manufacturer_facebook'],    		"",       "figure_manufacturer_facebook"),
+			"figure_manufacturer_twitter"    	 	=> form_sanitizer($_POST['figure_manufacturer_twitter'],     		"",       "figure_manufacturer_twitter"),
+			"figure_manufacturer_youtube"     		=> form_sanitizer($_POST['figure_manufacturer_youtube'],     		"",       "figure_manufacturer_youtube"),
+			"figure_manufacturer_pinterest"     	=> form_sanitizer($_POST['figure_manufacturer_pinterest'],     		"",       "figure_manufacturer_pinterest"),
+			"figure_manufacturer_instagram"     	=> form_sanitizer($_POST['figure_manufacturer_instagram'],     		"",       "figure_manufacturer_instagram"),
+			"figure_manufacturer_googleplus"     	=> form_sanitizer($_POST['figure_manufacturer_googleplus'],     	"",       "figure_manufacturer_googleplus"),
+			"figure_manufacturer_affiliate_program" => form_sanitizer($_POST['figure_manufacturer_affiliate_program'],  "",       "figure_manufacturer_affiliate_program"),
+			"figure_manufacturer_affiliate_url"     => form_sanitizer($_POST['figure_manufacturer_affiliate_url'],     	"",       "figure_manufacturer_affiliate_url"),
+			"figure_manufacturer_affiliate_code"    => form_sanitizer($_POST['figure_manufacturer_affiliate_code'],     "",       "figure_manufacturer_affiliate_code"),
+			"figure_manufacturer_info_admin"     	=> form_sanitizer($_POST['figure_manufacturer_info_admin'],     	"",       "figure_manufacturer_info_admin"),		
+			"figure_manufacturer_address"        		=> form_sanitizer($_POST['figure_manufacturer_address'],        		"",       "figure_manufacturer_address"),			
+			"figure_manufacturer_description" 		=> form_sanitizer($_POST['figure_manufacturer_description'], 		"",       "figure_manufacturer_description"),
+			"figure_manufacturer_language"    		=> form_sanitizer($_POST['figure_manufacturer_language'],    		LANGUAGE, "figure_manufacturer_language"),
+			"figure_manufacturer_parent"      		=> form_sanitizer($_POST['figure_manufacturer_parent'],      		0,        "figure_manufacturer_parent")
 		];
 		
 		// Check Sorting Fields
@@ -218,13 +242,125 @@ if ((isset($_GET['action']) && $_GET['action'] == "delete") && (isset($_GET['man
 			echo "</div>\n";
 		echo "</div>\n";
 	}
+		
+	// Manufacturer URL
+	echo form_text("figure_manufacturer_url", $locale['figm_0017'], $data['figure_manufacturer_url'], [
+		"inline"     => true,
+		"type"		 => "url",
+		"required"   => false,
+		"error_text" => $locale['figm_0001']
+	]);
 	
+	// Manufacturer E-MAIL
+	echo form_text("figure_manufacturer_email", $locale['figm_0018'], $data['figure_manufacturer_email'], [
+		"inline"     => true,
+		"required"   => false,
+		"type"		 => "email",	
+		"error_text" => $locale['figm_0001']
+	]);
+	
+	// Manufacturer FACEBOOK
+	echo form_text("figure_manufacturer_facebook", $locale['figm_0019'], $data['figure_manufacturer_facebook'], [
+		"inline"     => true,
+		"type"		 => "url",
+		"required"   => false,
+		"error_text" => $locale['figm_0001']
+	]);
+	
+	// Manufacturer TWITTER
+	echo form_text("figure_manufacturer_twitter", $locale['figm_0020'], $data['figure_manufacturer_twitter'], [
+		"inline"     => true,
+		"type"		 => "url",
+		"required"   => false,
+		"error_text" => $locale['figm_0001']
+	]);
+	
+	// Manufacturer YOUTUBE CHANNEL
+	echo form_text("figure_manufacturer_youtube", $locale['figm_0021'], $data['figure_manufacturer_youtube'], [
+		"inline"     => true,
+		"type"		 => "url",
+		"required"   => false,
+		"error_text" => $locale['figm_0001']
+	]);
+		
+	// ['figm_0023'] = "Manufacturer Pinterest";
+	echo form_text("figure_manufacturer_pinterest", $locale['figm_0023'], $data['figure_manufacturer_pinterest'], [
+		"inline"     => true,
+		"type"		 => "url",
+		"required"   => false,
+		"error_text" => $locale['figm_0001']
+	]);
+	
+	// ['figm_0024'] = "Manufacturer Instagram";
+	echo form_text("figure_manufacturer_instagram", $locale['figm_0024'], $data['figure_manufacturer_instagram'], [
+		"inline"     => true,
+		"type"		 => "url",
+		"required"   => false,
+		"error_text" => $locale['figm_0001']
+	]);
+	
+	// ['figm_0025'] = "Manufacturer Google+";
+	echo form_text("figure_manufacturer_googleplus", $locale['figm_0025'], $data['figure_manufacturer_googleplus'], [
+		"inline"     => true,
+		"type"		 => "url",
+		"required"   => false,
+		"error_text" => $locale['figm_0001']
+	]);	
+
+
+	// Set Options for Selectlists
+		$affiliate_opts = [
+			'0' => $locale['no'], 
+			'1' => $locale['yes']
+		];	
+	
+	// ['figm_0026'] = "Manufacturer Affiliate Program";
+	echo form_select("figure_manufacturer_affiliate_program", $locale['figm_0026'], $data['figure_manufacturer_affiliate_program'], 
+		array(
+		"inline" => TRUE, 
+		"options" => $affiliate_opts
+		));	
+			
+	// ['figm_0027'] = "Manufacturer Affiliate URL";
+	echo form_text("figure_manufacturer_affiliate_url", $locale['figm_0027'], $data['figure_manufacturer_affiliate_url'], [
+		"inline"     => true,
+		"type"		 => "url",
+		"required"   => false,
+		"error_text" => $locale['figm_0001']
+	]);	
+
+	// ['figm_0028'] = "Manufacturer Affiliate Code";
+	echo form_text("figure_manufacturer_affiliate_code", $locale['figm_0028'], $data['figure_manufacturer_affiliate_code'], [
+		"inline"     => true,
+		"required"   => false,
+		"error_text" => $locale['figm_0001']
+	]);	
+	
+	
+	// ['figm_0029'] = "Manufacturer Info Admin";
+	echo form_textarea("figure_manufacturer_info_admin", $locale['figm_0029'], $data['figure_manufacturer_info_admin'], [
+		"type"      => fusion_get_settings("tinymce_enabled") ? "tinymce" : "html",
+		"tinymce"   => fusion_get_settings("tinymce_enabled") && iADMIN ? "advanced" : "simple",
+		#"autosize"  => true,
+		"required"  => false,
+		"form_name" => "addmanufacturer"
+		]);
+				
+	// Manufacturer Address						 
+	echo form_textarea("figure_manufacturer_address", $locale['figm_0022'], $data['figure_manufacturer_address'], [
+		"type"      => fusion_get_settings("tinymce_enabled") ? "tinymce" : "html",
+		"tinymce"   => fusion_get_settings("tinymce_enabled") && iADMIN ? "advanced" : "simple",
+		#"autosize"  => true,
+		"required"  => false,
+		"form_name" => "addmanufacturer"
+	]);
+		
 	// Manufacturer Description							 
 	echo form_textarea("figure_manufacturer_description", $locale['figm_0002'], $data['figure_manufacturer_description'], [
-		"inline"    => true,
-		"html"      => true,
-		"preview"   => false,
-		"autosize"  => true,
+		"type"      => fusion_get_settings("tinymce_enabled") ? "tinymce" : "html",
+		"tinymce"   => fusion_get_settings("tinymce_enabled") && iADMIN ? "advanced" : "simple",
+		#"autosize"  => true,
+		"required"  => false,
 		"form_name" => "addmanufacturer"
 	]);
 	
@@ -305,11 +441,26 @@ if ((isset($_GET['action']) && $_GET['action'] == "delete") && (isset($_GET['man
 		}
 		
 		// Get all Manufacturer
+		/*
 		$result = dbquery("
 			SELECT 
 				figure_manufacturer_id, 
 				figure_manufacturer_name, 
 				figure_manufacturer_description,
+				figure_manufacturer_image,
+				figure_manufacturer_thumb
+			FROM ".DB_FIGURE_MANUFACTURERS." 
+			WHERE figure_manufacturer_parent='".$parent."'".(multilang_table("FI") ? " AND figure_manufacturer_language='".LANGUAGE."'" : "")." 
+			ORDER BY figure_manufacturer_name ASC
+			".($parent == "0" && $level == "0" ? "LIMIT ".$rowstart.",10" : "")."
+		");
+		*/
+		
+		// figure_manufacturer_description auskommentiert damit die description nicht in der liste angezeigt wird für den hersteller. 
+		$result = dbquery("
+			SELECT 
+				figure_manufacturer_id, 
+				figure_manufacturer_name, 
 				figure_manufacturer_image,
 				figure_manufacturer_thumb
 			FROM ".DB_FIGURE_MANUFACTURERS." 
@@ -323,7 +474,8 @@ if ((isset($_GET['action']) && $_GET['action'] == "delete") && (isset($_GET['man
 			if ($parent == "0" && $level == "0") {  echo "<table class='table table-responsive table-hover table-striped'>\n"; }			
 			// Display Items
 			while ($data = dbarray($result)) {
-				$description = strip_tags(parse_textarea($data['figure_manufacturer_description']));
+				//auskommentiert damit die description nicht in der liste angezeigt wird für den hersteller. 
+				//$description = strip_tags(parse_textarea($data['figure_manufacturer_description']));
 				
 				// Display each Item
 				echo "<tr>\n";
@@ -333,9 +485,10 @@ if ((isset($_GET['action']) && $_GET['action'] == "delete") && (isset($_GET['man
 						echo "<td style='width: 1%;'></td>\n";
 					}
 					echo "<td><strong>".str_repeat("&mdash;", $level).$data['figure_manufacturer_name']."</strong>\n";
-					if ($data['figure_manufacturer_description']) {
-						echo "<br />".str_repeat("&mdash;", $level)."<span class='small'>".$description."</span>\n";
-					}
+					//auskommentiert damit die description nicht in der liste angezeigt wird für den hersteller. 
+					//if ($data['figure_manufacturer_description']) {
+						//echo "<br />".str_repeat("&mdash;", $level)."<span class='small'>".$description."</span>\n";
+					//}
 					echo "</td>\n";
 					echo "<td align='center' width='1%' style='white-space:nowrap'>\n";
 						echo "<a href='".FUSION_SELF.$aidlink."&amp;section=figurelib_manufacturers&amp;action=edit&amp;manufacturer_id=".$data['figure_manufacturer_id']."' title='".$locale['cifg_0005']."' class='btn btn-warning btn-xs'><i class='fa fa-fw fa-cogs'></i> ".$locale['cifg_0005']."</a>\n"; 

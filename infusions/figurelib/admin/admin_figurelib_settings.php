@@ -228,10 +228,13 @@ echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";
 				
 	echo "</div>\n";
 	echo "</div>\n";
-
-closeside();
-
+	
+	// Save Settings Button
+	echo form_button("savesettings", $locale['figure_345'], $locale['figure_345'], ["class" => "btn-success center-block"]);
 	echo "</div>\n";
+	closeside();
+
+	
 
 #################### General Settings Module on/off ########################################################
 
@@ -395,14 +398,18 @@ openside("");
 							));	
 							
 	echo "</div>\n";
-	
-	closeside();							
 										
 	echo "</div>\n";	
-	
+		
 	closeside();
 
 	echo "</div>\n";	
+	
+	// Save Settings Button
+	echo form_button("savesettings", $locale['figure_345'], $locale['figure_345'], ["class" => "btn-success center-block"]);
+	echo "</p>\n";	
+	closeside();							
+
 
 // #######################################################################################################
 
@@ -517,7 +524,8 @@ echo "
 	</div>
 </div>";	
 	
-	
+	// Save Settings Button
+	echo form_button("savesettings", $locale['figure_345'], $locale['figure_345'], ["class" => "btn-success center-block"]);
 	echo "</div>\n";	
 
 // Display Figure Image Settings END
@@ -587,7 +595,11 @@ echo "
 	</div>
 </div>
 ";
-echo "</div>\n";	
+
+	// Save Settings Button
+	echo form_button("savesettings", $locale['figure_345'], $locale['figure_345'], ["class" => "btn-success center-block"]);
+
+	echo "</div>\n";	
 
 // Display Category Image Settings END
 	closeside();
@@ -657,7 +669,10 @@ echo "
 </div>
 ";
 
-echo "</div>\n";	
+	// Save Settings Button
+	echo form_button("savesettings", $locale['figure_345'], $locale['figure_345'], ["class" => "btn-success center-block"]);
+
+	echo "</div>\n";	
 
 // Display Manufacturer Image Settings END
 	closeside();
@@ -706,7 +721,6 @@ echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>\n";
 echo "</div>\n";
 
 // Save Settings Button
-
 echo form_button("savesettings", $locale['figure_345'], $locale['figure_345'], ["class" => "btn-success center-block"]);
 
 // Closeform

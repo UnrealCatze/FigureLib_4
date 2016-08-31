@@ -108,5 +108,5 @@
 	} else {
 		
 		// ['figs_0017'] = "There are currently no Figure submisisons";
-		echo "<div class='well text-center m-t-20'>".$locale['figs_0017']."</div>\n";
+		echo "<p><div class='alert alert-warning' role='alert'><div class='text-center'>".$locale['figs_0017']."</div></div>\n";
 	}

@@ -153,7 +153,8 @@ if (!empty($result)) {
 		// Handle posted Informations
 		if (isset($_POST['save_figure'])) {
 			$data = [
-				"figure_freigabe"       		=> isset($_POST['figure_freigabe'])       ? "1" : "0",
+
+				"figure_freigabe"      			=> form_sanitizer($_POST['figure_freigabe'],     		"", "figure_freigabe"),
 				"figure_agb"            		=> isset($_POST['figure_agb'])            ? "1" : "0",								
 				"figure_show_images"      		=> form_sanitizer($_POST['figure_show_images'],     	"", "figure_show_images"),
 				"figure_show_data"        		=> form_sanitizer($_POST['figure_show_data'],     		"", "figure_show_data"),
@@ -483,14 +484,13 @@ if (!empty($result)) {
 			// Check if there avaible Images
 			if (is_array($avaibleImages) && count($avaibleImages)) {
 				foreach ($avaibleImages AS $avaibleImage) {
-					echo "<div class='col-xs-12 col-sm-3'>\n";
-						echo form_checkbox("delete_image[]", "Delete this Image<br /><img src='".$avaibleImage['image']."' alt='".$avaibleImage['id']."' style='max-width: 200px;' />", "", [
+					echo "<div class='col-xs-12 col-sm-2'>\n";
+						echo form_checkbox("image_toppic", "Set as Cover<br /><img src='".$avaibleImage['image']."' alt='".$avaibleImage['id']."' style='max-width: 150px;' />", ($avaibleImage['toppic'] ? $avaibleImage['id'] : 0), ["type" => "radio", "input_id" => "image_titlepic_".$avaibleImage['id'], "value" => $avaibleImage['id'], "reverse_label" => true]);
+						echo form_checkbox("delete_image[]", "Delete Image", "", [
 							"value" => $avaibleImage['id'],
 							"input_id" => "delete-image-".$avaibleImage['id'],
 							"reverse_label" => true
 						]);
-						echo "<br />\n";
-						echo form_checkbox("image_toppic", "Set this as Toppic", ($avaibleImage['toppic'] ? $avaibleImage['id'] : 0), ["type" => "radio", "input_id" => "image_titlepic_".$avaibleImage['id'], "value" => $avaibleImage['id'], "reverse_label" => true]);
 					echo "</div>\n";
 				}
 			}
@@ -795,7 +795,7 @@ if (!empty($result)) {
 	    "tinymce"   => fusion_get_settings("tinymce_enabled") && iADMIN ? "advanced" : "simple",
 	    "autosize"  => true,
 	    "required"  => false,
-	    "form_name" => "submit_form"
+	    "form_name" => "inputform"
     ]);
 	
 	// Formfield "Description"
@@ -804,7 +804,7 @@ if (!empty($result)) {
 	    "tinymce"   => fusion_get_settings("tinymce_enabled") && iADMIN ? "advanced" : "simple",
 	    "autosize"  => true,
 	    "required"  => false,
-	    "form_name" => "submit_form"
+	    "form_name" => "inputform"
     ]);
 
 	// Accessories and Discreptions
