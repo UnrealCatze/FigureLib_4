@@ -107,6 +107,6 @@
 	
 	} else {
 		
-		// $locale['figs_0022'] = "There are currently no figure pendings";
-		echo "<p><div class='alert alert-warning' role='alert'><div class='text-center'>".$locale['figs_0022']."</div></div>\n";
+		//$locale['figs_0023'] = "There are currently no figure as deactivated";
+		echo "<p><div class='alert alert-warning' role='alert'><div class='text-center'>".$locale['figs_0023']."</div></div>\n";
 	}
