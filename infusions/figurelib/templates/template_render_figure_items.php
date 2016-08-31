@@ -82,7 +82,7 @@ $result = dbquery(
 			openside("");
 			
 			// TITLE LINE WITH ADMIN EDIT DIRECT LINK			
-			echo "<div class='well clearfix text-bold'><span>".trimlink($data['figure_title'], 23)." (".trimlink($data['figure_manufacturer_name'], 23).") [".trimlink($data['figure_pubdate'],7)."]</span>";
+			echo "<div class='well clearfix text-bold'><span>".trimlink($data['figure_title'], 23)." [".trimlink($data['figure_manufacturer_name'], 23)." / ".trimlink($data['figure_pubdate'],7)."]</span>";
 			
 							if (iADMIN || iSUPERADMIN) {
 								
@@ -222,7 +222,7 @@ if ($fil_settings['figure_show_data_global']) { // show figure data global on/of
 						
 						// TITLE DATA
 						echo "<div class='col-lg-8 col-md-8 col-sm-12 col-xs-12'>\n";
-								echo "<span class='small'>&nbsp;".$data['figure_title']."</span>\n";		
+								echo "<span class='small' style='word-break: break-all; word-wrap: break-word;'>".$data['figure_title']."</span>\n";		
 						echo "</div>\n";
 
 						// ++++++++++++++++
@@ -234,7 +234,7 @@ if ($fil_settings['figure_show_data_global']) { // show figure data global on/of
 						
 						// VARIANT DATA
 						echo "<div class='col-lg-8 col-md-8 col-sm-12 col-xs-12'>\n";
-								echo "<span class='small'>&nbsp;".$data['figure_variant']."</span>\n";		
+								echo "<span class='small' style='word-break: break-all; word-wrap: break-word;'>".$data['figure_variant']."</span>\n";		
 						echo "</div>\n";
 						
 						// ++++++++++++++++
@@ -246,7 +246,7 @@ if ($fil_settings['figure_show_data_global']) { // show figure data global on/of
 						
 						// SERIES DATA
 						echo "<div class='col-lg-8 col-md-8 col-sm-12 col-xs-12'>\n";
-								echo "<span class='small'>&nbsp;".$data['figure_series']."</span>\n";
+								echo "<span class='small' style='word-break: break-all; word-wrap: break-word;'>".$data['figure_series']."</span>\n";
 						echo "</div>\n";
 						
 						// ++++++++++++++++
@@ -258,7 +258,7 @@ if ($fil_settings['figure_show_data_global']) { // show figure data global on/of
 						
 						// MANUFACTURER DATA
 						echo "<div class='col-lg-8 col-md-8 col-sm-12 col-xs-12'>\n";
-								echo "<span class='small'>&nbsp;".$data['figure_manufacturer_name']."</span>\n";		
+								echo "<span class='small' style='word-break: break-all; word-wrap: break-word;'>".$data['figure_manufacturer_name']."</span>\n";		
 						echo "</div>\n";
 						
 						// ++++++++++++++++
@@ -270,7 +270,7 @@ if ($fil_settings['figure_show_data_global']) { // show figure data global on/of
 						
 						// Release Date DATA
 						echo "<div class='col-lg-8 col-md-8 col-sm-12 col-xs-12'>\n";
-								echo "<span class='small'>&nbsp;".$data['figure_pubdate']."</span>\n";
+								echo "<span class='small' style='word-break: break-all; word-wrap: break-word;'>".$data['figure_pubdate']."</span>\n";
 						echo "</div>\n";
 						
 						// ++++++++++++++++
@@ -282,7 +282,7 @@ if ($fil_settings['figure_show_data_global']) { // show figure data global on/of
 						
 						// Country DATA
 						echo "<div class='col-lg-8 col-md-8 col-sm-12 col-xs-12'>\n";
-								echo "<span class='small'>&nbsp;".figures_getCountryName($data['figure_country'])."</span>\n";		
+								echo "<span class='small' style='word-break: break-all; word-wrap: break-word;'>".figures_getCountryName($data['figure_country'])."</span>\n";		
 						echo "</div>\n";
 						
 						// ++++++++++++++++
@@ -294,7 +294,7 @@ if ($fil_settings['figure_show_data_global']) { // show figure data global on/of
 						
 						// Artists Date DATA
 						echo "<div class='col-lg-8 col-md-8 col-sm-12 col-xs-12'>\n";
-								echo "<span class='small'>&nbsp;".$data['figure_artists']."</span>\n";
+								echo "<span class='small'style='word-break: break-all; word-wrap: break-word;'>".$data['figure_artists']."</span>\n";
 						echo "</div>\n";
 
 			echo "</div>\n";
@@ -316,7 +316,7 @@ if ($fil_settings['figure_show_data_global']) { // show figure data global on/of
 						
 						// Scale DATA
 						echo "<div class='col-lg-8 col-md-8 col-sm-12 col-xs-12'>\n";
-								echo "<span class='small'>&nbsp;".$data['figure_scale_name']."</span>\n";		
+								echo "<span class='small' style='word-break: break-all; word-wrap: break-word;'>".$data['figure_scale_name']."</span>\n";		
 						echo "</div>\n";
 						
 						// ++++++++++++++++
@@ -328,7 +328,7 @@ if ($fil_settings['figure_show_data_global']) { // show figure data global on/of
 						
 						// Weight DATA
 						echo "<div class='col-lg-8 col-md-8 col-sm-12 col-xs-12'>\n";
-								echo "<span class='small'>&nbsp;".$data['figure_weight']."</span>\n";
+								echo "<span class='small' style='word-break: break-all; word-wrap: break-word;'>".$data['figure_weight']."</span>\n";
 						echo "</div>\n";
 						
 						// ++++++++++++++++
@@ -347,7 +347,7 @@ if ($fil_settings['figure_show_data_global']) { // show figure data global on/of
 				   
 						if(dbrows($height)){
 						   while($dataheight = dbarray($height)){								
-									echo "<span class='small'>&nbsp;".$dataheight['figure_measurements_inch']."</span>\n";		
+									echo "<span class='small' style='word-break: break-all; word-wrap: break-word;'>".$dataheight['figure_measurements_inch']."</span>\n";		
 							}
 						}
 						echo "</div>\n";
@@ -368,7 +368,7 @@ if ($fil_settings['figure_show_data_global']) { // show figure data global on/of
 				   
 						if(dbrows($width)){
 						   while($datawidth = dbarray($width)){	
-									echo "<span class='small'>&nbsp;".$datawidth['figure_measurements_inch']."</span>\n";
+									echo "<span class='small' style='word-break: break-all; word-wrap: break-word;'>".$datawidth['figure_measurements_inch']."</span>\n";
 							}
 						}
 						echo "</div>\n";
@@ -389,7 +389,7 @@ if ($fil_settings['figure_show_data_global']) { // show figure data global on/of
 						   
 						 if(dbrows($depth)){
 							while($datadepth = dbarray($depth)){	
-									echo "<span class='small'>&nbsp;".$datadepth['figure_measurements_inch']."</span>\n";	
+									echo "<span class='small' style='word-break: break-all; word-wrap: break-word;'>".$datadepth['figure_measurements_inch']."</span>\n";	
 							}
 						}								
 						echo "</div>\n";
@@ -413,7 +413,7 @@ if ($fil_settings['figure_show_data_global']) { // show figure data global on/of
 						
 						// Brand DATA
 						echo "<div class='col-lg-8 col-md-8 col-sm-12 col-xs-12'>\n";
-								echo "<span class='small'>&nbsp;".$data['figure_brand_name']."</span>\n";		
+								echo "<span class='small' style='word-break: break-all; word-wrap: break-word;'>".$data['figure_brand_name']."</span>\n";		
 						echo "</div>\n";
 						
 						// ++++++++++++++++
@@ -425,7 +425,7 @@ if ($fil_settings['figure_show_data_global']) { // show figure data global on/of
 						
 						// Material DATA
 						echo "<div class='col-lg-8 col-md-8 col-sm-12 col-xs-12'>\n";
-								echo "<span class='small'>&nbsp;".$data['figure_material_name']."</span>\n";
+								echo "<span class='small' style='word-break: break-all; word-wrap: break-word;'>".$data['figure_material_name']."</span>\n";
 						echo "</div>\n";
 						
 						// ++++++++++++++++
@@ -437,7 +437,7 @@ if ($fil_settings['figure_show_data_global']) { // show figure data global on/of
 						
 						// Articulations Points DATA
 						echo "<div class='col-lg-8 col-md-8 col-sm-12 col-xs-12'>\n";
-								echo "<span class='small'>&nbsp;".$data['figure_poa_name']."</span>\n";		
+								echo "<span class='small' style='word-break: break-all; word-wrap: break-word;'>".$data['figure_poa_name']."</span>\n";		
 						echo "</div>\n";
 						
 						// ++++++++++++++++
@@ -449,7 +449,7 @@ if ($fil_settings['figure_show_data_global']) { // show figure data global on/of
 						
 						// Packaging DATA
 						echo "<div class='col-lg-8 col-md-8 col-sm-12 col-xs-12'>\n";
-								echo "<span class='small'>&nbsp;".$data['figure_packaging_name']."</span>\n";
+								echo "<span class='small' style='word-break: break-all; word-wrap: break-word;'>".$data['figure_packaging_name']."</span>\n";
 						echo "</div>\n";
 											
 			echo "</div>\n";
@@ -471,7 +471,7 @@ if ($fil_settings['figure_show_data_global']) { // show figure data global on/of
 						
 						// MSRP (Price by Release) DATA
 						echo "<div class='col-lg-8 col-md-8 col-sm-12 col-xs-12'>\n";
-								echo "<span class='small'>&nbsp;".$data['figure_retailprice']."</span>\n";		
+								echo "<span class='small' style='word-break: break-all; word-wrap: break-word;'>".$data['figure_retailprice']."</span>\n";		
 						echo "</div>\n";
 						
 						// ++++++++++++++++
@@ -483,7 +483,7 @@ if ($fil_settings['figure_show_data_global']) { // show figure data global on/of
 						
 						// Used Price DATA
 						echo "<div class='col-lg-8 col-md-8 col-sm-12 col-xs-12'>\n";
-								echo "<span class='small'>&nbsp;".$data['figure_usedprice']."</span>\n";
+								echo "<span class='small' style='word-break: break-all; word-wrap: break-word;'>".$data['figure_usedprice']."</span>\n";
 						echo "</div>\n";
 						
 						// ++++++++++++++++
@@ -495,7 +495,7 @@ if ($fil_settings['figure_show_data_global']) { // show figure data global on/of
 						
 						// Limited Edition YES/NO DATA
 						echo "<div class='col-lg-8 col-md-8 col-sm-12 col-xs-12'>\n";
-								echo "<span class='small'>&nbsp;".$data['figure_limitation_name']."</span>\n";		
+								echo "<span class='small' style='word-break: break-all; word-wrap: break-word;'>".$data['figure_limitation_name']."</span>\n";		
 						echo "</div>\n";
 						
 						// ++++++++++++++++
@@ -507,7 +507,7 @@ if ($fil_settings['figure_show_data_global']) { // show figure data global on/of
 						
 						// Edition Size DATA
 						echo "<div class='col-lg-8 col-md-8 col-sm-12 col-xs-12'>\n";
-								echo "<span class='small'>&nbsp;".$data['figure_editionsize']."</span>\n";
+								echo "<span class='small' style='word-break: break-all; word-wrap: break-word;'>".$data['figure_editionsize']."</span>\n";
 						echo "</div>\n";
 												
 			echo "</div>\n";
@@ -529,7 +529,7 @@ if ($fil_settings['figure_show_data_global']) { // show figure data global on/of
 						
 						// Accessories DATA
 						echo "<div class='col-lg-8 col-md-8 col-sm-12 col-xs-12'>\n";
-								echo "<span class='small' style='word-break: break-all; word-wrap: break-word;'>&nbsp;".($data['figure_accessories'] ? $data['figure_accessories'] : "-")."</span>\n";		
+								echo "<span class='small' style='word-break: break-all; word-wrap: break-word;'>".($data['figure_accessories'] ? $data['figure_accessories'] : "-")."</span>\n";		
 						echo "</div>\n";
 						
 						// ++++++++++++++++
@@ -541,7 +541,7 @@ if ($fil_settings['figure_show_data_global']) { // show figure data global on/of
 						
 						// Discreption  DATA
 						echo "<div class='col-lg-8 col-md-8 col-sm-12 col-xs-12'>\n";
-								echo "<span class='small' style='word-break: break-all; word-wrap: break-word;'>&nbsp;".($data['figure_description'] ? $data['figure_description'] : "-")."</span>\n";
+								echo "<span class='small' style='word-break: break-all; word-wrap: break-word;'>".($data['figure_description'] ? $data['figure_description'] : "-")."</span>\n";
 						echo "</div>\n";
 					
 			echo "</div>\n";
