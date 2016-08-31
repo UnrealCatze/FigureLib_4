@@ -81,6 +81,8 @@ $locale['filt_0016'] = "Brands";
 $locale['filt_0017'] = "Edit/Publish Figure";
 $locale['filt_0018'] = "Here can you add, delete, edit and publish figures";
 $locale['filt_0019'] = "Pendings";
+$locale['filt_0020'] = "Inactive";
+$locale['filt_0021'] = "Delete";
 
 // CURRENT FIGURES
 $locale['cifg_0000'] = "Figure Name / Title";
@@ -767,10 +769,10 @@ $locale['figure_1824'] = "Admin Message: Modul RATINGS global deactivated! Activ
 $locale['figure_1825'] = "Admin Message: Modul MYCOLLECTION global deactivated! Activate ";
 $locale['figure_1826'] = "Admin Message: Modul RELATED FIGURES global deactivated! Activate ";
 $locale['figure_1827'] = "Admin Message: Modul SOCIAL SHARING global deactivated! Activate ";
-$locale['figure_1828'] = "Submitting";
-$locale['figure_1829'] = "Show on Page";
-$locale['figure_1830'] = "Set on Pending";
-$locale['figure_1831'] = "Hide Figure";
+$locale['figure_1828'] = "Set as SUBMIT (Hide from Page)";
+$locale['figure_1829'] = "Set as ACTIVE (Show on Page)";
+$locale['figure_1830'] = "Set as PENDING (Hide from Page)";
+$locale['figure_1831'] = "Set as INACTIVE (Hide from Page)";
 $locale['figure_1832'] = "For Deleting";
 
 // Error Messages
