@@ -34,12 +34,12 @@
 			
 	$rows = dbrows($result);
 	if ($rows > 0) {
-		// ['figs_0021'] = "There are currently %s pending for your review.";
-		echo "<div class='well'>".sprintf($locale['figs_0021'], format_word($rows, $locale['fmt_submission']))."</div>\n";
+		// ['figs_0026'] = "There are currently %s figures for your review.";
+		echo "<div class='well'>".sprintf($locale['figs_0026'], format_word($rows, $locale['fig_inactive']))."</div>\n";
 		echo "<table class='table table-striped'>\n";
 		echo "<tr>\n";
 		
-		echo "<th>".$locale['figs_0013']."</th>";	// ['figs_0013'] = "Submission Subject for Review";
+		echo "<th>".$locale['figs_0025']."</th>";	// ['figs_0025'] = "Subject on Status Inactive";
 		echo "<th>".$locale['cifg_0012']."</th>";	// ['cifg_0012'] = "Category";
 		echo "<th>".$locale['cifg_0010']."</th>";	// ['cifg_0010'] = "Manufacturer"; 
 		echo "<th>".$locale['cifg_0011']."</th>";	// ['cifg_0011'] = "Scale";	
