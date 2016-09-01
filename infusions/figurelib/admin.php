@@ -277,7 +277,7 @@ $result = dbquery("
 				
 				echo "<div class='page-header'>";
 				echo "<div class='clearfix m-b-20'>\n";
-				echo "<div class='table-responsive'>\n";
+				//echo "<div class='table-responsive'>\n";
 				echo "<div class='row'>\n";	
 				echo "<div class='strong'>\n";	
 		
@@ -328,7 +328,7 @@ $result = dbquery("
 						
 				echo "</div>\n";
 				echo "</div>\n";
-				echo "</div>\n";
+				//echo "</div>\n";
 				echo "</div>\n";
 				echo "</div>\n";				
 				

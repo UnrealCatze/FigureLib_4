@@ -205,7 +205,7 @@ opentable("<strong>".$locale['mc_0001']."</strong>");
 															
 				echo "<div class='text-bold'>";				
 				echo "<div class='container-fluid'>\n";
-				echo "<div class='table-responsive'>\n";
+				//echo "<div class='table-responsive'>\n";
 				echo "<div class='row'>\n";	
 
 								/*//// GRID SYSTEM FOR PANEL AS OVERVIEW ///////////////////////////////////////
@@ -260,7 +260,7 @@ opentable("<strong>".$locale['mc_0001']."</strong>");
 								echo "</div>\n";												
 						
 						echo "</div>\n";
-						echo "</div>\n";
+						//echo "</div>\n";
 						echo "</div>\n";
 						echo "</div>\n";
 						
@@ -269,7 +269,7 @@ opentable("<strong>".$locale['mc_0001']."</strong>");
 				 while($data = dbarray($result)){
 					 
 						echo "<div class='container-fluid'>\n";
-						echo "<div class='table-responsive'>\n";
+						//echo "<div class='table-responsive'>\n";
 						echo "<div class='row'>\n";		
 				 
 							
@@ -340,7 +340,7 @@ opentable("<strong>".$locale['mc_0001']."</strong>");
 								echo "</div>\n";
 							echo "</div>\n";
 						echo "</div>\n";
-						echo "</div>\n";
+						//echo "</div>\n";
 							
 							}	
 	
