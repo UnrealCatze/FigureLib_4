@@ -132,7 +132,7 @@ $locale['figs_0019'] = "Submit another figure";
 $locale['figs_0020'] = "Return to [SITENAME]";
 $locale['figs_0021'] = "There are currently %s pending for your review.";
 $locale['figs_0022'] = "There are currently no figure on pending";
-$locale['figs_0023'] = "There are currently no figure as deactivated";
+$locale['figs_0023'] = "There are currently no figure deactivated";
 $locale['figs_0024'] = "Subject on Status Pending";
 $locale['figs_0025'] = "Subject on Status Inactive";
 $locale['figs_0026'] = "There are currently %s figure(s).";
@@ -650,6 +650,9 @@ $locale['figure_1250'] = "Delete this download scale?";
 $locale['figure_1300'] = "Edit Figure POA";
 $locale['figure_1301'] = "Add Figure Point of Articulation";
 $locale['figure_1302'] = "Current Figure Point of Articulations";
+$locale['figure_1303'] = "POA";
+$locale['figure_1304'] = "Figure Point of Articulations (POA)";
+$locale['figure_1305'] = "Most Point of Articulations (POA)";
 
 $locale['figure_1310'] = "Figure Point of Articulation added";
 $locale['figure_1311'] = "Figure Point of Articulation updated";
@@ -984,4 +987,5 @@ $locale['stats_002'] ="MSRP";
 $locale['stats_003'] ="Top 5";
 $locale['stats_004'] ="Total number of figures:";
 $locale['stats_005'] ="Total figures owned by user:";
+$locale['stats_006'] ="Top 10";
 
