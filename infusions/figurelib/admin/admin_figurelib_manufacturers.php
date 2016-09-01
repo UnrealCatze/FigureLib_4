@@ -138,8 +138,8 @@ if ((isset($_GET['action']) && $_GET['action'] == "delete") && (isset($_GET['man
 		}
 		if (!isset($data['figure_manufacturer_image']) || !isset($data['figure_manufacturer_thumb'])) {
 			if ($data['figure_manufacturer_id']) {
-				$data['figure_manufacturer_image'] = dbarraynum(dbquery("SELECT figure_manufacturer_image FROM ".DB_FIGURE_MANUFACTURERS." WHERE figure_manufacturer_id='".$data['figure_manufacturer_id']."' LIMIT 0,1"));
-				$data['figure_manufacturer_thumb'] = dbarraynum(dbquery("SELECT figure_manufacturer_thumb FROM ".DB_FIGURE_MANUFACTURERS." WHERE figure_manufacturer_id='".$data['figure_manufacturer_id']."' LIMIT 0,1"));
+				@list($data['figure_manufacturer_image']) = dbarraynum(dbquery("SELECT figure_manufacturer_image FROM ".DB_FIGURE_MANUFACTURERS." WHERE figure_manufacturer_id='".$data['figure_manufacturer_id']."' LIMIT 0,1"));
+				@list($data['figure_manufacturer_thumb']) = dbarraynum(dbquery("SELECT figure_manufacturer_thumb FROM ".DB_FIGURE_MANUFACTURERS." WHERE figure_manufacturer_id='".$data['figure_manufacturer_id']."' LIMIT 0,1"));
 			} else {
 				$data['figure_manufacturer_image'] = "";
 				$data['figure_manufacturer_thumb'] = "";

@@ -114,8 +114,8 @@ if ((isset($_GET['action']) && $_GET['action'] == "delete") && (isset($_GET['cat
 		}
 		if (!isset($data['figure_cat_image']) || !isset($data['figure_cat_thumb'])) {
 			if ($data['figure_cat_id']) {
-				$data['figure_cat_image'] = dbarraynum(dbquery("SELECT figure_cat_image FROM ".DB_FIGURE_CATS." WHERE figure_cat_id='".$data['figure_cat_id']."' LIMIT 0,1"));
-				$data['figure_cat_thumb'] = dbarraynum(dbquery("SELECT figure_cat_thumb FROM ".DB_FIGURE_CATS." WHERE figure_cat_id='".$data['figure_cat_id']."' LIMIT 0,1"));
+				@list($data['figure_cat_image']) = dbarraynum(dbquery("SELECT figure_cat_image FROM ".DB_FIGURE_CATS." WHERE figure_cat_id='".$data['figure_cat_id']."' LIMIT 0,1"));
+				@list($data['figure_cat_thumb']) = dbarraynum(dbquery("SELECT figure_cat_thumb FROM ".DB_FIGURE_CATS." WHERE figure_cat_id='".$data['figure_cat_id']."' LIMIT 0,1"));
 			} else {
 				$data['figure_cat_image'] = "";
 				$data['figure_cat_thumb'] = "";

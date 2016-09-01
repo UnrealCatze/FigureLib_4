@@ -19,9 +19,9 @@
 | written permission from the original author(s).
 +--------------------------------------------------------*/
 	//error_reporting(E_ALL);
-	//Formularinhalte prÃ¼fen
+	//Formularinhalte prüfen
 	//print_r ($_POST);
-	//GET-Parameter prÃ¼fen
+	//GET-Parameter prüfen
 	//print_r ($_GET);
 /*--------------------------------------------------------*/
 

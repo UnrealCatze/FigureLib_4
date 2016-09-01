@@ -1013,7 +1013,7 @@ $('#figure_pubdate-field .input-group.date').datetimepicker({
 		showClear: true,
 		showClose: true,
 		allowInputToggle: true,
-		format: 'YYYY / MMMM',
+		format: 'YYYY (MMMM)',
 });
 </script>");
 	
