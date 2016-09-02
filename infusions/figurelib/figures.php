@@ -170,7 +170,7 @@ if (
 			// Get Figure Datas
 			$result = dbquery("
 				SELECT
-					f.figure_id, f.figure_title, f.figure_variant, f.figure_pubdate, f.figure_series, f.figure_clickcount, f.figure_datestamp, 
+					f.figure_id, f.figure_title, f.figure_manufacturer, f.figure_variant, f.figure_pubdate, f.figure_series, f.figure_clickcount, f.figure_datestamp, 
 					fm.figure_manufacturer_name,
 					fb.figure_brand_name,
 					fs.figure_scale_name,
