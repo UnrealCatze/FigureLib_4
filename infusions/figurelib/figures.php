@@ -189,7 +189,9 @@ if (
 			$info['figure_rows'] = dbrows($result);
 			
 			// Pagenav
-			$info['page_nav'] = $max_rows > $figurelibSettings['figure_per_page'] ? makepagenav($_GET['rowstart'], $figurelibSettings['figure_per_page'], $max_rows, 3, INFUSIONS."figurelib/figures.php?figure_cat_id=".$info['figure_cat_id']."&amp;") : false;
+			$info['page_nav'] = $max_rows > $figurelibSettings['figure_per_page'] ? 
+			makepagenav($_GET['rowstart'], $figurelibSettings['figure_per_page'], $max_rows, 3, 
+			INFUSIONS."figurelib/figures.php?figure_cat_id=".$info['figure_cat_id']."&amp;figure_manufacturer=".$mdata['figure_manufacturer']."&amp;") : false;
 			
 			// Add Figure Informations into Array
 			while ($data = dbarray($result)) {
