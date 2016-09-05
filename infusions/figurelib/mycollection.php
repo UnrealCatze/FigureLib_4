@@ -284,17 +284,17 @@ opentable("<strong>".$locale['mc_0001']."</strong>");
 									
 								// COLUMN 2 (name of figure)
 									echo "<div class='col-lg-2 col-md-2 col-sm-4 col-xs-4'>\n";
-											echo "<div class='side-small figurelib-inforow-height'><a href='".INFUSIONS."figurelib/figures.php?figure_id=".$data['figure_id']."' title='".$locale['CLFP_002']." : ".$data['figure_title']."' alt='".$locale['CLFP_002']." : ".$data['figure_title']."'>".trimlink($data['figure_title'],8)."</a>";
+											echo "<div class='side-small figurelib-inforow-height'><a href='".INFUSIONS."figurelib/figures.php?figure_id=".$data['figure_id']."' title='".$locale['CLFP_002']." : ".$data['figure_title']."' alt='".$locale['CLFP_002']." : ".$data['figure_title']."'>".trimlink($data['figure_title'],13)."</a>";
 											echo "</div></div>\n";	
 																				
 								// COLUMN 3 (manufacturer)
 									echo "<div class='col-lg-2 col-md-2 col-sm-4 col-xs-4'>\n";
-											echo "<div class='side-small figurelib-inforow-height' title='".$locale['CLFP_003']." : ".$data['figure_manufacturer_name']."' alt='".$locale['CLFP_003']." : ".$data['figure_manufacturer_name']."'>".trimlink($data['figure_manufacturer_name'],10)."</div>\n";
+											echo "<div class='side-small figurelib-inforow-height' title='".$locale['CLFP_003']." : ".$data['figure_manufacturer_name']."' alt='".$locale['CLFP_003']." : ".$data['figure_manufacturer_name']."'>".trimlink($data['figure_manufacturer_name'],13)."</div>\n";
 											echo "</div>\n";
 								
 								// COLUMN 4 (brand)
 									echo "<div class='col-lg-2 hidden-2 hidden-sm hidden-xs'>\n";
-											echo "<div class='side-small figurelib-inforow-height' title='".$locale['CLFP_004']." : ".$data['figure_brand_name']."' alt='".$locale['CLFP_004']." : ".$data['figure_brand_name']."'>".trimlink($data['figure_brand_name'],10)."</div>\n";
+											echo "<div class='side-small figurelib-inforow-height' title='".$locale['CLFP_004']." : ".$data['figure_brand_name']."' alt='".$locale['CLFP_004']." : ".$data['figure_brand_name']."'>".trimlink($data['figure_brand_name'],13)."</div>\n";
 											echo "</div>\n";
 								
 								// COLUMN 5 (scale)
@@ -307,7 +307,7 @@ opentable("<strong>".$locale['mc_0001']."</strong>");
 										
 												// COLUMN 6 (release date)
 												echo "<div class='col-lg-1 col-md-1 hidden-sm hidden-xs'>\n";
-													echo "<div class='side-small figurelib-inforow-height' title='".$locale['CLFP_006']." : ".$locale['CLFP_008']."' alt='".$locale['CLFP_006']." : ".$locale['CLFP_008']."'>".trimlink($locale['CLFP_008'],7)."</div>\n";
+													echo "<div class='side-small figurelib-inforow-height' title='".$locale['CLFP_006']." : ".$locale['CLFP_008']."' alt='".$locale['CLFP_006']." : ".$locale['CLFP_008']."'>".trimlink($locale['CLFP_008'],5)."</div>\n";
 												echo "</div>\n";			
 									} else {
 										

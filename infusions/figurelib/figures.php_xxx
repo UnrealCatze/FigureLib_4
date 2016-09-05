@@ -1,11 +1,11 @@
 <?php
 	//error_reporting(E_ALL);
 	// Formularinhalte prüfen
-	//echo "Check Form:";
+	//echo "Formularinhalte prüfen:";
 	//print_r ($_POST);
 	//echo "<br>";
 	// GET-Parameter prüfen
-	//echo "Check GET-Parameter:";
+	//echo "GET-Parameter prüfen:";
 	//print_r ($_GET);
 	// Sessions prüfen
 	//print_r ($_SESSION);
@@ -170,10 +170,9 @@ if (
 			// Get Figure Datas
 			$result = dbquery("
 				SELECT
-					f.figure_id, f.figure_title, f.figure_brand, f.figure_scale, f.figure_manufacturer, f.figure_submitter, f.figure_variant, f.figure_pubdate, f.figure_series, f.figure_clickcount, f.figure_datestamp, 
-					fm.figure_manufacturer_name, fm.figure_manufacturer_id, 
-					fb.figure_brand_name, fb.figure_brand_id,
-					fs.figure_scale_name, fs.figure_scale_id,
+					f.figure_id, f.figure_title, f.figure_variant, f.figure_pubdate, f.figure_series, f.figure_clickcount, f.figure_datestamp, 
+					fm.*,	
+					fb.figure_brand_name, fs.figure_scale_name,	
 					fu.user_id, fu.user_name, fu.user_status
 				FROM ".DB_FIGURE_ITEMS." AS f 
 				LEFT JOIN ".DB_FIGURE_MANUFACTURERS." AS fm ON fm.figure_manufacturer_id=f.figure_manufacturer
@@ -188,11 +187,8 @@ if (
 			// Count Items
 			$info['figure_rows'] = dbrows($result);
 			
-			
 			// Pagenav
-			$info['page_nav'] = $max_rows > $figurelibSettings['figure_per_page'] ? 
-			makepagenav($_GET['rowstart'], $figurelibSettings['figure_per_page'], $max_rows, 3, 
-			INFUSIONS."figurelib/figures.php?figure_cat_id=".$info['figure_cat_id']."&amp;figure_manufacturer=".$_GET['figure_manufacturer']."&amp;") : false;
+			$info['page_nav'] = $max_rows > $figurelibSettings['figure_per_page'] ? makepagenav($_GET['rowstart'], $figurelibSettings['figure_per_page'], $max_rows, 3, INFUSIONS."figurelib/figures.php?figure_cat_id=".$info['figure_cat_id']."&amp;") : false;
 			
 			// Add Figure Informations into Array
 			while ($data = dbarray($result)) {
@@ -201,6 +197,21 @@ if (
 					'link' => INFUSIONS."figurelib/figures.php?figure_id=".$data['figure_id'],
 					'name' => $data['figure_title'],
 					'manufacturer' => $data['figure_manufacturer_name'],
+					'manufacturer_url' => $data['figure_manufacturer_url'],					
+					'manufacturer_email' => $data['figure_manufacturer_email'],
+					'manufacturer_facebook' => $data['figure_manufacturer_facebook'],
+					'manufacturer_twitter' => $data['figure_manufacturer_twitter'],
+					'manufacturer_youtube' => $data['figure_manufacturer_youtube'],
+					'manufacturer_address' => $data['figure_manufacturer_address'],				
+					'manufacturer_pinterest' => $data['figure_manufacturer_pinterest'],
+					'manufacturer_instagram' => $data['figure_manufacturer_instagram'],
+					'manufacturer_googleplus' => $data['figure_manufacturer_googleplus'],
+					'manufacturer_affiliate_program' => $data['figure_manufacturer_affiliate_program'],
+					'manufacturer_affiliate_url' => $data['figure_manufacturer_affiliate_url'],
+					'manufacturer_affiliate_code' => $data['figure_manufacturer_affiliate_code'],
+					'manufacturer_info_admin' => $data['figure_manufacturer_info_admin'],
+					'manufacturer_address' => $data['figure_manufacturer_address'],					
+					'manufacturer_description' => $data['figure_manufacturer_description'],
 					'scale' => $data['figure_scale_name'],
 					'year' => $data['figure_pubdate'],
 					'brand' => $data['figure_brand_name'],

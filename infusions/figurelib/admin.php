@@ -176,6 +176,7 @@ function figurelib_listing() {
 	$total_rows = dbcount("(figure_id)", DB_FIGURE_ITEMS);
 	$submissions = dbcount("(figure_id)", DB_FIGURE_ITEMS, "figure_freigabe = 0");
 	$pendings = dbcount("(figure_id)", DB_FIGURE_ITEMS, "figure_freigabe = 2");
+	$inactive = dbcount("(figure_id)", DB_FIGURE_ITEMS, "figure_freigabe = 3");
 	$rowstart = isset($_GET['rowstart']) && ($_GET['rowstart'] <= $total_rows) ? $_GET['rowstart'] : 0;
 	// add a filter browser
 	$catOpts = array(
