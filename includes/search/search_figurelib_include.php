@@ -52,15 +52,13 @@ if ($_GET['stype'] == "figurelib" || $_GET['stype'] == "all") {
 		$items_count .= THEME_BULLET."&nbsp;<a href='".FUSION_SELF."?stype=figurelib&amp;stext=".$_POST['stext']."&amp;".$composevars."'>".$locale['f401'].$rows."</a><br />\n";
 		$result = dbquery("
 			SELECT 
-				f.figure_id, f.figure_title, f.figure_description, f.figure_datestamp, f.figure_clickcount,
+				f.figure_id, f.figure_title, f.figure_description, f.figure_datestamp, f.figure_clickcount, f.figure_pubdate,
 				fc.figure_cat_name,
 				fm.figure_manufacturer_name,
-				fy.figure_year,
 				fu.user_id, fu.user_name, fu.user_status
 			FROM ".DB_FIGURE_ITEMS." AS f
 			LEFT JOIN ".DB_FIGURE_CATS." AS fc ON fc.figure_cat_id=f.figure_cat
 			LEFT JOIN ".DB_FIGURE_MANUFACTURERS." AS fm ON fm.figure_manufacturer_id=f.figure_manufacturer
-			LEFT JOIN ".DB_FIGURE_YEARS." AS fy ON fy.figure_year_id=f.figure_pubdate
 			LEFT JOIN ".DB_USERS." AS fu ON fu.user_id=f.figure_submitter
 			WHERE ".$fieldsvar." AND f.figure_freigabe='1'
 			".($_POST['datelimit'] != 0 ? " AND figure_datestamp >= '".(time() - $_POST['datelimit'])."'" : "")."
@@ -83,7 +81,7 @@ if ($_GET['stype'] == "figurelib" || $_GET['stype'] == "all") {
 			if ($text_frag != "") $search_result .= "<div class='quote' style='width:auto;height:auto;overflow:auto'>".$text_frag."</div><br />";
 			$search_result .= "<span class='small'><span class='alt'>".$locale['f404']."</span> ".($data['user_id'] ? profile_link($data['user_id'], $data['user_name'], $data['user_status']) : "");
 			$search_result .= ($data['figure_manufacturer_name'] ? " |\n<span class='alt'>".$locale['f405']."</span> ".$data['figure_manufacturer_name'] : "");
-			$search_result .= ($data['figure_year'] ? " |\n<span class='alt'>".$locale['f406']."</span> ".$data['figure_year'] : "")."<br />\n";
+			$search_result .= ($data['figure_pubdate'] ? " |\n<span class='alt'>".$locale['f406']."</span> ".$data['figure_pubdate'] : "")."<br />\n";
 			$search_result .= "<span class='alt'>".$locale['f407']."</span> ".showdate("%d.%m.%y", $data['figure_datestamp'])." |\n";
 			$search_result .= "<span class='alt'>".$locale['f408']."</span> ".$data['figure_clickcount']."</span><br /><br />\n";
 			search_globalarray($search_result);
