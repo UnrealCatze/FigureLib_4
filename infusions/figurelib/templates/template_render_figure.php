@@ -100,8 +100,8 @@ global $settings;
 							
 							<div class='col-xs-6 col-sm-6 col-md-6 col-lg-6'>
 								<div class='pull-right'>";
-									if ($data['figure_manufacturer_id'])  {	
-									echo "<img src='".figures_getImagePath("manufacturers", "thumb", $data['figure_manufacturer_id'])."' style='max-width: 50px;' />";
+									if ($data['figure_manufacturer_image'])  {	
+									echo "<img src='".figures_getImagePath("manufacturers", "thumb", $data['figure_manufacturer_id'])."' style='max-width: 70px;' />";
 									}
 							echo "</div>
 						</div>
@@ -109,41 +109,45 @@ global $settings;
 				
 				// ################################################        
 					
+		if ( $data['figure_manufacturer_url'] || $data['figure_manufacturer_email'] || 	$data['figure_manufacturer_facebook'] || 
+		$data['figure_manufacturer_twitter'] || $data['figure_manufacturer_youtube'] || $data['figure_manufacturer_pinterest'] || 
+		$data['figure_manufacturer_instagram'] || 	$data['figure_manufacturer_googleplus']) {
+					
 					echo "<li class='list-group-item'>"; 			
 					echo "<span class='text-bold'>Online: </span>";
 						
 						if ($data['figure_manufacturer_url'])  {				
 									echo "&nbsp;<a class='' href='".$data['figure_manufacturer_url']."'><i class='fa fa-globe' aria-hidden='true'> ".$locale['figm_0030']."</i></a>\n";
-						} 
+						} else { } 
 				// -----------------------------------------------		
 						 if ($data['figure_manufacturer_email'])  {					
 								echo "&nbsp;<a class='' href='".$data['figure_manufacturer_email']."'><i class='fa fa-envelope' aria-hidden='true'> ".$locale['figm_0031']."</i></a>\n";
-						} 
+						} else { } 
 				// --------------------------------------- --------	
 						if ($data['figure_manufacturer_facebook'])  {
 									echo "&nbsp;<a class='' href='".$data['figure_manufacturer_facebook']."'><i class='fa fa-facebook-official' aria-hidden='true'> ".$locale['figm_0032']."</i></a>\n";
-						} 
+						} else { } 
 				// -----------------------------------------------	
 						if ($data['figure_manufacturer_twitter'])  {
 									echo "&nbsp;<a class='' href='".$data['figure_manufacturer_twitter']."'><i class='fa fa-twitter' aria-hidden='true'> ".$locale['figm_0033']."</i></a>\n";
-						} 
+						} else { } 
 				// -----------------------------------------------	
 						if ($data['figure_manufacturer_youtube'])  {
 									echo "&nbsp;<a class='' href='".$data['figure_manufacturer_youtube']."'><i class='fa fa-youtube' aria-hidden='true'> ".$locale['figm_0034']."</i></a>\n";
-						} 
+						} else { }  
 				// -----------------------------------------------	
 						if ($data['figure_manufacturer_pinterest'])  {
 									echo "&nbsp;<a class='' href='".$data['figure_manufacturer_pinterest']."'><i class='fa fa-pinterest' aria-hidden='true'> ".$locale['figm_0036']."</i></a>\n";
-						} 
+						} else { }  
 				// -----------------------------------------------			
 						if ($data['figure_manufacturer_instagram'])  {
 									echo "&nbsp;<a class='' href='".$data['figure_manufacturer_instagram']."'><i class='fa fa-instagram' aria-hidden='true'> ".$locale['figm_0037']."</i></a>\n";
-						} 
+						} else { }  
 				// -----------------------------------------------	
 						if ($data['figure_manufacturer_googleplus'])  {
 									echo "&nbsp;<a class='' href='".$data['figure_manufacturer_googleplus']."'><i class='fa fa-google-plus' aria-hidden='true'> ".$locale['figm_0038']."</i></a>\n";				
-						} 						
-					
+						} else { }  						
+				} else { }	
 					echo "</li>";
 				
 				// ################################################ 
@@ -153,15 +157,16 @@ global $settings;
 								$manufacturer_address = strip_tags(parse_textarea($data['figure_manufacturer_address']));
 							echo $manufacturer_address;
 							echo "</li>";
-					} else 
+					} else { }   
 				// -----------------------------------------------	
-				 if ($data['figure_manufacturer_description'])  {
+				 
+					if ($data['figure_manufacturer_description'])  {
 							echo "<li class='list-group-item'>";
 								echo "<span class='text-bold'>".$locale['figm_0045']." </span>";
-								$manufacturer_description = strip_tags(parse_textarea($data['figure_manufacturer_description']));
+								$manufacturer_description = nl2br(parse_textarea($data['figure_manufacturer_description']));
 								echo $manufacturer_description;
 							echo "</li>";
-						} 
+					} else { } 
 				// -----------------------------------------------	
 				
 		// ADMIN INFOS MANUFACTURERS
@@ -171,10 +176,10 @@ global $settings;
 						if ($data['figure_manufacturer_info_admin'])  {
 							echo "<li class='list-group-item'>";
 								echo "<span class='text-bold'>".$locale['figm_0042'].": </span>";
-								$manufacturer_admin_info = strip_tags(parse_textarea($data['figure_manufacturer_info_admin']));
+								$manufacturer_admin_info = nl2br(parse_textarea($data['figure_manufacturer_info_admin']));
 								echo $manufacturer_admin_info;
 							echo "</li>";
-						} 				
+						} else { } 				
 				}
 				
 					/*	$locale['figm_0039'] = "Affiliate Program";
@@ -347,7 +352,7 @@ global $settings;
 							
 							<div class='col-xs-6 col-sm-6 col-md-6 col-lg-6'>
 								<div class='pull-right'>";
-									if ($data['figure_manufacturer_id'])  {	
+									if ($data['figure_manufacturer_image'])  {	
 									echo "<img src='".figures_getImagePath("manufacturers", "thumb", $data['figure_manufacturer_id'])."' style='max-width: 50px;' />";
 									}
 							echo "</div>
@@ -361,35 +366,35 @@ global $settings;
 						
 						if ($data['figure_manufacturer_url'])  {				
 									echo "&nbsp;<a class='' href='".$data['figure_manufacturer_url']."'><i class='fa fa-globe' aria-hidden='true'> ".$locale['figm_0030']."</i></a>\n";
-						} 
+						} else { } 
 				// -----------------------------------------------		
 						 if ($data['figure_manufacturer_email'])  {					
 								echo "&nbsp;<a class='' href='".$data['figure_manufacturer_email']."'><i class='fa fa-envelope' aria-hidden='true'> ".$locale['figm_0031']."</i></a>\n";
-						} 
+						} else { } 
 				// --------------------------------------- --------	
 						if ($data['figure_manufacturer_facebook'])  {
 									echo "&nbsp;<a class='' href='".$data['figure_manufacturer_facebook']."'><i class='fa fa-facebook-official' aria-hidden='true'> ".$locale['figm_0032']."</i></a>\n";
-						} 
+						} else { } 
 				// -----------------------------------------------	
 						if ($data['figure_manufacturer_twitter'])  {
 									echo "&nbsp;<a class='' href='".$data['figure_manufacturer_twitter']."'><i class='fa fa-twitter' aria-hidden='true'> ".$locale['figm_0033']."</i></a>\n";
-						} 
+						} else { } 
 				// -----------------------------------------------	
 						if ($data['figure_manufacturer_youtube'])  {
 									echo "&nbsp;<a class='' href='".$data['figure_manufacturer_youtube']."'><i class='fa fa-youtube' aria-hidden='true'> ".$locale['figm_0034']."</i></a>\n";
-						} 
+						} else { }  
 				// -----------------------------------------------	
 						if ($data['figure_manufacturer_pinterest'])  {
 									echo "&nbsp;<a class='' href='".$data['figure_manufacturer_pinterest']."'><i class='fa fa-pinterest' aria-hidden='true'> ".$locale['figm_0036']."</i></a>\n";
-						} 
+						} else { }  
 				// -----------------------------------------------			
 						if ($data['figure_manufacturer_instagram'])  {
 									echo "&nbsp;<a class='' href='".$data['figure_manufacturer_instagram']."'><i class='fa fa-instagram' aria-hidden='true'> ".$locale['figm_0037']."</i></a>\n";
-						} 
+						} else { }  
 				// -----------------------------------------------	
 						if ($data['figure_manufacturer_googleplus'])  {
 									echo "&nbsp;<a class='' href='".$data['figure_manufacturer_googleplus']."'><i class='fa fa-google-plus' aria-hidden='true'> ".$locale['figm_0038']."</i></a>\n";				
-						} 						
+						} else { }  						
 					
 					echo "</li>";
 				
@@ -400,15 +405,16 @@ global $settings;
 								$manufacturer_address = strip_tags(parse_textarea($data['figure_manufacturer_address']));
 							echo $manufacturer_address;
 							echo "</li>";
-					} else 
+					} else { }   
 				// -----------------------------------------------	
-				 if ($data['figure_manufacturer_description'])  {
+				 
+					if ($data['figure_manufacturer_description'])  {
 							echo "<li class='list-group-item'>";
 								echo "<span class='text-bold'>".$locale['figm_0045']." </span>";
-								$manufacturer_description = strip_tags(parse_textarea($data['figure_manufacturer_description']));
+								$manufacturer_description = nl2br(parse_textarea($data['figure_manufacturer_description']));
 								echo $manufacturer_description;
 							echo "</li>";
-						} 
+					} else { } 
 				// -----------------------------------------------	
 				
 		// ADMIN INFOS MANUFACTURERS
@@ -416,12 +422,14 @@ global $settings;
 				if (iADMIN || iSUPERADMIN) {
 											
 						if ($data['figure_manufacturer_info_admin'])  {
-							echo "<li class='list-group-item'>";
+							
+						echo "<li class='list-group-item alert alert-danger'>"; 
 								echo "<span class='text-bold'>".$locale['figm_0042'].": </span>";
-								$manufacturer_admin_info = strip_tags(parse_textarea($data['figure_manufacturer_info_admin']));
-								echo $manufacturer_admin_info;
+								$manufacturer_admin_info = nl2br(parse_textarea($data['figure_manufacturer_info_admin']));						
+									echo $manufacturer_admin_info;
+
 							echo "</li>";
-						} 				
+						} else { } 				
 				}
 				
 					/*	$locale['figm_0039'] = "Affiliate Program";
@@ -432,13 +440,13 @@ global $settings;
 						'manufacturer_affiliate_code' => $data['figure_manufacturer_affiliate_code'],	*/				
 				
       echo "</ul>";
-      //echo "<div class='panel-footer'></div>";
+      echo "<div class='panel-footer'></div>";
     echo "</div>
   </div>
 </div>";
 
 	}	
-// ######################################################################################################
+// ######################################################################################################	
 			
 					
 					
