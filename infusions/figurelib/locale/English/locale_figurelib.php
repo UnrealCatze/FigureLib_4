@@ -652,7 +652,8 @@ $locale['figure_1301'] = "Add Figure Point of Articulation";
 $locale['figure_1302'] = "Current Figure Point of Articulations";
 $locale['figure_1303'] = "POA";
 $locale['figure_1304'] = "Figure Point of Articulations (POA)";
-$locale['figure_1305'] = "Most Point of Articulations (POA)";
+$locale['figure_1305'] = "Most Point of Articulations";
+
 
 $locale['figure_1310'] = "Figure Point of Articulation added";
 $locale['figure_1311'] = "Figure Point of Articulation updated";
@@ -953,9 +954,11 @@ $locale['CLFP_021']= "Last entries";
 $locale['CLFP_022']= "Most viewed Figures";
 $locale['CLFP_023']= "Figure Stats";
 $locale['CLFP_024']= "Not enough data available to create a statistic.";
-$locale['CLFP_025']= "The figure, which most be in the user's possession";
+$locale['CLFP_025']= "Most owned by user's";
 $locale['CLFP_026']= "Highest usedprice";
 $locale['CLFP_027']= "Highest retailprice";
+$locale['CLFP_028']= "Oldest Figure";
+
 
 // mycollection
 $locale['mc_0001']= "My Figure Collection";
@@ -988,4 +991,5 @@ $locale['stats_003'] ="Top 5";
 $locale['stats_004'] ="Total number of figures:";
 $locale['stats_005'] ="Total figures owned by user:";
 $locale['stats_006'] ="Top 10";
+$locale['stats_007'] ="Top 10 Rankings";
 
