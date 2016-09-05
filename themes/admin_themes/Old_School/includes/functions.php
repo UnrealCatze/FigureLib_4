@@ -52,7 +52,7 @@ function render_admin_dashboard() {
 }
 
 function render_dashboard() {
-   global $members, $forum, $download, $news, $articles, $weblinks, $figurelib, $photos, $global_comments, $global_ratings, $global_submissions, $link_type, $submit_type, $comments_type, $locale, $aidlink, $settings, $infusions_count;
+    global $members, $forum, $download, $news, $articles, $weblinks, $figurelib, $photos, $global_comments, $global_ratings, $global_submissions, $link_type, $submit_type, $comments_type, $locale, $aidlink, $settings, $infusions_count;
     $mobile = '12';
     $tablet = '12';
     $laptop = '6';
@@ -117,6 +117,48 @@ function render_dashboard() {
         closeside();
         echo "</div>\n";
     }
+	if (db_exists(DB_FIGURE_ITEMS)) {
+							echo "<div class='col-xs-$mobile col-sm-$tablet col-md-$laptop col-lg-$desktop'>\n";
+							openside("", "well");
+							echo "<span class='text-smaller text-uppercase'><strong>Figure Datebase Overview</strong></span>\n<br/>\n";
+							echo "<div class='clearfix m-t-10'>\n";
+							echo "<img class='img-responsive pull-right dashboard-icon' src='".get_image("ac_FI")."'/>\n";
+							echo "<div class='pull-left display-inline-block m-r-10'>\n";
+							echo "<span class='text-smaller'>Figures</span>\n<br/>\n";
+							echo "<h4 class='m-t-0'>".number_format($figurelib['figure'])."</h4>\n";
+							echo "</div>\n";
+							echo "<div class='pull-left display-inline-block m-r-10'>\n";
+							echo "<span class='text-smaller'>".$locale['257']."</span>\n<br/>\n";
+							echo "<h4 class='m-t-0'>".number_format($figurelib['comment'])."</h4>\n";
+							
+							echo "</div>\n";
+							echo "<div class='pull-left display-inline-block m-r-10'>\n";
+							echo "<span class='text-smaller'>".$locale['254']."</span>\n<br/>\n";
+										 
+							 // wenn submit daten da sind mache anzahl rot ansonsten schwarz
+							 $submits = dbcount("(figure_id)", DB_FIGURE_ITEMS, "figure_freigabe='0'");
+								if ($submits != "0") {
+									echo "<h4 class='m-t-0'><font color='red'>".$submits."</font></h4>\n";
+													} else {
+									echo "<h4 class='m-t-0'>".$submits."</font></h4>\n";
+													}	
+							echo "</div>\n";		
+							echo "<div class='pull-left display-inline-block m-r-10'>\n";
+							echo "<span class='text-smaller'>Pendings</span>\n<br/>\n";
+							
+							// wenn pending daten da sind mache anzahl rot ansonsten schwarz				
+							$pendings = dbcount("(figure_id)", DB_FIGURE_ITEMS, "figure_freigabe='2'");
+								if ($pendings != "0") {
+									echo "<h4 class='m-t-0'><font color='red'>".$pendings."</font></h4>\n";
+													} else {
+									echo "<h4 class='m-t-0'>".$pendings."</font></h4>\n";
+													}		
+							
+								echo "</div>\n";
+								echo "</div>\n";
+								closeside();
+							echo "</div>";
+						}
     if (db_exists(DB_DOWNLOADS)) {
         echo "<div class='col-xs-$mobile col-sm-$tablet col-md-$laptop col-lg-$desktop'>\n";
         openside("", "well");
@@ -205,48 +247,6 @@ function render_dashboard() {
         closeside();
         echo "</div>";
     }
-	if (db_exists(DB_FIGURE_ITEMS)) {
-		echo "<div class='col-xs-$mobile col-sm-$tablet col-md-$laptop col-lg-$desktop'>\n";
-		openside("", "well");
-		echo "<span class='text-smaller text-uppercase'><strong>Figure Datebase Overview</strong></span>\n<br/>\n";
-		echo "<div class='clearfix m-t-10'>\n";
-		echo "<img class='img-responsive pull-right dashboard-icon' src='".get_image("ac_FI")."'/>\n";
-		echo "<div class='pull-left display-inline-block m-r-10'>\n";
-		echo "<span class='text-smaller'>Figures</span>\n<br/>\n";
-		echo "<h4 class='m-t-0'>".number_format($figurelib['figure'])."</h4>\n";
-		echo "</div>\n";
-		echo "<div class='pull-left display-inline-block m-r-10'>\n";
-		echo "<span class='text-smaller'>".$locale['257']."</span>\n<br/>\n";
-		echo "<h4 class='m-t-0'>".number_format($figurelib['comment'])."</h4>\n";
-		
-		echo "</div>\n";
-		echo "<div class='pull-left display-inline-block m-r-10'>\n";
-		echo "<span class='text-smaller'>".$locale['254']."</span>\n<br/>\n";
-					 
-		 // wenn submit daten da sind mache anzahl rot ansonsten schwarz
-		 $submits = dbcount("(figure_id)", DB_FIGURE_ITEMS, "figure_freigabe='0'");
-			if ($submits != "0") {
-				echo "<h4 class='m-t-0'><font color='red'>".$submits."</font></h4>\n";
-								} else {
-				echo "<h4 class='m-t-0'>".$submits."</font></h4>\n";
-								}	
-		echo "</div>\n";		
-		echo "<div class='pull-left display-inline-block m-r-10'>\n";
-		echo "<span class='text-smaller'>Pendings</span>\n<br/>\n";
-		
-		// wenn pending daten da sind mache anzahl rot ansonsten schwarz				
-		$pendings = dbcount("(figure_id)", DB_FIGURE_ITEMS, "figure_freigabe='2'");
-			if ($pendings != "0") {
-				echo "<h4 class='m-t-0'><font color='red'>".$pendings."</font></h4>\n";
-								} else {
-				echo "<h4 class='m-t-0'>".$pendings."</font></h4>\n";
-								}		
-		
-			echo "</div>\n";
-			echo "</div>\n";
-			closeside();
-		echo "</div>";
-	}
     if (db_exists(DB_PHOTOS)) {
         echo "<div class='col-xs-$mobile col-sm-$tablet col-md-$laptop col-lg-$desktop'>\n";
         openside("", "well");
@@ -369,7 +369,7 @@ function render_dashboard() {
                     break;
 				case "f":
 					$review_link = INFUSIONS."figurelib/admin.php".$aidlink."&amp;section=figurelib_submissions&amp;submit_id=".$submit_data['submit_id'];
-					break;
+							break;
                 default:
                     // @todo: add admin class API to use infusion_db.php to register submission link
                     $review_link = "";
