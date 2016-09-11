@@ -23,7 +23,21 @@ if (file_exists(INFUSIONS."figurelib/locale/".LOCALESET."locale_figurelib.php"))
 } else {
 	include INFUSIONS."figurelib/locale/English/locale_figurelib.php";
 }
-				
+		// SEETING FIGURES PER SITE
+		$limit = 5; 
+		
+		// Set Empty Arrays
+		$info = array("figure_rows" => 0, "page_nav" => false);
+		$info['item'] = array();
+
+		// Count all Figures
+		$max_rows = dbcount("(figure_id)", DB_FIGURE_ITEMS, "figure_freigabe=1 AND ".groupaccess("figure_visibility")."");
+		
+		// Check Rowstart
+		$_GET['rowstart'] = isset($_GET['rowstart']) && isnum($_GET['rowstart']) && $_GET['rowstart'] <= $max_rows ? $_GET['rowstart'] : 0;	
+	
+	if ($max_rows) {
+					
 // DATENBANK AUSLESEN UND DATEN BEREITSTELLEN
 $result = dbquery("
 	SELECT 
@@ -39,9 +53,14 @@ $result = dbquery("
 	LEFT JOIN ".DB_FIGURE_MANUFACTURERS." tbm ON tbm.figure_manufacturer_id = tb.figure_manufacturer
 	LEFT JOIN ".DB_FIGURE_BRANDS." tbb ON tbb.figure_brand_id = tb.figure_brand
 	LEFT JOIN ".DB_FIGURE_SCALES." tbs ON tbs.figure_scale_id = tb.figure_scale
-	".(multilang_table("FI") ? "WHERE figure_language='".LANGUAGE."' AND" : "WHERE")." tb.figure_freigabe='1' 
-	ORDER BY figure_datestamp DESC LIMIT 0,5
-");
+	".(multilang_table("FI") ? "WHERE figure_language='".LANGUAGE."' AND" : "WHERE")." tb.figure_freigabe='1' AND ".groupaccess("tb.figure_visibility")."
+	ORDER BY figure_datestamp DESC
+	LIMIT ".$_GET['rowstart'].",".$limit."
+	");
+
+
+			// Pagenav		
+			$info['page_nav'] = $max_rows > $limit ? makepagenav($_GET['rowstart'], $limit, $max_rows, 3, FUSION_SELF."?") : 0;
 			
 // PANEL ÖFFNEN / ANFANG		
 //openside($locale['lastentries']);
@@ -146,17 +165,17 @@ if (dbrows($result) != 0) {
 
 		// COLUMN 2 (name of figure)
 		echo "<div class='col-lg-2 col-md-3 col-sm-4 col-xs-4'>\n";
-			echo "<div class='side-small figurelib-inforow-height'><a href='".INFUSIONS."figurelib/figures.php?figure_id=".$data['figure_id']."' title='".$locale['CLFP_002']." : ".$data['figure_title']."' alt='".$locale['CLFP_002']." : ".$data['figure_title']."'>".trimlink($data['figure_title'], 15)."</a>";
+			echo "<div class='side-small figurelib-inforow-height'><a href='".INFUSIONS."figurelib/figures.php?figure_id=".$data['figure_id']."' title='".$locale['CLFP_002']." : ".$data['figure_title']."' alt='".$locale['CLFP_002']." : ".$data['figure_title']."'>".trimlink($data['figure_title'], 12)."</a>";
 			echo "</div></div>\n";	
 
 		// COLUMN 3 (manufacturer)
 		echo "<div class='col-lg-2 col-md-3 col-sm-4 col-xs-4'>\n";	
-			echo "<div class='side-small figurelib-inforow-height' title='".$locale['CLFP_003']." : ".$data['figure_manufacturer_name']."' alt='".$locale['CLFP_003']." : ".$data['figure_manufacturer_name']."'>".trimlink($data['figure_manufacturer_name'],15)."</div>\n";
+			echo "<div class='side-small figurelib-inforow-height' title='".$locale['CLFP_003']." : ".$data['figure_manufacturer_name']."' alt='".$locale['CLFP_003']." : ".$data['figure_manufacturer_name']."'>".trimlink($data['figure_manufacturer_name'],12)."</div>\n";
 		echo "</div>\n";
 		
 		// COLUMN 4 (brand)
 		echo "<div class='col-lg-2 hidden-md hidden-sm hidden-xs'>\n";
-			echo "<div class='side-small figurelib-inforow-height' title='".$locale['CLFP_004']." : ".$data['figure_brand_name']."' alt='".$locale['CLFP_004']." : ".$data['figure_brand_name']."'>".trimlink($data['figure_brand_name'],15)."</div>\n";
+			echo "<div class='side-small figurelib-inforow-height' title='".$locale['CLFP_004']." : ".$data['figure_brand_name']."' alt='".$locale['CLFP_004']." : ".$data['figure_brand_name']."'>".trimlink($data['figure_brand_name'],12)."</div>\n";
 		echo "</div>\n";
 		
 		// COLUMN 5 (scale)
@@ -231,9 +250,14 @@ if (dbrows($result) != 0) {
 		//echo "</div>\n";
 		echo "</div>\n";
 		echo "</div>\n";
+		
+		
 	}
+	}
+	
 
-
+// PAGE NAV
+		//echo $info['page_nav'] ? "<div class='text-right'>".$info['page_nav']."</div>" : '';
 	
 } else {
 	echo "<div style='text-align: center;'>".$locale['CLFP_001']."</div>"; // 001 = No figures available"
