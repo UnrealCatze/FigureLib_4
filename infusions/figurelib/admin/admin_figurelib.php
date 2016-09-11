@@ -523,7 +523,7 @@ if (!empty($result)) {
         "placeholder" => $locale['figurelib/admin/figurelib.php_005'],
         "error_text"  => $locale['figurelib/admin/figurelib.php_006'],
         "inline"      => true,
-        "width"       => "520px",
+        "inner_width"      => "520px",
         "required"    => true
     ]);
 	
@@ -532,7 +532,7 @@ if (!empty($result)) {
         "placeholder" => $locale['figurelib/admin/figurelib.php_008'],
         "error_text"  => $locale['figurelib/admin/figurelib.php_070'],
         "inline"      => true,
-        "width"       => "520px",
+        "inner_width"      => "520px",
         "required"    => true,
         "no_root"     => 1,
         "query"       => (multilang_table("FI") ? "WHERE figure_cat_language='".LANGUAGE."'" : ""),
@@ -544,7 +544,7 @@ if (!empty($result)) {
     echo form_text("figure_variant", $locale['figurelib/admin/figurelib.php_010'], $data['figure_variant'], [
 		"placeholder" => $locale['figurelib/admin/figurelib.php_011'],
         "inline" => true,
-        "width" => "520px",
+        "inner_width"=> "520px",
     ]);
 	
 	// Formfield "Figure Manufacturer"
@@ -552,7 +552,7 @@ if (!empty($result)) {
         "placeholder" => $locale['figurelib/admin/figurelib.php_013'],
         "error_text"  => $locale['figurelib/admin/figurelib.php_014'],
         "inline"      => true,
-        "width"       => "520px",
+        "inner_width"      => "520px",
         "required"    => true,
         "no_root"     => 1,
         "query"       => (multilang_table("FI") ? "WHERE figure_manufacturer_language='".LANGUAGE."'" : ""),
@@ -564,7 +564,7 @@ if (!empty($result)) {
     echo form_text("figure_artists", $locale['figurelib/admin/figurelib.php_015'], $data['figure_artists'], [
 		"placeholder" => $locale['figurelib/admin/figurelib.php_016'],
         "inline" => true,
-        "width" => "520px",
+        "inner_width"=> "520px",
     ]);
 	
 	// Formfield "Figure Country"
@@ -575,7 +575,7 @@ if (!empty($result)) {
         "options" => $countries,
         "placeholder" => $locale['figurelib/admin/figurelib.php_018'],
 		"inline" => true,
-		"width" => "520px",
+		"inner_width"=> "520px",
         "allowclear" => true
     ]);
 
@@ -584,7 +584,7 @@ if (!empty($result)) {
         "placeholder" => $locale['figurelib/admin/figurelib.php_020'],
         "error_text"  => $locale['figurelib/admin/figurelib.php_021'],
         "inline"      => true,
-        "width"       => "520px",
+        "inner_width"      => "520px",
         "required"    => true,
         "no_root"     => 1,
         "query"       => (multilang_table("FI") ? "WHERE figure_brand_language='".LANGUAGE."'" : ""),
@@ -596,7 +596,7 @@ if (!empty($result)) {
     echo form_text("figure_series", $locale['figure_439'], $data['figure_series'], [
 		"placeholder" => $locale['figurelib/admin/figurelib.php_023'],
         "inline" => true,
-        "width" => "520px",
+        "inner_width"=> "520px",
     ]);
 	
 	// Basedata 
@@ -612,7 +612,7 @@ if (!empty($result)) {
 	    "placeholder" => $locale['figurelib/admin/figurelib.php_025'],
         "error_text"  => $locale['figurelib/admin/figurelib.php_026'],
         "inline"      => true,
-        "width"       => "520px",
+        "inner_width"      => "520px",
         "required"    => true,
         "no_root"     => 1,
         "query"       => (multilang_table("FI") ? "WHERE figure_scale_language='".LANGUAGE."'" : ""),
@@ -624,7 +624,7 @@ if (!empty($result)) {
     echo form_text("figure_weight", $locale['figurelib/admin/figurelib.php_027'], $data['figure_weight'], [
 		"placeholder" => $locale['figurelib/admin/figurelib.php_028'],
         "inline" => true,
-        "width" => "520px"
+        "inner_width"=> "520px"
     ]);
 
 	// Formfield "Figure Height"
@@ -632,7 +632,7 @@ if (!empty($result)) {
 	    "placeholder" => $locale['figurelib/admin/figurelib.php_030'],
         "error_text"  => $locale['figurelib/admin/figurelib.php_031'],
         "inline"      => true,
-        "width"       => "520px",
+        "inner_width"      => "520px",
         "required"    => true,
         "no_root"     => 1,
         "query"       => (multilang_table("FI") ? "WHERE figure_measurements_language='".LANGUAGE."'" : ""),
@@ -645,7 +645,7 @@ if (!empty($result)) {
 	    "placeholder" => $locale['figurelib/admin/figurelib.php_033'],
         "error_text"  => $locale['figurelib/admin/figurelib.php_034'],
         "inline"      => true,
-        "width"       => "520px",
+        "inner_width"      => "520px",
         "required"    => true,
         "no_root"     => 1,
         "query"       => (multilang_table("FI") ? "WHERE figure_measurements_language='".LANGUAGE."'" : ""),
@@ -658,7 +658,7 @@ if (!empty($result)) {
 	    "placeholder" => $locale['figurelib/admin/figurelib.php_036'],
         "error_text"  => $locale['figurelib/admin/figurelib.php_037'],
         "inline"      => true,
-        "width"       => "520px",
+        "inner_width"      => "520px",
         "required"    => true,
         "no_root"     => 1,
         "query"       => (multilang_table("FI") ? "WHERE figure_measurements_language='".LANGUAGE."'" : ""),
@@ -671,7 +671,7 @@ if (!empty($result)) {
 	    "placeholder" => $locale['figurelib/admin/figurelib.php_039'],
         "error_text"  => $locale['figurelib/admin/figurelib.php_040'],
         "inline"      => true,
-        "width"       => "520px",
+        "inner_width"      => "520px",
         "required"    => true,
         "no_root"     => 1,
         "query"       => (multilang_table("FI") ? "WHERE figure_material_language='".LANGUAGE."'" : ""),
@@ -684,7 +684,7 @@ if (!empty($result)) {
 	    "placeholder" => $locale['figurelib/admin/figurelib.php_042'],
         "error_text"  => $locale['figurelib/admin/figurelib.php_043'],
         "inline"      => true,
-        "width"       => "520px",
+        "inner_width"      => "520px",
         "required"    => true,
         "no_root"     => 1,
         "query"       => (multilang_table("FI") ? "WHERE figure_poa_language='".LANGUAGE."'" : ""),
@@ -697,7 +697,7 @@ if (!empty($result)) {
 	    "placeholder" => $locale['figurelib/admin/figurelib.php_045'],
         "error_text"  => $locale['figurelib/admin/figurelib.php_046'],
         "inline"      => true,
-        "width"       => "520px",
+        "inner_width"      => "520px",
         "required"    => true,
         "no_root"     => 1,
         "query"       => (multilang_table("FI") ? "WHERE figure_packaging_language='".LANGUAGE."'" : ""),
@@ -728,7 +728,7 @@ if (!empty($result)) {
     echo form_text("figure_retailprice", $locale['figurelib/admin/figurelib.php_050'], $data['figure_retailprice'], [
 		"placeholder"   => $locale['figurelib/admin/figurelib.php_051'],
         "inline"        => true,
-        "width"         => "488px",
+        "inner_width"        => "488px",
 		"min"           => 0,
 		"prepend_value" => "&#036;",
 		"type"          => "number"
@@ -738,7 +738,7 @@ if (!empty($result)) {
     echo form_text("figure_usedprice", $locale['figurelib/admin/figurelib.php_052'], $data['figure_usedprice'], [
 		"placeholder"   => $locale['figurelib/admin/figurelib.php_053'],
         "inline"        => true,
-        "width"         => "488px",
+        "inner_width"        => "488px",
 		"min"           => 0,
 		"prepend_value" => "&#036;",
 		"type"          => "number"
@@ -749,7 +749,7 @@ if (!empty($result)) {
 	    "placeholder" => $locale['figurelib/admin/figurelib.php_055'],
         "error_text"  => $locale['figurelib/admin/figurelib.php_056'],
         "inline"      => true,
-        "width"       => "520px",
+        "inner_width"      => "520px",
         "required"    => true,
         "no_root"     => 1,
         "query"       => (multilang_table("FI") ? "WHERE figure_limitation_language='".LANGUAGE."'" : ""),
@@ -761,7 +761,7 @@ if (!empty($result)) {
     echo form_text("figure_editionsize", $locale['figurelib/admin/figurelib.php_057'], $data['figure_editionsize'], [
 		"placeholder"   => $locale['figurelib/admin/figurelib.php_058'],
         "inline"        => true,
-        "width"         => "520px",
+        "inner_width"   => "520px",
 		"min"           => 0,
 		"type"          => "number"
     ]);
@@ -779,7 +779,7 @@ if (!empty($result)) {
 		"placeholder"   => $locale['figure_1818'],
 		"error_text"    => $locale['figurelib-error-113'],
         "inline"        => true,
-        "width"         => "520px",
+        "inner_width"   => "520px",
 		"max_lenght"    => 40
     ]);
 
@@ -848,10 +848,10 @@ if (!empty($result)) {
     openside("<strong>FORUM & E-SHOP URL</strong>");
 	
 	// Formfield "Forum"
-	echo form_text("figure_forum_url", $locale['figure_460'], $data['figure_forum_url'], ["inline" => true, "width" => "520px"]);
+	echo form_text("figure_forum_url", $locale['figure_460'], $data['figure_forum_url'], ["inline" => true, "inner_width"=> "520px"]);
 	
 	// Formfield "E-Shop Url"
-	echo form_text("figure_eshop", $locale['figure_024'], $data['figure_eshop'], ["inline" => true, "width" => "520px"]);
+	echo form_text("figure_eshop", $locale['figure_024'], $data['figure_eshop'], ["inline" => true, "inner_width"=> "520px"]);
 
 	// Forum and E-Shop Url
     closeside();
@@ -862,28 +862,28 @@ if (!empty($result)) {
     openside("<strong>AMAZON LINKS</strong>");
 
 	// Formfield "Amazon Germany"
-	echo form_text("figure_amazon_de", "<img src='".INFUSIONS."figurelib/images/flags/flag_germany.png' alt='".$locale['figure_025']."' /> ".$locale['figure_025'], $data['figure_amazon_de'], ["inline" => true, "width" => "520px"]);
+	echo form_text("figure_amazon_de", "<img src='".INFUSIONS."figurelib/images/flags/flag_germany.png' alt='".$locale['figure_025']."' /> ".$locale['figure_025'], $data['figure_amazon_de'], ["inline" => true, "inner_width"=> "520px"]);
 	
 	// Formfield "Amazon United Kingdom"
-	echo form_text("figure_amazon_uk", "<img src='".INFUSIONS."figurelib/images/flags/flag_great_britain.png' alt='".$locale['figure_026']."' /> ".$locale['figure_026'], $data['figure_amazon_uk'], ["inline" => true, "width" => "520px"]);
+	echo form_text("figure_amazon_uk", "<img src='".INFUSIONS."figurelib/images/flags/flag_great_britain.png' alt='".$locale['figure_026']."' /> ".$locale['figure_026'], $data['figure_amazon_uk'], ["inline" => true, "inner_width"=> "520px"]);
 	
 	// Formfield "Amazon France"
-	echo form_text("figure_amazon_fr", "<img src='".INFUSIONS."figurelib/images/flags/flag_france.png' alt='".$locale['figure_027']."' /> ".$locale['figure_027'], $data['figure_amazon_fr'], ["inline" => true, "width" => "520px"]);
+	echo form_text("figure_amazon_fr", "<img src='".INFUSIONS."figurelib/images/flags/flag_france.png' alt='".$locale['figure_027']."' /> ".$locale['figure_027'], $data['figure_amazon_fr'], ["inline" => true, "inner_width"=> "520px"]);
 	
 	// Formfield "Amazon Spain"
-	echo form_text("figure_amazon_es", "<img src='".INFUSIONS."figurelib/images/flags/flag_spain.png' alt='".$locale['figure_028']."' /> ".$locale['figure_028'], $data['figure_amazon_es'], ["inline" => true, "width" => "520px"]);
+	echo form_text("figure_amazon_es", "<img src='".INFUSIONS."figurelib/images/flags/flag_spain.png' alt='".$locale['figure_028']."' /> ".$locale['figure_028'], $data['figure_amazon_es'], ["inline" => true, "inner_width"=> "520px"]);
 	
 	// Formfield "Amazon Italy"
-	echo form_text("figure_amazon_it", "<img src='".INFUSIONS."figurelib/images/flags/flag_italy.png' alt='".$locale['figure_029']."' /> ".$locale['figure_029'], $data['figure_amazon_it'], ["inline" => true, "width" => "520px"]);
+	echo form_text("figure_amazon_it", "<img src='".INFUSIONS."figurelib/images/flags/flag_italy.png' alt='".$locale['figure_029']."' /> ".$locale['figure_029'], $data['figure_amazon_it'], ["inline" => true, "inner_width"=> "520px"]);
 	
 	// Formfield "Amazon Japan"
-	echo form_text("figure_amazon_jp", "<img src='".INFUSIONS."figurelib/images/flags/flag_japan.png' alt='".$locale['figure_030']."' /> ".$locale['figure_030'], $data['figure_amazon_jp'], ["inline" => true, "width" => "520px"]);
+	echo form_text("figure_amazon_jp", "<img src='".INFUSIONS."figurelib/images/flags/flag_japan.png' alt='".$locale['figure_030']."' /> ".$locale['figure_030'], $data['figure_amazon_jp'], ["inline" => true, "inner_width"=> "520px"]);
 	
 	// Formfield "Amazon United States"
-	echo form_text("figure_amazon_com", "<img src='".INFUSIONS."figurelib/images/flags/flag_usa.png' alt='".$locale['figure_031']."' /> ".$locale['figure_031'], $data['figure_amazon_com'], ["inline" => true, "width" => "520px"]);
+	echo form_text("figure_amazon_com", "<img src='".INFUSIONS."figurelib/images/flags/flag_usa.png' alt='".$locale['figure_031']."' /> ".$locale['figure_031'], $data['figure_amazon_com'], ["inline" => true, "inner_width"=> "520px"]);
 	
 	// Formfield "Amazon Canada"
-	echo form_text("figure_amazon_ca", "<img src='".INFUSIONS."figurelib/images/flags/flag_canada.png' alt='".$locale['figure_032']."' /> ".$locale['figure_032'], $data['figure_amazon_ca'], ["inline" => true, "width" => "520px"]);
+	echo form_text("figure_amazon_ca", "<img src='".INFUSIONS."figurelib/images/flags/flag_canada.png' alt='".$locale['figure_032']."' /> ".$locale['figure_032'], $data['figure_amazon_ca'], ["inline" => true, "inner_width"=> "520px"]);
 	
 	// Amazon
     closeside();
@@ -894,34 +894,34 @@ if (!empty($result)) {
     openside("<strong>AFFILIATE LINKS</strong>");
 	
 	// Formfield "Affiliate Link #1"
-	echo form_text("figure_affiliate_1", $locale['figure_023_1'], $data['figure_affiliate_1'], ["inline" => true, "width" => "520px"]);
+	echo form_text("figure_affiliate_1", $locale['figure_023_1'], $data['figure_affiliate_1'], ["inline" => true, "inner_width"=> "520px"]);
 	
 	// Formfield "Affiliate Link #2"
-	echo form_text("figure_affiliate_2", $locale['figure_023_2'], $data['figure_affiliate_2'], ["inline" => true, "width" => "520px"]);
+	echo form_text("figure_affiliate_2", $locale['figure_023_2'], $data['figure_affiliate_2'], ["inline" => true, "inner_width"=> "520px"]);
 	
 	// Formfield "Affiliate Link #3"
-	echo form_text("figure_affiliate_3", $locale['figure_023_3'], $data['figure_affiliate_3'], ["inline" => true, "width" => "520px"]);
+	echo form_text("figure_affiliate_3", $locale['figure_023_3'], $data['figure_affiliate_3'], ["inline" => true, "inner_width"=> "520px"]);
 	
 	// Formfield "Affiliate Link #4"
-	echo form_text("figure_affiliate_4", $locale['figure_023_4'], $data['figure_affiliate_4'], ["inline" => true, "width" => "520px"]);
+	echo form_text("figure_affiliate_4", $locale['figure_023_4'], $data['figure_affiliate_4'], ["inline" => true, "inner_width"=> "520px"]);
 	
 	// Formfield "Affiliate Link #5"
-	echo form_text("figure_affiliate_5", $locale['figure_023_5'], $data['figure_affiliate_5'], ["inline" => true, "width" => "520px"]);
+	echo form_text("figure_affiliate_5", $locale['figure_023_5'], $data['figure_affiliate_5'], ["inline" => true, "inner_width"=> "520px"]);
 	
 	// Formfield "Affiliate Link #6"
-	echo form_text("figure_affiliate_6", $locale['figure_023_6'], $data['figure_affiliate_6'], ["inline" => true, "width" => "520px"]);
+	echo form_text("figure_affiliate_6", $locale['figure_023_6'], $data['figure_affiliate_6'], ["inline" => true, "inner_width"=> "520px"]);
 	
 	// Formfield "Affiliate Link #7"
-	echo form_text("figure_affiliate_7", $locale['figure_023_7'], $data['figure_affiliate_7'], ["inline" => true, "width" => "520px"]);
+	echo form_text("figure_affiliate_7", $locale['figure_023_7'], $data['figure_affiliate_7'], ["inline" => true, "inner_width"=> "520px"]);
 	
 	// Formfield "Affiliate Link #8"
-	echo form_text("figure_affiliate_8", $locale['figure_023_8'], $data['figure_affiliate_8'], ["inline" => true, "width" => "520px"]);
+	echo form_text("figure_affiliate_8", $locale['figure_023_8'], $data['figure_affiliate_8'], ["inline" => true, "inner_width"=> "520px"]);
 	
 	// Formfield "Affiliate Link #9"
-	echo form_text("figure_affiliate_9", $locale['figure_023_9'], $data['figure_affiliate_9'], ["inline" => true, "width" => "520px"]);
+	echo form_text("figure_affiliate_9", $locale['figure_023_9'], $data['figure_affiliate_9'], ["inline" => true, "inner_width"=> "520px"]);
 	
 	// Formfield "Affiliate Link #10"
-	echo form_text("figure_affiliate_10", $locale['figure_023_10'], $data['figure_affiliate_10'], ["inline" => true, "width" => "520px"]);
+	echo form_text("figure_affiliate_10", $locale['figure_023_10'], $data['figure_affiliate_10'], ["inline" => true, "inner_width"=> "520px"]);
 	
 	// Affiliate Links
     closeside();
@@ -959,9 +959,9 @@ if (!empty($result)) {
 // Datepicker include
 if (!defined('DATEPICKER')) {
 	define('DATEPICKER', TRUE);
-    add_to_head("<link href='".DYNAMICS."assets/datepicker/css/datetimepicker.min.css' rel='stylesheet' />");
+    add_to_head("<link href='".DYNAMICS."assets/datepicker/css/bootstrap-datetimepicker.min.css' rel='stylesheet' />");
     add_to_footer("<script src='".DYNAMICS."assets/datepicker/js/moment.min.js'></script>");
-    add_to_footer("<script src='".DYNAMICS."assets/datepicker/js/datetimepicker.min.js'></script>");
+    add_to_footer("<script src='".DYNAMICS."assets/datepicker/js/bootstrap-datetimepicker.min.js'></script>");
     add_to_head("<script src='".DYNAMICS."assets/datepicker/locale/".$locale['datepicker'].".js'></script>");
 }
 	
@@ -969,6 +969,10 @@ if (!defined('DATEPICKER')) {
 add_to_footer("
 <script type='text/javascript'>
 $(function() {
+	$('input[name=\"figure_videourl\"]').click(function(){
+		return confirm('Please note, that all Videos must be Copyright Free!');
+	});
+
 	$('#figure_videourl').blur(function(){
 		var embed = $('#figure_videourl').val();
 		if (embed) {
@@ -977,6 +981,7 @@ $(function() {
 			$('#figure_videopreview').html('<div>Sorry! There is no Video avaible to this Figure.</div>');
 		}
     });
+	
 	$('#figure_videourl').ready(function(){
 		var embed = $('#figure_videourl').val();
 		if (embed) {
@@ -1014,6 +1019,12 @@ $('#figure_pubdate-field .input-group.date').datetimepicker({
 		showClose: true,
 		allowInputToggle: true,
 		format: 'YYYY (MMMM)',
+});
+
+$(function() {
+    $('input[name=\"figure_images[]\"]').click(function(){
+        return confirm('Please note, that all uploaded Images must be Copyright Free!');
+    });
 });
 </script>");
 	
