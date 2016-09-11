@@ -231,7 +231,9 @@ if (
 				fm.figure_manufacturer_id, fm.figure_manufacturer_name, COUNT(f.figure_id) AS figure_counter
 			FROM ".DB_FIGURE_ITEMS." AS f
 			LEFT JOIN ".DB_FIGURE_MANUFACTURERS." AS fm ON fm.figure_manufacturer_id=f.figure_manufacturer
-			WHERE f.figure_cat='".$_GET['figure_cat_id']."' AND ".groupaccess("f.figure_visibility")." AND f.figure_freigabe='1'
+			WHERE f.figure_cat='".$_GET['figure_cat_id']."' 
+			AND ".groupaccess("f.figure_visibility")." 
+			AND f.figure_freigabe='1'
 			GROUP BY fm.figure_manufacturer_id
 			ORDER BY fm.figure_manufacturer_name ASC
 		");

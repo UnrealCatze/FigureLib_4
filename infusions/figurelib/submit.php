@@ -173,8 +173,8 @@ if (iMEMBER && $figurelibSettings['figure_submit']) {
 				
 					// Send Notification
 					if ($figurelibSettings['figure_notification'] != "1") {
-						$figurelibSettings['figure_notification_message'] = str_replace("{FIGURELINK}", $settings['siteurl']."infusions/figurelib/figures.php?figure_id=".$unique_id."&action=admincatcher", $figurelibSettings['figure_notification_message']);
-						
+						$figurelibSettings['figure_notification_message'] = str_replace("{FIGURELINK}", $settings['siteurl']."infusions/figurelib/figures.php?figure_id=".$data['figure_id']."&action=admincatcher", $figurelibSettings['figure_notification_message']);
+					
 						// Send Message Notification
 						if ($figurelibSettings['figure_notification'] == "2") {
 							require_once INCLUDES."infusions_include.php";
@@ -213,13 +213,11 @@ if (iMEMBER && $figurelibSettings['figure_submit']) {
 		// Display Info Message with Form
         } else {
 			echo "<div class='panel panel-default tbl-border'>\n<div class='panel-body'>\n";
-				echo "<div class='alert alert-info m-b-20 submission-guidelines'>".str_replace("[SITENAME]", fusion_get_settings("sitename"),$locale['figure_532'])."</div>\n";
-
+				echo "<div class='alert alert-info m-b-20 submission-guidelines'>".str_replace("[SITENAME]", fusion_get_settings("sitename"),$locale['figure_532']),"<br><br><strong>".sprintf($locale['figure_035'], parsebytesize($figurelibSettings['figure_photo_max_b']).$locale['figure_036'].$figurelibSettings['figure_image_upload_count'])."<br>".$locale['figure_533']."</strong></div>\n";
 				
 				// Display Divider
 				echo "<div class='tbl1'><hr /></div>\n";		
-						
-						
+												
 				// Start Form
 				echo openform("inputform", "post", FUSION_REQUEST, array("class" => "m-t-20", "enctype" => true));
 
@@ -228,7 +226,7 @@ if (iMEMBER && $figurelibSettings['figure_submit']) {
 					"placeholder" => $locale['figurelib/admin/figurelib.php_005'],
 					"error_text"  => $locale['figurelib/admin/figurelib.php_006'],
 					"inline"      => true,
-					"width"		  => "100%",
+					'inner_width' => '100%',
 					"required"    => true
 				]);
 				
@@ -239,7 +237,7 @@ if (iMEMBER && $figurelibSettings['figure_submit']) {
 					"error_text"  => $locale['figurelib/admin/figurelib.php_070'],
 					"inline"      => true,
 					"required"    => true,
-					"width"		  => "100%",
+					'inner_width' => '100%',
 					"no_root"     => 1,
 					"query"       => (multilang_table("FI") ? "WHERE figure_cat_language='".LANGUAGE."'" : ""),
 					"maxselect"   => 1,
@@ -249,7 +247,7 @@ if (iMEMBER && $figurelibSettings['figure_submit']) {
 				// Formfield "Figure Variant"
 				echo form_text("figure_variant", $locale['figurelib/admin/figurelib.php_010'], $data['figure_variant'], [
 					"placeholder" => $locale['figurelib/admin/figurelib.php_011'],
-					"width"		  => "100%",
+					'inner_width' => '100%',
 					"inline" => true
 				]);
 				
@@ -258,7 +256,7 @@ if (iMEMBER && $figurelibSettings['figure_submit']) {
 					"placeholder" => $locale['figurelib/admin/figurelib.php_013'],
 					"error_text"  => $locale['figurelib/admin/figurelib.php_014'],
 					"inline"      => true,
-					"width"		  => "100%",
+					'inner_width' => '100%',
 					"required"    => true,
 					"no_root"     => 1,
 					"query"       => (multilang_table("FI") ? "WHERE figure_manufacturer_language='".LANGUAGE."'" : ""),
@@ -279,7 +277,7 @@ if (iMEMBER && $figurelibSettings['figure_submit']) {
 				$countries = array_merge(["Unknown"], $countries);
 				echo form_select("figure_country", $locale['figurelib/admin/figurelib.php_017'], $data['figure_country'], [
 					"options" => $countries,
-					"width"		  => "100%",
+					'inner_width' => '100%',
 					"placeholder" => $locale['figurelib/admin/figurelib.php_018'],
 					"inline" => true,
 					"allowclear" => true
@@ -289,7 +287,7 @@ if (iMEMBER && $figurelibSettings['figure_submit']) {
 				echo form_select_tree("figure_brand", $locale['figurelib/admin/figurelib.php_019'], $data['figure_brand'], [
 					"placeholder" => $locale['figurelib/admin/figurelib.php_020'],
 					"error_text"  => $locale['figurelib/admin/figurelib.php_021'],
-					"width"		  => "100%",
+					'inner_width' => '100%',
 					"inline"      => true,
 					"required"    => true,
 					"no_root"     => 1,
@@ -301,20 +299,18 @@ if (iMEMBER && $figurelibSettings['figure_submit']) {
 				// Formfield "Figure Series"
 				echo form_text("figure_series", $locale['figure_439'], $data['figure_series'], [
 					"placeholder" => $locale['figurelib/admin/figurelib.php_023'],
-					"width"		  => "100%",
+					'inner_width' => '100%',
 					"inline" => true
 				]);
-				
-				
+								
 				// Display Divider
 				echo "<div class='tbl1'><hr /></div>\n";
-				
-				
+								
 				// Formfield "Figure Scale"
 				echo form_select_tree("figure_scale", $locale['figurelib/admin/figurelib.php_024'], $data['figure_scale'], [
 					"placeholder" => $locale['figurelib/admin/figurelib.php_025'],
 					"error_text"  => $locale['figurelib/admin/figurelib.php_026'],
-					"width"		  => "100%",
+					'inner_width' => '100%',
 					"inline"      => true,
 					"required"    => true,
 					"no_root"     => 1,
@@ -326,7 +322,7 @@ if (iMEMBER && $figurelibSettings['figure_submit']) {
 				// Formfield "Figure Weight"
 				echo form_text("figure_weight", $locale['figurelib/admin/figurelib.php_027'], $data['figure_weight'], [
 					"placeholder" => $locale['figurelib/admin/figurelib.php_028'],
-					"width"		  => "100%",
+					'inner_width' => '100%',
 					"inline" => true
 				]);
 
@@ -334,7 +330,7 @@ if (iMEMBER && $figurelibSettings['figure_submit']) {
 				echo form_select_tree("figure_height", $locale['figurelib/admin/figurelib.php_029'], $data['figure_height'], [
 					"placeholder" => $locale['figurelib/admin/figurelib.php_030'],
 					"error_text"  => $locale['figurelib/admin/figurelib.php_031'],
-					"width"		  => "100%",
+					'inner_width' => '100%',
 					"inline"      => true,
 					"required"    => true,
 					"no_root"     => 1,
@@ -347,7 +343,7 @@ if (iMEMBER && $figurelibSettings['figure_submit']) {
 				echo form_select_tree("figure_width", $locale['figurelib/admin/figurelib.php_032'], $data['figure_width'], [
 					"placeholder" => $locale['figurelib/admin/figurelib.php_033'],
 					"error_text"  => $locale['figurelib/admin/figurelib.php_034'],
-					"width"		  => "100%",
+					'inner_width' => '100%',
 					"inline"      => true,
 					"required"    => true,
 					"no_root"     => 1,
@@ -360,7 +356,7 @@ if (iMEMBER && $figurelibSettings['figure_submit']) {
 				echo form_select_tree("figure_depth", $locale['figurelib/admin/figurelib.php_035'], $data['figure_depth'], [
 					"placeholder" => $locale['figurelib/admin/figurelib.php_036'],
 					"error_text"  => $locale['figurelib/admin/figurelib.php_037'],
-					"width"		  => "100%",
+					'inner_width' => '100%',
 					"inline"      => true,
 					"required"    => true,
 					"no_root"     => 1,
@@ -372,8 +368,7 @@ if (iMEMBER && $figurelibSettings['figure_submit']) {
 				
 				// Display Divider
 				echo "<div class='tbl1'><hr /></div>\n";
-				
-				
+								
 				// Formfield "Figure Material"
 				echo form_select_tree("figure_material", $locale['figurelib/admin/figurelib.php_038'], $data['figure_material'], [
 					"placeholder" => $locale['figurelib/admin/figurelib.php_039'],
@@ -381,6 +376,7 @@ if (iMEMBER && $figurelibSettings['figure_submit']) {
 					"width"		  => "100%",
 					"inline"      => true,
 					"required"    => true,
+					'inner_width' => '100%',
 					"no_root"     => 1,
 					"query"       => (multilang_table("FI") ? "WHERE figure_material_language='".LANGUAGE."'" : ""),
 					"maxselect"   => 1,
@@ -391,7 +387,7 @@ if (iMEMBER && $figurelibSettings['figure_submit']) {
 				echo form_select_tree("figure_poa", $locale['figurelib/admin/figurelib.php_041'], $data['figure_poa'], [
 					"placeholder" => $locale['figurelib/admin/figurelib.php_042'],
 					"error_text"  => $locale['figurelib/admin/figurelib.php_043'],
-					"width"		  => "100%",
+					'inner_width' => '100%',
 					"inline"      => true,
 					"required"    => true,
 					"no_root"     => 1,
@@ -404,7 +400,7 @@ if (iMEMBER && $figurelibSettings['figure_submit']) {
 				echo form_select_tree("figure_packaging", $locale['figurelib/admin/figurelib.php_044'], $data['figure_packaging'], [
 					"placeholder" => $locale['figurelib/admin/figurelib.php_045'],
 					"error_text"  => $locale['figurelib/admin/figurelib.php_046'],
-					"width"		  => "100%",
+					'inner_width' => '100%',
 					"inline"      => true,
 					"required"    => true,
 					"no_root"     => 1,
@@ -412,27 +408,25 @@ if (iMEMBER && $figurelibSettings['figure_submit']) {
 					"maxselect"   => 1,
 					"allowclear"  => true
 				], DB_FIGURE_PACKAGINGS, "figure_packaging_name", "figure_packaging_id", "figure_packaging_parent");
-				
-				
+								
 				// Display Divider
 				echo "<div class='tbl1'><hr /></div>\n";
-				
-				
+								
 				// Formfield "Figure Pubdate"
 				echo "<div id='figure_pubdate-field' class='form-group'>\n";
 					echo "<label class='control-label col-xs-12 col-sm-3 col-md-3 col-lg-3 p-l-0' for='figure_pubdate'>". $locale['figurelib/admin/figurelib.php_047']."</label>\n";
 					echo "<div class='col-xs-12 col-sm-9 col-md-9 col-lg-9'>\n";
 						echo "<div class='input-group date'>\n";
 							echo "<input type='text' name='figure_pubdate' id='figure_pubdate' value='".$data['figure_pubdate']."' class='form-control textbox' placeholder='".$locale['figurelib/admin/figurelib.php_048']."' />\n";
-							echo "<span class='input-group-addon'><i class='entypo calendar'></i></span>\n";
+							echo "<span class='input-group-addon'><i class='entypo calendar text-lighter'></i></span>\n";
 						echo "</div>\n";
 					echo "</div>\n";
 				echo "</div>\n";
-
+				
 				// Formfield "Figure Retailprice"
 				echo form_text("figure_retailprice", $locale['figurelib/admin/figurelib.php_050'], $data['figure_retailprice'], [
 					"placeholder"   => $locale['figurelib/admin/figurelib.php_051'],
-					"width"		    => "100%",
+					'inner_width' => '100%',
 					"inline"        => true,
 					"min"           => 0,
 					"prepend_value" => "&#036;",
@@ -442,23 +436,21 @@ if (iMEMBER && $figurelibSettings['figure_submit']) {
 				// Formfield "Figure Usedprice"
 				echo form_text("figure_usedprice", $locale['figurelib/admin/figurelib.php_052'], $data['figure_usedprice'], [
 					"placeholder"   => $locale['figurelib/admin/figurelib.php_053'],
-					"width"		    => "100%",
+					'inner_width' => '100%',
 					"inline"        => true,
 					"min"           => 0,
 					"prepend_value" => "&#036;",
 					"type"          => "number"
 				]);
-				
-				
+								
 				// Display Divider
 				echo "<div class='tbl1'><hr /></div>\n";
-				
-				
+								
 				// Formfield "Figure Limited Edition"
 				echo form_select_tree("figure_limitation", $locale['figurelib/admin/figurelib.php_054'], $data['figure_limitation'], [
 					"placeholder" => $locale['figurelib/admin/figurelib.php_055'],
 					"error_text"  => $locale['figurelib/admin/figurelib.php_056'],
-					"width"		  => "100%",
+					'inner_width' => '100%',
 					"inline"      => true,
 					"required"    => true,
 					"no_root"     => 1,
@@ -470,7 +462,7 @@ if (iMEMBER && $figurelibSettings['figure_submit']) {
 				// Formfield "Figure Editions Size"
 				echo form_text("figure_editionsize", $locale['figurelib/admin/figurelib.php_057'], $data['figure_editionsize'], [
 					"placeholder"   => $locale['figurelib/admin/figurelib.php_058'],
-					"width"		    => "100%",
+					'inner_width' => '100%',
 					"inline"        => true,
 					"min"           => 0,
 					"type"          => "number"
@@ -483,7 +475,7 @@ if (iMEMBER && $figurelibSettings['figure_submit']) {
 				echo form_text("figure_videourl", $locale['figure_461'], $data['figure_videourl'], [
 					"placeholder"   => $locale['figure_1818'],
 					"error_text"    => $locale['figurelib-error-113'],
-					"width"		    => "100%",
+					'inner_width' => '100%',
 					"inline"        => true,
 					"max_lenght"    => 40
 				]);
@@ -497,8 +489,7 @@ if (iMEMBER && $figurelibSettings['figure_submit']) {
 						echo "<div id='figure_videopreview'></div>\n";
 					echo "</div>\n";
 				echo "</div>\n";	
-				
-				
+								
 				// Display Divider
 				echo "<div class='tbl1'><hr /></div>\n";
 
@@ -527,12 +518,10 @@ if (iMEMBER && $figurelibSettings['figure_submit']) {
 					"thumbnail2_suffix" => "_t2",
 				]);
 				echo "</div>\n";
-				
-				
+								
 				// Display Divider
 				echo "<div class='tbl1'><hr /></div>\n";
-				
-				
+								
 				// Formfield "Accessories"
 				echo form_textarea("figure_accessories", $locale['figurelib/admin/figurelib.php_060'], $data['figure_accessories'], [
 					"type"      => fusion_get_settings("tinymce_enabled") ? "tinymce" : "html",
@@ -550,20 +539,16 @@ if (iMEMBER && $figurelibSettings['figure_submit']) {
 					"required"  => false,
 					"form_name" => "inputform"
 				]);
-				
-				
+								
 				// Display Divider
 				echo "<div class='tbl1'><hr /></div>\n";
-				
-				
+								
 				// Formfield "Terms"
 				echo form_checkbox("figure_agb", $locale['figurelib/admin/figurelib.php_062'], $data['figure_agb'], ["reverse_label" => true, "required" => true, "error_text" => $locale['figurelib/admin/figurelib.php_063']]);
-				
-				
+								
 				// Display Divider
 				echo "<div class='tbl1'><hr /></div>\n";
-				
-				
+								
 				// Save Button
 				echo form_button("save_figure", $locale['figure_521'], $locale['figure_521'], ["class" => "btn btn-primary"]);
 
@@ -589,9 +574,9 @@ closeside();
 // Datepicker include
 if (!defined('DATEPICKER')) {
 	define('DATEPICKER', TRUE);
-    add_to_head("<link href='".DYNAMICS."assets/datepicker/css/datetimepicker.min.css' rel='stylesheet' />");
+    add_to_head("<link href='".DYNAMICS."assets/datepicker/css/bootstrap-datetimepicker.min.css' rel='stylesheet' />");
     add_to_footer("<script src='".DYNAMICS."assets/datepicker/js/moment.min.js'></script>");
-    add_to_footer("<script src='".DYNAMICS."assets/datepicker/js/datetimepicker.min.js'></script>");
+    add_to_footer("<script src='".DYNAMICS."assets/datepicker/js/bootstrap-datetimepicker.min.js'></script>");
     add_to_head("<script src='".DYNAMICS."assets/datepicker/locale/".$locale['datepicker'].".js'></script>");
 }
 	

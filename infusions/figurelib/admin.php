@@ -354,7 +354,7 @@ $result = dbquery("
 												
 						// COLUMN 3 Figure Name/Title
 							echo "<div class='col-lg-2 col-md-3 col-sm-3 col-xs-12'>\n";
-									echo "<div class='side-small figurelib-inforow-height'><a href='".INFUSIONS."figurelib/figures.php?figure_id=".$data['figure_id']."' title='".$locale['CLFP_002']." : ".$data['figure_title']."' alt='".$locale['CLFP_002']." : ".$data['figure_title']."'>".trimlink($data['figure_title'], 10)."</a>";
+									echo "<div class='side-small figurelib-inforow-height'><a href='".INFUSIONS."figurelib/figures.php?figure_id=".$data['figure_id']."' title='".$locale['CLFP_002']." : ".$data['figure_title']."' alt='".$locale['CLFP_002']." : ".$data['figure_title']."'>".trimlink($data['figure_title'], 20)."</a>";
 							echo "</div></div>\n";	
 							
 						// COLUMN 4 Figure ID
@@ -363,11 +363,11 @@ $result = dbquery("
 									
 						// COLUMN 5 Category
 							echo "<div class='col-lg-2 col-md-2 col-sm-3 col-xs-12'>\n";
-									echo "<div class='side-small figurelib-inforow-height'>".trimlink($data['figure_cat_name'],10)."</div></div>\n";				
+									echo "<div class='side-small figurelib-inforow-height'>".trimlink($data['figure_cat_name'],20)."</div></div>\n";				
 																	
 						// COLUMN 6 Manufacturer
 							echo "<div class='col-lg-2 col-md-3 hidden-sm hidden-xs'>\n";
-									echo "<div class='side-small figurelib-inforow-height'>".trimlink($data['figure_manufacturer_name'],10)."</div></div>\n";	
+									echo "<div class='side-small figurelib-inforow-height'>".trimlink($data['figure_manufacturer_name'],20)."</div></div>\n";	
 						
 						// COLUMN 7 Scale
 							echo "<div class='col-lg-1 hidden-md hidden-sm hidden-xs'>\n";
