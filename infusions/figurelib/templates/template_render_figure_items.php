@@ -82,7 +82,7 @@ $result = dbquery(
 			openside("");
 			
 			// TITLE LINE WITH ADMIN EDIT DIRECT LINK			
-			echo "<div class='well clearfix text-bold'><span>".trimlink($data['figure_title'], 23)." [".trimlink($data['figure_manufacturer_name'], 23)." / ".trimlink($data['figure_pubdate'],7)."]</span>";
+			echo "<div class='well clearfix text-bold'><span>".trimlink($data['figure_title'], 23)." [".trimlink($data['figure_manufacturer_name'], 23)." / ".trimlink($data['figure_pubdate'],15)."]</span>";
 			
 							if (iADMIN || iSUPERADMIN) {
 								
@@ -545,7 +545,7 @@ if ($fil_settings['figure_show_data_global']) { // show figure data global on/of
 						
 						// Accessories DATA
 						echo "<div class='col-lg-8 col-md-8 col-sm-12 col-xs-12'>\n";
-								echo "<span class='small' style='word-break: break-all; word-wrap: break-word;'>".($data['figure_accessories'] ? $data['figure_accessories'] : "-")."&nbsp;</span>\n";		
+								echo "<span class='small' style='word-break: break-all; word-wrap: break-word;'>".(parse_textarea($data['figure_accessories']) ? parse_textarea($data['figure_accessories']) : "-")."&nbsp;</span>\n";		
 						echo "</div>\n";
 						
 						// ++++++++++++++++
@@ -557,7 +557,7 @@ if ($fil_settings['figure_show_data_global']) { // show figure data global on/of
 						
 						// Discreption  DATA
 						echo "<div class='col-lg-8 col-md-8 col-sm-12 col-xs-12'>\n";
-								echo "<span class='small' style='word-break: break-all; word-wrap: break-word;'>".($data['figure_description'] ? $data['figure_description'] : "-")."&nbsp;</span>\n";
+								echo "<span class='small' style='word-break: break-all; word-wrap: break-word;'>".(parse_textarea($data['figure_description']) ? parse_textarea($data['figure_description']) : "-")."&nbsp;</span>\n";
 						echo "</div>\n";
 					
 			echo "</div>\n";

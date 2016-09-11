@@ -71,7 +71,9 @@ global $settings;
 			LIMIT 0,1				
 	");	
 
-	while ($data = dbarray($result)) {				
+	while ($data = dbarray($result)) {	
+
+openside("");	
 				
 				echo "	<div class='panel-group'>
 						<div class='panel panel-default'>
@@ -282,14 +284,15 @@ global $settings;
 								echo "</div>\n";
 								}
 					
-					echo "</aside>";	
+					//echo "</aside>";	
 					
 				}
 		
 			echo $info['page_nav'] ? "<div class='text-right'>".$info['page_nav']."</div>" : '';
-			
+			closeside();
 		}
 	}	
+	
 /******************************************************************************************/	
 			
 } else {	
@@ -324,7 +327,7 @@ global $settings;
 	");	
 
 	while ($data = dbarray($result)) {				
-				
+openside("");					
 				echo "	<div class='panel-group'>
 						<div class='panel panel-default'>
 							<div class='panel-heading'>
@@ -337,7 +340,7 @@ global $settings;
 								echo " <a class='fa fa-cog pull-right'  href='".INFUSIONS."figurelib/admin.php".$aidlink."&amp;section=figurelib_manufacturers&amp;action=edit&amp;manufacturer_id=".intval($_GET['figure_manufacturer'])."'></a>&nbsp;";
 							}
 								
-								
+						
 							echo "</div>
 						<div id='collapse1' class='panel-collapse collapse'>
 						<ul class='list-group'>";	  
@@ -599,7 +602,7 @@ echo "</div>\n";
 								
 			}
 				echo $info['page_nav'] ? "<div class='text-right'>".$info['page_nav']."</div>" : '';
-
+closeside();
 		}
 	}											
 	
