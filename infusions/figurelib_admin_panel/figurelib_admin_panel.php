@@ -118,7 +118,10 @@ opensidex("<i class='fa fa-cog fa-vtop'> ".$locale['LFS_0001']."</i>");
 				// ['LFS_0011']= "Images";	
 				$allImgCounter = dbcount("(figure_images_image_id)", DB_FIGURE_IMAGES);	
 				echo "<li><a class='side' href='".INFUSIONS."figurelib/admin.php".$aidlink."&amp;section=figurelib'>".$locale['LFS_0011']." </a><span class='pull-right'>".$allImgCounter."</span></li>\n";
-
+				
+				// Check des verbrauchten Speicherplatzes für die Figuren Bilder		
+				echo "<li><a class='side' href='".BASEDIR."size.php'>Image Space<i class='fa fa-picture-o pull-right' aria-hidden='true'></i></li></a>\n";
+				
 ///////////////////////////////////////////////////////////////
 	echo "<hr>";
 		
