@@ -65,8 +65,11 @@ global $settings;
 	$result = dbquery("
 		SELECT	f.*, fm.*					
 			FROM ".DB_FIGURE_MANUFACTURERS." AS fm 
-			LEFT JOIN ".DB_FIGURE_ITEMS." AS f ON fm.figure_manufacturer_id=f.figure_manufacturer
-			WHERE f.figure_freigabe='1' AND figure_cat='".intval($_GET['figure_cat_id'])."' AND figure_manufacturer='".intval($_GET['figure_manufacturer'])."' 
+			LEFT JOIN ".DB_FIGURE_ITEMS." 
+			AS f ON fm.figure_manufacturer_id=f.figure_manufacturer
+			WHERE f.figure_freigabe='1' 
+			AND figure_cat='".intval($_GET['figure_cat_id'])."' 
+			AND figure_manufacturer='".intval($_GET['figure_manufacturer'])."' 
 			AND ".groupaccess("figure_visibility")."
 			LIMIT 0,1				
 	");	
@@ -320,8 +323,11 @@ openside("");
 	$result = dbquery("
 		SELECT	f.*, fm.*					
 			FROM ".DB_FIGURE_MANUFACTURERS." AS fm 
-			LEFT JOIN ".DB_FIGURE_ITEMS." AS f ON fm.figure_manufacturer_id=f.figure_manufacturer
-			WHERE f.figure_freigabe='1' AND figure_cat='".intval($_GET['figure_cat_id'])."' AND figure_manufacturer='".intval($_GET['figure_manufacturer'])."' 
+			LEFT JOIN ".DB_FIGURE_ITEMS." 
+			AS f ON fm.figure_manufacturer_id=f.figure_manufacturer
+			WHERE f.figure_freigabe='1' 
+			AND figure_cat='".intval($_GET['figure_cat_id'])."' 
+			AND figure_manufacturer='".intval($_GET['figure_manufacturer'])."' 
 			AND ".groupaccess("figure_visibility")."
 			LIMIT 0,1				
 	");	
