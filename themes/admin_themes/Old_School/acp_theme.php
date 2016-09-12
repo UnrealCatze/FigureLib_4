@@ -174,7 +174,7 @@ function render_admin_panel() {
         echo showMemoryUsage();
     }
     echo "<hr />\n";
-   // echo showFooterErrors();
+    //echo showFooterErrors();
     echo "</footer>\n";
     echo "</div>\n"; // .acp-main
     echo "</div>\n"; // #admin-panel
