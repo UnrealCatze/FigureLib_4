@@ -663,14 +663,14 @@ if (!empty($enabled_languages)) {
 		$mlt_insertdbrow[$language][] = DB_SITE_LINKS." (link_name, link_url, link_visibility, link_position, link_window, link_order, link_language) VALUES ('".$locale['figure_521']."', 'infusions/figurelib/submit.php?stype=f', ".USER_LEVEL_MEMBER.", '2', '0', '4', '".$language."')";
 		
 		//$locale['figure_533'] = "Figure Stats";
-		$mlt_insertdbrow[$language][] = DB_SITE_LINKS." (link_name, link_url, link_visibility, link_position, link_window, link_order, link_language) VALUES ('".$locale['figure_533']."', 'infusions/figurelib/panels/figure_stats_panel.php', '0', '2', '0', '5', '".$language."')";
+		$mlt_insertdbrow[$language][] = DB_SITE_LINKS." (link_name, link_url, link_visibility, link_position, link_window, link_order, link_language) VALUES ('".$locale['figure_533']."', 'infusions/figurelib/panels/figurelib_stats_panel.php', '0', '2', '0', '5', '".$language."')";
 		
 		
 		// drop deprecated language records
 		$mlt_deldbrow[$language][] = DB_SITE_LINKS." WHERE link_url='infusions/figurelib/figures.php' AND link_language='".$language."'";
 		$mlt_deldbrow[$language][] = DB_SITE_LINKS." WHERE link_url='infusions/figurelib/mycollection.php' AND link_language='".$language."'";
 		$mlt_deldbrow[$language][] = DB_SITE_LINKS." WHERE link_url='infusions/figurelib/submit.php?stype=f' AND link_language='".$language."'";
-		$mlt_deldbrow[$language][] = DB_SITE_LINKS." WHERE link_url='infusions/figurelib/panels/figure_stats_panel.php' AND link_language='".$language."'";
+		$mlt_deldbrow[$language][] = DB_SITE_LINKS." WHERE link_url='infusions/figurelib/panels/figurelib_stats_panel.php' AND link_language='".$language."'";
 		$mlt_deldbrow[$language][] = DB_FIGURE_CATS." WHERE figure_cat_language='".$language."'";
 	}
 } else {
@@ -839,7 +839,7 @@ $inf_deldbrow[] = DB_ADMIN." WHERE admin_rights='FI'";
 $inf_deldbrow[] = DB_SITE_LINKS." WHERE link_url='infusions/figurelib/figures.php'";
 $inf_deldbrow[] = DB_SITE_LINKS." WHERE link_url='infusions/figurelib/submit.php'";
 $inf_deldbrow[] = DB_SITE_LINKS." WHERE link_url='infusions/figurelib/mycollection.php'";
-$inf_deldbrow[] = DB_SITE_LINKS." WHERE link_url='infusions/figurelib/panels/figure_stats_panel.php'";
+$inf_deldbrow[] = DB_SITE_LINKS." WHERE link_url='infusions/figurelib/panels/figurelib_stats_panel.php'";
 $inf_deldbrow[] = DB_LANGUAGE_TABLES." WHERE mlt_rights='FI'";
 $inf_deldbrow[] = DB_SETTINGS_INF." WHERE settings_inf='figurelib'";
 $inf_deldbrow[] = DB_PANELS." WHERE panel_filename='figurelib_center_panel'";

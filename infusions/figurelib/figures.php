@@ -73,7 +73,9 @@ add_breadcrumb(["link" => INFUSIONS."figurelib/figures.php", "title" => \PHPFusi
 if (
 	isset($_GET['figure_id']) && 
 	isnum($_GET['figure_id']) &&
-	dbcount("(figure_id)", DB_FIGURE_ITEMS, "figure_id='".intval($_GET['figure_id'])."' AND figure_freigabe='1' AND ".groupaccess("figure_visibility")."")
+	dbcount("(figure_id)", DB_FIGURE_ITEMS, "figure_id='".intval($_GET['figure_id'])."' 
+											AND figure_freigabe='1' 
+											AND ".groupaccess("figure_visibility")."")
 ) {
 	
 	// Comments and Ratings
@@ -88,7 +90,10 @@ if (
 		$_GET['figure_cat_id'],
 		$figureTitle
 	) = dbarraynum(dbquery("
-		SELECT figure_cat, figure_title FROM ".DB_FIGURE_ITEMS." WHERE figure_id='".intval($_GET['figure_id'])."' AND figure_freigabe='1' AND ".groupaccess("figure_visibility")."
+		SELECT figure_cat, figure_title FROM ".DB_FIGURE_ITEMS." 
+		WHERE figure_id='".intval($_GET['figure_id'])."' 
+		AND figure_freigabe='1' 
+		AND ".groupaccess("figure_visibility")."
 	"));
 	
 	// Add Sitetitle
@@ -159,7 +164,9 @@ if (
 		add_breadcrumb(["link" => INFUSIONS."figurelib/figures.php?figure_id=".$info['figure_cat_id']."&amp;figure_manufacturer=".$info['figure_manufacturer_id'], "title" => trimlink($info['figure_manufacturer_name'], 20)]);
 		
 		// Count all Figures
-		$max_rows = dbcount("(figure_id)", DB_FIGURE_ITEMS, "figure_cat='".$info['figure_cat_id']."' AND figure_freigabe='1' AND ".groupaccess('figure_visibility'));
+		$max_rows = dbcount("(figure_id)", DB_FIGURE_ITEMS, "figure_cat='".$info['figure_cat_id']."' 
+															AND figure_freigabe='1' 
+															AND ".groupaccess('figure_visibility'));
 		
 		// Check Rowstart
 		$_GET['rowstart'] = isset($_GET['rowstart']) && isnum($_GET['rowstart']) && $_GET['rowstart'] <= $max_rows ? $_GET['rowstart'] : 0;
@@ -180,20 +187,22 @@ if (
 				LEFT JOIN ".DB_FIGURE_BRANDS." AS fb ON fb.figure_brand_id=f.figure_brand
 				LEFT JOIN ".DB_FIGURE_SCALES." AS fs ON fs.figure_scale_id=f.figure_scale
 				LEFT JOIN ".DB_USERS." AS fu ON fu.user_id=f.figure_submitter
-				WHERE f.figure_freigabe='1' AND figure_cat='".intval($_GET['figure_cat_id'])."' AND figure_manufacturer='".intval($_GET['figure_manufacturer'])."' AND ".groupaccess("figure_visibility")."
-				ORDER BY ".$cdata['figure_cat_sorting']."
-				LIMIT ".$_GET['rowstart'].",".$figurelibSettings['figure_per_page']."
+					WHERE f.figure_freigabe='1' 
+					AND figure_cat='".intval($_GET['figure_cat_id'])."' 
+					AND figure_manufacturer='".intval($_GET['figure_manufacturer'])."' 
+					AND ".groupaccess("figure_visibility")."
+					ORDER BY ".$cdata['figure_cat_sorting']."
+					LIMIT ".$_GET['rowstart'].",".$figurelibSettings['figure_per_page']."
 			");
 			
 			// Count Items
 			$info['figure_rows'] = dbrows($result);
-			
-			
+						
 			// Pagenav
 			$info['page_nav'] = $max_rows > $figurelibSettings['figure_per_page'] ? 
 			makepagenav($_GET['rowstart'], $figurelibSettings['figure_per_page'], $max_rows, 3, 
 			INFUSIONS."figurelib/figures.php?figure_cat_id=".$info['figure_cat_id']."&amp;figure_manufacturer=".$_GET['figure_manufacturer']."&amp;") : false;
-			
+						
 			// Add Figure Informations into Array
 			while ($data = dbarray($result)) {
 				$data['new'] = ($data['figure_datestamp']+604800 > time()+($settings['timeoffset']*3600)) ? 1 : 0;
@@ -276,7 +285,8 @@ if (
 			fc.figure_cat_description, 
 			count(f.figure_id) 'figure_anzahl'
 		FROM ".DB_FIGURE_CATS." fc
-		LEFT JOIN ".DB_FIGURE_ITEMS." f on f.figure_cat = fc.figure_cat_id and ".groupaccess("figure_visibility")." AND figure_freigabe = '1'
+		LEFT JOIN ".DB_FIGURE_ITEMS." f on f.figure_cat = fc.figure_cat_id and ".groupaccess("figure_visibility")." 
+		AND figure_freigabe = '1'
 		".(multilang_table("FI") ? "WHERE fc.figure_cat_language='".LANGUAGE."'" : "")."
 		GROUP BY figure_cat_id
 		ORDER BY figure_cat_name
